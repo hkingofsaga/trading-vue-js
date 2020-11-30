@@ -4,17 +4,20 @@
 
 import Overlay from '../../mixins/overlay.js'
 import { layout_cnv } from '../js/layout_cnv.js'
-import Candle from '../js/candle_ext.js'
-import Volbar from '../js/volbar_ext.js'
+import Candle from '../primitives/candle.js'
+import Volbar from '../primitives/volbar.js'
+import Price from '../primitives/price.js'
 
 export default {
     name: 'Candles',
     mixins: [Overlay],
     methods: {
         meta_info() {
-            return { author: 'C451', version: '1.0.0' }
+            return { author: 'C451', version: '1.2.0' }
         },
-
+        init() {
+            this.price = new Price(this)
+        },
         draw(ctx) {
 
             // If data === main candlestick data
@@ -39,9 +42,17 @@ export default {
                 new Candle(this, ctx, c)
             }
 
+            if (this.price_line) this.price.draw(ctx)
         },
         use_for() { return ['Candles'] },
-        //data_colors() { return [this.color] }
+
+        // When added as offchart overlay
+        y_range() {
+            return [
+                Math.max(...this.$props.sub.map(x => x[2])),
+                Math.min(...this.$props.sub.map(x => x[3]))
+            ]
+        }
     },
 
     // Define internal setting & constants here
@@ -53,37 +64,41 @@ export default {
             return 'showVolume' in this.sett ?
                 this.sett.showVolume : true
         },
+        price_line() {
+            return 'priceLine' in this.sett ?
+                this.sett.priceLine : true
+        },
         colorCandleUp() {
             return this.sett.colorCandleUp ||
-            this.$props.colors.colorCandleUp
+            this.$props.colors.candleUp
         },
         colorCandleDw() {
             return this.sett.colorCandleDw ||
-            this.$props.colors.colorCandleDw
+            this.$props.colors.candleDw
         },
         colorWickUp() {
             return this.sett.colorWickUp ||
-            this.$props.colors.colorWickUp
+            this.$props.colors.wickUp
         },
         colorWickDw() {
             return this.sett.colorWickDw ||
-            this.$props.colors.colorWickDw
+            this.$props.colors.wickDw
         },
         colorWickSm() {
             return this.sett.colorWickSm ||
-            this.$props.colors.colorWickSm
+            this.$props.colors.wickSm
         },
         colorVolUp() {
             return this.sett.colorVolUp ||
-            this.$props.colors.colorVolUp
+            this.$props.colors.volUp
         },
         colorVolDw() {
             return this.sett.colorVolDw ||
-            this.$props.colors.colorVolDw
+            this.$props.colors.volDw
         }
     },
     data() {
-        return {}
+        return { price: {} }
     }
 
 }

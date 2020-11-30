@@ -1,10 +1,11 @@
 # Getting Started
 
-::: warning
-This library is in alpha stage, API may change. This guide's version is **0.3.0**
-:::
+This guide's version is **0.9.0**
 
 ![npm](https://img.shields.io/npm/v/trading-vue-js.svg?color=brightgreen&label=Current%20lib%20version)
+
+## Scripts Guide is [here](https://github.com/tvjsx/trading-vue-js/blob/master/docs/guide/SCRIPTS.md)
+## Extensions Guide is [there](https://github.com/tvjsx/trading-vue-js/blob/master/docs/guide/EXTENSIONS.md)
 
 **TradingVue.js** is a hackable charting lib for traders, highly inspired by UX of TradingView.com. It allows you to create custom indicators and even new types of charts.
 
@@ -235,7 +236,7 @@ Our data-object will have the following format:
             4124.0
         ]
     ],
-    settings: {}
+    "settings": {}
 }
 ```
 
@@ -418,10 +419,10 @@ To make the overlay more reusable we can define `settings` format and use its pr
 `In data.json:`
 ```json
 "settings" : {
-    "buy-color": "#bfff00",
-    "sell-color": "#ec4662",
-    "marker-size": 5,
-    "show-label": true
+    "buyColor": "#bfff00",
+    "sellColor": "#ec4662",
+    "markerSize": 5,
+    "showLabel": true
 }
 ```
 
@@ -473,24 +474,22 @@ export default {
             return this.$props.settings
         },
         buy_color() {
-            return this.sett['buy-color'] || '#bfff00' // default value
+            return this.sett['buyColor'] || '#bfff00' // default value
         },
         sell_color() {
-            return this.sett['sell-color'] || '#ec4662'
+            return this.sett['sellColor'] || '#ec4662'
         },
         marker_size() {
-            return this.sett['marker-size'] || 5
+            return this.sett['markerSize'] || 5
         },
         show_label() {
-            return this.sett['show-label'] !== false
+            return this.sett['showLabel'] !== false
         }
     }
 }
 ```
 
 ## Publishing your overlay
-
-If you want to share your work, you can make a PR to https://github.com/C451/trading-vue-js .
 
 Make sure your class contains `meta_info()` method at the same level as `use_for()`:
 
@@ -499,20 +498,15 @@ meta_info() {
     return {
         author: 'Satoshi Smith',
         version: '1.0.0',
-        contact (opt) '<email>'
-        github: (opt) '<GitHub Page>',
+        desc: /*opt*/ 'Brief description',
+        contact: /*opt*/ '<email>',
+        github: /*opt*/ '<GitHub Page>'
     }
 },
 use_for() {return ['<YourOverlayId>'] }
 ```
 
-Submit a PR to `trading-vue-js/src/components/overlays/` as a folder with the following structure:
+Submit a PR to https://github.com/tvjsx/tvjs-overlays
 
-* **YourOverlay**\
-    * **YourOverlay.js** - main file
-    * **data.json** - Data example, less than `1MB`
-    * ...
-
-*Please check that your overlay id is not yet in use. In the future this process will be automated.*
 
 *This section will be updated*

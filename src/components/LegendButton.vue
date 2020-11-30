@@ -1,6 +1,10 @@
 <template>
     <img class="t-vue-lbtn" :src="base64"
-        :id="uuid"
+        :id="uuid" :style="{
+            width: config.L_BTN_SIZE + 'px',
+            height: config.L_BTN_SIZE + 'px',
+            margin: config.L_BTN_MARGIN
+        }"
         @click="onclick">
 </template>
 <script>
@@ -9,13 +13,13 @@ import Icons from '../stuff/icons.json'
 
 export default {
     name: 'LegendButton',
-    props: ['id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display'],
+    props: ['id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display',
+            'icon', 'config'],
     mounted() {
-
     },
     computed: {
         base64() {
-            return 'data:image/png;base64,' + Icons[this.file_name]
+            return this.icon || Icons[this.file_name]
         },
         file_name() {
             let id = this.$props.id
@@ -35,8 +39,7 @@ export default {
                 "onchart" : "offchart"
         },
         data_index() {
-            return this.$props.grid_id === 0 ?
-                this.$props.index : this.$props.grid_id - 1
+            return this.$props.index
         }
     },
     methods: {
@@ -55,9 +58,6 @@ export default {
 <style>
 .t-vue-lbtn {
     z-index: 100;
-    width: 21px;
-    height: 21px;
-    margin-bottom: -6px;
     pointer-events: all;
     cursor: pointer;
 }

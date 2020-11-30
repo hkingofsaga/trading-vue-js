@@ -1,5 +1,6 @@
 <template>
 <trading-vue :data="chart" :width="this.width" :height="this.height"
+        :toolbar="true"
         :color-back="colors.colorBack"
         :color-grid="colors.colorGrid"
         :color-text="colors.colorText">
@@ -9,11 +10,12 @@
 <script>
 import TradingVue from '../../src/TradingVue.vue'
 import Data from '../data/data_btc.json'
-import Utils from '../../src/stuff/utils.js'
+import DataCube from '../../src/helpers/datacube.js'
 
 export default {
     name: 'Simple',
     description: 'Should display everything okay',
+    props: ['night'],
     components: {
         TradingVue
     },
@@ -25,28 +27,29 @@ export default {
     },
     mounted() {
         window.addEventListener('resize', this.onResize)
-        setTimeout(() => {
-            // Async data setup
-            this.$set(this, 'chart', Data)
-        }, 0)
         this.onResize()
+        window.dc = this.chart
+    },
+    computed: {
+        colors() {
+            return this.$props.night ? {} : {
+                colorBack: '#fff',
+                colorGrid: '#eee',
+                colorText: '#333'
+            }
+        },
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize)
     },
     data() {
         return {
-            chart: {}, // Data will be here,
+            chart: new DataCube(Data),
             width: window.innerWidth,
-            height: window.innerHeight,
-            colors: {
-                colorBack: '#fff',
-                colorGrid: '#eee',
-                colorText: '#333',
-            }
-        };
+            height: window.innerHeight
+        }
     }
-};
+}
 </script>
 
 <style>

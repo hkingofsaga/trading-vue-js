@@ -3,6 +3,7 @@
         <chartbox v-for="(timeframe, id) in charts" :key="id"
             :id="id" :tf="id" v-bind:data="timeframe"
             :width="cbox_width" :height="cbox_height"
+            :night="night"
             >
         </chartbox>
     </div>
@@ -18,6 +19,7 @@ import Utils from '../../src/stuff/utils.js'
 export default {
     name: 'Multichart',
     description: 'All charts must work correctly and independently',
+    props: ['night'],
     components: {
         Chartbox
     },
@@ -33,10 +35,6 @@ export default {
     },
     mounted() {
         window.addEventListener('resize', this.onResize)
-        setTimeout(() => {
-            // Async data setup
-            this.$set(this, 'charts', Data)
-        }, 0)
         this.onResize()
     },
     beforeDestroy() {
@@ -44,12 +42,12 @@ export default {
     },
     data() {
         return {
-            charts: {}, // Data will be here,
+            charts: Data,
             width: window.innerWidth,
             height: window.innerHeight
         }
     }
-};
+}
 </script>
 
 <style>

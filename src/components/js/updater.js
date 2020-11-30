@@ -11,19 +11,24 @@ class CursorUpdater {
     }
 
     sync(e) {
-
+        // TODO: values not displaying if a custom grid id is set:
+        // grid: { id: N }
         this.cursor.grid_id = e.grid_id
-
+        let once = true
         for (var grid of this.grids) {
             const c = this.cursor_data(grid, e)
             if (!this.cursor.locked) {
-                this.cursor.t = c.t
+                // TODO: find a better fix to invisible cursor prob
+                if (once) {
+                    this.cursor.t = this.cursor_time(grid, e, c)
+                    if (this.cursor.t) once = false
+                }
                 if(c.values) {
                     this.comp.$set(this.cursor.values, grid.id, c.values)
                 }
             }
             if (grid.id !== e.grid_id) continue
-            this.cursor.x = c.x
+            this.cursor.x = grid.t2screen(this.cursor.t)
             this.cursor.y = c.y
             this.cursor.y$ = c.y$
         }
@@ -35,7 +40,13 @@ class CursorUpdater {
         let data = this.comp[s].data
 
         // Split offchart data between offchart grids
-        if (grid.id > 0) data = [data[grid.id - 1]]
+        if (grid.id > 0) {
+            // Sequential grids
+            let d = data.filter(x => x.grid.id === undefined)
+            // grids with custom ids (for merging)
+            let m = data.filter(x => x.grid.id === grid.id)
+            data = [d[grid.id - 1], ...m]
+        }
 
         const t = grid.screen2t(e.x)
         let ids = {}, res = {}
@@ -67,6 +78,20 @@ class CursorUpdater {
             },
             this.overlay_data(grid, e))
         }
+    }
+
+    // Get cursor t-position (extended)
+    cursor_time(grid, mouse, candle) {
+        let t = grid.screen2t(mouse.x)
+        let r = Math.abs((t - candle.t) / this.comp.interval)
+        let sign = Math.sign(t - candle.t)
+        if (r >= 0.5) {
+            // Outside the data range
+            let n = Math.round(r)
+            return candle.t + n * this.comp.interval * sign
+        }
+        // Inside the data range
+        return candle.t
     }
 
 }

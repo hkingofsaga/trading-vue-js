@@ -13,11 +13,6 @@ export default class Crosshair {
 
     }
 
-    update(x, y) {
-        this.x = this.nearest()
-        this.y = y
-    }
-
     draw(ctx) {
 
         // Update reference to the grid
@@ -25,12 +20,11 @@ export default class Crosshair {
 
         if (!this.visible) return
 
-        // Adjust x here cuz there is a delay between
-        // update() and draw()
-        this.x = this.nearest()
+        this.x = this.$p.cursor.x
+        this.y = this.$p.cursor.y
 
         ctx.save()
-        ctx.strokeStyle = this.$p.colors.colorCross
+        ctx.strokeStyle = this.$p.colors.cross
         ctx.beginPath()
         ctx.setLineDash([5])
 
@@ -61,17 +55,5 @@ export default class Crosshair {
     set visible(val) {
         this._visible = val
     }
-
-    // Nearest data object (when locked)
-    nearest() {
-        if (this.$p.cursor.locked) {
-            let t = this.$p.cursor.t
-            let x = this.layout.t_magnet(t)
-            return x
-        }
-        return this.$p.cursor.x
-    }
-
-
 
 }

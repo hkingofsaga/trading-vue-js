@@ -1,9 +1,8 @@
 /*!
- * TradingVue.JS - v0.3.5 - Sun Jul 07 2019
- * https://github.com/C451/trading-vue-js
- * Copyright (c) 2019 c451 Code's All Right;
- * Licensed under the MIT license
- * 
+ * TradingVue.JS - v0.10.0-alpha - Fri Nov 27 2020
+ *     https://github.com/tvjsx/trading-vue-js
+ *     Copyright (c) 2019 C451 Code's All Right;
+ *     Licensed under the MIT license
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -98,11 +97,459 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 70);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(34);
+
+var iterableToArray = __webpack_require__(35);
+
+var unsupportedIterableToArray = __webpack_require__(30);
+
+var nonIterableSpread = __webpack_require__(36);
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(37);
+
+var iterableToArrayLimit = __webpack_require__(38);
+
+var unsupportedIterableToArray = __webpack_require__(30);
+
+var nonIterableRest = __webpack_require__(39);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
+/* 4 */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"extended.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAANElEQVR4nGNggABGEMEEIlhABAeI+AASF0AlHmAqA4kzKAAx8wGQuAMKwd6AoYzBAWonAwAcLwTgNfJ3RQAAAABJRU5ErkJggg==\",\"ray.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAMklEQVR4nGNgQAJMIIIFRHCACAEQoQAiHICYvQEkjkrwYypjAIkzwk2zAREuqIQFzD4AE3kE4BEmGggAAAAASUVORK5CYII=\",\"segment.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAlQTFRFAAAATU1NJCQkCxcHIQAAAAN0Uk5TAP8SmutI5AAAACxJREFUeJxjYMACGAMgNAsLdpoVKi8AVe8A1QblQlWRKt0AoULw2w1zGxoAABdiAviQhF/mAAAAAElFTkSuQmCC\",\"add.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAH5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqPz8/Pj4+BQUFCQkJAQEBZGRkh4eHAgICEBAQNjY2g4ODgYGBAAAAAwMDeXl5d3d3GBgYERERgICAgICANDQ0PDw8Y2NjCAgIhYWFGhoaJycnOjo6YWFhgICAdXV14Y16sQAAACp0Uk5TAAILDxIKESEnJiYoKCgTKSkpKCAnKSkFKCkpJiDl/ycpKSA2JyYpKSkpOkQ+xgAAARdJREFUeJzllNt2gyAQRTWiRsHLoDU0GpPYmMv//2BMS+sgl6Z9bM8bi73gnJkBz/sn8lcBIUHofwtG8TpJKUuTLI6cYF7QEqRKynP71VX9AkhNXVlsbMQrLLQVGyPZLsGHWgPrCxMJwHUPlXa79NBp2et5d9f3u3m1XxatQNn7SagOXCUjCjYUDuqxcWlHj4MSfw12FDJchFViRN8+1qcQoUH6lR1L1mEMEErofB6WzEUwylzomfzOQGiOJdXiWH7mQoUyMa4WXJQWOBvLFvPCGxt6FSr5kyH0qi0YddNG2/pgCsOjff4ZTizXPNwKIzl56OoGg9d9Z/+5cs6On+CFCfevFQ3ZaTycx1YMbvDdRvjkp/lHdAcPXzokxcwfDwAAAABJRU5ErkJggg==\",\"cursor.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAxQTFRFAAAATU1NTU1NTU1NwlMHHwAAAAR0Uk5TAOvhxbpPrUkAAAAkSURBVHicY2BgYHBggAByabxg1WoGBq2pRCk9AKUbcND43AEAufYHlSuusE4AAAAASUVORK5CYII=\",\"display_off.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAU1QTFRFAAAAh4eHh4eHAAAAAAAAAAAAAwMDAAAAAAAAhoaGGBgYgYGBAAAAPz8/AgICg4ODCQkJhISEh4eHh4eHPj4+NjY2gYGBg4ODgYGBgYGBgoKCAQEBJycngoKChYWFEBAQg4ODCAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0hISEgYGBPDw8gYGBgYGBh4eHh4eHhYWFh4eHgoKChYWFgYGBgYGBg4ODhoaGg4ODYWFhgoKCBgYGdXV1goKCg4ODgYGBgICAgYGBAAAAg4ODhYWFhISEh4eHgoKChYWFOjo6goKCGhoah4eHh4eHh4eHgoKCh4eHeXl5hoaGgoKChISEgYGBgYGBgoKCY2NjgYGBgoKCh4eHgoKCgYGBhoaGg4ODhoaGhYWFh4eHgYGBhoaGhoaGhoaGg4ODgoKChISEgoKChYWFh4eHfKktUwAAAG90Uk5TACn/AhEFKA8SLCbxCigoVBNKUTYoJ/lh3PyAKSaTNiBtICYpISggKSkmJ0LEKef3lGxA8rn//+pcMSkpnCcptHPJKe0LUjnx5LzKKaMnX73hl64pLnhkzNSgKeLv17LQ+liIzaLe7PfTw5tFpz3K1fXR/gAAAgBJREFUeJzllNdXwjAUxknB0lIoCKVsGTIFQRAZ7r333nuv///R3LZ4mlDQZ/0ekp7b37n5bnITk+mfyDxv5Tir3fwjaElO5BIOKZFLJS1dQVfI0Y809TtEV+elo95RpFPWG+1go4fdQ5QybI8haaNBkM2ANbM09bnrwaPY7iFKrz7EMBdu7CHdVruXIt0M1hb+GKA3LTRKkp5lTA6Dg6xIkhaHhvQ1IlW/UCouQdJNJTRIpk1qO7+wUpcfpl537oBc7VNip3Gi/AmVPBAC1UrL6HXtSGVT+k2Yz0Focad07OMRf3P5BEbd63PFQx7HN+w61JoAm+uBlV48O/0jkLSMmtPCmQ8HwlYdykFV4/LJPp7e3hVyFdapHNehLk6PSjhSkBvwu/cFyJGIYvOyhoc1jjYQFGbygD4CWjoAMla/og3YoSw+KPhjPNoFcim4iFD+pFYA8zZ9WeYU5OBjZ3ORWyCfG03E+47kKpCIJTpGO4KP8XMgtw990xG/PBNTgmPEEXwf7P42oOdFIRAoBCtqTKL6Rcwq4Xsgh5xYC/mmSs6yJKk1YbnVeTq1NaEpmlHbmVn2EORkW2trF2ZzmHGTSUMGl1a9hp4ySRpdQ8yKGURpMmRIYg9pb1YPzg6kO79cLlE6bYFjEtv91bLEUxvhwbWwjY13BxUb9l8+mn9EX8x3Nki8ff5wAAAAAElFTkSuQmCC\",\"display_on.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAR1QTFRFAAAAh4eHgYGBAAAAAAAAgYGBAAAAAwMDAAAAAAAAgYGBg4ODGBgYgYGBhISEAAAAPz8/AgIChoaGCQkJhYWFPj4+NjY2goKCgYGBAQEBJycngYGBgoKCEBAQCAgIhISEKioqZGRkCgoKBQUFERERd3d3gYGBg4ODgYGBGxsbNDQ0hISEgoKCgoKChYWFPDw8gYGBgYGBhoaGgoKCg4ODgoKCgYGBgoKCgoKCgoKCg4ODgoKChoaGgoKCgYGBhoaGg4ODYWFhBgYGdXV1gYGBg4ODgoKCgICAg4ODg4ODhISEAAAAg4ODOjo6gYGBGhoaeXl5goKCgYGBgoKChYWFgoKChISEgoKCY2NjgYGBg4ODgYGBgYGBg4ODgYGBo8n54AAAAF90Uk5TACn/AhH3BSgPEuhUJvFACigoLBM2KCeA6ykm+pMgIEkmKSEoICn9XCkmJ0u6nDop4sUypGuEzLZ6vmCYLZ/dLykpJynUYa8pcllCC1Ip2ycpisl1PadFsintbsPQZdi/bTW7AAAB4UlEQVR4nOWUZ1fCMBSGSSGWFiq0UDbIkr2XbBwMxS0b1P//M0xK9XSiftX7oel585zkvfcmMRj+SRhvzRRlthm/BU3Ry3TYzofTsajpIOjw2iNAjIiddehvHXSdA0mkXEEdG0fkE1DEKXmkSVqVIA6rBmsktUgAWLWHoGp30UNclbtLmwQgoyya91wPTbFy0mQXJ5zJQO6BgXRjfH0iSkX5stHIXr5r0bB/lu8syjR8rzsFbR2SpX+5J2eMP3csLtYsEY2K8BeTFuE2jaVCBw7bHOBuxq16AXmpbui3LtIfbRLUHMY2q4lcFo2WB4KA1SUAlWumNEKCzyxBKZxVHvYGaFguCBx1vM/x0IPzoqQoj5SdP4mns2cCGhBsrgj0uaeUBtzMyxQN8w4mYROTW8+r0oANp8W5mf6WQw5aCYJ2o7ymPaKMi2uVpmWM4TW6tdImgGo1bT4nK6DbbsCc0AZSdmLEFszzHrh6riVvRrNA3/9SE8QLWQu+Gjto9+gE9NBMwr9zi83gFeeFTe11zpm1CHE3HeyVCSknf3MIDcFTbfJKdbR1L4xX49L+/BoillV5uPJqkshD3JWSgpNMXP/lcrD8+hO84MnDr5YpFHv0Fe99VjJ0GBRs2H74aP6R+ACr+TFvZNAQ1wAAAABJRU5ErkJggg==\",\"down.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAKVQTFRFAAAAg4ODgICAAAAAAAAAAAAACAgIAAAAAAAAAAAAAAAAOTk5hYWFEBAQfHx8ODg4dnZ2NDQ0XV1dGxsbKCgogICAFBQUIiIiZGRkgICAgICAFRUVAAAAgICAgICAgICAf39/Li4ugICAcHBwgoKCgICAgoKCgICAg4ODgYGBPj4+goKCgICAhISEgYGBgICAgoKCgICAgYGBgYGBf39/gICAgICAIdPQHAAAADd0Uk5TACn/KAIRIBMFDwooKyApKSknKSYmzCcmKfL7JRCUi2L3J7IpcLUrr0VbKXntNEnkMbxrUcG56CMpi50AAAFZSURBVHic5ZRpf4MgDIeFKFatWm/tfW091u7evv9Hm1Acoujm2y0vFPH5Jf+EEE37J6bblmlatv4jaBCI4rMfR0CMXtAEJ0fccgfM7tAkQHXzArdDxggmqGETGCnJWROkNlOwOqhIhKCtgbSicw1uK/dATSK0aRatIzytA8ik4XSiyJnLSm+VPxULgeyLI3uHRJH+qcB4WZGrKb4c20WwI7b3iUt74OS6XD+xZWrXUCtme0uKTvfcJ65CZFa9VOebqwXmft+oT8yF+/VymT4XeGB+Xx8L+j4gBcoFIDT+oMz6Qp93Y74pCeBpUXaLuW0rUk6r1iv3nP322ewYkgv2nZIvgpSPQDrY5wTjRJDNg9XAE/+uSXIVX812GdKEmtvR2rtWaw+5MAOuofJy79SXu9TgBl4d9DZdI0NjgyiswNCB/qk1J5Bmvp+lQOa9IJNhW4bxm6H5R+wLQYMSQXZNzbcAAAAASUVORK5CYII=\",\"price_range.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAIUlEQVR4nGNggAPm/w9gTA4QIQMitECEJ1yMEgLNDiAAADfgBMRu78GgAAAAAElFTkSuQmCC\",\"price_time.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAOklEQVR4nGNggAPm/w9gTA4QIQPEClpMQMITRHCACScQoQQihBgY9P//grKgYk5wdTACYhQHFjuAAABZFAlc4e1fcQAAAABJRU5ErkJggg==\",\"remove.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAK5QTFRFAAAAh4eHgICAAAAAAAAAh4eHAAAAAwMDAAAAAAAAgICAGBgYAAAAPz8/AgICgICACQkJhoaGhoaGgICAPj4+NjY2gYGBg4ODgYGBAQEBJycngoKCEBAQgICAgICACAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0gICAPDw8YWFhBgYGdXV1gICAg4ODgICAAAAAOjo6GhoaeXl5gICAhYWFY2NjhYWFgICA9O0oCgAAADp0Uk5TACn/AhErBSgPEvEmCigowxMuMcgoJ7hWrCkmdCD6vSAmKSEoICkpJie6KSknKSkp0wspJynCMik11rrLte8AAAFwSURBVHic5ZTXkoIwFIZNAAPSpKkoRQV7Wcva3v/FFiRmEwise7t7bs7MP98k/ylJq/VPQjjKiiJrwo+gON0uxro7XiRTsRHs+voE4JjoRrf+6sD7AFTMvaDGRht9glLMUJtLqmUwD5XDCohHAmBUPQSV27GHtFK7xycBWJab5uPaR+Hlmue7GfZxHwyWFHVMQghXFgD2A8IOZtfssdNJIXcyFEaSfchzp9BuMVP+Fhvr5Qh0nGfqYTGhm3BcYFUaQBKOhMWzRqHyGFRY03ppQ5lCFZ30RloVZGQTaa3QqEt0OyrQnkSkk8I1YJkvAwPCMgY0UpbzXRZhVbosIWGbZTLNQszGMCM42FJEjWDDjIAMtp+xj6x2K+/DqNDc0r4Yc8yGl3uer2aIyT1iyd8sYSuY8cldZbVrH4zPebTvP8OMNSoedj6XzDyk3pwG98u0/ufqGu7tBW5c1PxriXFyHq5PQxXFzeDThvbmp/lH4gt6WxfZ03H8DwAAAABJRU5ErkJggg==\",\"settings.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAW5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqQEBAPj4+BQUFCAgIAQEBPz8/ZWVlh4eHZGRkAgICCQkJDw8PNjY2g4ODgoKCNTU1EBAQAAAAAwMDeXl5d3d3AAAAGBgYAAAAERERioqKgoKCgoKCgoKCgYGBgoKChISEhoaGNDQ0g4ODgICAgICAgICAgYGBgYGBhYWFgICAgICAPT09AAAAgYGBgICAgICAgICAgICAY2NjCAgIgICAgICAhYWFhYWFgYGBHBwcgICAhYWFGhoagYGBgYGBg4ODhoaGJycnAAAAhISEgICAg4ODPDw8AAAAgoKCgICAhISEOjo6h4eHgoKCgYGBgICAf39/gYGBgoKCgICAGBgYgYGBg4ODg4ODgICACwsLgYGBgICAgYGBgYGBgYGBgICAgYGBYWFhf39/g4ODPj4+gYGBg4ODgICAhYWFgoKCgYGBgICAgYGBgoKCdXV1T0kC9QAAAHp0Uk5TAAILDxMKESEnJiYpKSgTKSgpKSkoEyAnKSknIAYoKSkFJQEgKl94jYVvVC4nU9f/+K8pOu71KBCi3NPq/ikg0e01Nokm1UUnsZVqQSYOT9lrKRJz5lIpK12jyu+sesgnhGVLxCG55a6Um+GaKfJCKKRgKUt8ocergymDQ9knAAABsElEQVR4nOWUV1vCMBSGg1AQpBZrcVdE3KJxo4LgnuCoe4F7orjHv7doTk3bgF7rd5OnX94nZ+SkCP0TWQqsNpuVs/wI2h2FTleR2+XkHfa8YLHgKRGJSj2SN3fosvIKkVJlVXWONGrkWtEgn1zHJP1GMCs/g7XILFIUpXoTWmaKTnIImGovh72Gxqbmlta2dvgOGpsmQO0dnfhTXd3E6JH0pN1DNnr7MFE/HDsQ0qEO6Pxg9sCh4XDkGx2J6sovBD+G8eiYuo5PxLTKeLoJBZNgT2EcnjY0YYajUKsL7Fk1gcjU3PwChcYTFGorAnsRqlpa1tAVhUbdmr+6RtjIOlgbCjMBUdzc2t7ZzbJ7zAQ4p6GSfRVNwkeKLsvCg31w2JBdjlT0GDxZNzEnpcQ+xWfnFxeXVyp6Tay07gq+L/YUOoBvbomV0V8skiq//DutWfeEfJD1JPLCED4+Pb8kX986tApNQ4iqfSJT76bRzvlgBPODQXW/foYqK5lyeBeYJEL1gaoeGnwIBhjRoQ9SZgTAdEbO/9cKRfmZ+MpGPCVHQ3nBzzS4hKIkuNyh/5g+ALiAXSSas9hwAAAAAElFTkSuQmCC\",\"time_range.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAAJElEQVR4nGNgwAsUGJhQCScQoQQihBgY9P//grKgYk4YOvACACOpBKG6Svj+AAAAAElFTkSuQmCC\",\"trash.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAQMAAAD+JxcgAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAATU1NkJ+rOQAAAAJ0Uk5TAP9bkSK1AAAALUlEQVR4nGNgAIN6ENHQACX4//9gYBBgYIESYC4LkA0lPEkmGFAI5v8PILYCAHygDJxlK0RUAAAAAElFTkSuQmCC\",\"up.png\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAMZQTFRFAAAAh4eHgICAAAAAAAAAAAAAAwMDAAAAAAAAGBgYAAAAPz8/AgICCQkJgICAh4eHPj4+NjY2AQEBJycnEBAQgICAgICACAgIKioqZGRkCgoKBQUFgYGBERERd3d3gYGBGxsbNDQ0gICAgYGBPDw8gYGBh4eHgICAYWFhBgYGgYGBdXV1goKCg4ODhYWFgICAgoKCAAAAhISEOjo6gICAGhoagYGBeXl5hoaGgICAY2Njg4ODgoKCgoKCgYGBgoKCg4ODgoKC64uw1gAAAEJ0Uk5TACn/AhEFKA8SJgooKBP7KignKSYg9c0gJikhKLQgKSkmJ7ywKY8s5SknlClxKTMpXwtFKe0neiku8ClKWmSbbFFjM5GHSgAAAW5JREFUeJzllGd/gjAQxk3AMFWWOHDvVa2rVbu//5cqhJWQQO3b9nkVjv/v7rnLKJX+iYS9JMuSKvwIiu3loKkZzYHXFgvBiqW1QKSWplfySzvmAyDUN50cG2X0DDLqoTKXVLJgIIXDCohHAqCzHhymeuShy/Ru8kkAhtmhWUTvW9fdEnPQaVLU0n8XF0L3kn5P6LTtZPKgNoK+RrUkcGtQ7S9TsgOxxinrkUPYD+LwLCIh7CTsWSVQqRmTuPqpitlZFLQlApXjrsYBc335wOw47ksmUSMMrgKi/gnAE/awCqNHmTUwDf5X34LlBuedsgbUsK15kPMxTIXzzvFSIdsSPBw7nGD1K+7bL3F9xStEnZhoCw71TbpL71GBBbUF1MZmZWTOi97PI3eIJn9zCEtOj0+umaOde2EszqW9/xr6rM54WFtc0vfQNak57Ibd/Jerohu3GFwYqPjVEhve2Z4cbQU1ikFsQ73z0fwj+ga3VBezGuggFQAAAABJRU5ErkJggg==\"}");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesClient; });
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+function addStylesClient (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(68);
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -2748,440 +3195,352 @@ if (true) {
 
 
 /***/ }),
-/* 1 */
+/* 9 */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+var setPrototypeOf = __webpack_require__(45);
 
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return '@media ' + item[2] + '{' + content + '}';
-      } else {
-        return content;
-      }
-    }).join('');
-  }; // import a list of modules into the list
-
-
-  list.i = function (modules, mediaQuery) {
-    if (typeof modules === 'string') {
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    for (var i = 0; i < this.length; i++) {
-      var id = this[i][0];
-
-      if (id != null) {
-        alreadyImportedModules[id] = true;
-      }
-    }
-
-    for (i = 0; i < modules.length; i++) {
-      var item = modules[i]; // skip already imported module
-      // this implementation is not 100% perfect for weird media query combinations
-      // when a module is imported multiple times with different media queries.
-      // I hope this will never occur (Hey this way we have smaller bundles)
-
-      if (item[0] == null || !alreadyImportedModules[item[0]]) {
-        if (mediaQuery && !item[2]) {
-          item[2] = mediaQuery;
-        } else if (mediaQuery) {
-          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';
-        }
-
-        list.push(item);
-      }
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || '';
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
   }
 
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(10);
+
+var assertThisInitialized = __webpack_require__(27);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
     });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  } else {
+    obj[key] = value;
   }
 
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-  return '/*# ' + data + ' */';
+  return obj;
 }
+
+module.exports = _defineProperty;
 
 /***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-function addStylesClient (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 3 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(15);
+var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(2).default
+var add = __webpack_require__(6).default
+var update = add("21fde573", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(47);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
 var update = add("68f243ea", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 4 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(17);
+var content = __webpack_require__(49);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(2).default
+var add = __webpack_require__(6).default
 var update = add("9895d3a6", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 5 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(19);
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(2).default
+var add = __webpack_require__(6).default
+var update = add("5b620605", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(53);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
 var update = add("1db01c0b", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 6 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(2).default
+var add = __webpack_require__(6).default
 var update = add("12d2309d", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 7 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(57);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__(2).default
+var add = __webpack_require__(6).default
 var update = add("1b34bfeb", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
-/* 8 */
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(59);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
+var update = add("8139036a", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(61);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
+var update = add("604bf5ef", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(63);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
+var update = add("f32fd36e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(65);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
+var update = add("fd83689e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(67);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(6).default
+var update = add("550b47ab", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3191,9 +3550,9 @@ if(false) {}
 /**
  * Dependencies
  */
-var util = __webpack_require__(11),
-    cmp = __webpack_require__(12),
-    bin = __webpack_require__(13);
+var util = __webpack_require__(40),
+    cmp = __webpack_require__(41),
+    bin = __webpack_require__(42);
 
 /**
  * Module interface definition
@@ -3405,7 +3764,40 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 
 /***/ }),
-/* 9 */
+/* 29 */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(29);
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3735,13 +4127,604 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 10 */
+/* 32 */
 /***/ (function(module) {
 
-module.exports = {"add.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAH5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqPz8/Pj4+BQUFCQkJAQEBZGRkh4eHAgICEBAQNjY2g4ODgYGBAAAAAwMDeXl5d3d3GBgYERERgICAgICANDQ0PDw8Y2NjCAgIhYWFGhoaJycnOjo6YWFhgICAdXV14Y16sQAAACp0Uk5TAAILDxIKESEnJiYoKCgTKSkpKCAnKSkFKCkpJiDl/ycpKSA2JyYpKSkpOkQ+xgAAARdJREFUeJzllNt2gyAQRTWiRsHLoDU0GpPYmMv//2BMS+sgl6Z9bM8bi73gnJkBz/sn8lcBIUHofwtG8TpJKUuTLI6cYF7QEqRKynP71VX9AkhNXVlsbMQrLLQVGyPZLsGHWgPrCxMJwHUPlXa79NBp2et5d9f3u3m1XxatQNn7SagOXCUjCjYUDuqxcWlHj4MSfw12FDJchFViRN8+1qcQoUH6lR1L1mEMEErofB6WzEUwylzomfzOQGiOJdXiWH7mQoUyMa4WXJQWOBvLFvPCGxt6FSr5kyH0qi0YddNG2/pgCsOjff4ZTizXPNwKIzl56OoGg9d9Z/+5cs6On+CFCfevFQ3ZaTycx1YMbvDdRvjkp/lHdAcPXzokxcwfDwAAAABJRU5ErkJggg==","display_off.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAU1QTFRFAAAAh4eHh4eHAAAAAAAAAAAAAwMDAAAAAAAAhoaGGBgYgYGBAAAAPz8/AgICg4ODCQkJhISEh4eHh4eHPj4+NjY2gYGBg4ODgYGBgYGBgoKCAQEBJycngoKChYWFEBAQg4ODCAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0hISEgYGBPDw8gYGBgYGBh4eHh4eHhYWFh4eHgoKChYWFgYGBgYGBg4ODhoaGg4ODYWFhgoKCBgYGdXV1goKCg4ODgYGBgICAgYGBAAAAg4ODhYWFhISEh4eHgoKChYWFOjo6goKCGhoah4eHh4eHh4eHgoKCh4eHeXl5hoaGgoKChISEgYGBgYGBgoKCY2NjgYGBgoKCh4eHgoKCgYGBhoaGg4ODhoaGhYWFh4eHgYGBhoaGhoaGhoaGg4ODgoKChISEgoKChYWFh4eHfKktUwAAAG90Uk5TACn/AhEFKA8SLCbxCigoVBNKUTYoJ/lh3PyAKSaTNiBtICYpISggKSkmJ0LEKef3lGxA8rn//+pcMSkpnCcptHPJKe0LUjnx5LzKKaMnX73hl64pLnhkzNSgKeLv17LQ+liIzaLe7PfTw5tFpz3K1fXR/gAAAgBJREFUeJzllNdXwjAUxknB0lIoCKVsGTIFQRAZ7r333nuv///R3LZ4mlDQZ/0ekp7b37n5bnITk+mfyDxv5Tir3fwjaElO5BIOKZFLJS1dQVfI0Y809TtEV+elo95RpFPWG+1go4fdQ5QybI8haaNBkM2ANbM09bnrwaPY7iFKrz7EMBdu7CHdVruXIt0M1hb+GKA3LTRKkp5lTA6Dg6xIkhaHhvQ1IlW/UCouQdJNJTRIpk1qO7+wUpcfpl537oBc7VNip3Gi/AmVPBAC1UrL6HXtSGVT+k2Yz0Focad07OMRf3P5BEbd63PFQx7HN+w61JoAm+uBlV48O/0jkLSMmtPCmQ8HwlYdykFV4/LJPp7e3hVyFdapHNehLk6PSjhSkBvwu/cFyJGIYvOyhoc1jjYQFGbygD4CWjoAMla/og3YoSw+KPhjPNoFcim4iFD+pFYA8zZ9WeYU5OBjZ3ORWyCfG03E+47kKpCIJTpGO4KP8XMgtw990xG/PBNTgmPEEXwf7P42oOdFIRAoBCtqTKL6Rcwq4Xsgh5xYC/mmSs6yJKk1YbnVeTq1NaEpmlHbmVn2EORkW2trF2ZzmHGTSUMGl1a9hp4ySRpdQ8yKGURpMmRIYg9pb1YPzg6kO79cLlE6bYFjEtv91bLEUxvhwbWwjY13BxUb9l8+mn9EX8x3Nki8ff5wAAAAAElFTkSuQmCC","display_on.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAR1QTFRFAAAAh4eHgYGBAAAAAAAAgYGBAAAAAwMDAAAAAAAAgYGBg4ODGBgYgYGBhISEAAAAPz8/AgIChoaGCQkJhYWFPj4+NjY2goKCgYGBAQEBJycngYGBgoKCEBAQCAgIhISEKioqZGRkCgoKBQUFERERd3d3gYGBg4ODgYGBGxsbNDQ0hISEgoKCgoKChYWFPDw8gYGBgYGBhoaGgoKCg4ODgoKCgYGBgoKCgoKCgoKCg4ODgoKChoaGgoKCgYGBhoaGg4ODYWFhBgYGdXV1gYGBg4ODgoKCgICAg4ODg4ODhISEAAAAg4ODOjo6gYGBGhoaeXl5goKCgYGBgoKChYWFgoKChISEgoKCY2NjgYGBg4ODgYGBgYGBg4ODgYGBo8n54AAAAF90Uk5TACn/AhH3BSgPEuhUJvFACigoLBM2KCeA6ykm+pMgIEkmKSEoICn9XCkmJ0u6nDop4sUypGuEzLZ6vmCYLZ/dLykpJynUYa8pcllCC1Ip2ycpisl1PadFsintbsPQZdi/bTW7AAAB4UlEQVR4nOWUZ1fCMBSGSSGWFiq0UDbIkr2XbBwMxS0b1P//M0xK9XSiftX7oel585zkvfcmMRj+SRhvzRRlthm/BU3Ry3TYzofTsajpIOjw2iNAjIiddehvHXSdA0mkXEEdG0fkE1DEKXmkSVqVIA6rBmsktUgAWLWHoGp30UNclbtLmwQgoyya91wPTbFy0mQXJ5zJQO6BgXRjfH0iSkX5stHIXr5r0bB/lu8syjR8rzsFbR2SpX+5J2eMP3csLtYsEY2K8BeTFuE2jaVCBw7bHOBuxq16AXmpbui3LtIfbRLUHMY2q4lcFo2WB4KA1SUAlWumNEKCzyxBKZxVHvYGaFguCBx1vM/x0IPzoqQoj5SdP4mns2cCGhBsrgj0uaeUBtzMyxQN8w4mYROTW8+r0oANp8W5mf6WQw5aCYJ2o7ymPaKMi2uVpmWM4TW6tdImgGo1bT4nK6DbbsCc0AZSdmLEFszzHrh6riVvRrNA3/9SE8QLWQu+Gjto9+gE9NBMwr9zi83gFeeFTe11zpm1CHE3HeyVCSknf3MIDcFTbfJKdbR1L4xX49L+/BoillV5uPJqkshD3JWSgpNMXP/lcrD8+hO84MnDr5YpFHv0Fe99VjJ0GBRs2H74aP6R+ACr+TFvZNAQ1wAAAABJRU5ErkJggg==","down.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAKVQTFRFAAAAg4ODgICAAAAAAAAAAAAACAgIAAAAAAAAAAAAAAAAOTk5hYWFEBAQfHx8ODg4dnZ2NDQ0XV1dGxsbKCgogICAFBQUIiIiZGRkgICAgICAFRUVAAAAgICAgICAgICAf39/Li4ugICAcHBwgoKCgICAgoKCgICAg4ODgYGBPj4+goKCgICAhISEgYGBgICAgoKCgICAgYGBgYGBf39/gICAgICAIdPQHAAAADd0Uk5TACn/KAIRIBMFDwooKyApKSknKSYmzCcmKfL7JRCUi2L3J7IpcLUrr0VbKXntNEnkMbxrUcG56CMpi50AAAFZSURBVHic5ZRpf4MgDIeFKFatWm/tfW091u7evv9Hm1Acoujm2y0vFPH5Jf+EEE37J6bblmlatv4jaBCI4rMfR0CMXtAEJ0fccgfM7tAkQHXzArdDxggmqGETGCnJWROkNlOwOqhIhKCtgbSicw1uK/dATSK0aRatIzytA8ik4XSiyJnLSm+VPxULgeyLI3uHRJH+qcB4WZGrKb4c20WwI7b3iUt74OS6XD+xZWrXUCtme0uKTvfcJ65CZFa9VOebqwXmft+oT8yF+/VymT4XeGB+Xx8L+j4gBcoFIDT+oMz6Qp93Y74pCeBpUXaLuW0rUk6r1iv3nP322ewYkgv2nZIvgpSPQDrY5wTjRJDNg9XAE/+uSXIVX812GdKEmtvR2rtWaw+5MAOuofJy79SXu9TgBl4d9DZdI0NjgyiswNCB/qk1J5Bmvp+lQOa9IJNhW4bxm6H5R+wLQYMSQXZNzbcAAAAASUVORK5CYII=","remove.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAK5QTFRFAAAAh4eHgICAAAAAAAAAh4eHAAAAAwMDAAAAAAAAgICAGBgYAAAAPz8/AgICgICACQkJhoaGhoaGgICAPj4+NjY2gYGBg4ODgYGBAQEBJycngoKCEBAQgICAgICACAgIKioqZGRkCgoKBQUFERERd3d3gYGBGxsbNDQ0gICAPDw8YWFhBgYGdXV1gICAg4ODgICAAAAAOjo6GhoaeXl5gICAhYWFY2NjhYWFgICA9O0oCgAAADp0Uk5TACn/AhErBSgPEvEmCigowxMuMcgoJ7hWrCkmdCD6vSAmKSEoICkpJie6KSknKSkp0wspJynCMik11rrLte8AAAFwSURBVHic5ZTXkoIwFIZNAAPSpKkoRQV7Wcva3v/FFiRmEwise7t7bs7MP98k/ylJq/VPQjjKiiJrwo+gON0uxro7XiRTsRHs+voE4JjoRrf+6sD7AFTMvaDGRht9glLMUJtLqmUwD5XDCohHAmBUPQSV27GHtFK7xycBWJab5uPaR+Hlmue7GfZxHwyWFHVMQghXFgD2A8IOZtfssdNJIXcyFEaSfchzp9BuMVP+Fhvr5Qh0nGfqYTGhm3BcYFUaQBKOhMWzRqHyGFRY03ppQ5lCFZ30RloVZGQTaa3QqEt0OyrQnkSkk8I1YJkvAwPCMgY0UpbzXRZhVbosIWGbZTLNQszGMCM42FJEjWDDjIAMtp+xj6x2K+/DqNDc0r4Yc8yGl3uer2aIyT1iyd8sYSuY8cldZbVrH4zPebTvP8OMNSoedj6XzDyk3pwG98u0/ufqGu7tBW5c1PxriXFyHq5PQxXFzeDThvbmp/lH4gt6WxfZ03H8DwAAAABJRU5ErkJggg==","settings.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAW5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKBgYGGxsbKioqQEBAPj4+BQUFCAgIAQEBPz8/ZWVlh4eHZGRkAgICCQkJDw8PNjY2g4ODgoKCNTU1EBAQAAAAAwMDeXl5d3d3AAAAGBgYAAAAERERioqKgoKCgoKCgoKCgYGBgoKChISEhoaGNDQ0g4ODgICAgICAgICAgYGBgYGBhYWFgICAgICAPT09AAAAgYGBgICAgICAgICAgICAY2NjCAgIgICAgICAhYWFhYWFgYGBHBwcgICAhYWFGhoagYGBgYGBg4ODhoaGJycnAAAAhISEgICAg4ODPDw8AAAAgoKCgICAhISEOjo6h4eHgoKCgYGBgICAf39/gYGBgoKCgICAGBgYgYGBg4ODg4ODgICACwsLgYGBgICAgYGBgYGBgYGBgICAgYGBYWFhf39/g4ODPj4+gYGBg4ODgICAhYWFgoKCgYGBgICAgYGBgoKCdXV1T0kC9QAAAHp0Uk5TAAILDxMKESEnJiYpKSgTKSgpKSkoEyAnKSknIAYoKSkFJQEgKl94jYVvVC4nU9f/+K8pOu71KBCi3NPq/ikg0e01Nokm1UUnsZVqQSYOT9lrKRJz5lIpK12jyu+sesgnhGVLxCG55a6Um+GaKfJCKKRgKUt8ocergymDQ9knAAABsElEQVR4nOWUV1vCMBSGg1AQpBZrcVdE3KJxo4LgnuCoe4F7orjHv7doTk3bgF7rd5OnX94nZ+SkCP0TWQqsNpuVs/wI2h2FTleR2+XkHfa8YLHgKRGJSj2SN3fosvIKkVJlVXWONGrkWtEgn1zHJP1GMCs/g7XILFIUpXoTWmaKTnIImGovh72Gxqbmlta2dvgOGpsmQO0dnfhTXd3E6JH0pN1DNnr7MFE/HDsQ0qEO6Pxg9sCh4XDkGx2J6sovBD+G8eiYuo5PxLTKeLoJBZNgT2EcnjY0YYajUKsL7Fk1gcjU3PwChcYTFGorAnsRqlpa1tAVhUbdmr+6RtjIOlgbCjMBUdzc2t7ZzbJ7zAQ4p6GSfRVNwkeKLsvCg31w2JBdjlT0GDxZNzEnpcQ+xWfnFxeXVyp6Tay07gq+L/YUOoBvbomV0V8skiq//DutWfeEfJD1JPLCED4+Pb8kX986tApNQ4iqfSJT76bRzvlgBPODQXW/foYqK5lyeBeYJEL1gaoeGnwIBhjRoQ9SZgTAdEbO/9cKRfmZ+MpGPCVHQ3nBzzS4hKIkuNyh/5g+ALiAXSSas9hwAAAAAElFTkSuQmCC","up.png":"iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAMAAADyHTlpAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAMZQTFRFAAAAh4eHgICAAAAAAAAAAAAAAwMDAAAAAAAAGBgYAAAAPz8/AgICCQkJgICAh4eHPj4+NjY2AQEBJycnEBAQgICAgICACAgIKioqZGRkCgoKBQUFgYGBERERd3d3gYGBGxsbNDQ0gICAgYGBPDw8gYGBh4eHgICAYWFhBgYGgYGBdXV1goKCg4ODhYWFgICAgoKCAAAAhISEOjo6gICAGhoagYGBeXl5hoaGgICAY2Njg4ODgoKCgoKCgYGBgoKCg4ODgoKC64uw1gAAAEJ0Uk5TACn/AhEFKA8SJgooKBP7KignKSYg9c0gJikhKLQgKSkmJ7ywKY8s5SknlClxKTMpXwtFKe0neiku8ClKWmSbbFFjM5GHSgAAAW5JREFUeJzllGd/gjAQxk3AMFWWOHDvVa2rVbu//5cqhJWQQO3b9nkVjv/v7rnLKJX+iYS9JMuSKvwIiu3loKkZzYHXFgvBiqW1QKSWplfySzvmAyDUN50cG2X0DDLqoTKXVLJgIIXDCohHAqCzHhymeuShy/Ru8kkAhtmhWUTvW9fdEnPQaVLU0n8XF0L3kn5P6LTtZPKgNoK+RrUkcGtQ7S9TsgOxxinrkUPYD+LwLCIh7CTsWSVQqRmTuPqpitlZFLQlApXjrsYBc335wOw47ksmUSMMrgKi/gnAE/awCqNHmTUwDf5X34LlBuedsgbUsK15kPMxTIXzzvFSIdsSPBw7nGD1K+7bL3F9xStEnZhoCw71TbpL71GBBbUF1MZmZWTOi97PI3eIJn9zCEtOj0+umaOde2EszqW9/xr6rM54WFtc0vfQNak57Ibd/Jerohu3GFwYqPjVEhve2Z4cbQU1ikFsQ73z0fwj+ga3VBezGuggFQAAAABJRU5ErkJggg=="};
+module.exports = JSON.parse("[\"IQMwrgdgxgLglgewgChgSgN4DcCGAnAAgFMBeDAXwG5xp4kCU9M4RkiBtPAXTTyJjB4IxTlwB0RAB4AHBHhgBnSrkJwSHbmTgAuPABoANtuABGPVNnyF2ilT4ChBGKLFQcBg8jgSZcxXrgAn0t/CDQggxJgAAYgiz8FcggxAFsSGD1kqHVMsQATEhpYRBQMoj0mDGSEVHM0AB96gHkAIwArIlh8ohA4CCIABTwEaSJ5AE9a8owiCDAUsZwWgyJjWIBzfl1yNHJcvELIYqRUTAAiSDyevqI8s+B08dGEEAIAZXGUloQDADJfj5fH5iGAIN4wPB9dYAFRw63+rQ6XSuvX6QxGYxgkwygO+BhBYIhUNh6z02HcYFWZwAsgg8mAVmcdnpEZ0YN1UYNhqMJrUzgB9flEBS0+mMsm4AyUtY7PbJGCHWglKbMVgmX5Ef6oEilNDhAAcGt4/EEwhglBYyAALBr/mcEO02WcSI9nq8YP8Pb92YLhaKGURjQ4zcp8AQDqyulA+DgYERkHMPGgLaxknhkEwWY7kdc0dzMZN9GcUTgGTAzmTZvNFstVjE9JLpTBmQAmW2/M4KIkQdb3V1EF5ONAgOTIFQEOATs1oZJ5DMBPRFOgoQMYeympzsIhcchiFp9OeJgwBPWUdeOPBysQQRXHXXkwikL0+oUiukBgD8S+VmHPZo5pYGM22jficv4mo4zZnhBwizmwehnDgFaBuYV4ILey4qmuMEEJG7LSMMoJYqMYgABY4AoTQAO4QOiPJYq47ieGUuy5NIJBnBWKDJAoJAtlauzIOwoGlHUGDsvEVgYcqLEYJawCoFOXY4NAA6vIGaAwKRwxUQwRC6dCTxEAAongwzpmcADCKkQAgMAEG4HgEDgDkGBRCjOR5LkiWcux7CJWEiQwgWjuON7RJQEAADxEGIKw9lpkUANRJZg44HBwEBcGeEhzAseBLCsJB4Ll1YFbWjSmBUrhIL06yCIVpD1mcjZEGcfThlqJVUZCMCNVE0ThHhHI3HRBa1CVADWRDjBUfkSb4UkBWUc3YcGxD/KUYgEXZdlGXUFSbRN4TNv5RyYStYQPuGOrICYLbhGoKAmAAzOEOC3QAnOEvHPQJlALSEvHLeB63pugjRwKcjQ4ND9QKMgfmLudMnmJkmCAwkt0mPqrHLWJQWieUEAVAuOB6AoGN4OM13oc4OBcMglN6GAJAIGIrXkG4MBQKRpxrRuWAIHAeTBeg5Ds3kSBEB+8ZgGg2joikcAKLFfAKD8WBy2gIKkbM85wLsmNLSjJzoALjgBWlYZPqRKsVCQ+D1QsECKNB639LpSsq/GyABYEODW4QvHsjg0jSAYkzlEw1Cm8INTmygChk3oCAswh/SSOWeji0FYD80nKdp2ACFaTpFbizUQsiwQg07H5Z1KmbBNx8Fq5/mcPkusRanvJ8eJ2go/c/M6/aDriwJwHGBWgngH7G4oOrSWboMbj3g7AQvv3L/ef5OHaXdj68E9/N6NUQF2eBgLAcguiQJ+eg89/D/iO1EUZH6di/ZzaOv7pymwI2wQsYQEbneKY6NroHBQC2Ewj1botgenoD6MC3qxybsIBGsl5IlRVm8PwjUACCZkcDjAADJwGmqcTS2kEC6U9gQUy5lkBnAAJIQElDXPIsYkLJnkkQRo7J4rrC0gAPmiP8BSRApybmiDwGhOk9K6SYaONhHD3A1wPFIXyAM7YKHyDw9IOc9FiC0ZIHIWkVZiFVjAAAQggS4+A4DCkRsYqxUAEApGkPgUgZw8otDGKPP+TgTHKw4R+bweUoBeO0N4S+0TpBuP0arfAvNHbWKIKk0iSSObuFkLxCgOSoCCA1tAhkx5LH6MzjAAwdCdTlJydUu26xSL1I8OQLeJBk76LfntEiNjLKeO8XwHe/NLSdzjn2YJ6Ay50KUYwsyqj2GcNFk7asrsdF70qTVLxPijGVL2D0wifTYo2LeJkvAaSQZyVYBMjBUyjIbwUXMhhKiLLLI0asvAztZjlmTFskxKTLmtIyAcim21jk92sX4UZQcnDpD0eYBFVizHuzXiY7hfVoXyGQH7OOCZVpbJ2cM+MEAtxcAqOS3Yeock2PsY4yELiTp6MORC3aUK6UOIgNwxlwN8VwoVNszF5NbYou5VINFkFQl9CwOkOKswRGkU9OwOR5KckpBwJIWVQiFVaWVTqhKpEAC0JguBqrBUc9lRkxAgH4Fc/F5tLTRDvkKnh8rDVBnRe4kpt8jyNKkDUupfrtlNLgC0tpFS9EpmQCal1JiPG7L4LUbZYSsB6gBd6vApSI3+qzrUqiOaQ0Buaa02IlTo0mDje4oZPjk2hM1Wmz1UrM3ZuDSY6p+bkX6OFe6xVJrc2WPDW2lWoZHxdtyQYfJ7AYDZUtIGPesURyXA/KgeNPqMqmPFZIAdnbh1VOLWG1pR4Farpbb6hpRa811NigRIgWAB0lvUNeANzKR1hXHUC3mjEPCnuTugSVZo11Zt9Zuq427L2BoLckW996IOPuSNUpJrLelQs2Aqa5z4TG2p5nzf945RX6OKcBvAAGGDlKfjLV1fVyXaCPMhyF1q0MACUVKbFGdgtUVbCM1qTSxJtZLsrbOw7zU4o6GDjqI6UwR7aD0tN0VY4TfNAxiYONsyTchpNWI7XQ0jR474QEaHpl0c92BcF/hit1CgDBwCgKSioSU4HkDARdMSnT8bE1Xo4aRHUYAfmGiiUa+ZeQrXJFKVYJMqz5UamsPQHiIB1QarWGLPUp7RZiDsX+5KdQ5yc8jDBWE3MOrEgmcpLoBH1CIKIg1iq0BaifL2rSyYRzpnfbEaB+kCDEIKlHZM0UiDJVSngdgWV0jDeynvS8znUYeagbdXGANgEm3yxxsZtzL5QiCY890/HwwqjEzeYaKHrWgnBJCHs37mI6yszZ+M+o9Amv+TBM4eFR46k9OfS+19Z5ahvOyOLn2b4lQgDgBY4QaRh1ewZ+oZxznln0x+LrpCbXDBSKcbQZxiE/NdgoSHjQAD0AA9ZAH5tAAFU4D1FYTOGAxPtD6nqCYAAbPUF6D1aeWTcl424aAEckPGAAEjxyCYUNOwgfnBnUbQ1dRbRCc1N5uM30rYwAKzwOeoz96X0frYwAOzJkK8tsSE24ZQxYjDFUjQEZI3c5ApXz1voBAQYNdBd5nLwRJpTC2wgoY886R9JjPQVhRiQADmAv9FuLw+jbq6441DDfKbO7aYAFCkTEGHCOkxAjKfHCg/SyAABicc9wHjT+HSOtRDaPY9v8dM5NoMMdGO9PYOBS8Z5Kx4ZB3z1mKCAZJSP8uia27DNA5A82DfgMdawRH4xTEKGn9Q434sB8FYj3y5bqoWGXFzLcB5bo+5AlPifUx09YxyBkXhBfOFp/I88acXL7mMar9heJWh9COuGVGG8lhHzrOrJgHGLxeyUEAgBQW9HAUWWyCAI1KeGsFYJSPqVSMQAAHQgHYQIDkCuEIGAICQnBP1rD0AYCQCNXwG63QOzEUAIBSGT3snIi1mcgIHYCPxgJnjkEZjQEoP4FIjpDEF8nvyK1XHHwug32vxVnn3QB21Ojywn1cyfwfxuU33FU5DuAeGCQfgBBfmP0WFnnP3IOoWuhvFMwdnrDUCqg+ml1rgBmpgwGazHDDGTjpkYI0OYNP24ERkoAUgOCZjZmfSzkRh1iln6Fq1+ATCTxTyZgnUpHCGAHK2SGES0go3+QGmTC5ljBE0dQGmQXSHIFRCYhpghBpjwEM1K28L/EaHZj/ERmyL6FyPkMNlmV0hwCcz3lAT4MNwENkP5Rf0UQYQ/xMkWXeXUV/2cn/yIEAKcAQAICuFD0EGkUgOgLwLgL6GUkQJQLQIwLGHGIIBwOcPwMIKgJINITIKRAoKoK7AIFoOkRckcIP00JYNcPYIWC0m4N4OX0ujhQOGuQuFVhAKJFgDODE1IEOwb2JifXIkohojGgmAdjuTvE2z3xPg/BPhsD2DUFwRP1nkaDOAAAEsTnDZ4KwPoSoKJxhoBWF0SNNoccTiTSTyS8AKxeISoTtuwYQ4RMScSmSzsWTewXdlx0CIEro95/Nt9ISsQIFQtpQIs8pYC6xYg4sEtyoVhkteo0tZcTpyUOkrCahClOJdhuY0jMB0Jo9PMzQssWi85+TVpY91B/gb1gT4CVJbNBwQBZYQJMjhpoxMk4wvA2V35G8KYdQOtJAMxGhTMq8NwW9+QZUEBpp2M0YY9h8OIFBk9RhxU8hwR8ByxSN/ZkEN8zgpBOgwB4AexXsmB6j5kv8zgABxWYLQs/FWZyAwGMPIcYcMSACADbPhW5BNCOfgHfO+SocZeo17Oo1/ZyUjakSomw5IR4rggoQIZIJ2R2SgSgOFX6boFYdYWMfrS0T3ccdCSaJmdGaNBADfdCF0UiNAOLIsykUjBAJzcZapSHVITgukGcDJV2HUMQfkVWD8hc75SgIgAwb4wc1/J8mc18+QzsZM2YK4NMvqeQEs55XSA4M4bslYOMO4XIJ2SKfIFWbxHDYySQWzaQTCP89YXYQC1WM4DufTZ8p4vITaNPFoK+EilhDuLC75RIvMyQAsos7k8cVmKAfkzslhWyPADVAwV7MAEEIyDfaBfIaWT+NC3su4dHJM0AmC24AATWcQMEwuksXPPMvKQGvP6z/HFNWAMu+T0ACPCwUv6CczOCHLvmkp7i6g4mUowq4jotnI4iHI4vWBICsvIrl1qA9ybyCiErePEisPMp7nRzEokoJO+XD0ck8A8ycz1Nw2NPEiMnR38qdl/jl3ZB6jDiCrE1aQoB5JKAIFYEwGyNbk8HqqCn5ERgoHHAKCqryHYDgC4GfwzUSDE1lWGjQ3RF9KICaBAD0HYiwH+CwDHGQCaCEnkWTGkH+GkAo0YrSuQESUNi1AKGkGTHHHGBIH5B9JOUKHOp7hIHdJjC9LyCa1blR3NnYD8QDQrCctAoQg7nEGa2MhwBEzxXy1XATjRiBon2NJCSsUjI4WjPjHKHFj1HrgaowQIHWCwnSnk30RhqFhjOzMDmsNbity93mV9gCn0E91AFbnTADgplTjhUEtQB6opQyEDmjU+vLiflctkuulaWCsXBIFT1aizLtAdGOLhN7hAC2qYj9gQkFBwCohwCnl8lljEHVk1njBAC/P5AVqVvQF1n1nBqELXFEvepzjppPOZCNpkl/BYX8oyHsOpQVjVmFA1r9h1i0kNuuSFopCfApmQAvKtuuWNw5roQrgtqdolmQGCsElpopsjom2KnFwNsLkpm0CtycyCgPNknfXZDxLkC3B8rpFnVYC3yUP0w31iiuA3K3JzVDqole1inAoevkLztpLVpgjqyLoKGoqe3MDT2+SCsUJuDyD0GzoOnrsbu7vTRwlIgAu7r8q+tikXJ6KMgrOhD1lwNrMIClmFEIPsh2iwBFkuIIAAHJ6jT6OD6LeC95SJyAlchKSY27t7+6nYRLJ7+yZLG8F0F7J7X7B6iTrKq7AKiBNy4wc056rTAH1hSM4AIl7KZY2Bp0O6kygIAA5EHbcEgbwVqfu6pOVapMhBAKAb6p7Cjburu5ujiR8/+wKsuke8IYBmu8Bv1C82JbQNgX+/y5ewe1ez/folhfOwgdWMsCcDyWyeyFSI4p0Rh9c0B2u1h3YIKFofmfDMgfIohqATLORKgEwGRL0ThrKzR0bU1cIFsfRrunIjwchYh0bFsClZekAaeYx5wF6HgHJfI4yV2XlUIpTJR1uKiVRm2OVTykoRoKq2Ka6vxOQJKmykBuMYgAe0kP7IZdCkodQFG13IM82bZTx7x5xXidgGKmxrR6ihAOyJkFmm1OQf6kTFoJJV9fRdWfgZAGIfx1GpayfIJsdZwXq6NedHCWKba/9cZQ+aZHw9ALZaNYAFWDBtB1ABrC894kgftKPVueMTAGwygFKPAKKarRKNAS0LIGWjIJgHbWKVqUbbgfu2yqIMwMywZiI0geh/oUequ6WDIogOwHCFvfBxo8gcy6pbQakTO1uCcnK1qbQF524Gy6WGUAFnCV+YEkgGff7CEL7W+fkPQM6tFq+QHEgY8fEPIPCtycYDBhYNmZALF5OKsmsu4wve5E6Wfas/oeluOdjOFXxMZrbfeM+XFjFkjP8YAaIurO+AwTEll7ehl2Eu+Th4l0A0l8l8rWKYHUHVidkDVPASaDlkm4aGxMak5SavzcgjJGAA1nuSa2ofkE9F8XpQUU61OWoGlyVtlxlplo7UYG6k1j0rc5AcYE6PYUOUq9iYOmCDAeWxWqeIqvYVHdYK62SvQONj1jgBmfqnCMFdkQhIeGk7ekgZJtPbN7IAKYmUmAONKYWGXO+HALUD6b2VWI6uwgM3SdG/OEt/QQ2HM0jPOhQF1lw6V0innawfdXwj2vWFAa2leEm9kWy+eJ59OiZyopGvQVHf1x12aZ1ullw3yPQcYZmtN9aMFGfDkqEfd00M4dgMWtkAgXt2eLgJkHOMQaacYNfCG66UgUzagUKMMb3acG9ZPPmMIUjF2rWLNDZqQ3klATZ0ceeuIue5Zm9EYNwy0VQacZop54qXIW5qqUBNDrD2IFoh91qXiJoPQSQeNz1jAflwHbQbdZpsPa5S0bZGDEgMtGTLOFj2lX5cdb8rj6F0eoVD5qqIVEBsB0gPdX+mh7ZRcvjjx6mLxokYUapvAWpvmKiKI9AGw/DfRvRNAJyqe3mfAQhGnQaaWn9SpOoSRWZnAeZpKU5azWzO6PULUSpLLPj1iLsEYECTogT/oAaMTQVExPJhThQFVcQUJpAdm5y7uL+wMMs0Of8gatWyUPYeV/C3mQi4i5cLz9fVujFaWJCpwAErtaq+gdMEmSoPefRKJ/y/RRcsoCZ7LPAShl8numhnhuh4e15qI4AS8TTsMNQXJuT/JxT2Dk1C0URFjygI1aAuFD6Qb8YeT3lZm/0lvcLiAdm4YCpqtkEamTRnbCyGCnRS0FvDR4hqKcdGDOFdCY5n9cmVC1I0iTR7d1mG7zwO7qxyOJ7kShAf4eWXLqxGDKKVbh7vb43YHnDTRvQNp6NJjvgLAIHm1ao6x0HnCWvRH4HZH4hiioC7zVgE8/7o5O9BHoxrHsHxiCH4hqHuuSiogeQ4AeWMs15ARpy6mH4rcl2eyKiKeLgwshyB79AwgD78YI71gWHonlvIXlHsGZACXpHz7rHuXZvZisAEi7L6Q1cPr4R8dILnx0bkwM8CbiKabyoK0+bxbgp0QaNbwU7qAc7sX2a34V7rwBCSX4h3yT0ExQH7wV3qAWb7BygZizJSaJzat4Is4QPnASaV7GATEq8voSkaPoIk73bs760jUc72XjH+XqAGtiNBt4OR2D8Vb1J/gEoZE0jKroyIxWrwe8oHAFdFNFr6hs2iDdJH3vQNhtTEvr0ymPYTy1YOQkC8uF1GLgr+LmBjuCPqPkfnuWPky+PtqGfj+Vv8f9HGi6LnuBvkxPASUcdOrpJ9VJv3u4MCuNjhUPM7lXyBKmJ9waPmLm05zs/9QcIO+xcPoFWUiNX42zX4gbXob4LxZmN0qyTdpuq4XOoF3/5Ldtw0aZID7xdQSF403fUlMSjSZIAsKTjMYHtz0CBMwgHfXLFlS/421rCX7HphAIW7Dd9EevACobym5GowB37P/uQOC7koYBO3EpvANmxZBu+JQSLqBU/o9w4UqJJJpQBwG7A94cAJzIzw6wVk4AHgeRgYD544ZhiABEirwTibMMiAOlQCnkEIEK5IEiXauvI3AZyRaS2gTpuEBEboNMG2gYmAGk0a0Y9gb1LONH1CQtdH+ViaTp125x4DA25ABZn3kpiWECioDTdrPCYyQB4AFLS8FlX5j9tlQ1FD6nwE2CssXC4Q12HAAWAEASA4YXyBmGtz8FNmrcFcISnTZP4DsJrfVsCUmqNA5CRKQUHa35AWIAE0cXvItEXigJwO02R/AEOfzjI+OEtQcAHhABB4Y+9QYAEMJGEfZ0WsAfjKYGjQTC2QUwvFuyBTwg5Zh+vUZpMm7g8t0Qkgf1kKwij5ESaAAES3LkdImhITkhdmQALDg8F8aYTTlOFxg9AhhCdpBwoB6goisuGIebCFYmA5cnQhXN0LaH6I8EBCWsNPgoR40HUkNUNsGGFaoBRa5BAYe6H+Aqx887/L0vswvLvZYOhvXEbqlaQuhqQsYVPMMPKbgxFmQRbEVFCtAthPoVoT6Izh1z0iNcfg9AP8DhGmgFIwAUYfaGREqEeWfInyIKL3wrC/AgkJfICKJjAigYZAKJDElqHps6BhyCEAkl0Eyip2MUD8Cal/iiIZYJgbQLLlaLq9ChqNQfO2xzLXQGStnURHaLMB0xEBiaeMM4AUBmptkZiClIbFvKywJuc8HAHu2IGXBjAZgMxLRgaQwZtACAKKNEHFy6B+0QLaMbGLwAOZtgUY8RB+Cd7mcVoCgftGW1ozXDsxFMBzKWxzLaAAxvVMgEum5QxYwxycSMX6iBZ0YOkq+DJFkh1ZqMqMOAXTIWMRTlBYgsUPXubW2SSh8k+QtopAi+LSJ1sfxHCumGzwJkYEaua8HkMyLPRBo/pBDDL3CDXdkAb0FmJ+RQAnlYst0ASB30PHIBfeAtFABuMiBbiQA4QRoc9HCAFAtx1rBsLdFVzTULxaaHdtjDgTLsLx/rMTIFReiM4iAyuMenxCtAAAqUkC0GgkmBPoLYCCdgJIBgTlcMEyaKRzIBvBbE1IVhGg20CM5YgeE6kIQgAAa2gEwHjliDQgmgTQMhLYkIRMZtAyuHXHoGhC2J+QrCSyE0CIkthIJXEnidCGMjUh+Q1IYiZxO4m8T+J/IWxExlYTUTpJPEviWg35AAAJRiccO0B0i6J3E2xE0CYzHDjIrEswMJO4lvBoQWlMhMZHRxSwRimFeiYxP5B8SyEZCbQBxOMgUSBghCNBjpLEAmBIJlkPyccNskAB1bQGIEZx6BKyik44VRJMDRBYgcU1hMcK0q6SOJhkriSxO0Atg7svktBhpOMisJKyGk6EHlJbB6ATJ+eQhKTjITQh+QtkoicrliAES0GrCakKTnEnNS2JegdqfyAABaDEySYJP6mUShpI06iUQBeh6AAAaoxLeAhTbJUUoKXoFJwUT+QTQXyZZFYTWSopn0PQMNKaDiTqQTQEyflSwAVgyE8k6EOpLeCsJBpdk2BHoBum2I7pEkliZWUIno4jUjOaQJIFrgEA/pAM2uBWCWlMZGJN08KcVOMgeSzgMGX5BWHzz8SKpZwEwCYFBnEEy8RAI1EPC7CjE9AtiazBAEmgkioAHwAmSkHzwmU9AKBAgAzPeCgMEA0iUnKwj0BMYHQu0FkHsOSHrSWgEQkuNZFdg+IO89MxmRiIKjvAVIycY4cMBrhvAZZegDSYBS1jwA3ABANBkQEpB0zhAjMhQDLLxljAWA97JoLhOMhqSdJJgGaf1MImk5RJxEogFaFtloN7ZxkZXNoBeioT2pbsoKdoE+jey7Zokl6NEGon6hUJWk0nKxNJCRymMVoaiVaCtCoTjhhCDKdhPCnGRjIAAaWInRArQ4cyCWdLQbQgNJ2geplpWMi5SqI/U1GRpPIkDBtAr1AAFIqQPq+eIgC0A+oki6SCEQhARC7mkIPqTcyAEPIZAfVCEYAXsAhHOTSAPqTQP4ghDQYIArpCEY4Z0DOAUpoQnU4yEtMIS2S3gjcpKTBOrmYTq5L0Y+XoBbAXzq5jOGCfU1gn1Nz59TK+fU3qZBSsJegI+dhJ1wfzMJ2E8+dhKvnYTsJ90OCXoFvmkhz5pIEwGIEwmkhoFBcvQAHMgngTIJXsyCfdCdngKnZFKfnLvP3mNyxA0QSCYFL0BiAqp5CkhSQruxmAqpyuClJZHIjyBBk8WMNDR2XZhx+QkAKNhgHRk45pps0s4Mrn4XK4bZ6M6IPwutnOyzgLYCRT/BQnSKQ5/Cr2dIpMApAf44ExReorDlYKhF2i9BQhCCnaLkFCEEOdopxioT0ZGkn+KSBkXWK8pYCs4C9HsVQKEIVoexSYETmWL7o9iq0Kzm8XHCf42E9GeFI0V5zEF6M6kD/HqboytKP8KiHsFYTcToQ+efkOFJYlESzg4UsdgQGTxQgCASSygnSGkTjAHEIBHnnpRAKjAoALAFspEJ6AFRMhyAc+iAEvq9AVgosDqKfQM7yBL6l7GYanE9p4Aue3xUpWAD57CA0MzkYQJAAsBshbgWxIgLQUQCCB721IEgHjjeEEB6gaAISPzkIRGpBp/IM1NECNSfQDlRy/nEgTEBcAYJaAdgEgTdEwSPwSBXFGIGeVoAkCaAPHOsAyF6BCEGyvZRcuOUqozlwKq5TcruUPKnlLy9gEJAJxnACcSBdgEiq4BcAkoH4T5VwB+V/K3ggKpAnkFSjIAkCVEO5T8pSB6A0GZAKgEFDaD8xqQcUCiDAHYRgZJuajBlfmSioiVVwHAU1DtwyGuIOA9jflajjDJeZ2AbjEVYjGsQRwp4LCBCDrA1TSBcUXIyCFKoTowRTMmTXksZH5hEprsDnPOluktZnBeFaAEsUIiZUsqpAJq8gL5Haau5WEGNCtrXDviahgivibdoQkZVdhrV5iCKFLH0IkBvVnK0TEc2WZko+VRIUVY7jJTCro1SHW5NEGHKNBhkqsdhDTkNhRRVccfOYP1gUBc8cMeQyjhRDajoUf4bgKiioArWlrj+Z7bQLmspD30wwH0TiOfG5jzhz2vkdtbGHggCgoY3auLB2sCAVgCAg6pAB2qLBoA72+uOVHwAjgA1SUoXHMlTycxUQ7YKwBMGKrNDaqaq0IVbCwnWzFlthYoiQkV3ZDHsewbhH+gavhqgYbVtyM1SWMHFWrjVtyO1UjSChkIMaDA/XgWqngiZVwlatqPwoOxiA3gFs/iccID4xhJolAYDWcG0VgafZokmDUH3g21r7FYG2OWhsj4YaqKgS2jDdTEApytKuGuDQhtCVEamgYgDOdnPI34a2oUS6jWICLklyGNCGuJSxorksSEW60NNUQAzWnAYJoCIKMcIPV+J5gASOkiet7iTN020aNBtOh4B7wlNM6SgG8B9XMqt0bK4JpptDX/oF0K6NTX1W/W8qHG7AexuEBM0KxzCsuIKJZCwhbIkoZwI1GcFs4yrrMNOM4FFDc06xZAyqh1byXzw/rCAN4Kqj/xQ5DhiBLWfrjIjJSaBCkzgbgLp2FR9hsGP2UQHu2S1mpeqvWFwMKnUBM1uABiPqGIJwiibW4AwYStgBdXOoXQEAH7CxyawkCbosQAboAP167N/efvEkVpBtS1JRwGYJKIbDxwPQYe7ABmGNjdU7Zux9MM1FlG1EHAcAqYtQDgBNR8aNwRAPZpNoW1cAi+5YhzLuvoAABHbpr/wig/8f20WxjmNlK2h9nAWUe7aFzQBEAkoJAUnEzSe3CoXtMEx7eIB7SwdNtXmY7cIE+3mwf+77ClAYRnQOwIosRQkSuWuhPRtoiHTXIFq8Dv1vgPwTJBAFeyBwUxJAK0ABRx4Tg1szJfHbwHe1XzvAsHEncBVuT+JAkVbKnSQH1D07ceLCfpXDhdCh9Y0ZWe9ZIEtaV4f+HkDqH+zCIdtDY0Gf9l4HYBujytYMUHQQCYxtUKiDCJ4YGDEBoZoQGQjZs2sIC2IOxwTV6iWg+r5oPqUAWpFRQQhCxJK4gMxJa0M04QAo5XQQdx35AwAQAgoLGtrRFg+6DghReoIWRBBiYzCdWp+BAEzFQtnAM6ULpQH/VFrWm2yQUDAGiCChGgeACbins93p7+QI2oIr+jECQAU8LAGnC9AowHaNxOetPfazwBGo8AAAUg7ZAbS1tccsVVj0Shd3BIXORI7GTBT9GNBAQ0TgD2Zd65EPe0Lv3o41t6Ww5mFWFPu7GD7gNBAF6PPt73orHYHSExLBw93xQM99QZXE5hK7CANJNWn+oKH92ND6ugoffU+NQjjgAAXs/iCg04ZsloJqr+hziNNTEr43/R4xAAkBxN8oB8TkmawaoFQsAm/qChMRwgREVfBcusHgOjBMSCAUiAYCgArztkXPblEGjEA4GpY1coTLIIMCblpAa5dpaQbDh/oLMfUCxLQZwCe6q+rHKxBqj6BRBgA05JWk/RMQixzEXYyMnkCDI/6vd2vEAI0BD1e71U3BnvSCEAOSHQD9odA5gZcEeCkDAgyLRxzjz2gUyH1M3QhAt0IQrdCAG3S1BHjjYootOxHSmNSjXQPocAS3i51TZn621Q63tR6NHoChx10AXtYHBeHuMnD4gQUCAAgD2tbE244vNyl/S7bGmu27Wl7vta5MQA5ATYfclk0bxYD6hoyLIeMOqwSALhs4D2ppweG5auRtqOEFDJFJrdsUYI6Eev2ZHkDCNeNNUfiPe76jViL3T/rYNXR5ISRpCuDh8yvAU8DiSpTgQCyvN/iIe4pB5xSD8hujxXccCHAYOhd49khrpHjMb1JGckKvTFKSgaSSHwgIentGgYwNYB7tizDjkcbdQnHMD5x6QLLvYCSGckGIMlHIhyQlpl12yfNJ8eaMmGOAbxkcT8FC48AmiOEOcLsoyBFMn26OHY1uQrCQslRJ/G41dK4xp4sjoweeCYlhNxh+QyJlUOjm5ZiiGjm/bZNiaID8hpjoIZ6pLjs25YMA0Ji4NIF2O4nlDK8hEwUJmDqAJDF6/bOOj4MJ7C1aRBg0wcbwlrviocudJ3qsQ/auxnWk5SppghzClc2Bg8HQllhGoVTuBqiElCSM2CzwRqYqJscC4gAxMagarV2LmhW9s9DBqkX8LD3qAkoChgCmPqsR274jeenU8adkN26p9zuUXRkXQhwBKA0Y2U3ToQApRMAvEJU2GFZhdiL2JdaOsNhBB66uAE3QOIPu2QvHtaIRwUImeqApkHGP+ktNmbqN5myIh6QszknzQlnczYAJM/mkrNqYWjtR2s0mbKONmTEbpls61TrPJA7dhZlI6wE9zyRK03cLDCQbIMKBJEKabg+sLEzZAmzfx+PZmZTI1nWqJDFCNsmLPdnLxB0L43QjXO7nNzvx1WIeY3M/6uz/IHM61QHF+QDhdJhk2SYpPUFPE8J32hqKwikByskh3kx4ckACmANuGYUwILFPSIJTrAXkTadg5znJTcZ0M4SJNTym5zypkxAQbVO4zNThBz0x0ZAB6n69hppI6aZIDmmGDlpy0HAGtPSm3U0Fu0z/w+hvaFD/pQwoGeDMunu01FxHeGdsMCVx0P2hAAmd7PJmFgqZ/vYPp6Sy75Yg58IrB0qijnx0lByc2gHHALmTzNRq86WcCE09TAT8Ygx4EnNagVL7iaoy9oqoSZmzuen3cAFIiNBgBpEbC1V2dJF6yjxei+HbCcaXif9zl1PXnvUB0CjTOFhWIudVhT6oAwOiAOlj2D0mZo9knhIIckBvmwsH5gVNSoAtFqpO6J1vVRWRM/xejWGaA5y14s8J497qxnOQ1g4fgXobqxZrIfAOxg/KeuqMSmQ76HpDAdCWLNUalwjxAreV8SnVacoNWXj2gEtNoHzQNqOrdupkIPpLBlh19SnCA/VYWBjW/jTIRLrVZWGyrvN6OHWH9QBp8w3h7uTAIOMJE2lPNcqj6ttZqa7WVV+KduOm1NLI0aUp0AI34Meqo1+coWhgOzX6HpHj4L8Ioh4G7jXE8QtxFwjwHkIiE58fOOGAmFjKrhej/Gdmket7A/Whwe8SsntnfRAkrUJES9XG2GZXZ7Ot2e7HAkoDPZkR+md7FR2+zBFfsSwgVteEwbv0SRs8/TJiVhyQ4ds1+EACjjDW3JMc3eHHKzfqCE5ac5OSnNTlpz04mcLONnCTg5wg5RgD1XnN1kFzC4uwW6nbOjZYjsi9QNlz0HaCZ0yaj4TgKkVUGc46h8+bWx3FbCqrmVrA85JKyTSz1ypyrGAWyjKBsDu2qokLZLSlB3B7AB+MIronMmbCLhYkkg0cnwz6LMI1EKyZQaMRIqbE8SsxIgjsUWL3CHSsUVYvHDwCYFNi2xBYuUD2LEE+c0jWAB5FOI0EcAdBK4kwVpJsEr6s5HgrsBzz+l6w6EOYXbcdu/Ygbk8eu5UUyCO3xwkBhdtupAJypbKOWcwB+fNgd3Ygc3fyI7aOEKB/rkQT8qUXqBpgYIk5OXjTEtAnkyy/zUFqjS1vFYjMyrKrFSNFbYiWtsWsLRx3ay6R58ymPrANl4DTb/tpGS8OOHCkv7W4b+zAJ/uzE/7ZgsqJo1YjyOFkckbwcKeRJIDsAaJMUlsHjiQcoPP5KDlmiYiskmS5p/IYyAMDxXWyTULB/RNg+Mi4PBpJAIh87JT1mJPdBUKAJNChCVE944J2oFCeiv9qt09DgGkw+LINh3zNt4e0ihGr8BzWRkJ3Tp0yAkB3rojmANRFohBYsQSrBGBpCCExaQiVudwtqC3F6gEGSO5U081SsiZKgCGqm3IBrVUVFAljtqIoC902OuHYGHh4w42wNra1nuhQCLAceRlvHV0tx1RR1p5A8gPj/x21B6XlhQn9oaAEwoicIaXgIAcJw46HjaLG1XzU3iYkCfBOoY+gFziVtxt+ELQk+zQIbEyoPcC4EgO/ELyqA2pKiD5zh5k58cCPErchd9HSpQgHAnVpAXVShE+pWJNkqPSvaKoLxxwAgiMLdUUaEgpaFYzYskAyY8deOmn0oRE2e0KNuHijCEXzd4Y7WBg6n4wdHI0/ZNtFIaR4B4O6tIBp81LV+rUNEW1p37BEE3NS3fsL2PPZgiRpKF+MkJRW9nAoNk4I45PNFyM6QT0N3HeyX7gn/Ia5y+DucVZs9tz159a2c5wu6jDpj57s/yo45Fngdw3IIexadH5Cnuh8Ylzsei9cXU1QQ5bYIy5QzjigELoIfGyDNZYU+sPGwHHSgOQQCgWlyLD6rKb+6YL+1uS9QiRWGTxLhK0s/4LYsRYcKX7CYjZc0v2AdL3TJmMPPoAOGMN7ZLK45fyuuX8DmdDrD5eNCcXyQVPW0aAOAJcg3ZkgOEdQrVHu1+4KI2EHCAEcvnCVR/aK6xemiSaRmUYTABUKyxGgocz5wyeBxuuZ7xz4ot65UJou/EIAEN8s8cDojMRLo33J1ZrjRBK9qwOZlG/AKYVDn6vCVy3XAHQ1FAIsKliLAQjZvt2qmdtLDHQAfg5m4efV/PFC6/xHcIaWGIGDrfWcbBfu8F4y7kR4X02gXBGCmPnIPtjXgoJGM66gqdzMXM9tGOS6DUp7i3c4HF9O8rfjpgcpwTt0RJfBX6m3/bjIAN2reAJt33bxt/8bMwPMD2Q7jMNAUyBjuCXE7qN1QSAixvxXC7wt9jWXelvPDL7v5A7Dbdbv63u73t84APetvj3Hb+t5c97cXuB317jo8O5gmjuXwCR61lG+Ja/Pmn77yV4u4yffvV3mH9d4B9rfAee3gofd2ZkPcbv23POaD+R/5B9vL3XbG93gDxwofWjT7oV5w/6BTzc3LmD98EyXeeOV3Zbt6r2Edc0egPXbkDxR7A9UeWPiHmNBFgfdofJ3DJpYBi/49EC94fW1PJp7vzcfvnANEw2+5y66fSRaeDxFgnU+cPPH6wDHmZ49d2a3VorD4VG/s8Y8TZs7o0rVtTcU2ab1K2z8Z4MAaonPLmNtvm6g532Jw3HAj2J/cAaoWEEz8oOdYmckw0vazztbpxpQfQ9PA2ikQmBglsAHs2uIgHjn0DoRYgrMWUpN1t79YoAEZ3miQHy8WAY0JgGCfl9kCBMoAxBS+d8uQBXyuvdCQ8g9FPDhnBaLMd7c4Fxm9fTUMEu+kS4RhgA8cacQIKh7aPBf0cFEPoOF5084R8vO33UFm4QJ7fJ2Fn/rTwmO9GftvEIM76JBxcEuCrBLzElxDi8ief35biEMl6y8ZBfI9qgDzK44TWImFtwU3YelWcTre1gYL0ay+B+rC+A3VM4BbpS/TrMi6r+H6D6R9lHIfPhgBxSiWNKf8OpLsexvqk9DZTG4uULtAWbf5eNUQZOn5qgzDU+HDbxw7y0GHfU+AxpjcIOz4Ris+uAxBBB/IhyS9XDyGQMIFm6wB8e/n+WaL7YSwKOwu8HPSgYSKRQMIxCkn+HXszfuZQ+qayFX2NnnoBa3Cmh9rZNzgAxRFmFoCM4To4B9MJseOI64ag899BbM93/mFG5aAzvtPegkmIJ617CeS3q773z96h9v6EICq9LwqoB9HuIHSXlaJmDm6AoYAVweaon/uVyIRNAGHqh435+hcko5MFMejIricf3xuTfP3Ij6/F+Wwpf8d9a39uzPOH3vhuj5/Ff+/cPKFotx95D8tBAmuP7Z5H62e9qMvOX+BNsgUAJ+0YTAZdcn4gep+70ECGf1n/W5LfBvMEnAOx9JgbeuPTf759jskpt/zPip3kVG6gA1KPfK0AP+JiD+ifPD5/gdSl5j80oq38fmt3GXH8YpF/bxTIkzSr9DY5EAbyIV35AXzHsK/GXnvcd/dDxu9UKIgFkFL/SGny9bMWQUM89/dHAM4ewNqCP883D9zq1XPD1SodLbaV279g/MTwwDNgMPzx8+1Mf0U8quLBGp8ZvaHVU9NvM/xSAEAS/3ndO/BgVv9PvVCjYDKAwf3+8X/CTHIhMA2oDMBcBOPzoDmfOREN4qfft3w4XNKeSgDNccAIACRLWMVDkG9ZdQgAXNQ/xUD/SCf3mBneYmBc0TAXyGXVHRCB2MCRUTIBc1a/TP3pcEPaQKSlogYr1zETyTZQUAkoY8Sfoy/Lb1QoEAGX2w8JxBdyu13vUgPv9+Agf2h9n/CwQ/RjAt4mXU1Aee0m5R9frBW1UoOAGm9dtYrxW0SbNf2gIKvSAP8Cz/OQB7lffd4TKCtPWX1fYLvVPGs9UAqd2jATDGoJCCcArgPvseA1dxaCOXYj1C59RULhUJhfQYNNRaA9l3nA/A+vwCDegjWBA4OA8oGv9iAr9x78yA4YA5dl5QJHiD5PQYIn1vQYX3O5zNcYMUBJg5gN39mg9YKTJxUCoNqCIvKLzw8SAu/yMNLgrfDpJtg0Lhihu9fYNNQHnYX2ODh3EoOmCz/eYA4Dr/Sl3mcng1ChBDJPcAIHEzg61l0wmXdtEf0//HgHstrwFEMjV3GJ1wZNuEUpRAA2A12FIgEAz1w6xNdVAG5MQQHWDQx7ZSyHJCAgvEJeAqIIgCIAo+bAONpmiMkN9ZRhA4211+AWkNOFJgc1X+EYAtPwWD7g8IO6CxPNPwEDYgoQO2DAUKfw8xkgjjg+gIodIMoBMgw5ne0+fJmgZgG9MAJvc4AJ30BDH3aALQDiwZWHFDHvPF0/cvyeL08M8gZWFlD1nTL3D9qAgHwOAXvaHArApAqlxB8fEJHzN0JnJgApQ5/fRDZcEfMH2R8w6EMLR9CfQjFECKAwIAkCzAiwLeMrA/dHRo1MJMPjByYVMJkVt2MIGXVYzG91cDivQD0phT3BQFEQfuX4BrDYxawA3FdApxQrAnvE8XADywovU3cTyU9wQBREKc1+B+w2MQQAjRR1xc0rQNsM6NzxbZDF9BuVpgkCSfc2hbDlcbdkAMhUOAHT9t+JLxLgJfFzUZxt2bJBbD9QbdkiANwrcKsQxfEhj3CzgHXEPC7As4E+ht2do1q4gnWWmPAWwpKXTCnA00GnRtwmtzLDkpTr0s8DPEAGp8DAF7U2V6tU6g/BDRd8U/DzApcNMD0ZBwMXBDARvyndRiJCHZDpse4LtCIQ3gKwiXQj0OEDkHNgAcxP/In1NC1PWBiRCtMWGAcNKfCfyVD0YZtzwA/tAvzugDQv7WRC5dUxgCAo3CwBJD6g4ICaCGTEACYgNsHCL0Ewg1rWWD7Q1YM8MJIjwGYcYgiP3lCAPFUI2EYoBzBt8sg1gGdtemBU2cCJg7DnhDDQpT3rApgs0ICDegSQGBw8daSPvAo3ckQscnI+lUs9XI8GACCS0EXGtDcPSUPw9FIhCF8j1bNSJIj4gk1FolHcCKEt9tyCMyMjREJrmCJVMZmgsjpA/QGsi1PKN1CiYAFoHwA2gsVyOdbAC0NIgwvdyKv9Ogm/yCjIgkKKS9wo1LzH8HYfLy8i2AMbXgR8vYYEuBkAfLwUATtHFA0h0fUJDLAi9KiCn9MotMLMZ0YQwNQsWIlsNQjMw6xDAAVGcmGTgWwl6H6cTIsaNhg1vB8MnCfIhxBuD2gjkIq0uQrEUpD9aGkOhBLIDSUOiM6GAJYAY3CqI/8p2F0hxDOHSaCgBxQ8rnzcSfPz0rZjMdymh50nR4N4DPo4iNS8o/LLwy8oY90KnUAfD6G9DOIGaKsRIwrH3B8WkcKMDgKURaLRjAw16hR8svbGIPF1XFiOyCS/cIGyA54ecKqhyY2vxJ9ZrE4I30jUBAGSCXNDaPMiZwmVyS8NzAIAnDNo38N3Cb3OszkQkoUiFC4RNPmKEU6/GyLz9EzKv3FiV/KWIPDzIjCIZNPo1v0qCLSfQBtCHxf6NdVAYlKKSIiLKUM8MNYiGKH8dYaGMtiQwuIKGirEcGMuhSYM4A1ipwh8X+DcUbn3lMhfexkgiAxVVDeN1vUoJgCSZJIW+i8IvAIa0mtZ3C78Vg2qOR8+gJIQtj5QhbFv14XFr0s96fBZjTi6jf1zqAiLXz0FRrEQm2QBbzDuhA5VYaVSVVrrYqL/AtwHOB3BTwdKDJgOOXiFiAqvA8Vq9YgUtE/Z5xF20R1SIGKEoA7LWw16N2AUiGMiNwOZjEx1w8eOygVtQoGXVvAxeNNQpvReKz8wIjMPe1N425TAjV4xrySgwrWLwUA8cXrwzASAS8RgkEAYghglKYTZSgAYJMABvjA4NAA39T4ioArDOtI1DCARtdkQ/8PYwIBydg4i0NqRggoqLqCDvSz1ASxIzh1ASvwiqMQCoEoIKSkYE753zQ/I56MWCAouSIiDIQ9BLCin/DSIOAaJc31iih47INSgjIqKGSjz4oyPSiJgzKPMio3fBLyiCohYPqoYAjVCgAc3W4Nwifo6/z9CCI1dy4S5wBqKtj3QsIFtiNI8MIkAyYyaJRiIwqfxJg6Y7dkWikyFaLppyYjaMONWXJLzTh22fmO3UL2dOCMCVGYuCljVw6dWfdNUD33l9h7JXyxxFARZnV8OsTX2kdtfc0F0DUoPXwcSBbI3x/oTfXn0zjNUVvHLw9POoGfc6QWpXYSMAEPR/JREtgOJYQAcYBZiQOUlgrBYksABFgW3XoG0FrAL5gCCBZEABABPHR/SwCtY2SGfdegfyILduAmqMhCUgXoGTimo1/wjDMfQMI5gfgCD3cRcw8QIfDzAxwPtj9EP9wNhzuTQO0ZodewO3YEw1IBGj22OQIDcdA9mNUSEg1HFsCWw/aJJjAUYwOThkIyxJPE7NcYM3d5YRoEvFx0LNChhzElsIPDHAkQwRgSGLKJYDOE3b3ci7EsMAVADfX5FV9DUFxKfsobdAHcTIoHXy8TXtabU+TscfxMeZAk/qUzi+gUJMmBwknZ2eS5gOMGEjTo3SHJCeQi9WpD+Q66OpB4+OMHuiLQtgPUVMEvCLqTQY4RNvwGouII9j5PDUzVRHk84IZNCQrSDRSPYM6JdELonFJgBaQ2kCJDanC0MSdXkkqKncJ1GJ3DjcA/zyjjAvD4RUwLfVgC/NGgRzWexonDMjbDJXHOFBdBDQUHcoXweJxsQD9MtFGxAA/5T5xZ8TX2VQ9g+TwY89U0Lm1oDU/gCNSc4OVGrj9rX4TusdGT4Sh4MfM43FSMyKlDsNPyHuEoBDBBJnlB9oZIH5xs2LSAyIeIJh2kA5mPzkWNg1c1NEJ/knnE7Af4TiF902Xf1PkAssYaHcgw0FACqBrBBGjyocANm1lV+gdzWThhURuQJ9+APimsAPcaMDgASKawCqh1gSEB0FkgHtJFhwmXLEl92IoKgvUTTPclTTusC1IzSPwR4wvUkoErSy8fcahEblJDRdIbjc04H3zTGAu41l1LaGAPidhUipLjII46VLexZU5kCVT6gFVMmoEnCVKi95U2KNF5tUq5yNj9U4pMNT+QPOMFQXtM1OnT007rFOArUrgBAzbU99PtTBQR1JgBnUouLdTVVE0i9SaUSC1Rjt04pPCdA0nPGDSjIUNPiZZiGLlyBo0kkljSrI6xATSk0mIDExeICG019P4fhRzTfUsQCPSYnQtJNZi0hz2QAy0xawrTRgcsWrSSZNqCSh60nhEbSKYZtKhBW0imHbTO0kMUTZe0gsQHS8gIdLlAxBGCTHS5DMTHQgaM2dPnSQQRdLC53QldPEI10hdJydBMIHz9T0MljO3A90sIgPSLQidRtcEEr3GjoF0hQzQBG9cTXQAXQY0QtCbEFtJJDGM+JLmMok5JM4z/MiTKKohoNjI5cS0ovUjDLkU1lBQAg6DJqSN8WT2tY6hXE0/SnUxoQRpfzepN4DoM5pM9D0gLBCPIJsB1JyyYMvLIqBmEm4CcQNkEVKjd+gHxEvgVINkK1iOEi0NshNY3hLAgXMjXS3IeU3XQWBBUqdx5BbMbxg6zbE0VIZNpATcLsh9DE9JLZZImL1aSFI+OIWyhYQdD5gaUt0KoDR/WPwdNdAswDm4xsf0gigFASwwT0IzY7jt55dUDPrDI9BASU85mbf38CPYovyYSYA7bLshDDFbPvc1shXxuhTYhCD+zIMZONhjDsu2LUA3tU7PR8LstuIT0bs7wP0iZebPUez/gBQBey1/d7KATpgr7I+ygQ37LDpnMkSO69UEtfhVgpIwHOBz8Ih0O+oacq9X2yWkk1Nh9tIt7Q2E7sgyIey8tNfzMiVAj2Ksifsi0N6s0sh4LjjIQsX1ZzSs8oD9CTg4nyFzxBOiKqQGI4X19xFQ9/2VD+3VEKShb3OBB4itMFEMYj5EYoIkEYA4YC+iyUpYNwTeAq3JKzTwNfy7D6UxgO+VGA6iKeSxcrlB4Tjo/b3WhOon3KpzqKTxwlzcreiMAQTrfVylc7c1dwuTkAbdH9YdEVmFcDiHaIE2UTAdEMw9hKF7XIAaeKoFjyxPePNlym4hMhzDWMF0U/kovFUPADGfIMn0BmwtMM5iZEk4KNQ6fPoHnBG8wsM5iZksXyzwHw7RMsDzkpL3WTDEksJY474BAFgjkpI0TvgFAD8FDlU81wIzyhM1b0V0vUaQJLgVwmWOyiYAg2SOjwEu4I79R6J7ygRukqXN4D984iL+9ocwQNvyR/O2MRivdV7wUT/QqMKDCIfCZ2JjcY9pMR8CY2MKJi0fUsNQyzjd/NeocfL/LR9DLaQLs0pYxCPbCQUG91gKVEpcPXCkCurSliOY9sLPD0C1NyljJwpcINcvdD8CgAkXQUF1EQ9Zghso7mUjH5AJudUCNioAYX0/k74Rj3ljUzOs1NQV0RWL6ozAHeIzj+tLOI30KYDXOajYUo8UsCNck9B4KVmPgqn128iQozDRCg4DrymYJeKkLDAJl2kKp9cWNXiIIvvQgjV4/gr3j3GOSx4KV0DfVEQd4rUH4LhC/Qr6oFC5AHsLbOdGB3EPg4qC1AZC/tCYK+9HeMXAp9VmLeN7CoxAKA2mE9ECKuAKKGsLgifgoiLNCvvUcLnCjzB+gBgjwuCIZCswB8K+qPwtsLl1YIoyBQiwaBfFTkrIuKgkoewuK8d4g0JYLzyL4KyKJuCIoMsAi6nw3F+dQWjqL3CjfSaK+9DfSSgiiymI89OgJAF9zD8/3I3Ahs86OD1sUvkN5Tro85Diw8gIlKndPPdlI3BeouLKlFlil5IqTEE/rU8drvPzPKi6c7BJi95IoRLE9J/WGBLz4g0hItByE23xyCHfQdyU82PEthUCPPfqOzgdikml6jPi4PK7AxQm3JOKQcn6METGczsAX95qa4qGTrEMmO1x24ybmjF+sLiwZoL4nu34sHYIXzeNdAmOGXiwAR+KPja8yzz6icUE+JQgg4knL8zQQXmHDidYqqLBLgoqClRxwo+GNy8qHICNRCNTHfToQRcAlGX93GGZNyj4Ifkq5KrEFhL5LHAr7Lxxk4CkpsiPPEEKBKW6QKMpSLi4wOhKDgW4rii9I1nSMiPYxhPeK98lXkxA+AS/kVK/ohnMZKkyeiBNLREiZxvzh/dSLZykY30Lh9QC9GLOBgwrL1DCYSvGL/yYwhujjCCfV0oDC/SiAq9K0fdCFgVivAX0L8/02MyNzaub72Qj4Czo2XVoCiYOvit8qZKXDEC43MvFmCrIuTBSikLh+DSID8FUKsijvgVgsimeO14EYcMyzLWwpcJwK8ykwsXAmsKfRLLIigwHLLxCv2DyKFYHeLEwXwiYILCCCp71oLVcjEKpZmC/kD/S5yvvTaKFyp7MsKeyw0Tktly7HI+Cyy3UWXKXhTsNYLQuEgubc/C7fKXCi0dGixZrk3yDVi7PbaNBCqo8EPBKC1MLxhCJVW5W2QYHciQL9nAexgTLwNWB0IRhfHU2F9/yr8qAr7GECqz9PywCvfKPYlTwNK/Mz4AlyXPMrDc8dgXk1ihB0+oDByv4dRW5Vf9bLCCzPgELiyhXstpNAKSKu7TJNTgHJEjCqKrKGMc+YDHXEJQLfkXFopcRcQ6wUQliC3TKKlIFIq+qAnJ1TGPEqGFQRTUgENExK2K2uoIoZfVrVDbH+EfsCATEIaR2ne7Qkq+IGfSookbH+EiZ1wh2AYQUQq4yxRkTe7QOhpKvqE0rZcRLnoqBK6bX0BJsC0NO9ycyBP60ECYPPqUYkqN3qVlILxFmyfKg/PdcBPMt1PzUKoF2CIFQUwApdC8zw2+9wov7yaibwZ0sB8QCkMujDPSiRLR8/Q30ujDCYrKrDDgysAutdlrdL3jDJuSrik8vY6kXkDBfAX2BZgk+vJZ9l1XUPUChffiN1CBfdqpF9wA3ZJJ8fK0PLJTj85Zlwri3KHIdKCUDSL9DyAyvLMBi/ZNVUCb3Tqr/Ti/RCIMCZkoiNJiGI+91Wrt2aOCmTHAvHC2r4skfJ2rlkxhnswzgfaPj01/ZOGErd8i0Nah11WYACqYAlQDgBM7byrerFaWeWcyo3LAHvLFSmPNwqAa+qMIS2coLKx9Ok48AVz6ArP3UD+knfM28YSy4pMCHwhwNC4jqrXPnBkIwfLkQicjZKRrmUzh2ZDWQl4HGALkV6otDAa44qVKcE3Cu2jHcm4pijMidUKHitQ60QvjcZQOBgkzKd7RlKcghmFvjCSo0OKCmU80KncqIfuWejdYgqwZqCIa/Ltjkq5/J9DUqiivSqP8zGLKrYfSGvxj/S8KLCBCq3WtDKbXbWtfyhSnJwOhFo8UvW8DoVmDUKq/f2J4AvA6nwiL6Ek4PLCjUEuEWDOjKNwpr8AVYscAJirlKmKqQmYtpDC8DwC0oLkWp2etTfVuEGkPrdbj6EvBO4BRsT4Ve0Bs67bejBtLQbTKAyIYeoBhtB+CC3k1gwRGwp0UbMuo3AtKDGwYEsbcagJBTsKEELECbG7FHxibZMDJtxaALxSZ7hZYTkAmtPutDw5ABm1Bx2aZm1xxocdmwro94Lmx5sRmPm2V8vkqepFsScMWypxXYSWwZxmcVnF2U5bTnEVsecafFVtCU0XBnp1oWuu1tqEPW29ADbKTWZ1jbG+zNtIqi2yfTrbTom+ZgwDAHttB7G2wmxYXV2y9tZcT2zhZvbd819skoRv2CqiBOLkXsLcqQQMg16Znh/wa4WMBUEgCCYmTti7NO28wM7FYlQIc7PO2wJvMQuwII5iA4hbJudCu2oJziauxPpe7fECEYG7ZumbsDdZyDbsESzuzDZrAG2x7ts6u4jYI5QIe3eTDxANGvUcIEOAQYp7GBsnY57dH0XsbbZe0zr17GCEMwO6YMB3ss+Pezx4CuI+2V0r6s+2KIL7G+2vsqRXuJBKH7Jtk6wobF+yHiQUobBGxP7CbHYa5pQFSCgdlIFUOUQVU5XOVvGiFVuV7lR5VuUXlN5WeVHlO5S+V2PClQol3G1uE8aHlfZW8azUJAghVfG4FUCaHlGACNQkCQgCQJJAQhGiAkCMACZx9QIprABZFZKRyaKm5KUIRim2RXyl6m6IHpEmmlsHzwmm5XHaawAEOWSlim/PGMh88fPBCbXlISEeUkCN4FuUsmnJryaCm8ptKbymyptOUmm6IDqaamxprWbPoVpq6bZFTpuKaem8pv6bBmwJqibflClSbk/7VGgj8roIB0RQAUif1T91MgEphpjiBMA6xwpX9EeteDAoFigwALJP45AUS5HoMrEBxBgB7jBUBcMQWsForBKjLsXgdMHRDwKRA2QFBIrqVWlCx8iKkxEhaQ9b4EkA5jSPjGBx0DVGmh+QHFs4YFAS5B/0d01FszMrMjMmpUj4th0hMp3AWVkERi2RveFMzQsjBa9wBAFxaiWsYC/0J/LHxZgAUsNOkROW0FuxbeWvFumgnKqd0xFZsiVu5bMRcbIZMCZX6u+Lwqgxiirq9D3isQS9NyxpwYqpVpD0aK/XEQFpAKOG/0qzDITlUAgg1rL1Zsn/nsgfMTFq5bTW1yzL0xwOrTuTKYCvxC4Z0Mv00w6AgNvEAHW9yzs0Ag6zGVgvi/rPeF7Ek1vNBIdfRguMoXeF0aBIJf1uBqh3ELmgEEdQ1E/Ic4g/SP0ygy1piTwq91RZdgYilP0QsWj9JKTcsyKEBdtWt1slb5POVEbd5PFtxvAocetq/TLbDbLrbZ/dTPNAjmGtne0IAR+PHTHXQF2SiSoaC0KYGYCZxXSzmDnQIAU0ybQqBsoSjBtN7jMIjTo4LKCwQtTULpGsTiWnFpJD8MaRzkdxHUYEkd5/B6mhIXSxOrkcFHEUjJZMGBGAdd1HGwjiQ3CKRGwYVxPR1sokdQIP7qBWdLS8ILmX2kL1CdMDrOInm8KJpYshEAkAotaAEubsJnGlkiM5wVWAMB0O1P0+U8dJGhSI0rZgAqdc4XezkganFuxbUOIf4lF0U2naHIMh0q7hIAm5N4H4lrEZklqUFmZjpC43RCdGTAF4lqDDAkOhCBQ6JqtODOAUCXgh4sc0xjtdaIHLHxoRlO/GLdE9W5JHRjBO/Vy1AwAd7Xg77IcTrOAUO9/Mw6svGllk7S8wgGyAFO1rTF1/wYVFY7mvEPQgNeYfkEWKi9Mt2nYirQToEEYeQFChrFikLgnjLyAzrRYx1LDok7shMzuC72AU+gmrskM4FPoAdHhCs6Oda6HXDntPzpwz/sHHXwN8AFADOAnhUtXsgEuiZympkusRlyVU6+1UkFYqHCDiETgTsDQ6KYYVtMNxZRmS67uuhmVPpk8acV+IYAU+koAUCTrp67xuvHDxwCAWxCySgIaAmEARIDyBl5rMUtUpgxu8bu66WShCFG69ZDbp67JuggH9AVgJbsIQBgVhAIApuvoGngJI2zDW7duvbq66Jqmc2JbEkgMCtxtuiAHW6Hui7qm7Rs4UGNlhQL7oe6JqkuBk7Pu+7u+6fuggGOE4APgFgBJiHhCcAFAIHr26Iu4VFM60O+7RR6NuiLuRNTOoLo5cmM1kyx6Ie77omqSGMHux6JuqbreBpMobo8hmOzEAKYCALwHbJ0AKnp66Jqu7h27IerroO7KyWpHyigKDnu66IuiLJ7APIGLsx7yW0gv8yRerroi6vdfHo6SvdeXsZkIugqEwDlexHzVoK8nnt56GZD0TZ6UOn9xQ7T6TbiG72CEgFEQCADADV7Oe8RKoCxeZVSNUp4b8gpaPug3oZlyAfXoN7STJky3ITewQzN6Le0+it6beu3tJ6DexXu17bgEEERh7e0XpDwXW6eFj68gW4gT6o+3nqe7PeedQWYdjd3qvEwer3oIAfe8HpL6mOEw3shshU3uyFze8pkt6shCPsT7Hux3o7Vnevjqr7C+sHET6y+yHrq6fhSGia6iuvDqmp38j6kT6+u74hnEhukbqz6Nuo3qngTe8Ptt6++r3v97djZfqb7V+xPsr6ziGvpX6KAEXpeJOE/FpCyxQYUFmz7Euzpi88G3JQ1Y6QSmFc7H+8lFLw4AZznC7k+yLqy9UvDHtSAX+hLrb65QlLrf75dTHq5dt2GAAM70urZCjdb0DVrjb+Yc/iQIYAFAYZl0KAgH5Bb0V4GyEAAA35xw2EWHIBNndEJl7i9VWCvMC6UWJ80jUXAdk6dTPQAoktNP1V00x0ANQQAg1JgYM0RKeMi14sQ9VVjVLNbKDJQ3GdmkPhioZMHzysM5IDMQkoV4wd031FhBYRzWh9uZpzbPfq904AbJnvcUoFCAXizxJgbchfVHTSPt11WQVJQx7J1T+9EOgIPyRNB+KyGq3kwPxMQ0MHWm+QsELDBRAkGKzR1hYOc/O2gfEIkP+7VHP9JkTXBp2AUB+QFsEx0Vua32uySMNHLQAW8Pdr2y7NAWMcBkh2XVPosBvgBAAXNVpWj8EusPqZZ51NyAc4R1RDpS8hBhCGUGv8sQDaBhYIroIJt2eULgHAhz2lVhCo9lv5hIdDjhvAqoDUrPA9ma3xsNDmW5BYQXUUQBXQ3tJKGkc2mLa2j5RAG0mm5Mgf4GgiBmA9iWiOfb7zawKIrthciUQQOsAxVBwNvycAg8IfcHL2oT234QhXFuMN+gZADmlJB5gZ00Iod9FihuBxEMlUE1XwcJFMxd8tOtvNKP3gyg7IlB+H64RHiAgBW91ONJ+1ZQhBcOwAl3S1mwPUEbSo3C4fWBIh+mO+LIdaR0MINS1mrbsHRO5gPEqobIAihbebEXg0IzM4AmHAbKACezhtWYfKwWXdgEa8efGP0mGGRmvBWGu1LkaezMghCDvZ+R/4HW0jUBCAS6RR4IijNmYIoalHkADu2PEzgXAcWHuR4IlZh6eMHAQgdLNka4BGgEwCfgg9KtPhgyiCQ1vqkGE9oeTfGM13fZ2R9xmgjkoytvM0SAK0ZSGbRvPh7EQR4GkhoVhQm3hSK8MZw0gIR9pWnga4iBODA8cFFWCakoIXG4HkaS3NuGKTWpFrTXKjlN0gA8dYEIoXe6FEEBbMB9mGE4QXvj3yYKc/uiTnMuJJgoWERJNqVUksYHSSyQX5uySSjXJL0prAFEacw468ICzk0S5AA1xpRNXW3tg6kbL11F2PQAABFHVk5CvYFHB9gwxzCBmxKufgD+6QW+CERpdgE/ScB1negTC0vrWrvTq/rTe3DdGGkG1vZhCNNMhsC6hoCLqbwEuuT0EbcZF0qq685i3GiAr1mOJzhJuuZJW64uPbq7sB7FJsXsXurptAcIeuAnZ4MeuUxxkSeqFsYcfgA5s5681O5tb8RepYR+bFX1XqicdeopxN6mnBJwpbXetlttAeWy5wlbE+qFwz6jWwXQXxnWyvH3VL0Ek0vgR+vGZoLF+p0cB2rQ2fwv600B/rYkP+s6IAG/uMNQPwN2zAaQGkSf6BZMn204A/bXLG6GcmUclDtcLBBsjt38ZBpjtUGv/Awak7dEhTsoCXBvtICGtYlzsNiEhq3oFSIuwobS7ahsoJaGi4noJjx5hsRhG7Z4lo7CAVaIDMaCruz4bRsARtBsB7CABEbFfBDHEbSfCe2lgZG0NwwB5GhezDslGqwhXtDxgG1UbgwdRoqIlGKjv3s9GxXiCgWmWSHbw17ExqvsCAm+wsbWsQytcTbG3rHsbbfD+0hSldMKAVBNlF43qAS0eoHzR6gMo3qA7dXZQJUiVElTJV1gClXkBAVevghB6gDWI/B6gJ0Ipx98+GCNL5AG0vqApapgGJVCVF5VJVPlBQBglXlclQCBGp2nHQMWwFqYwMXoeoBuMBIXabqsMAATUinOxRFFpsZep9vS9N0N3semweiauSAC+t6as7npuwe77IoS1WMHWVNrEBntNYGb2mXh4GdDSOB47h1AFoToDyEN8J2o6hJDDl2Mp0hPNSItUZkLidq+qM/Sdr/DPhDL8SAb9QDF7GZBHfLHoNc0tcZeDXJw7MdNdQ3U8w5MEDVYZqeB8AEZs5nkJkZmZQvU0Z1J190BNDx2/JPgWmcADGZ8we3FoZuw2jRCSeGaEozmcZFSdXsIR1EavY2MvJmbwMmYTMXW3me47gnCOGTx+MMDtMp/iRPRExqqtiru9u3K4HIMhID0oh8DDMnJKqqKMMKEHDjFYVT8sBqUFDbYyBdz3gtW822irZOK1jLdJfbSrahYwOkhtmiAO2YxjiQp2db8XZtqDdmrNEVv1nvZ5PGU0/Z3D0S4o50OdHpw5+SqopPovSu6A45h2cxjE5y3RtdU59xjiSvZw2d9mbcS0X9mcIcKvf7giEwmr0TER2On8FwQ13XHi5tqFdiY5iuf0N9aow1rmKZtOYbmDZn2ezmW5gedzn25yOIy0u5pIhyRzYxP2XnC5oedg1GNS0LgAy522YRh4583WdmcfOuY9mM5pucXmcPFugMFnQyqL3mqAYec7AA6sebPnK5hOcnnk5jeRnn65z2fnms5mdFhtSYNuZMir8necHm35g+YQ0rS40sO4v5+2YnnDDf+evn05p5rvmwFm3EgWN8paOtLKxl+fRg4F9DQQ1lpk+djnv5tBcvnp57WZvnsFhedwWisfBebR9EZaYLnSFpzD8JUncgDMHN1QOD2AhZxQBFmUgOd1XBzZ7KjYrDpn+GxmyIAwBbB8jFhFkXCZ9OZpcFFlsGpn/6mCCjLXM8sxaQC/EPW+NxZiOY9KTpuRb5n9EZQ0qsXDGxehagF9l2sWTp7Rf4nt7EPQ+NRY4xboQjFv7GMtAAvHBegyFvDTidlDScJj0nFonowMrQZRaUNolhxZvmNF86dcW5fL3EoVivEPReNfFgxZ4LHTIRB8WvFvxaXNxZ3LFPmJFqVwA9ijfXCsIbCEqC0cFIG8CBw/CfR3d0+zX2kyJsg7cggsZeGRGxm9QTmuxndtZRfJhQyBPWJnxNFCGxp1LMI0x16ZosdI79SNcAo70p7RqWW6qOXA3H1bHOm/Zdx8Yz7JjbDOsSm17ZwF8nTx8G3PHNfU5JvGOTeGz/AK6zkhRFUbHCDsg66++wbqTkT8auF8bH8Yc4/xkm27qnQICfMcaE2m2BWIJpmwhwYJmeoa1ObRCYXr36NCZXqhbNerJxsJiWzwmd6mW33qiJw+u5xlbUhFPreSh1z3gXl6+vEJb6+icUqq6020a1X6wDiVxzfG2y4mhAHiYdsdFsGEAa/h8SZlJyAUBoknwGxK0gboGyKbgaw7ZSe6JVJ/hnUnBiNBpGIxiYAmwa5ifSaWIECWzGQJCGgXmIaJiAu2lJyGogkoay7E4lsn6G+ydOXWCJydYa5OltU4bU4TyZ4bu7HyacJ+7ViACnVZoKdHsK+MKf6AIp65GimsiWKe854plRq3sUpzew0bTQLRpqJMpw+2ynW4UlaMakpwqegszG6C1KmGBNrGsbn7Kqf6wHG2qcYqXGgSkgM88G21f02qG5vtg7m+tHYgktBg2paZXHiigBBDQtBMQTtSkEpA4WnJGrorK1te1kodbYwD6cTHtfbXDCCf2bS61+f1roa11g0f7x15JEbmfZ2dbkMSAWkyvbV/MEzGcmWhk05UdaDwCv7RG8tCt0LkZccLJ4shtYFdZTZE1kNt1kWC6QlxvXRXG+YXZQMpUgfAAPItlDZhJpn14NjnHlQDXmg4VyKRc4ZmOFVhfRQLdvUY4XpmDOUgvSYaCfYsEF9cOp+lkDfY4WwcjSPjl6ZXlYo61IQB0QV9OfRsJ2QPgBho3e6uP1wxAIded9FUFcnlmFmCjZB8vW08HkhYNmaHg2lVX4Y9QZgBrnZ0p+dDYa4OJQjcgA3CFfR1xw8PIAKg+gfkAo2tHFfX1Bw8YLOg2NmIfU+hInZBZvVQQQLScxGGJ2nCAkpEjotDt1vDpDcYbR9ejo08F9a1Yf1+gAAd9CUsXcny0PeC/WCoZVRhGNHZcjQBAN/CDh4CGUDZX1wLIvWONWTR/HwZUNnjaJQlgFim80O4Istn1YkVMDfHFhODcARIR0MZc2tkGRGGSw4euByRMRb8j6gvSB13EgGuRnDQ2DBQCm7W21iXT8YH2cLZV5Itp7Gi3viRnHDw09IKjM3Et5TGE3Yt3FAvVK0C9WiBml2yiC2A0Kh2K2eN5DjlQYAGBVwYZzaQFEAht9jgxkSt0oRq2sN5Wb0A9cIfQxkQIUcBcgOoP0KVUXAMgf47WO3beEANARkYcMl23fnO2YjXNIbWi9A7ZS0H2fBh1wI54fSa2iUfBhxhRfQTcA4V9HGFmsxN7g0k2Kt97tHXuUXLd9YGt6RFkUVNy/l0BShDzg03mQGAxVhtN/sY9SPYf0fM5wUnvFlB9NhtauHSBEdCu0U2sgblJTklYUSy5SILwfYyBzEURd6dtnsL6SAfdSp3SCzEUetrERLLJNGdnnaZMWdtne53SCsky52jtqvr53SCv6Zl7WdhZnF2uwXL3wgCopN3VRH+1TuGSX+p7VvQhQDhE07/+xYru1td0B3z6/m7/TTWwtFNtAdrGpuVqAi02LI4yoplMlmsXjZqxaRZrEtFasqIWa3zR2rP41msyjBsB+BZrO3RsoOXQHZ4Qc4R2x/pQ7Zgij3HmZgkDZcLLY017NgWaxT2vmPP0pgujMOGQZGxvID6pUdjXcWL1d/XcErn0KiB12HeFNE13xAT2Er2Td7zrI22XFlr0pVWzhzJMSQxjhtNL170G73iewHUJExhovSvgIAdsh7AS9p8zo23R/9CkHrh1gzP7EkyIa4JoyBGARkiN9VqLDCWhfcf7+QZfcmhV96XbjBZ5apZphm4v0IC3TjcyvsNOtf0ku2cY+La6BEtmbZ0SyRrpCqWf20cFl7/28+NILIOfwmlgDHMMFaQSoYWktAeCgcJe1vAN0YvJSR+exSgMusA4+CN9dGdMoLQIZbvpSnMjso5llqolWXSC9ZY9Fp4R2A8ZsGXbR+N5/WObl0GYFmFvsQcwA0u0rfOnTyHvE4SEZgTyc3YIBIgWIEaEEASgAMAooM6jp0DAJrw6pTqdgAMBzM+fdm389t/KP3o6JRlHB6D6gCih82qjeYOZwVg4VGVBygVtajWzjgh2zW/Q+CcFNyokH7KOEPHy7oEpfCjccthTaJ3f+dkAaGO8863GCR9sffWAt+aGnVh4KBUHOdteCiGwloqjhhXNZgWJZeMEl940PRYl/QxhbuSgtBcNDDWI6Ms/jWJZx81FwE0iAXDCa3SOc2xdaYXk8RdeYIOOXJmKPAUBNJJHZwtshPZ6wXJgCOcgNpg88vZvoHFpnMtRhvaqhUXjHs7dzz1XGU/EBeZhA3OzxLG7DkVPB3REhVBuA8ZPLawCf6unusBmN59ge2w4djcVRDAJlSwGxgJPc95NjvabGBZrKgqMGYMsPFyYbKWK1KTVgAQ3OOKgKo57AQxWUGLGDDgdfKTEBjGEBRKx+0DSTSEL2qePT+BTGgMuFJ478Io3IjZy2lVJ1ta1dZqGgy3DqdV3u2Zt5TQCCR9ozdIATN59c1Y310te3GGAWzYtpYsDvjQjjwLFlHp70aQFIxHNsOEs37wLZgA3BTXDAhQ70bzazhMAXzdmt4klhAmP+gKY7hMyQNw6hAZQSTyzlBVLk2aATWJ/arWf9bXZH3z+1RwVD59l7p3299g/fX2j97dn23t9xYt33ymffZYRD92OcgH6T2VBikPodW2UwjhGwhbx6lrwl+YBtgA7QB0IfRGm2q1+M39CVW3UjKdzYFvCTdcDmogl5TDwq1Mr+9iPdzK51jMg8sBaOen+259eSD9gooUgugt5thUBDk0Ny0BABG9URQr1mtQra+3Rt2DUJKGuJnHHHS46Hfe2utlDKaYRcDMluA/CLM+G2cYJbc2GVturZP5izgHYI3eDIg5AAjUbJBKOmCkAHlNaUOQ97P3GLg74PqE632EPBscQ8ZhlMRoRNOT9jRzOpLTgoDOo/9lpfQh0+x06kPnTyMLkO3TrA7OovTqpzOp1lmwhHP+Dqw0NQ+Du7KnPAEX3UpNPEPFr6A9d/lpZNTjVxC+NdDoTdn0RN5g+e3azkLfgW29EOSlw39287NPQoaxG/2ZqIDv/3+gFcnQhpAJ5mkNZt/i39C621HXVs9zxZbONDzqjrOMCDhrhehXt4edX145TzYZOXoGhxBBnUP7DKc+xvLpWA4oIIIWY09Ys6IvZrP6alPF9s1yY5NjkgEFO0Ab+J+3R96o7MAxjrnU+OUktLTAN/j6uLUcV9K0ENEENVTcR31N2pxOgkkF4XYAYpSi7RV0dhDMSZ08cvBx3l67HGpQ98lU8wSN8CttFY2mOoFJ2lO2ttXNw24o1EKtzQ9BctS9dy1/KAjOI88vDWpmjcZPLFoxcumaK0F8vXTYEFCvnAehV9aS9uVye16/TEwRa7tHc26sUrp7Wiuc21K+mXWqU8Bp5aqOSO05gWlMiZdmC9y8MW+9Hy6rMClgvffKqjYpbqvwrnJB9Mqr9gHoVM9+K81cnG7K8SvcrtvbQTdDxVsxbVzXfRCOjXfkGhdM2kxGLMxrma48ui279MP0arqiFTa/Lxa4zaGr08zmvkj08w2vlrjI7WvIr/EH2uS2qkvVTWjufeSRm06xDp6PO2OcSgjNVQuxE6BPQEGgjRDD3E3QjKTdmyu9qxDo3oLWE86Ad1pqjXa/r7tDK3GDAG8H2gbxtbw7/NyG5B3e11HUC0f9LtahuKtuFrXatmDfq3IkbykGt9krXG8HWKt+jfcttD4vUBPrDi0LWs8WhAb9y/fd4kdxDCY0+KN0gRoAWOPBqQ9PBwLtHktPltGC5aXaYYqCQvgC6E/jMTxAy6ggRzLmiYz3Wylelh0taSjrbDMXMnT2pKOW7babLOFFaRysWcIryBaK3ADp+vQwHXiKURoRML4NScdKEQx6EalvUi0+Hk9zufkHjGoD2XTkgdBNOAbShKaSjZdhUR130hcTLAGsAoptVPkBtAELV9vt0sO4yArxZjIzII70zbzTaW+QFiw/IbHmAprRj26jFTjvqHDF2kPyDMPPTypyo7fT9fPYXXAF81mNujNESzvsk1CgfSG0i9cDO+oZkAtyab/4472RU+xI/Zk2xy4Q3s2rc+gEZbhrU1uwWx/DdHs78oAbTkgP26KtZ74HwH3DURCwwqzfZm6idhU+0BTvywCwwvOqN0YaDSHDbgA4O7+he6wAYjTmrPuyD6AXwh3b+u6xiEIczvdCUIBtPYtqMN+5bw9eRuLlwCr2+7CIp73O5wB87gwFlBYBhMeUh5AHfBFShWMs6/JvDjMlkN+QeB+GmhObfhuPAqVB4B4+L2IAaOExtgK1hvyOY/sOQSLZfnOpySC+TAAO3R1gv+seDiMcxWqE4Q3RATA8WXZ7ku9WXYBSojGPIdr0lsGiNri8f6SQvu+OGi9v1tCQX+mzMlPIAZ84kfxAKR4OKJsrvoEfFioR9a07+6veL2NH3NrkelH6R973p1g3ckfdHhR5ZT1Tpfa1Ouh26ZN1soBy5EfS9kvcX2xsZTROtp98R4N2soZTXpmtHsbCdzBmDD1is+AVtdh6oHzVquvr2k1iI4ljw6gBhGKafdoOlcIpnipnsDSTIRLIOaUqZCR36E1Coob5Ko2Oay0G1AcZngGF37tNjuGhIn9ndKecoFIf9H22MZ3ZgvR8BFutv6pseL1Td+KkiYjITTc+EnMHixKhbb9MFS3FTcp99pVHUp/R45wfa2aettGLiX5RgB6zHtpKcqzABgH6xJwwPOyx7kJnW4q4/uh9uC3EBrqMrAkIz28k2ytu7/dbXQZjR84ixtedEK90FsGir9RAwPXYv3bjHtDdH649kCyWATHJc+MmLqiD+eyjP59au9L4E86B3AOG7gAyk8E/TA3N66AVAztLsW+UkpfOXYkYpSl38z8DCvcaVJr3Q+mY2AT0H1E9QDMx31dD78ihf9dS44peSAHUwJAMRHijnAkEbh5MOo2sl/OO91xXxGewsLm92eENyk71Uw2Vp+87w8Q44BO8gbp4WxSkGnHdSjcUoWybImLLexF/gBh7gt7Urlw7GA2ApxQANtyKhfH9CXZe3w06g5YPGvXByfrszxgDIvHSEaG2uXio25Zgh7ljbCfHb6F8d5N3lqFFxtvx29Q7r/xgFb+IgV5PoHqQVkJkDf6bVVkgnbkaCYa02bOCdnqr8OFeQmEV0y+sdkVzCdRXxbLeoxXpbPevZxcV0ib5xCV9W2JXZ6aiZvqKsfWw7AqVp+ppXzbelYTJGVz+oAxWVvidSWBJ7EWEngG3le5XJJiBukmoG2SZFWFJ+BojsJVpBqlWlkGVc0mE7TBrMnA+pVcLsDJtVeztNVkye1XSG3VeLsDV6ycrs6GmuwYIzV+4mcn0+q1bcmbVjuy617V7yZOWnVnOv8nAp+FGCmR2T1enZwp0OzkmDSDIhincLOKZpgEpozBDXTQVKe3sVlqNd0aY1uXCChSIPV/ymysGy0vtk14qfMbwgjNY19KpoFJzWappxrqmNwb+zDAnGC5tdwrmwBw3Xbmn/VFedjEgFV0f9G9fKB86617Fx/NwxAy9srfAKL0omJoBSe0n+1WCPa12cAj3cmBA1H4GWjdZeEp3fKE2BiH/08/vEdOdEHuP7lYzeMNsn7VxlTUGvOS27b0Ec9TIi0BDZL2QAZ/5fMdteAGDLwHm9rXvAX71IshF3+9rXBj75xGAYkjzZ311jij6o/+6ECwQW4J8PboMq6fj47pHISF7KS3Cd+erof4FV+e0PDKpjh6IX8l8C+B9QC6ooUgb5B/hG+b5DvV/bh9ii+MDGL/10Ox0T8fMnjkG5iTbH4gCH24llQxezOBQEeS8LA01EMwYeZ7RS1kddHwa/UuvqBW5JtOU1tXYAJBjIqP99MHZhLTtQHZhVzkDtRKcGX2koBWmBKZFjUzZA9FHrRySwWXpF9mFwvVl9mAIuftErXI+mTSj9qcNXnLFcQgIGgtH6mMiAAWAOXOEFIBqSKAHhRREH+tpOFmHtHc/a1MkyNQ8gXr3F7MRyxaSyJ7N1GFQzFzlTxk6en+BZcTKxg0CeskxH0e+/vyzCc5fgYACAgtQI7/rATvuwepBhQA2QoDcqXjN7oe1rsDe+eECsAbSCkxJcAMvM84ye/QDEPXT3fvrFB7R099Oan3ZdHzrp/Yf9Oe3WZaOL/IXa1QH6YggfyEE7Sf4fDEm/nmFn/B+iAIJ6h+xf84yz3JERH+CJkf2IFR+q+9H4u+sfpJ4h+RcAn76gifkTJJ/1Fsn+h/WfrFGnDqfivNp+W8en4NuQ9Dn5/QufkJZe+I4BAHAJtfpCG23Ti9Lcx60fjH8u/OMpJ+FRvj2pHAId8ZkF1ol+sccc4H2HtH9uMADAfqxo/+e+ygwf6bQYR3LCLF2Bqf8F6y/zjw76iqzAG37PXOfsxZV4g/vICNRXuxkBGt+AG6GuQ1GCLSKufMUr+6N0tWlfah4Ri21mw6Vf7UkGU/jrGH75wXVW7/y7s7fZEKfnhGTBn+g3el+e0bVwYQGEfv8Q06QD6lMNrMGd0H+x/rFG6M9QI38t+3UMtygcY4d+Yr/cZO9CRky5eL7ahXvtLRAh2QJ8xlooHaf/H+o/mH4DPTjX7lv+qbjf5bxkTe34o1a1NDFd+NiB/gyvy7Aqv0x+8YGzu0vzLcDaWT+j/z6gjcTMWwqBsQLMVnk5YkjY9kAj+AEjgBLeE0Qes2FQ7/3C+X/1/04gEQ4D/y/+TLAT+WKE5UBANt+oN3fmr32XkRsn/wEmW++ohnJ+lAJO4VP0I25v2wBuvUwC7PzPW8N14B6N1/+h83iS5f34A62j6AI4FYBhv14Bpv24BmAQt+5xnT2Ziz4A+D1xkCgCIeES3UBmwUIeAvxOC2AKRgFY25QF8RYg1vXu+gFn5gcTkkurvwccmwTwApLG+OuxgccHJ00B0xwcc1Y2SStY0cBg8kicx/zsB6dC9+Kvx9+6vzyoBRT1+9x3IAPAEoAQAA=\"]");
 
 /***/ }),
-/* 11 */
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
+// This work is free. You can redistribute it and/or modify it
+// under the terms of the WTFPL, Version 2
+// For more information see LICENSE.txt or http://www.wtfpl.net/
+//
+// For more information, the home page:
+// http://pieroxy.net/blog/pages/lz-string/testing.html
+//
+// LZ-based compression algorithm, version 1.4.4
+var LZString = (function() {
+
+// private property
+var f = String.fromCharCode;
+var keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+var keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+var baseReverseDic = {};
+
+function getBaseValue(alphabet, character) {
+  if (!baseReverseDic[alphabet]) {
+    baseReverseDic[alphabet] = {};
+    for (var i=0 ; i<alphabet.length ; i++) {
+      baseReverseDic[alphabet][alphabet.charAt(i)] = i;
+    }
+  }
+  return baseReverseDic[alphabet][character];
+}
+
+var LZString = {
+  compressToBase64 : function (input) {
+    if (input == null) return "";
+    var res = LZString._compress(input, 6, function(a){return keyStrBase64.charAt(a);});
+    switch (res.length % 4) { // To produce valid Base64
+    default: // When could this happen ?
+    case 0 : return res;
+    case 1 : return res+"===";
+    case 2 : return res+"==";
+    case 3 : return res+"=";
+    }
+  },
+
+  decompressFromBase64 : function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrBase64, input.charAt(index)); });
+  },
+
+  compressToUTF16 : function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 15, function(a){return f(a+32);}) + " ";
+  },
+
+  decompressFromUTF16: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 16384, function(index) { return compressed.charCodeAt(index) - 32; });
+  },
+
+  //compress into uint8array (UCS-2 big endian format)
+  compressToUint8Array: function (uncompressed) {
+    var compressed = LZString.compress(uncompressed);
+    var buf=new Uint8Array(compressed.length*2); // 2 bytes per character
+
+    for (var i=0, TotalLen=compressed.length; i<TotalLen; i++) {
+      var current_value = compressed.charCodeAt(i);
+      buf[i*2] = current_value >>> 8;
+      buf[i*2+1] = current_value % 256;
+    }
+    return buf;
+  },
+
+  //decompress from uint8array (UCS-2 big endian format)
+  decompressFromUint8Array:function (compressed) {
+    if (compressed===null || compressed===undefined){
+        return LZString.decompress(compressed);
+    } else {
+        var buf=new Array(compressed.length/2); // 2 bytes per character
+        for (var i=0, TotalLen=buf.length; i<TotalLen; i++) {
+          buf[i]=compressed[i*2]*256+compressed[i*2+1];
+        }
+
+        var result = [];
+        buf.forEach(function (c) {
+          result.push(f(c));
+        });
+        return LZString.decompress(result.join(''));
+
+    }
+
+  },
+
+
+  //compress into a string that is already URI encoded
+  compressToEncodedURIComponent: function (input) {
+    if (input == null) return "";
+    return LZString._compress(input, 6, function(a){return keyStrUriSafe.charAt(a);});
+  },
+
+  //decompress from an output of compressToEncodedURIComponent
+  decompressFromEncodedURIComponent:function (input) {
+    if (input == null) return "";
+    if (input == "") return null;
+    input = input.replace(/ /g, "+");
+    return LZString._decompress(input.length, 32, function(index) { return getBaseValue(keyStrUriSafe, input.charAt(index)); });
+  },
+
+  compress: function (uncompressed) {
+    return LZString._compress(uncompressed, 16, function(a){return f(a);});
+  },
+  _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
+    if (uncompressed == null) return "";
+    var i, value,
+        context_dictionary= {},
+        context_dictionaryToCreate= {},
+        context_c="",
+        context_wc="",
+        context_w="",
+        context_enlargeIn= 2, // Compensate for the first entry which should not count
+        context_dictSize= 3,
+        context_numBits= 2,
+        context_data=[],
+        context_data_val=0,
+        context_data_position=0,
+        ii;
+
+    for (ii = 0; ii < uncompressed.length; ii += 1) {
+      context_c = uncompressed.charAt(ii);
+      if (!Object.prototype.hasOwnProperty.call(context_dictionary,context_c)) {
+        context_dictionary[context_c] = context_dictSize++;
+        context_dictionaryToCreate[context_c] = true;
+      }
+
+      context_wc = context_w + context_c;
+      if (Object.prototype.hasOwnProperty.call(context_dictionary,context_wc)) {
+        context_w = context_wc;
+      } else {
+        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+          if (context_w.charCodeAt(0)<256) {
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<8 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          } else {
+            value = 1;
+            for (i=0 ; i<context_numBits ; i++) {
+              context_data_val = (context_data_val << 1) | value;
+              if (context_data_position ==bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = 0;
+            }
+            value = context_w.charCodeAt(0);
+            for (i=0 ; i<16 ; i++) {
+              context_data_val = (context_data_val << 1) | (value&1);
+              if (context_data_position == bitsPerChar-1) {
+                context_data_position = 0;
+                context_data.push(getCharFromInt(context_data_val));
+                context_data_val = 0;
+              } else {
+                context_data_position++;
+              }
+              value = value >> 1;
+            }
+          }
+          context_enlargeIn--;
+          if (context_enlargeIn == 0) {
+            context_enlargeIn = Math.pow(2, context_numBits);
+            context_numBits++;
+          }
+          delete context_dictionaryToCreate[context_w];
+        } else {
+          value = context_dictionary[context_w];
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+
+
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        // Add wc to the dictionary.
+        context_dictionary[context_wc] = context_dictSize++;
+        context_w = String(context_c);
+      }
+    }
+
+    // Output the code for w.
+    if (context_w !== "") {
+      if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate,context_w)) {
+        if (context_w.charCodeAt(0)<256) {
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<8 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        } else {
+          value = 1;
+          for (i=0 ; i<context_numBits ; i++) {
+            context_data_val = (context_data_val << 1) | value;
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = 0;
+          }
+          value = context_w.charCodeAt(0);
+          for (i=0 ; i<16 ; i++) {
+            context_data_val = (context_data_val << 1) | (value&1);
+            if (context_data_position == bitsPerChar-1) {
+              context_data_position = 0;
+              context_data.push(getCharFromInt(context_data_val));
+              context_data_val = 0;
+            } else {
+              context_data_position++;
+            }
+            value = value >> 1;
+          }
+        }
+        context_enlargeIn--;
+        if (context_enlargeIn == 0) {
+          context_enlargeIn = Math.pow(2, context_numBits);
+          context_numBits++;
+        }
+        delete context_dictionaryToCreate[context_w];
+      } else {
+        value = context_dictionary[context_w];
+        for (i=0 ; i<context_numBits ; i++) {
+          context_data_val = (context_data_val << 1) | (value&1);
+          if (context_data_position == bitsPerChar-1) {
+            context_data_position = 0;
+            context_data.push(getCharFromInt(context_data_val));
+            context_data_val = 0;
+          } else {
+            context_data_position++;
+          }
+          value = value >> 1;
+        }
+
+
+      }
+      context_enlargeIn--;
+      if (context_enlargeIn == 0) {
+        context_enlargeIn = Math.pow(2, context_numBits);
+        context_numBits++;
+      }
+    }
+
+    // Mark the end of the stream
+    value = 2;
+    for (i=0 ; i<context_numBits ; i++) {
+      context_data_val = (context_data_val << 1) | (value&1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data_position = 0;
+        context_data.push(getCharFromInt(context_data_val));
+        context_data_val = 0;
+      } else {
+        context_data_position++;
+      }
+      value = value >> 1;
+    }
+
+    // Flush the last char
+    while (true) {
+      context_data_val = (context_data_val << 1);
+      if (context_data_position == bitsPerChar-1) {
+        context_data.push(getCharFromInt(context_data_val));
+        break;
+      }
+      else context_data_position++;
+    }
+    return context_data.join('');
+  },
+
+  decompress: function (compressed) {
+    if (compressed == null) return "";
+    if (compressed == "") return null;
+    return LZString._decompress(compressed.length, 32768, function(index) { return compressed.charCodeAt(index); });
+  },
+
+  _decompress: function (length, resetValue, getNextValue) {
+    var dictionary = [],
+        next,
+        enlargeIn = 4,
+        dictSize = 4,
+        numBits = 3,
+        entry = "",
+        result = [],
+        i,
+        w,
+        bits, resb, maxpower, power,
+        c,
+        data = {val:getNextValue(0), position:resetValue, index:1};
+
+    for (i = 0; i < 3; i += 1) {
+      dictionary[i] = i;
+    }
+
+    bits = 0;
+    maxpower = Math.pow(2,2);
+    power=1;
+    while (power!=maxpower) {
+      resb = data.val & data.position;
+      data.position >>= 1;
+      if (data.position == 0) {
+        data.position = resetValue;
+        data.val = getNextValue(data.index++);
+      }
+      bits |= (resb>0 ? 1 : 0) * power;
+      power <<= 1;
+    }
+
+    switch (next = bits) {
+      case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+        c = f(bits);
+        break;
+      case 2:
+        return "";
+    }
+    dictionary[3] = c;
+    w = c;
+    result.push(c);
+    while (true) {
+      if (data.index > length) {
+        return "";
+      }
+
+      bits = 0;
+      maxpower = Math.pow(2,numBits);
+      power=1;
+      while (power!=maxpower) {
+        resb = data.val & data.position;
+        data.position >>= 1;
+        if (data.position == 0) {
+          data.position = resetValue;
+          data.val = getNextValue(data.index++);
+        }
+        bits |= (resb>0 ? 1 : 0) * power;
+        power <<= 1;
+      }
+
+      switch (c = bits) {
+        case 0:
+          bits = 0;
+          maxpower = Math.pow(2,8);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 1:
+          bits = 0;
+          maxpower = Math.pow(2,16);
+          power=1;
+          while (power!=maxpower) {
+            resb = data.val & data.position;
+            data.position >>= 1;
+            if (data.position == 0) {
+              data.position = resetValue;
+              data.val = getNextValue(data.index++);
+            }
+            bits |= (resb>0 ? 1 : 0) * power;
+            power <<= 1;
+          }
+          dictionary[dictSize++] = f(bits);
+          c = dictSize-1;
+          enlargeIn--;
+          break;
+        case 2:
+          return result.join('');
+      }
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+      if (dictionary[c]) {
+        entry = dictionary[c];
+      } else {
+        if (c === dictSize) {
+          entry = w + w.charAt(0);
+        } else {
+          return null;
+        }
+      }
+      result.push(entry);
+
+      // Add w+entry[0] to the dictionary.
+      dictionary[dictSize++] = w + entry.charAt(0);
+      enlargeIn--;
+
+      w = entry;
+
+      if (enlargeIn == 0) {
+        enlargeIn = Math.pow(2, numBits);
+        numBits++;
+      }
+
+    }
+  }
+};
+  return LZString;
+})();
+
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () { return LZString; }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+} else {}
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(29);
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -3786,7 +4769,7 @@ module.exports.isSortableArrayLike = function (o) {
 
 
 /***/ }),
-/* 12 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -3821,7 +4804,7 @@ module.exports = {
 
 
 /***/ }),
-/* 13 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -3883,111 +4866,1077 @@ module.exports.search = search;
 
 
 /***/ }),
-/* 14 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UxWrapper_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UxWrapper_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UxWrapper_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UxWrapper_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.trading-vue-ux-wrapper {\n    position: absolute;\n    display: flex;\n}\n.tvjs-ux-wrapper-pin {\n    position: absolute;\n    width: 9px;\n    height: 9px;\n    z-index: 100;\n    background-color: #23a776;\n    border-radius: 10px;\n    margin-left: -6px;\n    margin-top: -6px;\n    pointer-events: none;\n}\n.tvjs-ux-wrapper-head {\n    position: absolute;\n    height: 23px;\n    width: 100%;\n}\n.tvjs-ux-wrapper-close {\n    position: absolute;\n    width: 11px;\n    height: 11px;\n    font-size: 1.5em;\n    line-height: 0.5em;\n    padding: 1px 1px 1px 1px;\n    border-radius: 10px;\n    right: 5px;\n    top: 5px;\n    user-select: none;\n    text-align: center;\n}\n.tvjs-ux-wrapper-close-hb {\n}\n.tvjs-ux-wrapper-close:hover {\n    background-color: #FF605C !important;\n    color: #692324 !important;\n}\n.tvjs-ux-wrapper-full {\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_LegendButton_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 15 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    width: 21px;\n    height: 21px;\n    margin-bottom: -6px;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
-
+exports.push([module.i, "\n.t-vue-lbtn {\n    z-index: 100;\n    pointer-events: all;\n    cursor: pointer;\n}\n", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
-/* 16 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 17 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.t-vue-lbtn-grp {\n    margin-left: 0.5em;\n}\n", ""]);
-
+// Exports
+module.exports = exports;
 
 
 /***/ }),
-/* 18 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Spinner_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Spinner_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Spinner_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Spinner_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.tvjs-spinner {\n    display: inline-block;\n    position: relative;\n    width: 20px;\n    height: 16px;\n    margin: -4px 0px -1px 0px;\n    opacity: 0.7;\n}\n.tvjs-spinner div {\n    position: absolute;\n    top: 8px;\n    width: 4px;\n    height: 4px;\n    border-radius: 50%;\n    animation-timing-function: cubic-bezier(1, 1, 1, 1);\n}\n.tvjs-spinner div:nth-child(1) {\n    left: 2px;\n    animation: tvjs-spinner1 0.6s infinite;\n    opacity: 0.9;\n}\n.tvjs-spinner div:nth-child(2) {\n    left: 2px;\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(3) {\n    left: 9px;\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(4) {\n    left: 16px;\n    animation: tvjs-spinner3 0.6s infinite;\n    opacity: 0.9;\n}\n@keyframes tvjs-spinner1 {\n0% {\n        transform: scale(0);\n}\n100% {\n        transform: scale(1);\n}\n}\n@keyframes tvjs-spinner3 {\n0% {\n        transform: scale(1);\n}\n100% {\n        transform: scale(0);\n}\n}\n@keyframes tvjs-spinner2 {\n0% {\n        transform: translate(0, 0);\n}\n100% {\n        transform: translate(7px, 0);\n}\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Legend_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 19 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 0.95em;\n    color: #999999; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 1.45em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-weight: 200;\n    font-size: 1.0em;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n", ""]);
-
+exports.push([module.i, "\n.trading-vue-legend {\n    position: relative;\n    z-index: 100;\n    font-size: 1.25em;\n    margin-left: 10px;\n    pointer-events: none;\n    text-align: left;\n    user-select: none;\n}\n.trading-vue-ohlcv {\n    pointer-events: none;\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\n    font-variant-numeric: tabular-nums;\n    font-weight: 100;\n    font-size: 0.95em;\n    color: #999999; /* TODO: move => params */\n    margin-left: 0.1em;\n    margin-right: 0.2em;\n}\n.t-vue-title {\n    margin-right: 0.25em;\n    font-size: 1.45em;\n    font-weight: 200;\n}\n.t-vue-ind {\n    margin-left: 0.2em;\n    margin-bottom: 0.5em;\n    font-weight: 200;\n    font-size: 1.0em;\n    margin-top: 0.3em;\n}\n.t-vue-ivalue {\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\n    color: #999999; /* TODO: move => params */\n}\n.tvjs-appear-enter-active,\n.tvjs-appear-leave-active\n{\n    transition: all .25s ease;\n}\n.tvjs-appear-enter, .tvjs-appear-leave-to\n{\n    opacity: 0;\n}\n", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
-/* 20 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(20);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Section_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 21 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-section {\n    height: 0;\n    position: absolute;\n}\n", ""]);
-
+// Exports
+module.exports = exports;
 
 
 /***/ }),
-/* 22 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Botbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
-/* 23 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(false);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, "\n.trading-vue-botbar {\n    position: relative !important;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.tvjs-item-list {\n    position: absolute;\n    user-select: none;\n    margin-top: -5px;\n}\n.tvjs-item-list-item {\n    display: flex;\n    align-items: center;\n    padding-right: 20px;\n    font-size: 1.15em;\n    letter-spacing: 0.05em;\n}\n.tvjs-item-list-item:hover {\n    background-color: #76878319;\n}\n.tvjs-item-list-item * {\n    position: relative !important;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ToolbarItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\n    background-color: #76878319;\n}\n.trading-vue-tbitem-exp {\n    position: absolute;\n    right: -3px;\n    padding: 18.5px 5px;\n    font-stretch: extra-condensed;\n    transform: scaleX(0.6);\n    font-size: 0.6em;\n    opacity: 0.0;\n    user-select: none;\n    line-height: 0;\n}\n.trading-vue-tbitem:hover\n.trading-vue-tbitem-exp {\n    opacity: 0.5;\n}\n.trading-vue-tbitem-exp:hover {\n    background-color: #76878330;\n    opacity: 0.9 !important;\n}\n.trading-vue-tbicon {\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item > .trading-vue-tbicon,\n.tvjs-item-list-item.selected-item > .trading-vue-tbicon {\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.tvjs-pixelated {\n    -ms-interpolation-mode: nearest-neighbor;\n    image-rendering: -webkit-optimize-contrast;\n    image-rendering: -webkit-crisp-edges;\n    image-rendering: -moz-crisp-edges;\n    image-rendering: -o-crisp-edges;\n    image-rendering: pixelated;\n}\n\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Toolbar_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.trading-vue-toolbar {\n    position: absolute;\n    border-right: 1px solid black;\n    z-index: 101;\n    padding-top: 3px;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Widgets_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Widgets_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Widgets_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Widgets_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.tvjs-widgets {\n    position: absolute;\n    z-index: 1000;\n    pointer-events: none;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_TradingVue_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_TradingVue_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_TradingVue_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_TradingVue_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(5);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Anit-boostrap tactix */\n.trading-vue *, ::after, ::before {\n    box-sizing: content-box;\n}\n.trading-vue img {\n    vertical-align: initial;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 24 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return /* reexport */ TradingVue; });
+__webpack_require__.d(__webpack_exports__, "Overlay", function() { return /* reexport */ mixins_overlay; });
+__webpack_require__.d(__webpack_exports__, "Utils", function() { return /* reexport */ utils; });
+__webpack_require__.d(__webpack_exports__, "Constants", function() { return /* reexport */ constants; });
+__webpack_require__.d(__webpack_exports__, "Candle", function() { return /* reexport */ candle_CandleExt; });
+__webpack_require__.d(__webpack_exports__, "Volbar", function() { return /* reexport */ volbar_VolbarExt; });
+__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return /* reexport */ layout_cnv; });
+__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return /* reexport */ layout_vol; });
+__webpack_require__.d(__webpack_exports__, "DataCube", function() { return /* reexport */ datacube_DataCube; });
+__webpack_require__.d(__webpack_exports__, "Tool", function() { return /* reexport */ mixins_tool; });
+__webpack_require__.d(__webpack_exports__, "Interface", function() { return /* reexport */ mixins_interface; });
+__webpack_require__.d(__webpack_exports__, "primitives", function() { return /* binding */ primitives; });
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/TradingVue.vue?vue&type=template&id=235c0ade&
 var TradingVuevue_type_template_id_235c0ade_render = function() {
@@ -3999,14 +5948,44 @@ var TradingVuevue_type_template_id_235c0ade_render = function() {
     {
       staticClass: "trading-vue",
       style: {
-        color: this.colorText,
-        font: this.font,
+        color: this.chart_props.colors.text,
+        font: this.font_comp,
         width: this.width + "px",
         height: this.height + "px"
       },
-      attrs: { id: _vm.id }
+      attrs: { id: _vm.id },
+      on: { mousedown: _vm.mousedown, mouseleave: _vm.mouseleave }
     },
     [
+      _vm.toolbar
+        ? _c(
+            "toolbar",
+            _vm._b(
+              {
+                ref: "toolbar",
+                attrs: { config: _vm.chart_config },
+                on: { "custom-event": _vm.custom_event }
+              },
+              "toolbar",
+              _vm.chart_props,
+              false
+            )
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.controllers.length
+        ? _c("widgets", {
+            ref: "widgets",
+            attrs: {
+              map: _vm.ws,
+              width: _vm.width,
+              height: _vm.height,
+              tv: this,
+              dc: _vm.data
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "chart",
         _vm._b(
@@ -4014,7 +5993,11 @@ var TradingVuevue_type_template_id_235c0ade_render = function() {
             key: _vm.reset,
             ref: "chart",
             attrs: { tv_id: _vm.id, config: _vm.chart_config },
-            on: { "legend-button-click": _vm.legend_button }
+            on: {
+              "custom-event": _vm.custom_event,
+              "range-changed": _vm.range_changed,
+              "legend-button-click": _vm.legend_button
+            }
           },
           "chart",
           _vm.chart_props,
@@ -4031,18 +6014,24 @@ TradingVuevue_type_template_id_235c0ade_render._withStripped = true
 
 // CONCATENATED MODULE: ./src/TradingVue.vue?vue&type=template&id=235c0ade&
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/toConsumableArray.js
+var toConsumableArray = __webpack_require__(0);
+var toConsumableArray_default = /*#__PURE__*/__webpack_require__.n(toConsumableArray);
+
 // CONCATENATED MODULE: ./src/stuff/constants.js
 var SECOND = 1000;
 var MINUTE = SECOND * 60;
+var MINUTE3 = MINUTE * 3;
 var MINUTE5 = MINUTE * 5;
 var MINUTE15 = MINUTE * 15;
 var MINUTE30 = MINUTE * 30;
 var HOUR = MINUTE * 60;
 var HOUR4 = HOUR * 4;
+var HOUR12 = HOUR * 12;
 var DAY = HOUR * 24;
 var WEEK = DAY * 7;
 var MONTH = WEEK * 4;
-var YEAR = MONTH * 12;
+var YEAR = DAY * 365;
 var MONTHMAP = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; // Grid time steps
 
 var TIMESCALES = [YEAR * 10, YEAR * 5, YEAR * 3, YEAR * 2, YEAR, MONTH * 6, MONTH * 4, MONTH * 3, MONTH * 2, MONTH, DAY * 15, DAY * 10, DAY * 7, DAY * 5, DAY * 3, DAY * 2, DAY, HOUR * 12, HOUR * 6, HOUR * 3, HOUR * 1.5, HOUR, MINUTE30, MINUTE15, MINUTE * 10, MINUTE5, MINUTE * 2, MINUTE]; // Grid $ steps
@@ -4050,7 +6039,25 @@ var TIMESCALES = [YEAR * 10, YEAR * 5, YEAR * 3, YEAR * 2, YEAR, MONTH * 6, MONT
 var $SCALES = [0.05, 0.1, 0.2, 0.25, 0.5, 0.8, 1, 2, 5];
 var ChartConfig = {
   SBMIN: 60,
-  // px
+  // Minimal sidebar px
+  SBMAX: Infinity,
+  // Max sidebar, px
+  TOOLBAR: 57,
+  // Toolbar width px
+  TB_ICON: 25,
+  // Toolbar icon size px
+  TB_ITEM_M: 6,
+  // Toolbar item margin px
+  TB_ICON_BRI: 1,
+  // Toolbar icon brightness
+  TB_ICON_HOLD: 420,
+  // ms, wait to expand
+  TB_BORDER: 1,
+  // Toolbar border px
+  TB_B_STYLE: 'dotted',
+  // Toolbar border style
+  TOOL_COLL: 7,
+  // Tool collision threshold
   EXPAND: 0.15,
   // %/100 of range
   CANDLEW: 0.6,
@@ -4061,7 +6068,7 @@ var ChartConfig = {
   // px
   BOTBAR: 28,
   // px
-  PANHEIGHT: 24,
+  PANHEIGHT: 22,
   // px
   DEFAULT_LEN: 50,
   // candles
@@ -4071,10 +6078,42 @@ var ChartConfig = {
   // candles
   MAX_ZOOM: 1000,
   // candles,
-  VOLSCALE: 0.15 // %/100 of height
+  VOLSCALE: 0.15,
+  // %/100 of height
+  UX_OPACITY: 0.9,
+  // Ux background opacity
+  ZOOM_MODE: 'tv',
+  // 'tv' or 'tl'
+  L_BTN_SIZE: 21,
+  // Legend Button size, px
+  L_BTN_MARGIN: '-6px 0 -6px 0',
+  // css margin
+  SCROLL_WHEEL: 'prevent' // 'pass', 'click'
 
 };
 ChartConfig.FONT = "11px -apple-system,BlinkMacSystemFont,\n    Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,\n    Fira Sans,Droid Sans,Helvetica Neue,\n    sans-serif";
+var IB_TF_WARN = "When using IB mode you should specify " + "timeframe ('tf' filed in 'chart' object)," + "otherwise you can get an unexpected behaviour";
+var MAP_UNIT = {
+  "1s": SECOND,
+  "5s": SECOND * 5,
+  "10s": SECOND * 10,
+  "20s": SECOND * 20,
+  "30s": SECOND * 30,
+  "1m": MINUTE,
+  "3m": MINUTE3,
+  "5m": MINUTE5,
+  "15m": MINUTE15,
+  "30m": MINUTE30,
+  "1H": HOUR,
+  "2H": HOUR * 2,
+  "3H": HOUR * 3,
+  "4H": HOUR4,
+  "12H": HOUR12,
+  "1D": DAY,
+  "1W": WEEK,
+  "1M": MONTH,
+  "1Y": YEAR
+};
 /* harmony default export */ var constants = ({
   SECOND: SECOND,
   MINUTE: MINUTE,
@@ -4090,7 +6129,9 @@ ChartConfig.FONT = "11px -apple-system,BlinkMacSystemFont,\n    Segoe UI,Roboto,
   MONTHMAP: MONTHMAP,
   TIMESCALES: TIMESCALES,
   $SCALES: $SCALES,
-  ChartConfig: ChartConfig
+  ChartConfig: ChartConfig,
+  map_unit: MAP_UNIT,
+  IB_TF_WARN: IB_TF_WARN
 });
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart.vue?vue&type=template&id=4d06a4de&
 var Chartvue_type_template_id_4d06a4de_render = function() {
@@ -4099,24 +6140,39 @@ var Chartvue_type_template_id_4d06a4de_render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "trading-vue-chart" },
+    { staticClass: "trading-vue-chart", style: _vm.styles },
     [
+      _c("keyboard", { ref: "keyboard" }),
+      _vm._v(" "),
       _vm._l(this._layout.grids, function(grid, i) {
         return _c("grid-section", {
           key: grid.id,
+          ref: "sec",
+          refInFor: true,
           attrs: { common: _vm.section_props(i), grid_id: i },
           on: {
+            "register-kb-listener": _vm.register_kb,
+            "remove-kb-listener": _vm.remove_kb,
             "range-changed": _vm.range_changed,
             "cursor-changed": _vm.cursor_changed,
             "cursor-locked": _vm.cursor_locked,
             "sidebar-transform": _vm.set_ytransform,
             "layer-meta-props": _vm.layer_meta_props,
+            "custom-event": _vm.emit_custom_event,
             "legend-button-click": _vm.legend_button_click
           }
         })
       }),
       _vm._v(" "),
-      _c("botbar", _vm._b({}, "botbar", _vm.botbar_props, false))
+      _c(
+        "botbar",
+        _vm._b(
+          { attrs: { shaders: _vm.shaders, timezone: _vm.timezone } },
+          "botbar",
+          _vm.botbar_props,
+          false
+        )
+      )
     ],
     2
   )
@@ -4126,6 +6182,10 @@ Chartvue_type_template_id_4d06a4de_render._withStripped = true
 
 
 // CONCATENATED MODULE: ./src/components/Chart.vue?vue&type=template&id=4d06a4de&
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
+var slicedToArray = __webpack_require__(3);
+var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // CONCATENATED MODULE: ./src/stuff/context.js
 // Canvas context for text measurments
@@ -4138,17 +6198,11 @@ function Context($p) {
 
 /* harmony default export */ var context = (Context);
 // EXTERNAL MODULE: ./node_modules/arrayslicer/lib/index.js
-var lib = __webpack_require__(8);
+var lib = __webpack_require__(28);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
 // CONCATENATED MODULE: ./src/stuff/utils.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
 /* harmony default export */ var utils = ({
@@ -4165,19 +6219,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   // Start of the day (zero millisecond)
   day_start: function day_start(t) {
     var start = new Date(t);
-    start.setHours(0, 0, 0, 0);
-    return start.getTime();
+    return start.setUTCHours(0, 0, 0, 0);
   },
   // Start of the month
   month_start: function month_start(t) {
     var date = new Date(t);
-    var start = new Date(date.getFullYear(), date.getMonth(), 1);
-    return start.getTime();
+    return Date.UTC(date.getFullYear(), date.getMonth(), 1);
   },
   // Start of the year
   year_start: function year_start(t) {
-    var start = new Date(new Date(t).getFullYear(), 0, 1);
-    return start.getTime();
+    return Date.UTC(new Date(t).getFullYear());
+  },
+  get_year: function get_year(t) {
+    if (!t) return undefined;
+    return new Date(t).getUTCFullYear();
+  },
+  get_month: function get_month(t) {
+    if (!t) return undefined;
+    return new Date(t).getUTCMonth();
   },
   // Nearest in array
   nearest_a: function nearest_a(x, array) {
@@ -4197,8 +6256,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
     return [index, val];
   },
-  round: function round(num) {
-    var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+  round: function round(num, decimals) {
+    if (decimals === void 0) {
+      decimals = 8;
+    }
+
     return parseFloat(num.toFixed(decimals));
   },
   // Strip? No, it's ugly floats in js
@@ -4210,7 +6272,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   },
   // Update array keeping the same reference
   overwrite: function overwrite(arr, new_arr) {
-    arr.splice.apply(arr, [0, arr.length].concat(_toConsumableArray(new_arr)));
+    arr.splice.apply(arr, [0, arr.length].concat(toConsumableArray_default()(new_arr)));
   },
   // Copy layout in reactive way
   copy_layout: function copy_layout(obj, new_obj) {
@@ -4233,12 +6295,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   },
   // Detects candles interval
   detect_interval: function detect_interval(ohlcv) {
-    // If second candle is missing it will still work
-    var l = ohlcv.length - 1;
-    var i1 = ohlcv[1][0] - ohlcv[0][0];
-    var i2 = ohlcv[l][0] - ohlcv[l - 1][0];
-    var r = Math.min(i1, i2);
-    return r || Math.max(i1, i2);
+    var len = Math.min(ohlcv.length - 1, 99);
+    var min = Infinity;
+    ohlcv.slice(0, len).forEach(function (x, i) {
+      var d = ohlcv[i + 1][0] - x[0];
+      if (d === d && d < min) min = d;
+    }); // This saves monthly chart from being awkward
+
+    if (min >= constants.MONTH && min <= constants.DAY * 30) {
+      return constants.DAY * 31;
+    }
+
+    return min;
   },
   // Gets numberic part of overlay id (e.g 'EMA_1' = > 1)
   get_num_id: function get_num_id(id) {
@@ -4250,17 +6318,39 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
     try {
       var ia = new lib_default.a(arr, "0");
-      return ia.getRange(t1, t2);
+      var res = ia.getRange(t1, t2);
+      var i0 = ia.valpos[t1].next;
+      return [res, i0];
     } catch (e) {
       // Something wrong with fancy slice lib
       // Fast fix: fallback to filter
-      return arr.filter(function (x) {
+      return [arr.filter(function (x) {
         return x[0] >= t1 && x[0] <= t2;
-      });
+      }), 0];
     }
+  },
+  // Fast filter (index-based)
+  fast_filter_i: function fast_filter_i(arr, t1, t2) {
+    if (!arr.length) return arr;
+    var i1 = Math.floor(t1);
+    if (i1 < 0) i1 = 0;
+    var i2 = Math.floor(t2 + 1);
+    var res = arr.slice(i1, i2);
+    return [res, i1];
+  },
+  // Nearest indexes (left and right)
+  fast_nearest: function fast_nearest(arr, t1) {
+    var ia = new lib_default.a(arr, "0");
+    ia.fetch(t1);
+    return [ia.nextlow, ia.nexthigh];
   },
   now: function now() {
     return new Date().getTime();
+  },
+  pause: function pause(delay) {
+    return new Promise(function (rs, rj) {
+      return setTimeout(rs, delay);
+    });
   },
   // Limit crazy wheel delta values
   smart_wheel: function smart_wheel(delta) {
@@ -4279,25 +6369,265 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   // Parse the original mouse event to find deltaY
   get_deltaY: function get_deltaY(event) {
     return event.originalEvent.deltaY / 12;
+  },
+  // Apply opacity to a hex color
+  apply_opacity: function apply_opacity(c, op) {
+    if (c.length === 7) {
+      var n = Math.floor(op * 255);
+      n = this.clamp(n, 0, 255);
+      c += n.toString(16);
+    }
+
+    return c;
+  },
+  // Parse timeframe or return value in ms
+  parse_tf: function parse_tf(smth) {
+    if (typeof smth === 'string') {
+      return constants.map_unit[smth];
+    } else {
+      return smth;
+    }
+  },
+  // Detect index shift between the main data sub
+  // and the overlay's sub (for IB-mode)
+  index_shift: function index_shift(sub, data) {
+    // Find the second timestamp (by value)
+    if (!data.length) return 0;
+    var first = data[0][0];
+    var second;
+
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] !== first) {
+        second = data[i][0];
+        break;
+      }
+    }
+
+    for (var j = 0; j < sub.length; j++) {
+      if (sub[j][0] === second) {
+        return j - i;
+      }
+    }
+
+    return 0;
+  },
+  // Fallback fix for Brave browser
+  // https://github.com/brave/brave-browser/issues/1738
+  measureText: function measureText(ctx, text, tv_id) {
+    var m = ctx.measureTextOrg(text);
+
+    if (m.width === 0) {
+      var doc = document;
+      var id = 'tvjs-measure-text';
+      var el = doc.getElementById(id);
+
+      if (!el) {
+        var base = doc.getElementById(tv_id);
+        el = doc.createElement("div");
+        el.id = id;
+        el.style.position = 'absolute';
+        el.style.top = '-1000px';
+        base.appendChild(el);
+      }
+
+      if (ctx.font) el.style.font = ctx.font;
+      el.innerText = text.replace(/ /g, '.');
+      return {
+        width: el.offsetWidth
+      };
+    } else {
+      return m;
+    }
+  },
+  uuid: function uuid(temp) {
+    if (temp === void 0) {
+      temp = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+    }
+
+    return temp.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : r & 0x3 | 0x8;
+      return v.toString(16);
+    });
+  },
+  uuid2: function uuid2() {
+    return this.uuid('xxxxxxxxxxxx');
+  },
+  // Delayed warning, f = condition lambda fn
+  warn: function warn(f, text, delay) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+
+    setTimeout(function () {
+      if (f()) console.warn(text);
+    }, delay);
+  },
+  // Checks if script props updated
+  // (and not style settings or something else)
+  is_scr_props_upd: function is_scr_props_upd(n, prev) {
+    var p = prev.find(function (x) {
+      return x.v.$uuid === n.v.$uuid;
+    });
+    if (!p) return false;
+    var props = n.p.settings.$props;
+    if (!props) return false;
+    return props.some(function (x) {
+      return n.v[x] !== p.v[x];
+    });
+  },
+  // Checks if it's time to make a script update
+  // (based on execInterval in ms)
+  delayed_exec: function delayed_exec(v) {
+    if (!v.script || !v.script.execInterval) return true;
+    var t = this.now();
+    var dt = v.script.execInterval;
+
+    if (!v.settings.$last_exec || t > v.settings.$last_exec + dt) {
+      v.settings.$last_exec = t;
+      return true;
+    }
+
+    return false;
   }
+});
+// CONCATENATED MODULE: ./src/stuff/math.js
+// Math/Geometry
+/* harmony default export */ var math = ({
+  // Distance from point to line
+  // p1 = point, (p2, p3) = line
+  point2line: function point2line(p1, p2, p3) {
+    var _this$tri = this.tri(p1, p2, p3),
+        area = _this$tri.area,
+        base = _this$tri.base;
+
+    return Math.abs(this.tri_h(area, base));
+  },
+  // Distance from point to segment
+  // p1 = point, (p2, p3) = segment
+  point2seg: function point2seg(p1, p2, p3) {
+    var _this$tri2 = this.tri(p1, p2, p3),
+        area = _this$tri2.area,
+        base = _this$tri2.base; // Vector projection
+
+
+    var proj = this.dot_prod(p1, p2, p3) / base; // Distance from left pin
+
+    var l1 = Math.max(-proj, 0); // Distance from right pin
+
+    var l2 = Math.max(proj - base, 0); // Normal
+
+    var h = Math.abs(this.tri_h(area, base));
+    return Math.max(h, l1, l2);
+  },
+  // Distance from point to ray
+  // p1 = point, (p2, p3) = ray
+  point2ray: function point2ray(p1, p2, p3) {
+    var _this$tri3 = this.tri(p1, p2, p3),
+        area = _this$tri3.area,
+        base = _this$tri3.base; // Vector projection
+
+
+    var proj = this.dot_prod(p1, p2, p3) / base; // Distance from left pin
+
+    var l1 = Math.max(-proj, 0); // Normal
+
+    var h = Math.abs(this.tri_h(area, base));
+    return Math.max(h, l1);
+  },
+  tri: function tri(p1, p2, p3) {
+    var area = this.area(p1, p2, p3);
+    var dx = p3[0] - p2[0];
+    var dy = p3[1] - p2[1];
+    var base = Math.sqrt(dx * dx + dy * dy);
+    return {
+      area: area,
+      base: base
+    };
+  },
+
+  /* Area of triangle:
+          p1
+        /    \
+      p2  _  p3
+  */
+  area: function area(p1, p2, p3) {
+    return p1[0] * (p2[1] - p3[1]) + p2[0] * (p3[1] - p1[1]) + p3[0] * (p1[1] - p2[1]);
+  },
+  // Triangle height
+  tri_h: function tri_h(area, base) {
+    return area / base;
+  },
+  // Dot product of (p2, p3) and (p2, p1)
+  dot_prod: function dot_prod(p1, p2, p3) {
+    var v1 = [p3[0] - p2[0], p3[1] - p2[1]];
+    var v2 = [p1[0] - p2[0], p1[1] - p2[1]];
+    return v1[0] * v2[0] + v1[1] * v2[1];
+  },
+  // Symmetrical log
+  log: function log(x) {
+    // TODO: log for small values
+    return Math.sign(x) * Math.log(Math.abs(x) + 1);
+  },
+  // Symmetrical exp
+  exp: function exp(x) {
+    return Math.sign(x) * (Math.exp(Math.abs(x)) - 1);
+  },
+  // Middle line on log scale based on range & px height
+  log_mid: function log_mid(r, h) {
+    var log_hi = this.log(r[0]);
+    var log_lo = this.log(r[1]);
+    var px = h / 2;
+    var gx = log_hi - px * (log_hi - log_lo) / h;
+    return this.exp(gx);
+  },
+  // Return new adjusted range, based on the previous
+  // range, new $_hi, target middle line
+  re_range: function re_range(r1, hi2, mid) {
+    var log_hi1 = this.log(r1[0]);
+    var log_lo1 = this.log(r1[1]);
+    var log_hi2 = this.log(hi2);
+    var log_$ = this.log(mid);
+    var W = (log_hi2 - log_$) * (log_hi1 - log_lo1) / (log_hi1 - log_$);
+    return this.exp(log_hi2 - W);
+  } // Return new adjusted range, based on the previous
+  // range, new $_hi, target middle line + dy (shift)
+  // WASTE
+
+  /*range_shift(r1, hi2, mid, dy, h) {
+      let log_hi1 = this.log(r1[0])
+      let log_lo1 = this.log(r1[1])
+      let log_hi2 = this.log(hi2)
+      let log_$ = this.log(mid)
+       let W = h * (log_hi2 - log_$) /
+              (h * (log_hi1 - log_$) / (log_hi1 - log_lo1) + dy)
+       return this.exp(log_hi2 - W)
+   }*/
+
 });
 // CONCATENATED MODULE: ./src/components/js/layout_fn.js
 // Layout functional interface
 
+
 /* harmony default export */ var layout_fn = (function (self, range) {
+  var ib = self.ti_map.ib;
+  var dt = range[1] - range[0];
+  var r = self.spacex / dt;
+  var ls = self.grid.logScale || false;
   Object.assign(self, {
     // Time to screen coordinates
     t2screen: function t2screen(t) {
-      var dt = range[1] - range[0];
-      var r = self.spacex / dt;
+      if (ib) t = self.ti_map.smth2i(t);
       return Math.floor((t - range[0]) * r) - 0.5;
     },
     // $ to screen coordinates
     $2screen: function $2screen(y) {
+      if (ls) y = math.log(y);
       return Math.floor(y * self.A + self.B) - 0.5;
     },
     // Time-axis nearest step
     t_magnet: function t_magnet(t) {
+      if (ib) t = self.ti_map.smth2i(t);
       var cn = self.candles || self.master_grid.candles;
       var arr = cn.map(function (x) {
         return x.raw[0];
@@ -4308,17 +6638,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
     // Screen-Y to dollar value (or whatever)
     screen2$: function screen2$(y) {
-      var range = self.height;
-      var range$ = self.$_hi - self.$_lo;
-      var y$ = (range - y) * (range$ / range);
-      var prec = self.prec;
-      return (self.$_lo + y$).toFixed(prec);
+      if (ls) return math.exp((y - self.B) / self.A);
+      return (y - self.B) / self.A;
     },
-    // Screen-X to timestapm
+    // Screen-X to timestamp
     screen2t: function screen2t(x) {
-      var dt = range[1] - range[0];
-      var r = self.spacex / dt;
-      return Math.floor(range[0] + x / r);
+      // TODO: most likely Math.floor not needed
+      // return Math.floor(range[0] + x / r)
+      return range[0] + x / r;
     },
     // $-axis nearest step
     $_magnet: function $_magnet(price) {},
@@ -4338,31 +6665,54 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   });
   return self;
 });
+// CONCATENATED MODULE: ./src/components/js/log_scale.js
+// Log-scale mode helpers
+// TODO: all-negative numbers (sometimes wrong scaling)
+
+/* harmony default export */ var log_scale = ({
+  candle: function candle(self, mid, p, $p) {
+    return {
+      x: mid,
+      w: self.px_step * $p.config.CANDLEW,
+      o: Math.floor(math.log(p[1]) * self.A + self.B),
+      h: Math.floor(math.log(p[2]) * self.A + self.B),
+      l: Math.floor(math.log(p[3]) * self.A + self.B),
+      c: Math.floor(math.log(p[4]) * self.A + self.B),
+      raw: p
+    };
+  },
+  expand: function expand(self, height) {
+    // expand log scale
+    var A = -height / (math.log(self.$_hi) - math.log(self.$_lo));
+    var B = -math.log(self.$_hi) * A;
+    var top = -height * 0.1;
+    var bot = height * 1.1;
+    self.$_hi = math.exp((top - B) / A);
+    self.$_lo = math.exp((bot - B) / A);
+  }
+});
 // CONCATENATED MODULE: ./src/components/js/grid_maker.js
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function grid_maker_toConsumableArray(arr) { return grid_maker_arrayWithoutHoles(arr) || grid_maker_iterableToArray(arr) || grid_maker_nonIterableSpread(); }
-
-function grid_maker_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function grid_maker_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function grid_maker_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
 
 
 var grid_maker_TIMESCALES = constants.TIMESCALES,
-    grid_maker_$SCALES = constants.$SCALES; // master_grid - ref to the master grid
+    grid_maker_$SCALES = constants.$SCALES,
+    grid_maker_WEEK = constants.WEEK,
+    grid_maker_MONTH = constants.MONTH,
+    grid_maker_YEAR = constants.YEAR,
+    grid_maker_HOUR = constants.HOUR,
+    grid_maker_DAY = constants.DAY;
+var MAX_INT = Number.MAX_SAFE_INTEGER; // master_grid - ref to the master grid
 
-function GridMaker(id, params) {
-  var master_grid = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+function GridMaker(id, params, master_grid) {
+  if (master_grid === void 0) {
+    master_grid = null;
+  }
+
   var sub = params.sub,
       interval = params.interval,
       range = params.range,
@@ -4370,49 +6720,61 @@ function GridMaker(id, params) {
       $p = params.$p,
       layers_meta = params.layers_meta,
       height = params.height,
-      y_t = params.y_t;
-  var self = {};
+      y_t = params.y_t,
+      ti_map = params.ti_map,
+      grid = params.grid,
+      timezone = params.timezone;
+  var self = {
+    ti_map: ti_map
+  };
   var lm = layers_meta[id];
   var y_range_fn = null;
+  var ls = grid.logScale;
 
   if (lm && Object.keys(lm).length) {
     // Gets last y_range fn()
-    y_range_fn = lm[Object.keys(lm).length - 1].y_range;
+    var yrs = Object.values(lm).filter(function (x) {
+      return x.y_range;
+    }); // The first y_range() determines the range
+
+    if (yrs.length) y_range_fn = yrs[0].y_range;
   } // Calc vertical ($/₿) range
 
 
   function calc_$range() {
     if (!master_grid) {
       // $ candlestick range
-      var hi = Math.max.apply(Math, grid_maker_toConsumableArray(sub.map(function (x) {
-        return x[2];
-      })));
-      var lo = Math.min.apply(Math, grid_maker_toConsumableArray(sub.map(function (x) {
-        return x[3];
-      })));
-    } else {
-      // Offchart indicator range
-      var dim = sub[0] ? sub[0].length : 0;
-      var arr = [];
-
-      for (var i = 1; i < dim; i++) {
-        arr.push.apply(arr, grid_maker_toConsumableArray(sub.map(function (x) {
-          return x[i];
-        }).filter(function (x) {
-          return typeof x !== 'string';
+      if (y_range_fn) {
+        var _y_range_fn = y_range_fn(hi, lo),
+            _y_range_fn2 = slicedToArray_default()(_y_range_fn, 2),
+            hi = _y_range_fn2[0],
+            lo = _y_range_fn2[1];
+      } else {
+        hi = Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+          return x[2];
+        })));
+        lo = Math.min.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+          return x[3];
         })));
       }
+    } else {
+      // Offchart indicator range
+      hi = -Infinity, lo = Infinity;
 
-      hi = Math.max.apply(Math, arr);
-      lo = Math.min.apply(Math, arr);
+      for (var i = 0; i < sub.length; i++) {
+        for (var j = 1; j < sub[i].length; j++) {
+          var v = sub[i][j];
+          if (v > hi) hi = v;
+          if (v < lo) lo = v;
+        }
+      }
 
       if (y_range_fn) {
-        var _y_range_fn = y_range_fn(hi, lo);
-
-        var _y_range_fn2 = _slicedToArray(_y_range_fn, 2);
-
-        hi = _y_range_fn2[0];
-        lo = _y_range_fn2[1];
+        var _y_range_fn3 = y_range_fn(hi, lo),
+            _y_range_fn4 = slicedToArray_default()(_y_range_fn3, 3),
+            hi = _y_range_fn4[0],
+            lo = _y_range_fn4[1],
+            exp = _y_range_fn4[2];
       }
     } // Fixed y-range in non-auto mode
 
@@ -4421,8 +6783,25 @@ function GridMaker(id, params) {
       self.$_hi = y_t.range[0];
       self.$_lo = y_t.range[1];
     } else {
-      self.$_hi = hi + (hi - lo) * $p.config.EXPAND;
-      self.$_lo = lo - (hi - lo) * $p.config.EXPAND;
+      if (!ls) {
+        exp = exp === false ? 0 : 1;
+        self.$_hi = hi + (hi - lo) * $p.config.EXPAND * exp;
+        self.$_lo = lo - (hi - lo) * $p.config.EXPAND * exp;
+      } else {
+        self.$_hi = hi;
+        self.$_lo = lo;
+        log_scale.expand(self, height);
+      }
+
+      if (self.$_hi === self.$_lo) {
+        if (!ls) {
+          self.$_hi *= 1.05; // Expand if height range === 0
+
+          self.$_lo *= 0.95;
+        } else {
+          log_scale.expand(self, height);
+        }
+      }
     }
   }
 
@@ -4437,6 +6816,7 @@ function GridMaker(id, params) {
     // Gets formated levels (their lengths),
     // calculates max and measures the sidebar length
     // from it:
+    // TODO: add custom formatter f()
 
 
     self.prec = calc_precision(sub);
@@ -4446,9 +6826,12 @@ function GridMaker(id, params) {
     var lens = subn.map(function (x) {
       return x[1].toFixed(self.prec).length;
     });
-    var str = '0'.repeat(Math.max.apply(Math, grid_maker_toConsumableArray(lens))) + '    ';
+    lens.push(self.$_hi.toFixed(self.prec).length);
+    lens.push(self.$_lo.toFixed(self.prec).length);
+    var str = '0'.repeat(Math.max.apply(Math, toConsumableArray_default()(lens))) + '    ';
     self.sb = ctx.measureText(str).width;
     self.sb = Math.max(Math.floor(self.sb), $p.config.SBMIN);
+    self.sb = Math.min(self.sb, $p.config.SBMAX);
   } // Calculate $ precision for the Y-axis
 
 
@@ -4457,10 +6840,32 @@ function GridMaker(id, params) {
         max_l = 0; // Get max lengths of integer and fractional parts
 
     data.forEach(function (x) {
-      var _x$1$toString$split = x[1].toString().split('.'),
-          _x$1$toString$split2 = _slicedToArray(_x$1$toString$split, 2),
-          l = _x$1$toString$split2[0],
-          r = _x$1$toString$split2[1];
+      // Fix undefined bug
+      var str = x[1] != null ? x[1].toString() : '';
+
+      if (x[1] < 0.000001) {
+        // Parsing the exponential form. Gosh this
+        // smells trickily
+        var _str$split = str.split('e-'),
+            _str$split2 = slicedToArray_default()(_str$split, 2),
+            ls = _str$split2[0],
+            rs = _str$split2[1];
+
+        var _ls$split = ls.split('.'),
+            _ls$split2 = slicedToArray_default()(_ls$split, 2),
+            l = _ls$split2[0],
+            r = _ls$split2[1];
+
+        if (!r) r = '';
+        r = {
+          length: r.length + parseInt(rs) || 0
+        };
+      } else {
+        var _str$split3 = str.split('.'),
+            _str$split4 = slicedToArray_default()(_str$split3, 2),
+            l = _str$split4[0],
+            r = _str$split4[1];
+      }
 
       if (r && r.length > max_r) {
         max_r = r.length;
@@ -4498,16 +6903,22 @@ function GridMaker(id, params) {
     var r = self.spacex / dt;
     self.startx = (sub[0][0] - range[0]) * r; // Candle Y-transform: (A = scale, B = shift)
 
-    self.A = -height / (self.$_hi - self.$_lo);
-    self.B = -self.$_hi * self.A;
+    if (!grid.logScale) {
+      self.A = -height / (self.$_hi - self.$_lo);
+      self.B = -self.$_hi * self.A;
+    } else {
+      self.A = -height / (math.log(self.$_hi) - math.log(self.$_lo));
+      self.B = -math.log(self.$_hi) * self.A;
+    }
   } // Select nearest good-loking t step (m is target scale)
 
 
   function time_step() {
-    var xrange = range[1] - range[0];
+    var k = ti_map.ib ? 60000 : 1;
+    var xrange = (range[1] - range[0]) * k;
     var m = xrange * ($p.config.GRIDX / $p.width);
     var s = grid_maker_TIMESCALES;
-    return utils.nearest_a(m, s)[1];
+    return utils.nearest_a(m, s)[1] / k;
   } // Select nearest good-loking $ step (m is target scale)
 
 
@@ -4518,13 +6929,54 @@ function GridMaker(id, params) {
     var d = Math.pow(10, p);
     var s = grid_maker_$SCALES.map(function (x) {
       return x * d;
-    }); // TODO: center the range (look at RSI for eaxmple,
+    }); // TODO: center the range (look at RSI for example,
     // it looks ugly when "80" is near the top)
 
     return utils.strip(utils.nearest_a(m, s)[1]);
-  } // TODO: build several grid lines outside of
-  // the data area (to fill the space)
+  }
 
+  function dollar_mult() {
+    var mult_hi = dollar_mult_hi();
+    var mult_lo = dollar_mult_lo();
+    return Math.max(mult_hi, mult_lo);
+  } // Price step multiplier (for the log-scale mode)
+
+
+  function dollar_mult_hi() {
+    var h = Math.min(self.B, height);
+    if (h < $p.config.GRIDY) return 1;
+    var n = h / $p.config.GRIDY; // target grid N
+
+    var yrange = self.$_hi;
+
+    if (self.$_lo > 0) {
+      var yratio = self.$_hi / self.$_lo;
+    } else {
+      yratio = self.$_hi / 1; // TODO: small values
+    }
+
+    var m = yrange * ($p.config.GRIDY / h);
+    var p = parseInt(yrange.toExponential().split('e')[1]);
+    return Math.pow(yratio, 1 / n);
+  }
+
+  function dollar_mult_lo() {
+    var h = Math.min(height - self.B, height);
+    if (h < $p.config.GRIDY) return 1;
+    var n = h / $p.config.GRIDY; // target grid N
+
+    var yrange = Math.abs(self.$_lo);
+
+    if (self.$_hi < 0 && self.$_lo < 0) {
+      var yratio = Math.abs(self.$_lo / self.$_hi);
+    } else {
+      yratio = Math.abs(self.$_lo) / 1;
+    }
+
+    var m = yrange * ($p.config.GRIDY / h);
+    var p = parseInt(yrange.toExponential().split('e')[1]);
+    return Math.pow(yratio, 1 / n);
+  }
 
   function grid_x() {
     // If this is a subgrid, no need to calc a timeline,
@@ -4534,14 +6986,36 @@ function GridMaker(id, params) {
       self.xs = [];
       var dt = range[1] - range[0];
       var r = self.spacex / dt;
+      /* TODO: remove the left-side glitch
+       let year_0 = Utils.get_year(sub[0][0])
+      for (var t0 = year_0; t0 < range[0]; t0 += self.t_step) {}
+       let m0 = Utils.get_month(t0)*/
 
       for (var i = 0; i < sub.length; i++) {
         var p = sub[i];
+        var prev = sub[i - 1] || [];
+        var prev_xs = self.xs[self.xs.length - 1] || [0, []];
+        var x = Math.floor((p[0] - range[0]) * r);
+        insert_line(prev, p, x); // Filtering lines that are too near
 
-        if (p[0] % self.t_step === 0) {
-          var x = Math.floor((p[0] - range[0]) * r);
-          self.xs.push([x, p]);
+        var xs = self.xs[self.xs.length - 1] || [0, []];
+        if (prev_xs === xs) continue;
+
+        if (xs[1][0] - prev_xs[1][0] < self.t_step * 0.8) {
+          // prev_xs is a higher "rank" label
+          if (xs[2] <= prev_xs[2]) {
+            self.xs.pop();
+          } else {
+            // Otherwise
+            self.xs.splice(self.xs.length - 2, 1);
+          }
         }
+      } // TODO: fix grid extension for bigger timeframes
+
+
+      if (interval < grid_maker_WEEK && r > 0) {
+        extend_left(dt, r);
+        extend_right(dt, r);
       }
     } else {
       self.t_step = master_grid.t_step;
@@ -4551,8 +7025,64 @@ function GridMaker(id, params) {
     }
   }
 
+  function insert_line(prev, p, x, m0) {
+    var prev_t = ti_map.ib ? ti_map.i2t(prev[0]) : prev[0];
+    var p_t = ti_map.ib ? ti_map.i2t(p[0]) : p[0];
+
+    if (ti_map.tf < grid_maker_DAY) {
+      prev_t += timezone * grid_maker_HOUR;
+      p_t += timezone * grid_maker_HOUR;
+    }
+
+    var d = timezone * grid_maker_HOUR; // TODO: take this block =========> (see below)
+
+    if ((prev[0] || interval === grid_maker_YEAR) && utils.get_year(p_t) !== utils.get_year(prev_t)) {
+      self.xs.push([x, p, grid_maker_YEAR]); // [px, [...], rank]
+    } else if (prev[0] && utils.get_month(p_t) !== utils.get_month(prev_t)) {
+      self.xs.push([x, p, grid_maker_MONTH]);
+    } // TODO: should be added if this day !== prev day
+    // And the same for 'botbar.js', TODO(*)
+    else if (utils.day_start(p_t) === p_t) {
+        self.xs.push([x, p, grid_maker_DAY]);
+      } else if (p[0] % self.t_step === 0) {
+        self.xs.push([x, p, interval]);
+      }
+  }
+
+  function extend_left(dt, r) {
+    if (!self.xs.length || !isFinite(r)) return;
+    var t = self.xs[0][1][0];
+
+    while (true) {
+      t -= self.t_step;
+      var x = Math.floor((t - range[0]) * r);
+      if (x < 0) break; // TODO: ==========> And insert it here somehow
+
+      if (t % interval === 0) {
+        self.xs.unshift([x, [t], interval]);
+      }
+    }
+  }
+
+  function extend_right(dt, r) {
+    if (!self.xs.length || !isFinite(r)) return;
+    var t = self.xs[self.xs.length - 1][1][0];
+
+    while (true) {
+      t += self.t_step;
+      var x = Math.floor((t - range[0]) * r);
+      if (x > self.spacex) break;
+
+      if (t % interval === 0) {
+        self.xs.push([x, [t], interval]);
+      }
+    }
+  }
+
   function grid_y() {
-    self.$_step = dollar_step();
+    // Prevent duplicate levels
+    var m = Math.pow(10, -self.prec);
+    self.$_step = Math.max(m, dollar_step());
     self.ys = [];
     var y1 = self.$_lo - self.$_lo % self.$_step;
 
@@ -4563,28 +7093,145 @@ function GridMaker(id, params) {
     }
   }
 
+  function grid_y_log() {
+    // TODO: Prevent duplicate levels, is this even
+    // a problem here ?
+    self.$_mult = dollar_mult();
+    self.ys = [];
+    if (!sub.length) return;
+    var v = Math.abs(sub[sub.length - 1][1] || 1);
+    var y1 = search_start_pos(v);
+    var y2 = search_start_neg(-v);
+    var yp = -Infinity; // Previous y value
+
+    var n = height / $p.config.GRIDY; // target grid N
+
+    var q = 1 + (self.$_mult - 1) / 2; // Over 0
+
+    for (var y$ = y1; y$ > 0; y$ /= self.$_mult) {
+      y$ = log_rounder(y$, q);
+      var y = Math.floor(math.log(y$) * self.A + self.B);
+      self.ys.push([y, utils.strip(y$)]);
+      if (y > height) break;
+      if (y - yp < $p.config.GRIDY * 0.7) break;
+      if (self.ys.length > n + 1) break;
+      yp = y;
+    } // Under 0
+
+
+    yp = Infinity;
+
+    for (var y$ = y2; y$ < 0; y$ /= self.$_mult) {
+      y$ = log_rounder(y$, q);
+
+      var _y = Math.floor(math.log(y$) * self.A + self.B);
+
+      if (yp - _y < $p.config.GRIDY * 0.7) break;
+      self.ys.push([_y, utils.strip(y$)]);
+      if (_y < 0) break;
+      if (self.ys.length > n * 3 + 1) break;
+      yp = _y;
+    } // TODO: remove lines near to 0
+
+  } // Search a start for the top grid so that
+  // the fixed value always included
+
+
+  function search_start_pos(value) {
+    var N = height / $p.config.GRIDY; // target grid N
+
+    var y = Infinity,
+        y$ = value,
+        count = 0;
+
+    while (y > 0) {
+      y = Math.floor(math.log(y$) * self.A + self.B);
+      y$ *= self.$_mult;
+      if (count++ > N * 3) return 0; // Prevents deadloops
+    }
+
+    return y$;
+  }
+
+  function search_start_neg(value) {
+    var N = height / $p.config.GRIDY; // target grid N
+
+    var y = -Infinity,
+        y$ = value,
+        count = 0;
+
+    while (y < height) {
+      y = Math.floor(math.log(y$) * self.A + self.B);
+      y$ *= self.$_mult;
+      if (count++ > N * 3) break; // Prevents deadloops
+    }
+
+    return y$;
+  } // Make log scale levels look great again
+
+
+  function log_rounder(x, quality) {
+    var s = Math.sign(x);
+    x = Math.abs(x);
+
+    if (x > 10) {
+      for (var div = 10; div < MAX_INT; div *= 10) {
+        var nice = Math.floor(x / div) * div;
+
+        if (x / nice > quality) {
+          // More than 10% off
+          break;
+        }
+      }
+
+      div /= 10;
+      return s * Math.floor(x / div) * div;
+    } else if (x < 1) {
+      for (var ro = 10; ro >= 1; ro--) {
+        var _nice = utils.round(x, ro);
+
+        if (x / _nice > quality) {
+          // More than 10% off
+          break;
+        }
+      }
+
+      return s * utils.round(x, ro + 1);
+    } else {
+      return s * Math.floor(x);
+    }
+  }
+
   function apply_sizes() {
     self.width = $p.width - self.sb;
     self.height = height;
   }
 
+  calc_$range();
   calc_sidebar();
   return {
     // First we need to calculate max sidebar width
     // (among all grids). Then we can actually make
     // them
     create: function create() {
-      calc_$range();
       calc_positions();
       grid_x();
-      grid_y();
+
+      if (grid.logScale) {
+        grid_y_log();
+      } else {
+        grid_y();
+      }
+
       apply_sizes(); // Link to the master grid (candlesticks)
 
       if (master_grid) {
         self.master_grid = master_grid;
-      } // Here we add some helpful functions for
-      // plugin creators
+      }
 
+      self.grid = grid; // Grid params
+      // Here we add some helpful functions for
+      // plugin creators
 
       return layout_fn(self, range);
     },
@@ -4602,21 +7249,14 @@ function GridMaker(id, params) {
 
 /* harmony default export */ var grid_maker = (GridMaker);
 // CONCATENATED MODULE: ./src/components/js/layout.js
-function layout_slicedToArray(arr, i) { return layout_arrayWithHoles(arr) || layout_iterableToArrayLimit(arr, i) || layout_nonIterableRest(); }
 
-function layout_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function layout_iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function layout_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function layout_toConsumableArray(arr) { return layout_arrayWithoutHoles(arr) || layout_iterableToArray(arr) || layout_nonIterableSpread(); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function layout_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function layout_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function layout_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Calculates all necessary s*it to build the chart
 // Heights, widths, transforms, ... = everything
@@ -4626,21 +7266,40 @@ function layout_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 
 // So it's better to calc all in one place.
 
 
+
+
+
 function Layout(params) {
-  var sub = params.sub,
+  var chart = params.chart,
+      sub = params.sub,
       offsub = params.offsub,
       interval = params.interval,
       range = params.range,
       ctx = params.ctx,
       layers_meta = params.layers_meta,
+      ti_map = params.ti_map,
       $p = params.$props,
-      y_ts = params.y_transforms; // Splits space between main chart
+      y_ts = params.y_transforms;
+  var mgrid = chart.grid || {};
+  offsub = offsub.filter(function (x, i) {
+    // Skip offchart overlays with custom grid id,
+    // because they will be mergred with the existing grids
+    return !(x.grid && x.grid.id);
+  }); // Splits space between main chart
   // and offchart indicator grids
 
   function grid_hs() {
+    var height = $p.height - $p.config.BOTBAR; // When at least one height defined (default = 1),
+    // Pxs calculated as: (sum of weights) / number
+
+    if (mgrid.height || offsub.find(function (x) {
+      return x.grid.height;
+    })) {
+      return weighted_hs(mgrid, height);
+    }
+
     var n = offsub.length;
-    var off_h = 2 * Math.sqrt(n) / 7 / (n || 1);
-    var height = $p.height - $p.config.BOTBAR; // Offchart grid height
+    var off_h = 2 * Math.sqrt(n) / 7 / (n || 1); // Offchart grid height
 
     var px = Math.floor(height * off_h); // Main grid height
 
@@ -4648,16 +7307,34 @@ function Layout(params) {
     return [m].concat(Array(n).fill(px));
   }
 
-  function t2screen(t) {
-    var dt = range[1] - range[0];
-    var r = self.spacex / dt;
-    return Math.floor((t - range[0]) * r);
+  function weighted_hs(grid, height) {
+    var hs = [{
+      grid: grid
+    }].concat(toConsumableArray_default()(offsub)).map(function (x) {
+      return x.grid.height || 1;
+    });
+    var sum = hs.reduce(function (a, b) {
+      return a + b;
+    }, 0);
+    hs = hs.map(function (x) {
+      return Math.floor(x / sum * height);
+    }); // Refine the height if Math.floor decreased px sum
+
+    sum = hs.reduce(function (a, b) {
+      return a + b;
+    }, 0);
+
+    for (var i = 0; i < height - sum; i++) {
+      hs[i % hs.length]++;
+    }
+
+    return hs;
   }
 
   function candles_n_vol() {
     self.candles = [];
     self.volume = [];
-    var maxv = Math.max.apply(Math, layout_toConsumableArray(sub.map(function (x) {
+    var maxv = Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
       return x[5];
     })));
     var vs = $p.config.VOLSCALE * $p.height / maxv;
@@ -4669,14 +7346,14 @@ function Layout(params) {
 
     for (var i = 0; i < sub.length; i++) {
       var p = sub[i];
-      mid = t2screen(p[0]);
-      self.candles.push({
+      mid = self.t2screen(p[0]) + 0.5;
+      self.candles.push(mgrid.logScale ? log_scale.candle(self, mid, p, $p) : {
         x: mid,
         w: self.px_step * $p.config.CANDLEW,
-        o: p[1] * self.A + self.B,
-        h: p[2] * self.A + self.B,
-        l: p[3] * self.A + self.B,
-        c: p[4] * self.A + self.B,
+        o: Math.floor(p[1] * self.A + self.B),
+        h: Math.floor(p[2] * self.A + self.B),
+        l: Math.floor(p[3] * self.A + self.B),
+        c: Math.floor(p[4] * self.A + self.B),
         raw: p
       }); // Clear volume bar if there is a time gap
 
@@ -4690,7 +7367,7 @@ function Layout(params) {
         x1: x1,
         x2: x2,
         h: p[5] * vs,
-        green: p[4] > p[1],
+        green: p[4] >= p[1],
         raw: p
       });
       prev = x2 + splitter;
@@ -4706,43 +7383,39 @@ function Layout(params) {
     ctx: ctx,
     $p: $p,
     layers_meta: layers_meta,
+    ti_map: ti_map,
     height: hs[0],
-    y_t: y_ts[0]
+    y_t: y_ts[0],
+    grid: mgrid,
+    timezone: $p.timezone
   };
   var gms = [new grid_maker(0, specs)]; // Sub grids
 
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  var _iterator = _createForOfIteratorHelper(offsub.entries()),
+      _step;
 
   try {
-    for (var _iterator = offsub.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _step$value = layout_slicedToArray(_step.value, 2),
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _step$value = slicedToArray_default()(_step.value, 2),
           i = _step$value[0],
-          data = _step$value[1].data;
+          _step$value$ = _step$value[1],
+          data = _step$value$.data,
+          grid = _step$value$.grid;
 
       specs.sub = data;
       specs.height = hs[i + 1];
       specs.y_t = y_ts[i + 1];
+      specs.grid = grid || {};
       gms.push(new grid_maker(i + 1, specs, gms[0].get_layout()));
     } // Max sidebar among all grinds
 
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 
-  var sb = Math.max.apply(Math, layout_toConsumableArray(gms.map(function (x) {
+  var sb = Math.max.apply(Math, toConsumableArray_default()(gms.map(function (x) {
     return x.get_sidebar();
   })));
   var grids = [],
@@ -4770,41 +7443,58 @@ function Layout(params) {
 }
 
 /* harmony default export */ var js_layout = (Layout);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
+var classCallCheck = __webpack_require__(1);
+var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
+var createClass = __webpack_require__(2);
+var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
+
 // CONCATENATED MODULE: ./src/components/js/updater.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+function updater_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = updater_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function updater_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return updater_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return updater_arrayLikeToArray(o, minLen); }
+
+function updater_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Cursor updater: calculates current values for
 // OHLCV and all other indicators
 
 
-var updater_CursorUpdater =
-/*#__PURE__*/
-function () {
+var updater_CursorUpdater = /*#__PURE__*/function () {
   function CursorUpdater(comp) {
-    _classCallCheck(this, CursorUpdater);
+    classCallCheck_default()(this, CursorUpdater);
 
     this.comp = comp, this.grids = comp._layout.grids, this.cursor = comp.cursor;
   }
 
-  _createClass(CursorUpdater, [{
+  createClass_default()(CursorUpdater, [{
     key: "sync",
     value: function sync(e) {
+      // TODO: values not displaying if a custom grid id is set:
+      // grid: { id: N }
       this.cursor.grid_id = e.grid_id;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var once = true;
+
+      var _iterator = updater_createForOfIteratorHelper(this.grids),
+          _step;
 
       try {
-        for (var _iterator = this.grids[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var grid = _step.value;
           var c = this.cursor_data(grid, e);
 
           if (!this.cursor.locked) {
-            this.cursor.t = c.t;
+            // TODO: find a better fix to invisible cursor prob
+            if (once) {
+              this.cursor.t = this.cursor_time(grid, e, c);
+              if (this.cursor.t) once = false;
+            }
 
             if (c.values) {
               this.comp.$set(this.cursor.values, grid.id, c.values);
@@ -4812,23 +7502,14 @@ function () {
           }
 
           if (grid.id !== e.grid_id) continue;
-          this.cursor.x = c.x;
+          this.cursor.x = grid.t2screen(this.cursor.t);
           this.cursor.y = c.y;
           this.cursor.y$ = c.y$;
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
     }
   }, {
@@ -4837,16 +7518,28 @@ function () {
       var s = grid.id === 0 ? 'main_section' : 'sub_section';
       var data = this.comp[s].data; // Split offchart data between offchart grids
 
-      if (grid.id > 0) data = [data[grid.id - 1]];
+      if (grid.id > 0) {
+        // Sequential grids
+        var _d = data.filter(function (x) {
+          return x.grid.id === undefined;
+        }); // grids with custom ids (for merging)
+
+
+        var m = data.filter(function (x) {
+          return x.grid.id === grid.id;
+        });
+        data = [_d[grid.id - 1]].concat(toConsumableArray_default()(m));
+      }
+
       var t = grid.screen2t(e.x);
       var ids = {},
           res = {};
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+
+      var _iterator2 = updater_createForOfIteratorHelper(data),
+          _step2;
 
       try {
-        for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var d = _step2.value;
           var ts = d.data.map(function (x) {
             return x[0];
@@ -4856,18 +7549,9 @@ function () {
           res["".concat(d.type, "_").concat(ids[d.type])] = d.data[i];
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _iterator2.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+        _iterator2.f();
       }
 
       return res;
@@ -4891,6 +7575,23 @@ function () {
           ohlcv: grid.id === 0 ? data[i] : undefined
         }, this.overlay_data(grid, e))
       };
+    } // Get cursor t-position (extended)
+
+  }, {
+    key: "cursor_time",
+    value: function cursor_time(grid, mouse, candle) {
+      var t = grid.screen2t(mouse.x);
+      var r = Math.abs((t - candle.t) / this.comp.interval);
+      var sign = Math.sign(t - candle.t);
+
+      if (r >= 0.5) {
+        // Outside the data range
+        var n = Math.round(r);
+        return candle.t + n * this.comp.interval * sign;
+      } // Inside the data range
+
+
+      return candle.t;
     }
   }]);
 
@@ -4908,6 +7609,7 @@ var Sectionvue_type_template_id_8fbe9336_render = function() {
     { staticClass: "trading-vue-section" },
     [
       _c("chart-legend", {
+        ref: "legend",
         attrs: {
           values: _vm.section_values,
           grid_id: _vm.grid_id,
@@ -4921,13 +7623,18 @@ var Sectionvue_type_template_id_8fbe9336_render = function() {
         "grid",
         _vm._b(
           {
+            ref: "grid",
             attrs: { grid_id: _vm.grid_id },
             on: {
+              "register-kb-listener": _vm.register_kb,
+              "remove-kb-listener": _vm.remove_kb,
               "range-changed": _vm.range_changed,
               "cursor-changed": _vm.cursor_changed,
               "cursor-locked": _vm.cursor_locked,
               "layer-meta-props": _vm.emit_meta_props,
-              "sidebar-transform": _vm.sidebar_transform
+              "custom-event": _vm.emit_custom_event,
+              "sidebar-transform": _vm.sidebar_transform,
+              "rezoom-range": _vm.rezoom_range
             }
           },
           "grid",
@@ -4940,6 +7647,7 @@ var Sectionvue_type_template_id_8fbe9336_render = function() {
         "sidebar",
         _vm._b(
           {
+            ref: "sb-" + _vm.grid_id,
             attrs: { grid_id: _vm.grid_id, rerender: _vm.rerender },
             on: { "sidebar-transform": _vm.sidebar_transform }
           },
@@ -4959,34 +7667,23 @@ Sectionvue_type_template_id_8fbe9336_render._withStripped = true
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=template&id=8fbe9336&
 
 // EXTERNAL MODULE: ./node_modules/hammerjs/hammer.js
-var hammer = __webpack_require__(0);
+var hammer = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/hamsterjs/hamster.js
-var hamsterjs_hamster = __webpack_require__(9);
-var hamster_default = /*#__PURE__*/__webpack_require__.n(hamsterjs_hamster);
+var hamster = __webpack_require__(31);
+var hamster_default = /*#__PURE__*/__webpack_require__.n(hamster);
 
 // CONCATENATED MODULE: ./src/components/js/grid.js
-function grid_slicedToArray(arr, i) { return grid_arrayWithHoles(arr) || grid_iterableToArrayLimit(arr, i) || grid_nonIterableRest(); }
 
-function grid_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function grid_iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function grid_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function grid_toConsumableArray(arr) { return grid_arrayWithoutHoles(arr) || grid_iterableToArray(arr) || grid_nonIterableSpread(); }
 
-function grid_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function grid_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = grid_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function grid_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function grid_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return grid_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return grid_arrayLikeToArray(o, minLen); }
 
-function grid_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function grid_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function grid_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function grid_createClass(Constructor, protoProps, staticProps) { if (protoProps) grid_defineProperties(Constructor.prototype, protoProps); if (staticProps) grid_defineProperties(Constructor, staticProps); return Constructor; }
+function grid_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // Grid.js listens to various user-generated events,
 // emits Vue-events if something has changed (e.g. range)
@@ -4994,12 +7691,11 @@ function grid_createClass(Constructor, protoProps, staticProps) { if (protoProps
 
 
 
+ // Grid is good.
 
-var grid_Grid =
-/*#__PURE__*/
-function () {
+var grid_Grid = /*#__PURE__*/function () {
   function Grid(canvas, comp) {
-    grid_classCallCheck(this, Grid);
+    classCallCheck_default()(this, Grid);
 
     this.MIN_ZOOM = comp.config.MIN_ZOOM;
     this.MAX_ZOOM = comp.config.MAX_ZOOM;
@@ -5012,38 +7708,45 @@ function () {
     this.id = this.$p.grid_id;
     this.layout = this.$p.layout.grids[this.id];
     this.interval = this.$p.interval;
+    this.cursor = comp.$props.cursor;
     this.offset_x = 0;
     this.offset_y = 0;
     this.deltas = 0; // Wheel delta events
 
+    this.wmode = this.$p.config.SCROLL_WHEEL;
     this.listeners();
     this.overlays = [];
   }
 
-  grid_createClass(Grid, [{
+  createClass_default()(Grid, [{
     key: "listeners",
     value: function listeners() {
       var _this = this;
 
-      var hamster = hamster_default()(this.canvas);
-      hamster.wheel(function (event, delta) {
+      this.hm = hamster_default()(this.canvas);
+      this.hm.wheel(function (event, delta) {
         return _this.mousezoom(-delta * 50, event);
       });
-      var mc = new hammer["Manager"](this.canvas);
-      mc.add(new hammer["Pan"]());
+      var mc = this.mc = new hammer["Manager"](this.canvas);
+      mc.add(new hammer["Pan"]({
+        threshold: 0
+      }));
       mc.add(new hammer["Tap"]());
       mc.add(new hammer["Pinch"]());
       mc.get('pinch').set({
         enable: true
       });
       mc.on('panstart', function (event) {
+        if (_this.cursor.scroll_lock) return;
+        var tfrm = _this.$p.y_transform;
         _this.drug = {
           x: event.center.x + _this.offset_x,
           y: event.center.y + _this.offset_y,
           r: _this.range.slice(),
           t: _this.range[1] - _this.range[0],
-          o: _this.$p.y_transform ? _this.$p.y_transform.offset || 0 : 0,
-          y_r: _this.$p.y_transform ? _this.$p.y_transform.range.slice() : undefined
+          o: tfrm ? tfrm.offset || 0 : 0,
+          y_r: tfrm && tfrm.range ? tfrm.range.slice() : undefined,
+          B: _this.layout.B
         };
 
         _this.comp.$emit('cursor-changed', {
@@ -5056,7 +7759,7 @@ function () {
       });
       mc.on('panmove', function (event) {
         if (_this.drug) {
-          _this.mousedrug(_this.drug.x + event.deltaX, _this.drug.y + event.deltaY);
+          _this.mousedrag(_this.drug.x + event.deltaX, _this.drug.y + event.deltaY);
 
           _this.comp.$emit('cursor-changed', {
             grid_id: _this.id,
@@ -5091,15 +7794,25 @@ function () {
       mc.on('pinch', function (event) {
         if (_this.pinch) _this.pinchzoom(event.scale);
       });
-      window.addEventListener("gesturestart", function (event) {
-        event.preventDefault();
-      });
-      window.addEventListener("gesturechange", function (event) {
-        event.preventDefault();
-      });
-      window.addEventListener("gestureend", function (event) {
-        event.preventDefault();
-      });
+      var add = addEventListener;
+      add("gesturestart", this.gesturestart);
+      add("gesturechange", this.gesturechange);
+      add("gestureend", this.gestureend);
+    }
+  }, {
+    key: "gesturestart",
+    value: function gesturestart(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "gesturechange",
+    value: function gesturechange(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "gestureend",
+    value: function gestureend(event) {
+      event.preventDefault();
     }
   }, {
     key: "mousemove",
@@ -5108,8 +7821,7 @@ function () {
         grid_id: this.id,
         x: event.layerX,
         y: event.layerY + this.layout.offset
-      });
-      if (!this.drug) this.update(); // TODO: Temp solution, need to implement
+      }); // TODO: Temp solution, need to implement
       // a proper way to get the chart el offset
 
       this.offset_x = event.layerX - event.pageX + window.scrollX;
@@ -5133,8 +7845,13 @@ function () {
   }, {
     key: "mousedown",
     value: function mousedown(event) {
-      this.comp.$emit('cursor-locked', true);
       this.propagate('mousedown', event);
+      this.comp.$emit('cursor-locked', true);
+      if (event.defaultPrevented) return;
+      this.comp.$emit('custom-event', {
+        event: 'grid-mousedown',
+        args: [this.id, event]
+      });
     }
   }, {
     key: "click",
@@ -5150,6 +7867,14 @@ function () {
         this.overlays.push(layer);
       }
 
+      this.update();
+    }
+  }, {
+    key: "del_layer",
+    value: function del_layer(id) {
+      this.overlays = this.overlays.filter(function (x) {
+        return x.id !== id;
+      });
       this.update();
     }
   }, {
@@ -5169,10 +7894,12 @@ function () {
       // TODO: check what happens if data changes interval
       this.layout = this.$p.layout.grids[this.id];
       this.interval = this.$p.interval;
+      if (!this.layout) return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      if (this.$p.shaders.length) this.apply_shaders();
       this.grid();
       var overlays = [];
-      overlays.push.apply(overlays, grid_toConsumableArray(this.overlays)); // z-index sorting
+      overlays.push.apply(overlays, toConsumableArray_default()(this.overlays)); // z-index sorting
 
       overlays.sort(function (l1, l2) {
         return l1.z - l2.z;
@@ -5182,7 +7909,10 @@ function () {
 
         _this2.ctx.save();
 
-        l.renderer.draw(_this2.ctx);
+        var r = l.renderer;
+        if (r.pre_draw) r.pre_draw(_this2.ctx);
+        r.draw(_this2.ctx);
+        if (r.post_draw) r.post_draw(_this2.ctx);
 
         _this2.ctx.restore();
       });
@@ -5190,68 +7920,82 @@ function () {
       if (this.crosshair) {
         this.crosshair.renderer.draw(this.ctx);
       }
+    }
+  }, {
+    key: "apply_shaders",
+    value: function apply_shaders() {
+      var layout = this.$p.layout.grids[this.id];
+      var props = {
+        layout: layout,
+        range: this.range,
+        interval: this.interval,
+        tf: layout.ti_map.tf,
+        cursor: this.cursor,
+        colors: this.$p.colors,
+        sub: this.data,
+        font: this.$p.font,
+        config: this.$p.config,
+        meta: this.$p.meta
+      };
+
+      var _iterator = grid_createForOfIteratorHelper(this.$p.shaders),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var s = _step.value;
+          this.ctx.save();
+          s.draw(this.ctx, props);
+          this.ctx.restore();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
     } // Actually draws the grid (for real)
 
   }, {
     key: "grid",
     value: function grid() {
-      this.ctx.strokeStyle = this.$p.colors.colorGrid;
+      this.ctx.strokeStyle = this.$p.colors.grid;
       this.ctx.beginPath();
       var ymax = this.layout.height;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator2 = grid_createForOfIteratorHelper(this.layout.xs),
+          _step2;
 
       try {
-        for (var _iterator = this.layout.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _step$value = grid_slicedToArray(_step.value, 2),
-              x = _step$value[0],
-              p = _step$value[1];
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _step2$value = slicedToArray_default()(_step2.value, 2),
+              x = _step2$value[0],
+              p = _step2$value[1];
 
           this.ctx.moveTo(x - 0.5, 0);
           this.ctx.lineTo(x - 0.5, ymax);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator2.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator2.f();
       }
 
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iterator3 = grid_createForOfIteratorHelper(this.layout.ys),
+          _step3;
 
       try {
-        for (var _iterator2 = this.layout.ys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var _step2$value = grid_slicedToArray(_step2.value, 2),
-              y = _step2$value[0],
-              y$ = _step2$value[1];
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _step3$value = slicedToArray_default()(_step3.value, 2),
+              y = _step3$value[0],
+              y$ = _step3$value[1];
 
           this.ctx.moveTo(0, y - 0.5);
           this.ctx.lineTo(this.layout.width, y - 0.5);
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _iterator3.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+        _iterator3.f();
       }
 
       this.ctx.stroke();
@@ -5260,7 +8004,7 @@ function () {
   }, {
     key: "upper_border",
     value: function upper_border() {
-      this.ctx.strokeStyle = this.$p.colors.colorScale;
+      this.ctx.strokeStyle = this.$p.colors.scale;
       this.ctx.beginPath();
       this.ctx.moveTo(0, 0.5);
       this.ctx.lineTo(this.layout.width, 0.5);
@@ -5269,8 +8013,15 @@ function () {
   }, {
     key: "mousezoom",
     value: function mousezoom(delta, event) {
-      event.originalEvent.preventDefault();
-      event.preventDefault();
+      if (this.wmode !== 'pass') {
+        if (this.wmode === 'click' && !this.$p.meta.activated) {
+          return;
+        }
+
+        event.originalEvent.preventDefault();
+        event.preventDefault();
+      }
+
       event.deltaX = event.deltaX || utils.get_deltaX(event);
       event.deltaY = event.deltaY || utils.get_deltaY(event);
 
@@ -5292,26 +8043,58 @@ function () {
       if (delta < 0 && this.data.length <= this.MIN_ZOOM) return;
       if (delta > 0 && this.data.length > this.MAX_ZOOM) return;
       var k = this.interval / 1000;
-      this.range[0] -= delta * k * this.data.length; // TODO: BUG: while scrolling you may notice that
-      // the left part of the indicator data is not
-      // loaded immediately. (until you move the cursor)
-      // Need to investigate. Solution: check reactivity,
-      // it is probably lost.
+      var diff = delta * k * this.data.length;
+      var tl = this.comp.config.ZOOM_MODE === 'tl';
+
+      if (event.originalEvent.ctrlKey || tl) {
+        var offset = event.originalEvent.offsetX;
+        var diff1 = offset / (this.canvas.width - 1) * diff;
+        var diff2 = diff - diff1;
+        this.range[0] -= diff1;
+        this.range[1] += diff2;
+      } else {
+        this.range[0] -= diff;
+      }
+
+      if (tl) {
+        var _offset = event.originalEvent.offsetY;
+
+        var _diff = _offset / (this.canvas.height - 1) * 2;
+
+        var _diff2 = 2 - _diff;
+
+        var z = diff / (this.range[1] - this.range[0]); //rezoom_range(z, diff_x, diff_y)
+
+        this.comp.$emit('rezoom-range', {
+          grid_id: this.id,
+          z: z,
+          diff1: _diff,
+          diff2: _diff2
+        });
+      }
 
       this.change_range();
     }
   }, {
-    key: "mousedrug",
-    value: function mousedrug(x, y) {
+    key: "mousedrag",
+    value: function mousedrag(x, y) {
       var dt = this.drug.t * (this.drug.x - x) / this.layout.width;
       var d$ = this.layout.$_hi - this.layout.$_lo;
       d$ *= (this.drug.y - y) / this.layout.height;
       var offset = this.drug.o + d$;
+      var ls = this.layout.grid.logScale;
 
-      if (this.$p.y_transform && !this.$p.y_transform.auto) {
+      if (ls && this.drug.y_r) {
+        var dy = this.drug.y - y;
+        var range = this.drug.y_r.slice();
+        range[0] = math.exp((0 - this.drug.B + dy) / this.layout.A);
+        range[1] = math.exp((this.layout.height - this.drug.B + dy) / this.layout.A);
+      }
+
+      if (this.drug.y_r && this.$p.y_transform && !this.$p.y_transform.auto) {
         this.comp.$emit('sidebar-transform', {
           grid_id: this.id,
-          range: [this.drug.y_r[0] - offset, this.drug.y_r[1] - offset]
+          range: ls ? range || this.drug.y_r : [this.drug.y_r[0] - offset, this.drug.y_r[1] - offset]
         });
       }
 
@@ -5366,32 +8149,43 @@ function () {
   }, {
     key: "propagate",
     value: function propagate(name, event) {
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+      var _iterator4 = grid_createForOfIteratorHelper(this.overlays),
+          _step4;
 
       try {
-        for (var _iterator3 = this.overlays[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var layer = _step3.value;
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var layer = _step4.value;
 
           if (layer.renderer[name]) {
             layer.renderer[name](event);
           }
+
+          var mouse = layer.renderer.mouse;
+          var keys = layer.renderer.keys;
+
+          if (mouse.listeners) {
+            mouse.emit(name, event);
+          }
+
+          if (keys && keys.listeners) {
+            keys.emit(name, event);
+          }
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _iterator4.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-            _iterator3["return"]();
-          }
-        } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
-          }
-        }
+        _iterator4.f();
       }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      var rm = removeEventListener;
+      rm("gesturestart", this.gesturestart);
+      rm("gesturechange", this.gesturechange);
+      rm("gestureend", this.gestureend);
+      if (this.mc) this.mc.destroy();
+      if (this.hm) this.hm.unwheel();
     }
   }]);
 
@@ -5402,7 +8196,8 @@ function () {
 // CONCATENATED MODULE: ./src/mixins/canvas.js
 // Interactive canvas-based component
 // Should implement: mousemove, mouseout, mouseup, mousedown, click
-/* harmony default export */ var canvas = ({
+
+/* harmony default export */ var mixins_canvas = ({
   methods: {
     setup: function setup() {
       var _this = this;
@@ -5412,14 +8207,30 @@ function () {
       var dpr = window.devicePixelRatio || 1;
       canvas.style.width = "".concat(this._attrs.width, "px");
       canvas.style.height = "".concat(this._attrs.height, "px");
+      if (dpr < 1) dpr = 1; // Realy ? That's it? Issue #63
+
       this.$nextTick(function () {
         var rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d', {// TODO: test the boost:
+          //alpha: false,
+          //desynchronized: true,
+          //preserveDrawingBuffer: false
+        });
         ctx.scale(dpr, dpr);
 
-        _this.redraw();
+        _this.redraw(); // Fallback fix for Brave browser
+        // https://github.com/brave/brave-browser/issues/1738
+
+
+        if (!ctx.measureTextOrg) {
+          ctx.measureTextOrg = ctx.measureText;
+        }
+
+        ctx.measureText = function (text) {
+          return utils.measureText(ctx, text, _this.$props.tv_id);
+        };
       });
     },
     create_canvas: function create_canvas(h, id, props) {
@@ -5472,18 +8283,86 @@ function () {
     }
   }
 });
+// CONCATENATED MODULE: ./src/mixins/uxlist.js
+// Manager for Inteerface objects
+/* harmony default export */ var uxlist = ({
+  methods: {
+    on_ux_event: function on_ux_event(d, target) {
+      if (d.event === 'new-interface') {
+        if (d.args[0].target === target) {
+          d.args[0].vars = d.args[0].vars || {};
+          d.args[0].grid_id = d.args[1];
+          d.args[0].overlay_id = d.args[2];
+          this.uxs.push(d.args[0]); // this.rerender++
+        }
+      } else if (d.event === 'close-interface') {
+        this.uxs = this.uxs.filter(function (x) {
+          return x.uuid !== d.args[0];
+        });
+      } else if (d.event === 'modify-interface') {
+        var ux = this.uxs.filter(function (x) {
+          return x.uuid === d.args[0];
+        });
+
+        if (ux.length) {
+          this.modify(ux[0], d.args[1]);
+        }
+      } else if (d.event === 'hide-interface') {
+        var _ux = this.uxs.filter(function (x) {
+          return x.uuid === d.args[0];
+        });
+
+        if (_ux.length) {
+          _ux[0].hidden = true;
+          this.modify(_ux[0], {
+            hidden: true
+          });
+        }
+      } else if (d.event === 'show-interface') {
+        var _ux2 = this.uxs.filter(function (x) {
+          return x.uuid === d.args[0];
+        });
+
+        if (_ux2.length) {
+          this.modify(_ux2[0], {
+            hidden: false
+          });
+        }
+      } else {
+        return d;
+      }
+    },
+    modify: function modify(ux, obj) {
+      if (obj === void 0) {
+        obj = {};
+      }
+
+      for (var k in obj) {
+        if (k in ux) {
+          this.$set(ux, k, obj[k]);
+        }
+      }
+    },
+    // Remove all UXs for a given overlay id
+    remove_all_ux: function remove_all_ux(id) {
+      this.uxs = this.uxs.filter(function (x) {
+        return x.overlay.id !== id;
+      });
+    }
+  },
+  data: function data() {
+    return {
+      uxs: []
+    };
+  }
+});
 // CONCATENATED MODULE: ./src/components/js/crosshair.js
-function crosshair_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function crosshair_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function crosshair_createClass(Constructor, protoProps, staticProps) { if (protoProps) crosshair_defineProperties(Constructor.prototype, protoProps); if (staticProps) crosshair_defineProperties(Constructor, staticProps); return Constructor; }
 
-var Crosshair =
-/*#__PURE__*/
-function () {
+var crosshair_Crosshair = /*#__PURE__*/function () {
   function Crosshair(comp) {
-    crosshair_classCallCheck(this, Crosshair);
+    classCallCheck_default()(this, Crosshair);
 
     this.comp = comp;
     this.$p = comp.$props;
@@ -5493,23 +8372,16 @@ function () {
     this.layout = this.$p.layout;
   }
 
-  crosshair_createClass(Crosshair, [{
-    key: "update",
-    value: function update(x, y) {
-      this.x = this.nearest();
-      this.y = y;
-    }
-  }, {
+  createClass_default()(Crosshair, [{
     key: "draw",
     value: function draw(ctx) {
       // Update reference to the grid
       this.layout = this.$p.layout;
-      if (!this.visible) return; // Adjust x here cuz there is a delay between
-      // update() and draw()
-
-      this.x = this.nearest();
+      if (!this.visible) return;
+      this.x = this.$p.cursor.x;
+      this.y = this.$p.cursor.y;
       ctx.save();
-      ctx.strokeStyle = this.$p.colors.colorCross;
+      ctx.strokeStyle = this.$p.colors.cross;
       ctx.beginPath();
       ctx.setLineDash([5]); // H
 
@@ -5532,18 +8404,6 @@ function () {
       this.y = undefined;
     }
   }, {
-    key: "nearest",
-    // Nearest data object (when locked)
-    value: function nearest() {
-      if (this.$p.cursor.locked) {
-        var t = this.$p.cursor.t;
-        var x = this.layout.t_magnet(t);
-        return x;
-      }
-
-      return this.$p.cursor.x;
-    }
-  }, {
     key: "visible",
     get: function get() {
       return this._visible;
@@ -5564,7 +8424,7 @@ function () {
   props: ['cursor', 'colors', 'layout', 'sub'],
   methods: {
     create: function create() {
-      this.ch = new Crosshair(this); // New grid overlay-renderer descriptor.
+      this.ch = new crosshair_Crosshair(this); // New grid overlay-renderer descriptor.
       // Should implement draw() (see Spline.vue)
 
       this.$emit('new-grid-layer', {
@@ -5585,8 +8445,7 @@ function () {
           return;
         }
 
-        this.ch.visible = true;
-        this.ch.update(cursor.x, cursor.y);
+        this.ch.visible = true; //this.ch.update(cursor.x, cursor.y)
       },
       deep: true
     }
@@ -5662,7 +8521,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 
@@ -5671,7 +8535,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -5715,16 +8579,624 @@ var component = normalizeComponent(
 if (false) { var api; }
 component.options.__file = "src/components/Crosshair.vue"
 /* harmony default export */ var components_Crosshair = (component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/KeyboardListener.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+/* harmony default export */ var KeyboardListenervue_type_script_lang_js_ = ({
+  name: 'KeyboardListener',
+  render: function render(h) {
+    return h();
+  },
+  created: function created() {
+    this.$emit('register-kb-listener', {
+      id: this._uid,
+      keydown: this.keydown,
+      keyup: this.keyup,
+      keypress: this.keypress
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$emit('remove-kb-listener', {
+      id: this._uid
+    });
+  },
+  methods: {
+    keydown: function keydown(event) {
+      this.$emit('keydown', event);
+    },
+    keyup: function keyup(event) {
+      this.$emit('keyup', event);
+    },
+    keypress: function keypress(event) {
+      this.$emit('keypress', event);
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/KeyboardListener.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_KeyboardListenervue_type_script_lang_js_ = (KeyboardListenervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/KeyboardListener.vue
+var KeyboardListener_render, KeyboardListener_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var KeyboardListener_component = normalizeComponent(
+  components_KeyboardListenervue_type_script_lang_js_,
+  KeyboardListener_render,
+  KeyboardListener_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var KeyboardListener_api; }
+KeyboardListener_component.options.__file = "src/components/KeyboardListener.vue"
+/* harmony default export */ var KeyboardListener = (KeyboardListener_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/UxLayer.vue?vue&type=template&id=390ccf6e&
+var UxLayervue_type_template_id_390ccf6e_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    { class: "trading-vue-grid-ux-" + _vm.id, style: _vm.style },
+    _vm._l(_vm.uxs, function(ux) {
+      return _c("ux-wrapper", {
+        key: ux.uuid,
+        attrs: {
+          ux: ux,
+          updater: _vm.updater,
+          colors: _vm.colors,
+          config: _vm.config
+        },
+        on: { "custom-event": _vm.on_custom_event }
+      })
+    }),
+    1
+  )
+}
+var UxLayervue_type_template_id_390ccf6e_staticRenderFns = []
+UxLayervue_type_template_id_390ccf6e_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/UxLayer.vue?vue&type=template&id=390ccf6e&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/UxWrapper.vue?vue&type=template&id=4bc32070&
+var UxWrappervue_type_template_id_4bc32070_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.visible
+    ? _c(
+        "div",
+        {
+          staticClass: "trading-vue-ux-wrapper",
+          style: _vm.style,
+          attrs: { id: "tvjs-ux-wrapper-" + _vm.ux.uuid }
+        },
+        [
+          _c(_vm.ux.component, {
+            tag: "component",
+            attrs: {
+              ux: _vm.ux,
+              updater: _vm.updater,
+              wrapper: _vm.wrapper,
+              colors: _vm.colors
+            },
+            on: { "custom-event": _vm.on_custom_event }
+          }),
+          _vm._v(" "),
+          _vm.ux.show_pin
+            ? _c("div", {
+                staticClass: "tvjs-ux-wrapper-pin",
+                style: _vm.pin_style
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.ux.win_header !== false
+            ? _c("div", { staticClass: "tvjs-ux-wrapper-head" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "tvjs-ux-wrapper-close",
+                    style: _vm.btn_style,
+                    on: { click: _vm.close }
+                  },
+                  [_vm._v("×")]
+                )
+              ])
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var UxWrappervue_type_template_id_4bc32070_staticRenderFns = []
+UxWrappervue_type_template_id_4bc32070_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/UxWrapper.vue?vue&type=template&id=4bc32070&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/UxWrapper.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var UxWrappervue_type_script_lang_js_ = ({
+  name: 'UxWrapper',
+  props: ['ux', 'updater', 'colors', 'config'],
+  mounted: function mounted() {
+    this.self = document.getElementById(this.uuid);
+    this.w = this.self.offsetWidth; // TODO: => width: "content"
+
+    this.h = this.self.offsetHeight; // TODO: => height: "content"
+
+    this.update_position();
+  },
+  created: function created() {
+    this.mouse.on('mousemove', this.mousemove);
+    this.mouse.on('mouseout', this.mouseout);
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.mouse.off('mousemove', this.mousemove);
+    this.mouse.off('mouseout', this.mouseout);
+  },
+  methods: {
+    update_position: function update_position() {
+      if (this.uxr.hidden) return;
+      var lw = this.layout.width;
+      var lh = this.layout.height;
+      var pin = this.uxr.pin;
+
+      switch (pin[0]) {
+        case 'cursor':
+          var x = this.uxr.overlay.cursor.x;
+          break;
+
+        case 'mouse':
+          x = this.mouse.x;
+          break;
+
+        default:
+          if (typeof pin[0] === 'string') {
+            x = this.parse_coord(pin[0], lw);
+          } else {
+            x = this.layout.t2screen(pin[0]);
+          }
+
+      }
+
+      switch (pin[1]) {
+        case 'cursor':
+          var y = this.uxr.overlay.cursor.y;
+          break;
+
+        case 'mouse':
+          y = this.mouse.y;
+          break;
+
+        default:
+          if (typeof pin[1] === 'string') {
+            y = this.parse_coord(pin[1], lh);
+          } else {
+            y = this.layout.$2screen(pin[1]);
+          }
+
+      }
+
+      this.x = x + this.ox;
+      this.y = y + this.oy;
+    },
+    parse_coord: function parse_coord(str, scale) {
+      str = str.trim();
+      if (str === '0' || str === '') return 0;
+      var plus = str.split('+');
+
+      if (plus.length === 2) {
+        return this.parse_coord(plus[0], scale) + this.parse_coord(plus[1], scale);
+      }
+
+      var minus = str.split('-');
+
+      if (minus.length === 2) {
+        return this.parse_coord(minus[0], scale) - this.parse_coord(minus[1], scale);
+      }
+
+      var per = str.split('%');
+
+      if (per.length === 2) {
+        return scale * parseInt(per[0]) / 100;
+      }
+
+      var px = str.split('px');
+
+      if (px.length === 2) {
+        return parseInt(px[0]);
+      }
+
+      return undefined;
+    },
+    mousemove: function mousemove() {
+      this.update_position();
+      this.visible = true;
+    },
+    mouseout: function mouseout() {
+      if (this.uxr.pin.includes('cursor') || this.uxr.pin.includes('mouse')) this.visible = false;
+    },
+    on_custom_event: function on_custom_event(event) {
+      this.$emit('custom-event', event);
+
+      if (event.event === 'modify-interface') {
+        if (this.self) {
+          this.w = this.self.offsetWidth;
+          this.h = this.self.offsetHeight;
+        }
+
+        this.update_position();
+      }
+    },
+    close: function close() {
+      this.$emit('custom-event', {
+        event: 'close-interface',
+        args: [this.$props.ux.uuid]
+      });
+    }
+  },
+  computed: {
+    uxr: function uxr() {
+      return this.$props.ux; // just a ref
+    },
+    layout: function layout() {
+      return this.$props.ux.overlay.layout;
+    },
+    settings: function settings() {
+      return this.$props.ux.overlay.settings;
+    },
+    uuid: function uuid() {
+      return "tvjs-ux-wrapper-".concat(this.uxr.uuid);
+    },
+    mouse: function mouse() {
+      return this.uxr.overlay.mouse;
+    },
+    style: function style() {
+      var st = {
+        'display': this.uxr.hidden ? 'none' : undefined,
+        'left': "".concat(this.x, "px"),
+        'top': "".concat(this.y, "px"),
+        'pointer-events': this.uxr.pointer_events || 'all',
+        'z-index': this.z_index
+      };
+      if (this.uxr.win_styling !== false) st = Object.assign(st, {
+        'border': "1px solid ".concat(this.$props.colors.grid),
+        'border-radius': '3px',
+        'background': "".concat(this.background)
+      });
+      return st;
+    },
+    pin_style: function pin_style() {
+      return {
+        'left': "".concat(-this.ox, "px"),
+        'top': "".concat(-this.oy, "px"),
+        'background-color': this.uxr.pin_color
+      };
+    },
+    btn_style: function btn_style() {
+      return {
+        'background': "".concat(this.inactive_btn_color),
+        'color': "".concat(this.inactive_btn_color)
+      };
+    },
+    pin_pos: function pin_pos() {
+      return this.uxr.pin_position ? this.uxr.pin_position.split(',') : ['0', '0'];
+    },
+    // Offset x
+    ox: function ox() {
+      if (this.pin_pos.length !== 2) return undefined;
+      var x = this.parse_coord(this.pin_pos[0], this.w);
+      return -x;
+    },
+    // Offset y
+    oy: function oy() {
+      if (this.pin_pos.length !== 2) return undefined;
+      var y = this.parse_coord(this.pin_pos[1], this.h);
+      return -y;
+    },
+    z_index: function z_index() {
+      var base_index = this.settings['z-index'] || this.settings['zIndex'] || 0;
+      var ux_index = this.uxr['z_index'] || 0;
+      return base_index + ux_index;
+    },
+    background: function background() {
+      var c = this.uxr.background || this.$props.colors.back;
+      return utils.apply_opacity(c, this.uxr.background_opacity || this.$props.config.UX_OPACITY);
+    },
+    inactive_btn_color: function inactive_btn_color() {
+      return this.uxr.inactive_btn_color || this.$props.colors.grid;
+    },
+    wrapper: function wrapper() {
+      return {
+        x: this.x,
+        y: this.y,
+        pin_x: this.x - this.ox,
+        pin_y: this.y - this.oy
+      };
+    }
+  },
+  watch: {
+    updater: function updater() {
+      this.update_position();
+    }
+  },
+  data: function data() {
+    return {
+      x: 0,
+      y: 0,
+      w: 0,
+      h: 0,
+      visible: true
+    };
+  }
+});
+// CONCATENATED MODULE: ./src/components/UxWrapper.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_UxWrappervue_type_script_lang_js_ = (UxWrappervue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/UxWrapper.vue?vue&type=style&index=0&lang=css&
+var UxWrappervue_type_style_index_0_lang_css_ = __webpack_require__(43);
+
+// CONCATENATED MODULE: ./src/components/UxWrapper.vue
+
+
+
+
+
+
+/* normalize component */
+
+var UxWrapper_component = normalizeComponent(
+  components_UxWrappervue_type_script_lang_js_,
+  UxWrappervue_type_template_id_4bc32070_render,
+  UxWrappervue_type_template_id_4bc32070_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var UxWrapper_api; }
+UxWrapper_component.options.__file = "src/components/UxWrapper.vue"
+/* harmony default export */ var UxWrapper = (UxWrapper_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/UxLayer.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var UxLayervue_type_script_lang_js_ = ({
+  name: 'UxLayer',
+  props: ['tv_id', 'id', 'uxs', 'updater', 'colors', 'config'],
+  components: {
+    UxWrapper: UxWrapper
+  },
+  created: function created() {},
+  mounted: function mounted() {},
+  beforeDestroy: function beforeDestroy() {},
+  methods: {
+    on_custom_event: function on_custom_event(event) {
+      this.$emit('custom-event', event);
+    }
+  },
+  computed: {
+    style: function style() {
+      return {
+        'top': this.$props.id !== 0 ? '1px' : 0,
+        'left': 0,
+        'width': '100%',
+        'height': 'calc(100% - 2px)',
+        'position': 'absolute',
+        'z-index': '1',
+        'pointer-events': 'none',
+        'overflow': 'hidden'
+      };
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/UxLayer.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_UxLayervue_type_script_lang_js_ = (UxLayervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/UxLayer.vue
+
+
+
+
+
+/* normalize component */
+
+var UxLayer_component = normalizeComponent(
+  components_UxLayervue_type_script_lang_js_,
+  UxLayervue_type_template_id_390ccf6e_render,
+  UxLayervue_type_template_id_390ccf6e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var UxLayer_api; }
+UxLayer_component.options.__file = "src/components/UxLayer.vue"
+/* harmony default export */ var UxLayer = (UxLayer_component.exports);
+// CONCATENATED MODULE: ./src/stuff/mouse.js
+
+
+
+function mouse_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = mouse_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function mouse_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return mouse_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return mouse_arrayLikeToArray(o, minLen); }
+
+function mouse_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// Mouse event handler for overlay
+var mouse_Mouse = /*#__PURE__*/function () {
+  function Mouse(comp) {
+    classCallCheck_default()(this, Mouse);
+
+    this.comp = comp;
+    this.map = {};
+    this.listeners = 0;
+    this.pressed = false;
+    this.x = comp.$props.cursor.x;
+    this.y = comp.$props.cursor.y;
+    this.t = comp.$props.cursor.t;
+    this.y$ = comp.$props.cursor.y$;
+  } // You can choose where to place the handler
+  // (beginning or end of the queue)
+
+
+  createClass_default()(Mouse, [{
+    key: "on",
+    value: function on(name, handler, dir) {
+      if (dir === void 0) {
+        dir = "unshift";
+      }
+
+      if (!handler) return;
+      this.map[name] = this.map[name] || [];
+      this.map[name][dir](handler);
+      this.listeners++;
+    }
+  }, {
+    key: "off",
+    value: function off(name, handler) {
+      if (!this.map[name]) return;
+      var i = this.map[name].indexOf(handler);
+      if (i < 0) return;
+      this.map[name].splice(i, 1);
+      this.listeners--;
+    } // Called by grid.js
+
+  }, {
+    key: "emit",
+    value: function emit(name, event) {
+      var l = this.comp.layout;
+
+      if (name in this.map) {
+        var _iterator = mouse_createForOfIteratorHelper(this.map[name]),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var f = _step.value;
+            f(event);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+
+      if (name === 'mousemove') {
+        this.x = event.layerX;
+        this.y = event.layerY;
+        this.t = l.screen2t(this.x);
+        this.y$ = l.screen2$(this.y);
+      }
+
+      if (name === 'mousedown') {
+        this.pressed = true;
+      }
+
+      if (name === 'mouseup') {
+        this.pressed = false;
+      }
+    }
+  }]);
+
+  return Mouse;
+}();
+
+
 // CONCATENATED MODULE: ./src/mixins/overlay.js
 // Usuful stuff for creating overlays. Include as mixin
-// TODO: Add mouse events
-/* harmony default export */ var overlay = ({
-  props: ['id', 'num', 'interval', 'cursor', 'colors', 'layout', 'sub', 'data', 'settings', 'grid_id', 'font', 'config'],
+
+/* harmony default export */ var mixins_overlay = ({
+  props: ['id', 'num', 'interval', 'cursor', 'colors', 'layout', 'sub', 'data', 'settings', 'grid_id', 'font', 'config', 'meta', 'tf', 'i0'],
   mounted: function mounted() {
-    // Main chart?
+    // TODO(1): when hot reloading, dynamicaly changed mixins
+    // dissapear (cuz it's a hack), the only way for now
+    // is to reload the browser
+    if (!this.draw) {
+      this.draw = function (ctx) {
+        var text = 'EARLY ADOPTER BUG: reload the browser & enjoy';
+        console.warn(text);
+      };
+    } // Main chart?
+
+
     var main = this.$props.sub === this.$props.data;
-    this.meta_info();
-    this.$emit('new-grid-layer', {
+    this.meta_info(); // TODO(1): quick fix for vue2, in vue3 we use 3rd party emit
+
+    try {
+      new Function('return ' + this.$emit)();
+      this._$emit = this.$emit;
+      this.$emit = this.custom_event;
+    } catch (e) {
+      return;
+    }
+
+    this._$emit('new-grid-layer', {
       name: this.$options.name,
       id: this.$props.id,
       renderer: this,
@@ -5732,13 +9204,24 @@ component.options.__file = "src/components/Crosshair.vue"
       z: this.$props.settings['z-index'] || this.$props.settings['zIndex'] || (main ? 0 : -1)
     }); // Overlay meta-props (adjusting behaviour)
 
-    this.$emit('layer-meta-props', {
+
+    this._$emit('layer-meta-props', {
       grid_id: this.$props.grid_id,
       layer_id: this.$props.id,
       legend: this.legend,
       data_colors: this.data_colors,
       y_range: this.y_range
     });
+
+    this.exec_script();
+    this.mouse = new mouse_Mouse(this);
+    if (this.init_tool) this.init_tool();
+    if (this.init) this.init();
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.destroy) this.destroy();
+
+    this._$emit('delete-grid-layer', this.$props.id);
   },
   methods: {
     use_for: function use_for() {
@@ -5751,12 +9234,52 @@ component.options.__file = "src/components/Crosshair.vue"
       var id = this.$props.id;
       console.warn("".concat(id, " meta_info() is req. for publishing"));
       console.warn("Format: meta_info() {\n                author: 'Satoshi Smith',\n                version: '1.0.0',\n                contact (opt) '<email>'\n                github: (opt) '<GitHub Page>',\n            }");
+    },
+    custom_event: function custom_event(event) {
+      if (event.split(':')[0] === 'hook') return;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (event === 'change-settings' || event === 'object-selected' || event === 'new-shader' || event === 'new-interface' || event === 'remove-tool') {
+        args.push(this.grid_id, this.id);
+
+        if (this.$props.settings.$uuid) {
+          args.push(this.$props.settings.$uuid);
+        }
+      }
+
+      if (event === 'new-interface') {
+        args[0].overlay = this;
+        args[0].uuid = this.last_ux_id = "".concat(this.grid_id, "-").concat(this.id, "-").concat(this.uxs_count++);
+      } // TODO: add a namespace to the event name
+      // TODO(2): this prevents call overflow, but
+      // the root of evil is in (1)
+
+
+      if (event === 'custom-event') return;
+
+      this._$emit('custom-event', {
+        event: event,
+        args: args
+      });
+    },
+    exec_script: function exec_script() {
+      if (this.calc) this.$emit('exec-script', {
+        grid_id: this.$props.grid_id,
+        layer_id: this.$props.id,
+        src: this.calc(),
+        use_for: this.use_for()
+      });
     }
   },
   watch: {
     settings: {
-      handler: function handler() {
-        this.$emit('show-grid-layer', {
+      handler: function handler(n, p) {
+        if (this.watch_uuid) this.watch_uuid(n, p);
+
+        this._$emit('show-grid-layer', {
           id: this.$props.id,
           display: 'display' in this.$props.settings ? this.$props.settings['display'] : true
         });
@@ -5764,11 +9287,23 @@ component.options.__file = "src/components/Crosshair.vue"
       deep: true
     }
   },
+  data: function data() {
+    return {
+      uxs_count: 0,
+      last_ux_id: null
+    };
+  },
   render: function render(h) {
     return h();
   }
 });
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Spline.vue?vue&type=script&lang=js&
+function Splinevue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Splinevue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Splinevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Splinevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Spline renderer. (SMAs, EMAs, TEMAs...
 // you know what I mean)
 // TODO: make a real spline, not a bunch of lines...
@@ -5776,12 +9311,12 @@ component.options.__file = "src/components/Crosshair.vue"
 
 /* harmony default export */ var Splinevue_type_script_lang_js_ = ({
   name: 'Spline',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.1.1'
       };
     },
     // Here goes your code. You are provided with:
@@ -5808,29 +9343,47 @@ component.options.__file = "src/components/Crosshair.vue"
       ctx.beginPath();
       var layout = this.$props.layout;
       var i = this.data_index;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
 
-      try {
-        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var p = _step.value;
-          var x = layout.t2screen(p[0]);
-          var y = layout.$2screen(p[i]);
-          ctx.lineTo(x, y);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
+      if (!this.skip_nan) {
+        var _iterator = Splinevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+            _step;
+
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var p = _step.value;
+            var x = layout.t2screen(p[0]);
+            var y = layout.$2screen(p[i]);
+            ctx.lineTo(x, y);
           }
+        } catch (err) {
+          _iterator.e(err);
         } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
+          _iterator.f();
+        }
+      } else {
+        var _iterator2 = Splinevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var p = _step2.value;
+
+            var _x = layout.t2screen(p[0]);
+
+            var _y = layout.$2screen(p[i]);
+
+            if (p[i] == null || _y !== _y) {
+              this._skip = true;
+            } else {
+              if (this._skip) ctx.moveTo(_x, _y);
+              ctx.lineTo(_x, _y);
+              this._skip = false;
+            }
           }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
         }
       }
 
@@ -5866,6 +9419,9 @@ component.options.__file = "src/components/Crosshair.vue"
     },
     data_index: function data_index() {
       return this.sett.dataIndex || 1;
+    },
+    skip_nan: function skip_nan() {
+      return this.sett.skipNaN;
     }
   },
   data: function data() {
@@ -5900,49 +9456,48 @@ if (false) { var Spline_api; }
 Spline_component.options.__file = "src/components/overlays/Spline.vue"
 /* harmony default export */ var Spline = (Spline_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Splines.vue?vue&type=script&lang=js&
+function Splinesvue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Splinesvue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Splinesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Splinesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Splinesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Channel renderer. (Keltner, Bollinger)
 
 /* harmony default export */ var Splinesvue_type_script_lang_js_ = ({
   name: 'Splines',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.0.1'
       };
     },
     draw: function draw(ctx) {
       var layout = this.$props.layout;
 
       for (var i = 0; i < this.lines_num; i++) {
-        ctx.strokeStyle = this.clrx[i];
+        var _i = i % this.clrx.length;
+
+        ctx.strokeStyle = this.clrx[_i];
         ctx.lineWidth = this.widths[i] || this.line_width;
         ctx.beginPath();
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+
+        var _iterator = Splinesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+            _step;
 
         try {
-          for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var p = _step.value;
             var x = layout.t2screen(p[0]);
             var y = layout.$2screen(p[i + 1]);
             ctx.lineTo(x, y);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
 
         ctx.stroke();
@@ -6015,12 +9570,18 @@ if (false) { var Splines_api; }
 Splines_component.options.__file = "src/components/overlays/Splines.vue"
 /* harmony default export */ var Splines = (Splines_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Range.vue?vue&type=script&lang=js&
+function Rangevue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Rangevue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Rangevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Rangevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Rangevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // R S I . Because we love it
 // Adds all necessary stuff for you.
 
 /* harmony default export */ var Rangevue_type_script_lang_js_ = ({
   name: 'Range',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
@@ -6054,30 +9615,21 @@ Splines_component.options.__file = "src/components/overlays/Splines.vue"
       ctx.lineWidth = this.line_width;
       ctx.strokeStyle = this.color;
       ctx.beginPath();
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = Rangevue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+          _step;
 
       try {
-        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
           var x = layout.t2screen(p[0]);
           var y = layout.$2screen(p[1]);
           ctx.lineTo(x, y);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       ctx.stroke();
@@ -6163,27 +9715,33 @@ if (false) { var Range_api; }
 Range_component.options.__file = "src/components/overlays/Range.vue"
 /* harmony default export */ var Range = (Range_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Trades.vue?vue&type=script&lang=js&
+function Tradesvue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Tradesvue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Tradesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Tradesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Tradesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 /* harmony default export */ var Tradesvue_type_script_lang_js_ = ({
   name: 'Trades',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.0.1'
       };
     },
     draw: function draw(ctx) {
       var layout = this.$props.layout;
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'black';
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = Tradesvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+          _step;
 
       try {
-        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
           ctx.fillStyle = p[1] ? this.buy_color : this.sell_color;
           ctx.beginPath();
@@ -6200,18 +9758,9 @@ Range_component.options.__file = "src/components/overlays/Range.vue"
           }
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
     },
     draw_label: function draw_label(ctx, x, y, p) {
@@ -6226,16 +9775,12 @@ Range_component.options.__file = "src/components/overlays/Range.vue"
     // Defines legend format (values & colors)
     legend: function legend(values) {
       switch (values[1]) {
-        case -1:
-          var pos = 'Short';
-          break;
-
         case 0:
-          pos = 'Closed';
+          var pos = 'Sell';
           break;
 
         case 1:
-          pos = 'Long';
+          pos = 'Buy';
           break;
 
         default:
@@ -6246,7 +9791,7 @@ Range_component.options.__file = "src/components/overlays/Range.vue"
         value: pos
       }, {
         value: values[2].toFixed(4),
-        color: this.$props.colors.colorText
+        color: this.$props.colors.text
       }].concat(values[3] ? [{
         value: values[3]
       }] : []);
@@ -6258,7 +9803,6 @@ Range_component.options.__file = "src/components/overlays/Range.vue"
       return this.$props.settings;
     },
     default_font: function default_font() {
-      //console.log(this.$props.font.split('px').pop())
       return '12px ' + this.$props.font.split('px').pop();
     },
     buy_color: function buy_color() {
@@ -6308,15 +9852,17 @@ Trades_component.options.__file = "src/components/overlays/Trades.vue"
 /* harmony default export */ var Trades = (Trades_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Channel.vue?vue&type=script&lang=js&
 // Channel renderer. (Keltner, Bollinger)
+// TODO: allow color transparency
+// TODO: improve performance: draw in one solid chunk
 
 /* harmony default export */ var Channelvue_type_script_lang_js_ = ({
   name: 'Channel',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.0.1'
       };
     },
     draw: function draw(ctx) {
@@ -6327,7 +9873,9 @@ Trades_component.options.__file = "src/components/overlays/Trades.vue"
       for (var i = 0; i < this.$props.data.length - 1; i++) {
         var p1 = this.mapp(this.$props.data[i]);
         var p2 = this.mapp(this.$props.data[i + 1]);
-        if (!p2) continue; // Background
+        if (!p2) continue;
+        if (p1.y1 !== p1.y1) continue; // Fix NaN
+        // Background
 
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y1);
@@ -6421,7 +9969,7 @@ Channel_component.options.__file = "src/components/overlays/Channel.vue"
 
 /* harmony default export */ var Segmentvue_type_script_lang_js_ = ({
   name: 'Segment',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
@@ -6501,16 +10049,11 @@ if (false) { var Segment_api; }
 Segment_component.options.__file = "src/components/overlays/Segment.vue"
 /* harmony default export */ var Segment = (Segment_component.exports);
 // CONCATENATED MODULE: ./src/components/js/layout_cnv.js
-function layout_cnv_toConsumableArray(arr) { return layout_cnv_arrayWithoutHoles(arr) || layout_cnv_iterableToArray(arr) || layout_cnv_nonIterableSpread(); }
 
-function layout_cnv_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function layout_cnv_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function layout_cnv_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 // Claculates postions and sizes for candlestick
 // and volume bars for the given subset of data
+
 function layout_cnv(self) {
   var $p = self.$props;
   var sub = $p.data;
@@ -6520,36 +10063,46 @@ function layout_cnv(self) {
   var volume = []; // The volume bar height is determined as a percentage of
   // the chart's height (VOLSCALE)
 
-  var maxv = Math.max.apply(Math, layout_cnv_toConsumableArray(sub.map(function (x) {
+  var maxv = Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
     return x[5];
   })));
   var vs = $p.config.VOLSCALE * layout.height / maxv;
   var x1,
       x2,
+      w,
+      avg_w,
       mid,
-      prev = undefined;
-  var splitter = layout.px_step > 5 ? 1 : 0; // A & B are current chart tranformations:
+      prev = undefined; // Subset interval against main interval
+
+  var _new_interval = new_interval(layout, $p, sub),
+      _new_interval2 = slicedToArray_default()(_new_interval, 2),
+      interval2 = _new_interval2[0],
+      ratio = _new_interval2[1];
+
+  var px_step2 = layout.px_step * ratio;
+  var splitter = px_step2 > 5 ? 1 : 0; // A & B are current chart tranformations:
   // A === scale,  B === Y-axis shift
 
   for (var i = 0; i < sub.length; i++) {
     var p = sub[i];
-    mid = t2screen(p[0]) + 1;
-    candles.push({
-      x: mid,
-      w: layout.px_step * $p.config.CANDLEW,
-      o: p[1] * layout.A + layout.B,
-      h: p[2] * layout.A + layout.B,
-      l: p[3] * layout.A + layout.B,
-      c: p[4] * layout.A + layout.B,
-      raw: p
-    }); // Clear volume bar if there is a time gap
+    mid = t2screen(p[0]) + 1; // Clear volume bar if there is a time gap
 
-    if (sub[i - 1] && p[0] - sub[i - 1][0] > $p.interval) {
+    if (sub[i - 1] && p[0] - sub[i - 1][0] > interval2) {
       prev = null;
     }
 
-    x1 = prev || Math.floor(mid - layout.px_step * 0.5);
-    x2 = Math.floor(mid + layout.px_step * 0.5) - 0.5;
+    x1 = prev || Math.floor(mid - px_step2 * 0.5);
+    x2 = Math.floor(mid + px_step2 * 0.5) - 0.5; // TODO: add log scale support
+
+    candles.push({
+      x: mid,
+      w: layout.px_step * $p.config.CANDLEW * ratio,
+      o: Math.floor(p[1] * layout.A + layout.B),
+      h: Math.floor(p[2] * layout.A + layout.B),
+      l: Math.floor(p[3] * layout.A + layout.B),
+      c: Math.floor(p[4] * layout.A + layout.B),
+      raw: p
+    });
     volume.push({
       x1: x1,
       x2: x2,
@@ -6570,34 +10123,51 @@ function layout_vol(self) {
   var sub = $p.data;
   var t2screen = $p.layout.t2screen;
   var layout = $p.layout;
-  var volume = [];
-  var maxv = Math.max.apply(Math, layout_cnv_toConsumableArray(sub.map(function (x) {
-    return x[1];
+  var volume = []; // Detect data second dimention size:
+
+  var dim = sub[0] ? sub[0].length : 0; // Support special volume data (see API book), or OHLCV
+  // Data indices:
+
+  self._i1 = dim < 6 ? 1 : 5;
+  self._i2 = dim < 6 ? function (p) {
+    return p[2];
+  } : function (p) {
+    return p[4] >= p[1];
+  };
+  var maxv = Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+    return x[self._i1];
   })));
   var volscale = self.volscale || $p.config.VOLSCALE;
   var vs = volscale * layout.height / maxv;
   var x1,
       x2,
       mid,
-      prev = undefined;
-  var splitter = layout.px_step > 5 ? 1 : 0; // A & B are current chart tranformations:
+      prev = undefined; // Subset interval against main interval
+
+  var _new_interval3 = new_interval(layout, $p, sub),
+      _new_interval4 = slicedToArray_default()(_new_interval3, 2),
+      interval2 = _new_interval4[0],
+      ratio = _new_interval4[1];
+
+  var px_step2 = layout.px_step * ratio;
+  var splitter = px_step2 > 5 ? 1 : 0; // A & B are current chart tranformations:
   // A === scale,  B === Y-axis shift
 
   for (var i = 0; i < sub.length; i++) {
     var p = sub[i];
     mid = t2screen(p[0]) + 1; // Clear volume bar if there is a time gap
 
-    if (sub[i - 1] && p[0] - sub[i - 1][0] > $p.interval) {
+    if (sub[i - 1] && p[0] - sub[i - 1][0] > interval2) {
       prev = null;
     }
 
-    x1 = prev || Math.floor(mid - layout.px_step * 0.5);
-    x2 = Math.floor(mid + layout.px_step * 0.5) - 0.5;
+    x1 = prev || Math.floor(mid - px_step2 * 0.5);
+    x2 = Math.floor(mid + px_step2 * 0.5) - 0.5;
     volume.push({
       x1: x1,
       x2: x2,
-      h: p[1] * vs,
-      green: p[2],
+      h: p[self._i1] * vs,
+      green: self._i2(p),
       raw: p
     });
     prev = x2 + splitter;
@@ -6605,19 +10175,32 @@ function layout_vol(self) {
 
   return volume;
 }
-// CONCATENATED MODULE: ./src/components/js/candle_ext.js
-function candle_ext_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function candle_ext_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function new_interval(layout, $p, sub) {
+  // Subset interval against main interval
+  if (!layout.ti_map.ib) {
+    var interval2 = $p.tf || utils.detect_interval(sub);
+    var ratio = interval2 / $p.interval;
+  } else {
+    if ($p.tf) {
+      var ratio = $p.tf / layout.ti_map.tf;
+      var interval2 = ratio;
+    } else {
+      var interval2 = utils.detect_interval(sub);
+      var ratio = interval2 / $p.interval;
+    }
+  }
 
-function candle_ext_createClass(Constructor, protoProps, staticProps) { if (protoProps) candle_ext_defineProperties(Constructor.prototype, protoProps); if (staticProps) candle_ext_defineProperties(Constructor, staticProps); return Constructor; }
+  return [interval2, ratio];
+}
+// CONCATENATED MODULE: ./src/components/primitives/candle.js
+
+
 
 // Candle object for Candles overlay
-var CandleExt =
-/*#__PURE__*/
-function () {
+var candle_CandleExt = /*#__PURE__*/function () {
   function CandleExt(overlay, ctx, data) {
-    candle_ext_classCallCheck(this, CandleExt);
+    classCallCheck_default()(this, CandleExt);
 
     this.ctx = ctx;
     this.self = overlay;
@@ -6625,11 +10208,12 @@ function () {
     this.draw(data);
   }
 
-  candle_ext_createClass(CandleExt, [{
+  createClass_default()(CandleExt, [{
     key: "draw",
     value: function draw(data) {
-      var body_color = data.c <= data.o ? this.style.colorCandleUp : this.style.colorCandleDw;
-      var wick_color = data.c <= data.o ? this.style.colorWickUp : this.style.colorWickDw;
+      var green = data.raw[4] >= data.raw[1];
+      var body_color = green ? this.style.colorCandleUp : this.style.colorCandleDw;
+      var wick_color = green ? this.style.colorWickUp : this.style.colorWickDw;
       var wick_color_sm = this.style.colorWickSm;
       var w = Math.max(data.w, 1);
       var hw = Math.max(Math.floor(w * 0.5), 1);
@@ -6641,10 +10225,11 @@ function () {
       this.ctx.lineTo(Math.floor(data.x) - 0.5, Math.floor(data.l));
       this.ctx.stroke();
 
-      if (data.w > 1.5) {
+      if (data.w > 1.5 || data.o === data.c) {
         this.ctx.fillStyle = body_color; // TODO: Move common calculations to layout.js
 
-        this.ctx.fillRect(Math.floor(data.x - hw - 1), Math.floor(Math.min(data.o, data.c)), Math.floor(hw * 2 + 1), Math.floor(Math.max(h, max_h)));
+        var s = green ? 1 : -1;
+        this.ctx.fillRect(Math.floor(data.x - hw - 1), data.c, Math.floor(hw * 2 + 1), s * Math.max(h, max_h));
       } else {
         this.ctx.strokeStyle = body_color;
         this.ctx.beginPath();
@@ -6659,18 +10244,13 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/components/js/volbar_ext.js
-function volbar_ext_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// CONCATENATED MODULE: ./src/components/primitives/volbar.js
 
-function volbar_ext_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function volbar_ext_createClass(Constructor, protoProps, staticProps) { if (protoProps) volbar_ext_defineProperties(Constructor.prototype, protoProps); if (staticProps) volbar_ext_defineProperties(Constructor, staticProps); return Constructor; }
 
-var VolbarExt =
-/*#__PURE__*/
-function () {
+var volbar_VolbarExt = /*#__PURE__*/function () {
   function VolbarExt(overlay, ctx, data) {
-    volbar_ext_classCallCheck(this, VolbarExt);
+    classCallCheck_default()(this, VolbarExt);
 
     this.ctx = ctx;
     this.$p = overlay.$props;
@@ -6679,7 +10259,7 @@ function () {
     this.draw(data);
   }
 
-  volbar_ext_createClass(VolbarExt, [{
+  createClass_default()(VolbarExt, [{
     key: "draw",
     value: function draw(data) {
       var y0 = this.$p.layout.height;
@@ -6694,22 +10274,136 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/components/primitives/price.js
+
+
+
+// Price bar & price line (shader)
+var price_Price = /*#__PURE__*/function () {
+  function Price(comp) {
+    classCallCheck_default()(this, Price);
+
+    this.comp = comp;
+    this.data = comp.$props.data;
+  } // Defines an inline shader (has access to both
+  // target & overlay's contexts)
+
+
+  createClass_default()(Price, [{
+    key: "init_shader",
+    value: function init_shader() {
+      var _this = this;
+
+      var layout = this.comp.$props.layout;
+      var config = this.comp.$props.config;
+      var comp = this.comp;
+
+      var last_bar = function last_bar() {
+        return _this.last_bar();
+      };
+
+      this.comp.$emit('new-shader', {
+        target: 'sidebar',
+        draw: function draw(ctx) {
+          if (!last_bar()) return;
+          var bar = last_bar();
+          var w = ctx.canvas.width;
+          var h = config.PANHEIGHT;
+          var lbl = bar.price.toFixed(layout.prec);
+          ctx.fillStyle = bar.color;
+          var x = -0.5;
+          var y = bar.y - h * 0.5 - 0.5;
+          var a = 7;
+          ctx.fillRect(x - 0.5, y, w + 1, h);
+          ctx.fillStyle = comp.$props.colors.textHL;
+          ctx.textAlign = 'left';
+          ctx.fillText(lbl, a, y + 15);
+        }
+      });
+      this.shader = true;
+    } // Regular draw call for overaly
+
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      if (!this.comp.$props.meta.last) return;
+      if (!this.shader) this.init_shader();
+      var layout = this.comp.$props.layout;
+      var last = this.comp.$props.meta.last;
+      var dir = last[4] >= last[1];
+      var color = dir ? this.green() : this.red();
+      var y = layout.$2screen(last[4]) + (dir ? 1 : 0);
+      ctx.strokeStyle = color;
+      ctx.setLineDash([1, 1]);
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(layout.width, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }, {
+    key: "last_bar",
+    value: function last_bar() {
+      if (!this.data.length) return undefined;
+      var layout = this.comp.$props.layout;
+      var last = this.data[this.data.length - 1];
+      var y = layout.$2screen(last[4]);
+      var cndl = layout.c_magnet(last[0]);
+      return {
+        y: Math.floor(cndl.c) - 0.5,
+        price: last[4],
+        color: last[4] >= last[1] ? this.green() : this.red()
+      };
+    }
+  }, {
+    key: "last_price",
+    value: function last_price() {
+      return this.comp.$props.meta.last ? this.comp.$props.meta.last[4] : undefined;
+    }
+  }, {
+    key: "green",
+    value: function green() {
+      return this.comp.colorCandleUp;
+    }
+  }, {
+    key: "red",
+    value: function red() {
+      return this.comp.colorCandleDw;
+    }
+  }]);
+
+  return Price;
+}();
+
+
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Candles.vue?vue&type=script&lang=js&
+
+
+function Candlesvue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Candlesvue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Candlesvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Candlesvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Candlesvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Renedrer for candlesticks + volume (optional)
 // It can be used as the main chart or an indicator
 
 
 
 
+
 /* harmony default export */ var Candlesvue_type_script_lang_js_ = ({
   name: 'Candles',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.2.0'
       };
+    },
+    init: function init() {
+      this.price = new price_Price(this);
     },
     draw: function draw(ctx) {
       // If data === main candlestick data
@@ -6717,65 +10411,54 @@ function () {
       if (this.$props.sub === this.$props.data) {
         var cnv = {
           candles: this.$props.layout.candles,
-          volume: this.$props.layout.volume // Else, as offchart / onchart indicator:
-
-        };
+          volume: this.$props.layout.volume
+        }; // Else, as offchart / onchart indicator:
       } else {
         cnv = layout_cnv(this);
       }
 
       if (this.show_volume) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        var _iterator = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.volume),
+            _step;
 
         try {
-          for (var _iterator = cnv.volume[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var v = _step.value;
-            new VolbarExt(this, ctx, v);
+            new volbar_VolbarExt(this, ctx, v);
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
 
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
+      var _iterator2 = Candlesvue_type_script_lang_js_createForOfIteratorHelper(cnv.candles),
+          _step2;
 
       try {
-        for (var _iterator2 = cnv.candles[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var c = _step2.value;
-          new CandleExt(this, ctx, c);
+          new candle_CandleExt(this, ctx, c);
         }
       } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _iterator2.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+        _iterator2.f();
       }
+
+      if (this.price_line) this.price.draw(ctx);
     },
     use_for: function use_for() {
       return ['Candles'];
+    },
+    // When added as offchart overlay
+    y_range: function y_range() {
+      return [Math.max.apply(Math, toConsumableArray_default()(this.$props.sub.map(function (x) {
+        return x[2];
+      }))), Math.min.apply(Math, toConsumableArray_default()(this.$props.sub.map(function (x) {
+        return x[3];
+      })))];
     }
   },
   // Define internal setting & constants here
@@ -6786,30 +10469,35 @@ function () {
     show_volume: function show_volume() {
       return 'showVolume' in this.sett ? this.sett.showVolume : true;
     },
+    price_line: function price_line() {
+      return 'priceLine' in this.sett ? this.sett.priceLine : true;
+    },
     colorCandleUp: function colorCandleUp() {
-      return this.sett.colorCandleUp || this.$props.colors.colorCandleUp;
+      return this.sett.colorCandleUp || this.$props.colors.candleUp;
     },
     colorCandleDw: function colorCandleDw() {
-      return this.sett.colorCandleDw || this.$props.colors.colorCandleDw;
+      return this.sett.colorCandleDw || this.$props.colors.candleDw;
     },
     colorWickUp: function colorWickUp() {
-      return this.sett.colorWickUp || this.$props.colors.colorWickUp;
+      return this.sett.colorWickUp || this.$props.colors.wickUp;
     },
     colorWickDw: function colorWickDw() {
-      return this.sett.colorWickDw || this.$props.colors.colorWickDw;
+      return this.sett.colorWickDw || this.$props.colors.wickDw;
     },
     colorWickSm: function colorWickSm() {
-      return this.sett.colorWickSm || this.$props.colors.colorWickSm;
+      return this.sett.colorWickSm || this.$props.colors.wickSm;
     },
     colorVolUp: function colorVolUp() {
-      return this.sett.colorVolUp || this.$props.colors.colorVolUp;
+      return this.sett.colorVolUp || this.$props.colors.volUp;
     },
     colorVolDw: function colorVolDw() {
-      return this.sett.colorVolDw || this.$props.colors.colorVolDw;
+      return this.sett.colorVolDw || this.$props.colors.volDw;
     }
   },
   data: function data() {
-    return {};
+    return {
+      price: {}
+    };
   }
 });
 // CONCATENATED MODULE: ./src/components/overlays/Candles.vue?vue&type=script&lang=js&
@@ -6838,57 +10526,74 @@ if (false) { var Candles_api; }
 Candles_component.options.__file = "src/components/overlays/Candles.vue"
 /* harmony default export */ var Candles = (Candles_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/Volume.vue?vue&type=script&lang=js&
+
+
+function Volumevue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Volumevue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Volumevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Volumevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Volumevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Standalone renedrer for the volume
 
 
 
 /* harmony default export */ var Volumevue_type_script_lang_js_ = ({
   name: 'Volume',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.1.0'
       };
     },
     draw: function draw(ctx) {
       // TODO: volume average
       // TODO: Y-axis scaling
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+      var _iterator = Volumevue_type_script_lang_js_createForOfIteratorHelper(layout_vol(this)),
+          _step;
 
       try {
-        for (var _iterator = layout_vol(this)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var v = _step.value;
-          new VolbarExt(this, ctx, v);
+          new volbar_VolbarExt(this, ctx, v);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
     },
     use_for: function use_for() {
       return ['Volume'];
     },
     // Defines legend format (values & colors)
+    // _i2 - detetected data index (see layout_cnv)
     legend: function legend(values) {
-      var color = values[2] ? this.colorVolUpLegend : this.colorVolDwLegend;
+      var flag = this._i2 ? this._i2(values) : values[2];
+      var color = flag ? this.colorVolUpLegend : this.colorVolDwLegend;
       return [{
-        value: values[1],
+        value: values[this._i1 || 1],
         color: color
       }];
+    },
+    // When added as offchart overlay
+    // If data is OHLCV => recalc y-range
+    // _i1 - detetected data index (see layout_cnv)
+    y_range: function y_range(hi, lo) {
+      var _this = this;
+
+      if (this._i1 === 5) {
+        var sub = this.$props.sub;
+        return [Math.max.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+          return x[_this._i1];
+        }))), Math.min.apply(Math, toConsumableArray_default()(sub.map(function (x) {
+          return x[_this._i1];
+        })))];
+      } else {
+        return [hi, lo];
+      }
     }
   },
   // Define internal setting & constants here
@@ -6897,16 +10602,16 @@ Candles_component.options.__file = "src/components/overlays/Candles.vue"
       return this.$props.settings;
     },
     colorVolUp: function colorVolUp() {
-      return this.sett.colorVolUp || this.$props.colors.colorVolUp;
+      return this.sett.colorVolUp || this.$props.colors.volUp;
     },
     colorVolDw: function colorVolDw() {
-      return this.sett.colorVolDw || this.$props.colors.colorVolDw;
+      return this.sett.colorVolDw || this.$props.colors.volDw;
     },
     colorVolUpLegend: function colorVolUpLegend() {
-      return this.sett.colorVolUpLegend || this.$props.colors.colorCandleUp;
+      return this.sett.colorVolUpLegend || this.$props.colors.candleUp;
     },
     colorVolDwLegend: function colorVolDwLegend() {
-      return this.sett.colorVolDwLegend || this.$props.colors.colorCandleDw;
+      return this.sett.colorVolDwLegend || this.$props.colors.candleDw;
     },
     volscale: function volscale() {
       return this.sett.volscale || this.$props.grid_id > 0 ? 0.85 : this.$props.config.VOLSCALE;
@@ -6946,12 +10651,12 @@ Volume_component.options.__file = "src/components/overlays/Volume.vue"
 
 /* harmony default export */ var Splittersvue_type_script_lang_js_ = ({
   name: 'Splitters',
-  mixins: [overlay],
+  mixins: [mixins_overlay],
   methods: {
     meta_info: function meta_info() {
       return {
         author: 'C451',
-        version: '1.0.0'
+        version: '1.0.1'
       };
     },
     draw: function draw(ctx) {
@@ -6979,7 +10684,7 @@ Volume_component.options.__file = "src/components/overlays/Volume.vue"
       var w = ctx.measureText(p[1]).width + 10;
       var y = this.layout.height * (1.0 - pos);
       y = Math.floor(y);
-      ctx.fillStyle = p[3] || this.label_color;
+      ctx.fillStyle = p[3] || this.flag_color;
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(x + 10 * side, y - 10 * side);
@@ -6988,7 +10693,7 @@ Volume_component.options.__file = "src/components/overlays/Volume.vue"
       ctx.lineTo(x + 10 * side, y + 10 * side);
       ctx.closePath();
       ctx.fill();
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = this.label_color;
       ctx.textAlign = side < 0 ? 'right' : 'left';
       ctx.fillText(p[1], x + 15 * side, y + 4);
     },
@@ -7004,8 +10709,11 @@ Volume_component.options.__file = "src/components/overlays/Volume.vue"
     new_font: function new_font() {
       return this.sett.font || '12px ' + this.$props.font.split('px').pop();
     },
+    flag_color: function flag_color() {
+      return this.sett.flagColor || '#4285f4';
+    },
     label_color: function label_color() {
-      return this.sett.labelColor || '#4285f4';
+      return this.sett.labelColor || '#fff';
     },
     line_color: function line_color() {
       return this.sett.lineColor || '#4285f4';
@@ -7046,8 +10754,1042 @@ var Splitters_component = normalizeComponent(
 if (false) { var Splitters_api; }
 Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
 /* harmony default export */ var Splitters = (Splitters_component.exports);
+// CONCATENATED MODULE: ./src/stuff/keys.js
+
+
+
+function keys_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = keys_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function keys_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return keys_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return keys_arrayLikeToArray(o, minLen); }
+
+function keys_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// Keyboard event handler for overlay
+var keys_Keys = /*#__PURE__*/function () {
+  function Keys(comp) {
+    classCallCheck_default()(this, Keys);
+
+    this.comp = comp;
+    this.map = {};
+    this.listeners = 0;
+    this.keymap = {};
+  }
+
+  createClass_default()(Keys, [{
+    key: "on",
+    value: function on(name, handler) {
+      if (!handler) return;
+      this.map[name] = this.map[name] || [];
+      this.map[name].push(handler);
+      this.listeners++;
+    } // Called by grid.js
+
+  }, {
+    key: "emit",
+    value: function emit(name, event) {
+      if (name in this.map) {
+        var _iterator = keys_createForOfIteratorHelper(this.map[name]),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var f = _step.value;
+            f(event);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+
+      if (name === 'keydown') {
+        if (!this.keymap[event.key]) {
+          this.emit(event.key);
+        }
+
+        this.keymap[event.key] = true;
+      }
+
+      if (name === 'keyup') {
+        this.keymap[event.key] = false;
+      }
+    }
+  }, {
+    key: "pressed",
+    value: function pressed(key) {
+      return this.keymap[key];
+    }
+  }]);
+
+  return Keys;
+}();
+
+
+// CONCATENATED MODULE: ./src/mixins/tool.js
+function tool_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = tool_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function tool_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return tool_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return tool_arrayLikeToArray(o, minLen); }
+
+function tool_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// Usuful stuff for creating tools. Include as mixin
+
+/* harmony default export */ var mixins_tool = ({
+  methods: {
+    init_tool: function init_tool() {
+      var _this = this;
+
+      // Collision functions (float, float) => bool,
+      this.collisions = [];
+      this.pins = [];
+      this.mouse.on('mousemove', function (e) {
+        if (_this.collisions.some(function (f) {
+          return f(_this.mouse.x, _this.mouse.y);
+        })) {
+          _this.show_pins = true;
+        } else {
+          _this.show_pins = false;
+        }
+
+        if (_this.drag) _this.drag_update();
+      });
+      this.mouse.on('mousedown', function (e) {
+        if (e.defaultPrevented) return;
+
+        if (_this.collisions.some(function (f) {
+          return f(_this.mouse.x, _this.mouse.y);
+        })) {
+          if (!_this.selected) {
+            _this.$emit('object-selected');
+          }
+
+          _this.start_drag();
+
+          e.preventDefault();
+
+          _this.pins.forEach(function (x) {
+            return x.mousedown(e, true);
+          });
+        }
+      });
+      this.mouse.on('mouseup', function (e) {
+        _this.drag = null;
+
+        _this.$emit('scroll-lock', false);
+      });
+      this.keys = new keys_Keys(this);
+      this.keys.on('Delete', this.remove_tool);
+      this.keys.on('Backspace', this.remove_tool);
+      this.show_pins = false;
+      this.drag = null;
+    },
+    render_pins: function render_pins(ctx) {
+      if (this.selected || this.show_pins) {
+        this.pins.forEach(function (x) {
+          return x.draw(ctx);
+        });
+      }
+    },
+    set_state: function set_state(name) {
+      this.$emit('change-settings', {
+        $state: name
+      });
+    },
+    watch_uuid: function watch_uuid(n, p) {
+      // If layer $uuid is changed, then re-init
+      // pins & collisions
+      if (n.$uuid !== p.$uuid) {
+        var _iterator = tool_createForOfIteratorHelper(this.pins),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var p = _step.value;
+            p.re_init();
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        this.collisions = [];
+        this.show_pins = false;
+        this.drag = null;
+      }
+    },
+    pre_draw: function pre_draw() {
+      // Delete all collision functions before
+      // the draw() call and let primitives set
+      // them again
+      this.collisions = [];
+    },
+    remove_tool: function remove_tool() {
+      if (this.selected) this.$emit('remove-tool');
+    },
+    start_drag: function start_drag() {
+      this.$emit('scroll-lock', true);
+      var cursor = this.$props.cursor;
+      this.drag = {
+        t: cursor.t,
+        y$: cursor.y$
+      };
+      this.pins.forEach(function (x) {
+        return x.rec_position();
+      });
+    },
+    drag_update: function drag_update() {
+      var dt = this.$props.cursor.t - this.drag.t;
+      var dy = this.$props.cursor.y$ - this.drag.y$;
+      this.pins.forEach(function (x) {
+        return x.update_from([x.t1 + dt, x.y$1 + dy], true);
+      });
+    }
+  },
+  computed: {
+    // Settings starting with $ are reserved
+    selected: function selected() {
+      return this.$props.settings.$selected;
+    },
+    state: function state() {
+      return this.$props.settings.$state;
+    }
+  }
+});
+// EXTERNAL MODULE: ./src/stuff/icons.json
+var icons = __webpack_require__(4);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(14);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// CONCATENATED MODULE: ./src/components/primitives/pin.js
+
+
+
+
+// Semi-automatic pin object. For stretching things.
+var pin_Pin = /*#__PURE__*/function () {
+  // (Comp reference, a name in overlay settings,
+  // pin parameters)
+  function Pin(comp, name, params) {
+    var _this = this;
+
+    if (params === void 0) {
+      params = {};
+    }
+
+    classCallCheck_default()(this, Pin);
+
+    this.RADIUS = comp.$props.config.PIN_RADIUS || 5.5;
+    this.RADIUS_SQ = Math.pow(this.RADIUS + 7, 2);
+    this.COLOR_BACK = comp.$props.colors.back;
+    this.COLOR_BR = comp.$props.colors.text;
+    this.comp = comp;
+    this.layout = comp.layout;
+    this.mouse = comp.mouse;
+    this.name = name;
+    this.state = params.state || 'settled';
+    this.hidden = params.hidden || false;
+    this.mouse.on('mousemove', function (e) {
+      return _this.mousemove(e);
+    });
+    this.mouse.on('mousedown', function (e) {
+      return _this.mousedown(e);
+    });
+    this.mouse.on('mouseup', function (e) {
+      return _this.mouseup(e);
+    });
+
+    if (comp.state === 'finished') {
+      this.state = 'settled';
+      this.update_from(comp.$props.settings[name]);
+    } else {
+      this.update();
+    }
+
+    if (this.state !== 'settled') {
+      this.comp.$emit('scroll-lock', true);
+    }
+  }
+
+  createClass_default()(Pin, [{
+    key: "re_init",
+    value: function re_init() {
+      this.update_from(this.comp.$props.settings[this.name]);
+    }
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      if (this.hidden) return;
+
+      switch (this.state) {
+        case 'tracking':
+          break;
+
+        case 'dragging':
+          if (!this.moved) this.draw_circle(ctx);
+          break;
+
+        case 'settled':
+          this.draw_circle(ctx);
+          break;
+      }
+    }
+  }, {
+    key: "draw_circle",
+    value: function draw_circle(ctx) {
+      this.layout = this.comp.layout;
+
+      if (this.comp.selected) {
+        var r = this.RADIUS,
+            lw = 1.5;
+      } else {
+        var r = this.RADIUS * 0.95,
+            lw = 1;
+      }
+
+      ctx.lineWidth = lw;
+      ctx.strokeStyle = this.COLOR_BR;
+      ctx.fillStyle = this.COLOR_BACK;
+      ctx.beginPath();
+      ctx.arc(this.x = this.layout.t2screen(this.t), this.y = this.layout.$2screen(this.y$), r + 0.5, 0, Math.PI * 2, true);
+      ctx.fill();
+      ctx.stroke();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.y$ = this.comp.$props.cursor.y$;
+      this.y = this.comp.$props.cursor.y;
+      this.t = this.comp.$props.cursor.t;
+      this.x = this.comp.$props.cursor.x; // Save pin as time in IB mode
+      //if (this.layout.ti_map.ib) {
+      //    this.t = this.layout.ti_map.i2t(this.t )
+      //}
+      // Reset the settings attahed to the pin (position)
+
+      this.comp.$emit('change-settings', defineProperty_default()({}, this.name, [this.t, this.y$]));
+    }
+  }, {
+    key: "update_from",
+    value: function update_from(data, emit) {
+      if (emit === void 0) {
+        emit = false;
+      }
+
+      if (!data) return;
+      this.layout = this.comp.layout;
+      this.y$ = data[1];
+      this.y = this.layout.$2screen(this.y$);
+      this.t = data[0];
+      this.x = this.layout.t2screen(this.t); // TODO: Save pin as time in IB mode
+      //if (this.layout.ti_map.ib) {
+      //    this.t = this.layout.ti_map.i2t(this.t )
+      //}
+
+      if (emit) this.comp.$emit('change-settings', defineProperty_default()({}, this.name, [this.t, this.y$]));
+    }
+  }, {
+    key: "rec_position",
+    value: function rec_position() {
+      this.t1 = this.t;
+      this.y$1 = this.y$;
+    }
+  }, {
+    key: "mousemove",
+    value: function mousemove(event) {
+      switch (this.state) {
+        case 'tracking':
+        case 'dragging':
+          this.moved = true;
+          this.update();
+          break;
+      }
+    }
+  }, {
+    key: "mousedown",
+    value: function mousedown(event, force) {
+      if (force === void 0) {
+        force = false;
+      }
+
+      if (event.defaultPrevented && !force) return;
+
+      switch (this.state) {
+        case 'tracking':
+          this.state = 'settled';
+          if (this.on_settled) this.on_settled();
+          this.comp.$emit('scroll-lock', false);
+          break;
+
+        case 'settled':
+          if (this.hidden) return;
+
+          if (this.hover()) {
+            this.state = 'dragging';
+            this.moved = false;
+            this.comp.$emit('scroll-lock', true);
+            this.comp.$emit('object-selected');
+          }
+
+          break;
+      }
+
+      if (this.hover()) {
+        event.preventDefault();
+      }
+    }
+  }, {
+    key: "mouseup",
+    value: function mouseup(event) {
+      switch (this.state) {
+        case 'dragging':
+          this.state = 'settled';
+          if (this.on_settled) this.on_settled();
+          this.comp.$emit('scroll-lock', false);
+          break;
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, handler) {
+      switch (name) {
+        case 'settled':
+          this.on_settled = handler;
+          break;
+      }
+    }
+  }, {
+    key: "hover",
+    value: function hover() {
+      var x = this.x;
+      var y = this.y;
+      return (x - this.mouse.x) * (x - this.mouse.x) + (y - this.mouse.y) * (y - this.mouse.y) < this.RADIUS_SQ;
+    }
+  }]);
+
+  return Pin;
+}();
+
+
+// CONCATENATED MODULE: ./src/components/primitives/seg.js
+
+
+// Draws a segment, adds corresponding collision f-n
+
+
+var seg_Seg = /*#__PURE__*/function () {
+  // Overlay ref, canvas ctx
+  function Seg(overlay, ctx) {
+    classCallCheck_default()(this, Seg);
+
+    this.ctx = ctx;
+    this.comp = overlay;
+    this.T = overlay.$props.config.TOOL_COLL;
+  } // p1[t, $], p2[t, $] (time-price coordinates)
+
+
+  createClass_default()(Seg, [{
+    key: "draw",
+    value: function draw(p1, p2) {
+      var layout = this.comp.$props.layout;
+      var x1 = layout.t2screen(p1[0]);
+      var y1 = layout.$2screen(p1[1]);
+      var x2 = layout.t2screen(p2[0]);
+      var y2 = layout.$2screen(p2[1]);
+      this.ctx.moveTo(x1, y1);
+      this.ctx.lineTo(x2, y2);
+      this.comp.collisions.push(this.make([x1, y1], [x2, y2]));
+    } // Collision function. x, y - mouse coord.
+
+  }, {
+    key: "make",
+    value: function make(p1, p2) {
+      var _this = this;
+
+      return function (x, y) {
+        return math.point2seg([x, y], p1, p2) < _this.T;
+      };
+    }
+  }]);
+
+  return Seg;
+}();
+
+
+// CONCATENATED MODULE: ./src/components/primitives/line.js
+
+
+// Draws a line, adds corresponding collision f-n
+
+
+var line_Line = /*#__PURE__*/function () {
+  // Overlay ref, canvas ctx
+  function Line(overlay, ctx) {
+    classCallCheck_default()(this, Line);
+
+    this.ctx = ctx;
+    this.comp = overlay;
+    this.T = overlay.$props.config.TOOL_COLL;
+  } // p1[t, $], p2[t, $] (time-price coordinates)
+
+
+  createClass_default()(Line, [{
+    key: "draw",
+    value: function draw(p1, p2) {
+      var layout = this.comp.$props.layout;
+      var x1 = layout.t2screen(p1[0]);
+      var y1 = layout.$2screen(p1[1]);
+      var x2 = layout.t2screen(p2[0]);
+      var y2 = layout.$2screen(p2[1]);
+      this.ctx.moveTo(x1, y1);
+      this.ctx.lineTo(x2, y2);
+      var w = layout.width;
+      var h = layout.height; // TODO: transform k (angle) to screen ratio
+      // (this requires a new a2screen function)
+
+      var k = (y2 - y1) / (x2 - x1);
+      var s = Math.sign(x2 - x1 || y2 - y1);
+      var dx = w * s * 2;
+      var dy = w * k * s * 2;
+
+      if (dy === Infinity) {
+        dx = 0, dy = h * s;
+      }
+
+      this.ctx.moveTo(x2, y2);
+      this.ctx.lineTo(x2 + dx, y2 + dy);
+
+      if (!this.ray) {
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x1 - dx, y1 - dy);
+      }
+
+      this.comp.collisions.push(this.make([x1, y1], [x2, y2]));
+    } // Collision function. x, y - mouse coord.
+
+  }, {
+    key: "make",
+    value: function make(p1, p2) {
+      var _this = this;
+
+      var f = this.ray ? math.point2ray.bind(math) : math.point2line.bind(math);
+      return function (x, y) {
+        return f([x, y], p1, p2) < _this.T;
+      };
+    }
+  }]);
+
+  return Line;
+}();
+
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(12);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(13);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(9);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// CONCATENATED MODULE: ./src/components/primitives/ray.js
+
+
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+// Draws a ray, adds corresponding collision f-n
+
+
+var ray_Ray = /*#__PURE__*/function (_Line) {
+  inherits_default()(Ray, _Line);
+
+  var _super = _createSuper(Ray);
+
+  function Ray(overlay, ctx) {
+    var _this;
+
+    classCallCheck_default()(this, Ray);
+
+    _this = _super.call(this, overlay, ctx);
+    _this.ray = true;
+    return _this;
+  }
+
+  return Ray;
+}(line_Line);
+
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/LineTool.vue?vue&type=script&lang=js&
+// Line drawing tool
+// TODO: make an angle-snap when "Shift" is pressed
+
+
+
+
+
+
+
+/* harmony default export */ var LineToolvue_type_script_lang_js_ = ({
+  name: 'LineTool',
+  mixins: [mixins_overlay, mixins_tool],
+  methods: {
+    meta_info: function meta_info() {
+      return {
+        author: 'C451',
+        version: '1.1.0'
+      };
+    },
+    tool: function tool() {
+      return {
+        // Descriptor for the tool
+        group: 'Lines',
+        icon: icons['segment.png'],
+        type: 'Segment',
+        hint: 'This hint will be shown on hover',
+        data: [],
+        // Default data
+        settings: {},
+        // Default settings
+        // Modifications
+        mods: {
+          'Extended': {
+            // Rewrites the default setting fields
+            settings: {
+              extended: true
+            },
+            icon: icons['extended.png']
+          },
+          'Ray': {
+            // Rewrites the default setting fields
+            settings: {
+              ray: true
+            },
+            icon: icons['ray.png']
+          }
+        }
+      };
+    },
+    // Called after overlay mounted
+    init: function init() {
+      var _this = this;
+
+      // First pin is settled at the mouse position
+      this.pins.push(new pin_Pin(this, 'p1')); // Second one is following mouse until it clicks
+
+      this.pins.push(new pin_Pin(this, 'p2', {
+        state: 'tracking'
+      }));
+      this.pins[1].on('settled', function () {
+        // Call when current tool drawing is finished
+        // (Optionally) reset the mode back to 'Cursor'
+        _this.set_state('finished');
+
+        _this.$emit('drawing-mode-off');
+      });
+    },
+    draw: function draw(ctx) {
+      if (!this.p1 || !this.p2) return;
+      ctx.lineWidth = this.line_width;
+      ctx.strokeStyle = this.color;
+      ctx.beginPath();
+
+      if (this.sett.ray) {
+        new ray_Ray(this, ctx).draw(this.p1, this.p2);
+      } else if (this.sett.extended) {
+        new line_Line(this, ctx).draw(this.p1, this.p2);
+      } else {
+        new seg_Seg(this, ctx).draw(this.p1, this.p2);
+      }
+
+      ctx.stroke();
+      this.render_pins(ctx);
+    },
+    use_for: function use_for() {
+      return ['LineTool'];
+    },
+    data_colors: function data_colors() {
+      return [this.color];
+    }
+  },
+  // Define internal setting & constants here
+  computed: {
+    sett: function sett() {
+      return this.$props.settings;
+    },
+    p1: function p1() {
+      return this.$props.settings.p1;
+    },
+    p2: function p2() {
+      return this.$props.settings.p2;
+    },
+    line_width: function line_width() {
+      return this.sett.lineWidth || 0.9;
+    },
+    color: function color() {
+      return this.sett.color || '#42b28a';
+    }
+  },
+  data: function data() {
+    return {};
+  }
+});
+// CONCATENATED MODULE: ./src/components/overlays/LineTool.vue?vue&type=script&lang=js&
+ /* harmony default export */ var overlays_LineToolvue_type_script_lang_js_ = (LineToolvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/overlays/LineTool.vue
+var LineTool_render, LineTool_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var LineTool_component = normalizeComponent(
+  overlays_LineToolvue_type_script_lang_js_,
+  LineTool_render,
+  LineTool_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var LineTool_api; }
+LineTool_component.options.__file = "src/components/overlays/LineTool.vue"
+/* harmony default export */ var LineTool = (LineTool_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/overlays/RangeTool.vue?vue&type=script&lang=js&
+
+// Price/Time measurment tool
+
+
+
+
+
+/* harmony default export */ var RangeToolvue_type_script_lang_js_ = ({
+  name: 'RangeTool',
+  mixins: [mixins_overlay, mixins_tool],
+  methods: {
+    meta_info: function meta_info() {
+      return {
+        author: 'C451',
+        version: '2.0.1'
+      };
+    },
+    tool: function tool() {
+      return {
+        // Descriptor for the tool
+        group: 'Measurements',
+        icon: icons['price_range.png'],
+        type: 'Price',
+        hint: 'Price Range',
+        data: [],
+        // Default data
+        settings: {},
+        // Default settings
+        mods: {
+          'Time': {
+            // Rewrites the default setting fields
+            icon: icons['time_range.png'],
+            settings: {
+              price: false,
+              time: true
+            }
+          },
+          'PriceTime': {
+            // Rewrites the default setting fields
+            icon: icons['price_time.png'],
+            settings: {
+              price: true,
+              time: true
+            }
+          },
+          'ShiftMode': {
+            // Rewrites the default setting fields
+            settings: {
+              price: true,
+              time: true,
+              shiftMode: true
+            },
+            hidden: true
+          }
+        }
+      };
+    },
+    // Called after overlay mounted
+    init: function init() {
+      var _this = this;
+
+      // First pin is settled at the mouse position
+      this.pins.push(new pin_Pin(this, 'p1', {
+        hidden: this.shift
+      })); // Second one is following mouse until it clicks
+
+      this.pins.push(new pin_Pin(this, 'p2', {
+        state: 'tracking',
+        hidden: this.shift
+      }));
+      this.pins[1].on('settled', function () {
+        // Call when current tool drawing is finished
+        // (Optionally) reset the mode back to 'Cursor'
+        _this.set_state('finished');
+
+        _this.$emit('drawing-mode-off'); // Deselect the tool in shiftMode
+
+
+        if (_this.shift) _this._$emit('custom-event', {
+          event: 'object-selected',
+          args: []
+        });
+      });
+    },
+    draw: function draw(ctx) {
+      if (!this.p1 || !this.p2) return;
+      var dir = Math.sign(this.p2[1] - this.p1[1]);
+      var layout = this.$props.layout;
+      var xm = layout.t2screen((this.p1[0] + this.p2[0]) * 0.5);
+      ctx.lineWidth = this.line_width;
+      ctx.strokeStyle = this.color; // Background
+
+      ctx.fillStyle = this.back_color;
+      var x1 = layout.t2screen(this.p1[0]);
+      var y1 = layout.$2screen(this.p1[1]);
+      var x2 = layout.t2screen(this.p2[0]);
+      var y2 = layout.$2screen(this.p2[1]);
+      ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+      if (this.price) this.vertical(ctx, x1, y1, x2, y2, xm);
+      if (this.time) this.horizontal(ctx, x1, y1, x2, y2, xm);
+      this.draw_value(ctx, dir, xm, y2);
+      this.render_pins(ctx);
+    },
+    vertical: function vertical(ctx, x1, y1, x2, y2, xm) {
+      var layout = this.$props.layout;
+      var dir = Math.sign(this.p2[1] - this.p1[1]);
+      ctx.beginPath();
+
+      if (!this.shift) {
+        // Top
+        new seg_Seg(this, ctx).draw([this.p1[0], this.p2[1]], [this.p2[0], this.p2[1]]); // Bottom
+
+        new seg_Seg(this, ctx).draw([this.p1[0], this.p1[1]], [this.p2[0], this.p1[1]]);
+      } // Vertical Arrow
+
+
+      ctx.moveTo(xm - 4, y2 + 5 * dir);
+      ctx.lineTo(xm, y2);
+      ctx.lineTo(xm + 4, y2 + 5 * dir);
+      ctx.stroke(); // Vertical Line
+
+      ctx.beginPath();
+      ctx.setLineDash([5, 5]);
+      new seg_Seg(this, ctx).draw([(this.p1[0] + this.p2[0]) * 0.5, this.p2[1]], [(this.p1[0] + this.p2[0]) * 0.5, this.p1[1]]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    },
+    horizontal: function horizontal(ctx, x1, y1, x2, y2, xm) {
+      var layout = this.$props.layout;
+      var xdir = Math.sign(this.p2[0] - this.p1[0]);
+      var ym = (layout.$2screen(this.p1[1]) + layout.$2screen(this.p2[1])) / 2;
+      ctx.beginPath();
+
+      if (!this.shift) {
+        // Left
+        new seg_Seg(this, ctx).draw([this.p1[0], this.p1[1]], [this.p1[0], this.p2[1]]); // Right
+
+        new seg_Seg(this, ctx).draw([this.p2[0], this.p1[1]], [this.p2[0], this.p2[1]]);
+      } // Horizontal Arrow
+
+
+      ctx.moveTo(x2 - 5 * xdir, ym - 4);
+      ctx.lineTo(x2, ym);
+      ctx.lineTo(x2 - 5 * xdir, ym + 4);
+      ctx.stroke(); // Horizontal Line
+
+      ctx.beginPath();
+      ctx.setLineDash([5, 5]);
+      ctx.moveTo(x1, ym);
+      ctx.lineTo(x2, ym);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    },
+    // WTF? I know dude, a lot of shitty code here
+    draw_value: function draw_value(ctx, dir, xm, y) {
+      var _this2 = this;
+
+      ctx.font = this.new_font; // Price delta (anf percent)
+
+      var d$ = (this.p2[1] - this.p1[1]).toFixed(this.prec);
+      var p = (100 * (this.p2[1] / this.p1[1] - 1)).toFixed(this.prec); // Map interval to the actual tf (in ms)
+
+      var f = function f(t) {
+        return _this2.layout.ti_map.smth2t(t);
+      };
+
+      var dt = f(this.p2[0]) - f(this.p1[0]);
+      var tf = this.layout.ti_map.tf; // Bars count (through the candle index)
+
+      var f2 = function f2(t) {
+        var c = _this2.layout.c_magnet(t);
+
+        var cn = _this2.layout.candles || _this2.layout.master_grid.candles;
+        return cn.indexOf(c);
+      }; // Bars count (and handling the negative values)
+
+
+      var b = f2(this.p2[0]) - f2(this.p1[0]); // Format time delta
+      // Format time delta
+
+      var dtstr = this.t2str(dt);
+      var text = [];
+      if (this.price) text.push("".concat(d$, "  (").concat(p, "%)"));
+      if (this.time) text.push("".concat(b, " bars, ").concat(dtstr));
+      text = text.join('\n'); // "Multiple" fillText
+
+      var lines = text.split('\n');
+      var w = Math.max.apply(Math, toConsumableArray_default()(lines.map(function (x) {
+        return ctx.measureText(x).width + 20;
+      })).concat([100]));
+      var n = lines.length;
+      var h = 20 * n;
+      ctx.fillStyle = this.value_back;
+      ctx.fillRect(xm - w * 0.5, y - (10 + h) * dir, w, h * dir);
+      ctx.fillStyle = this.value_color;
+      ctx.textAlign = 'center';
+      lines.forEach(function (l, i) {
+        ctx.fillText(l, xm, y + (dir > 0 ? 20 * i - 20 * n + 5 : 20 * i + 25));
+      });
+    },
+    // Formats time from ms to `1D 12h` for example
+    t2str: function t2str(t) {
+      var sign = Math.sign(t);
+      var abs = Math.abs(t);
+      var tfs = [[1000, 's', 60], [60000, 'm', 60], [3600000, 'h', 24], [86400000, 'D', 7], [604800000, 'W', 4], [2592000000, 'M', 12], [31536000000, 'Y', Infinity], [Infinity, 'Eternity', Infinity]];
+
+      for (var i = 0; i < tfs.length; i++) {
+        tfs[i][0] = Math.floor(abs / tfs[i][0]);
+
+        if (tfs[i][0] === 0) {
+          var p1 = tfs[i - 1];
+          var p2 = tfs[i - 2];
+          var txt = sign < 0 ? '-' : '';
+
+          if (p1) {
+            txt += p1.slice(0, 2).join('');
+          }
+
+          var n2 = p2 ? p2[0] - p1[0] * p2[2] : 0;
+
+          if (p2 && n2) {
+            txt += ' ';
+            txt += "".concat(n2).concat(p2[1]);
+          }
+
+          return txt;
+        }
+      }
+    },
+    use_for: function use_for() {
+      return ['RangeTool'];
+    },
+    data_colors: function data_colors() {
+      return [this.color];
+    }
+  },
+  // Define internal setting & constants here
+  computed: {
+    sett: function sett() {
+      return this.$props.settings;
+    },
+    p1: function p1() {
+      return this.$props.settings.p1;
+    },
+    p2: function p2() {
+      return this.$props.settings.p2;
+    },
+    line_width: function line_width() {
+      return this.sett.lineWidth || 0.9;
+    },
+    color: function color() {
+      return this.sett.color || this.$props.colors.cross;
+    },
+    back_color: function back_color() {
+      return this.sett.backColor || '#9b9ba316';
+    },
+    value_back: function value_back() {
+      return this.sett.valueBack || '#9b9ba316';
+    },
+    value_color: function value_color() {
+      return this.sett.valueColor || this.$props.colors.text;
+    },
+    prec: function prec() {
+      return this.sett.precision || 2;
+    },
+    new_font: function new_font() {
+      return '12px ' + this.$props.font.split('px').pop();
+    },
+    price: function price() {
+      return 'price' in this.sett ? this.sett.price : true;
+    },
+    time: function time() {
+      return 'time' in this.sett ? this.sett.time : false;
+    },
+    shift: function shift() {
+      return this.sett.shiftMode;
+    }
+  },
+  data: function data() {
+    return {};
+  }
+});
+// CONCATENATED MODULE: ./src/components/overlays/RangeTool.vue?vue&type=script&lang=js&
+ /* harmony default export */ var overlays_RangeToolvue_type_script_lang_js_ = (RangeToolvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/overlays/RangeTool.vue
+var RangeTool_render, RangeTool_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var RangeTool_component = normalizeComponent(
+  overlays_RangeToolvue_type_script_lang_js_,
+  RangeTool_render,
+  RangeTool_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var RangeTool_api; }
+RangeTool_component.options.__file = "src/components/overlays/RangeTool.vue"
+/* harmony default export */ var RangeTool = (RangeTool_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Grid.vue?vue&type=script&lang=js&
+function Gridvue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Gridvue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Gridvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Gridvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Gridvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // Sets up all layers/overlays for the grid with 'grid_id'
+
+
+
+
+
 
 
 
@@ -7062,25 +11804,43 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
 
 /* harmony default export */ var Gridvue_type_script_lang_js_ = ({
   name: 'Grid',
-  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'overlays', 'width', 'height', 'data', 'grid_id', 'y_transform', 'font', 'tv_id', 'config'],
-  mixins: [canvas],
+  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'overlays', 'width', 'height', 'data', 'grid_id', 'y_transform', 'font', 'tv_id', 'config', 'meta', 'shaders'],
+  mixins: [mixins_canvas, uxlist],
   components: {
-    Crosshair: components_Crosshair
+    Crosshair: components_Crosshair,
+    KeyboardListener: KeyboardListener
   },
   created: function created() {
     var _this = this;
 
     // List of all possible overlays (builtin + custom)
-    this._list = [Spline, Splines, Range, Trades, Channel, Segment, Candles, Volume, Splitters].concat(this.$props.overlays);
+    this._list = [Spline, Splines, Range, Trades, Channel, Segment, Candles, Volume, Splitters, LineTool, RangeTool].concat(this.$props.overlays);
     this._registry = {}; // We need to know which components we will use.
     // Custom overlay components overwrite built-ins:
 
+    var tools = [];
+
     this._list.forEach(function (x, i) {
       var use_for = x.methods.use_for();
+      if (x.methods.tool) tools.push({
+        use_for: use_for,
+        info: x.methods.tool()
+      });
       use_for.forEach(function (indicator) {
         _this._registry[indicator] = i;
       });
     });
+
+    this.$emit('custom-event', {
+      event: 'register-tools',
+      args: tools
+    });
+    this.$on('custom-event', function (e) {
+      return _this.on_ux_event(e, 'grid');
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.renderer) this.renderer.destroy();
   },
   mounted: function mounted() {
     var _this2 = this;
@@ -7102,14 +11862,29 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
       },
       attrs: {
         width: layout.width,
-        height: layout.height
+        height: layout.height,
+        overflow: 'hidden'
       },
       style: {
-        backgroundColor: this.$props.colors.colorBack
+        backgroundColor: this.$props.colors.back
       },
       hs: [h(components_Crosshair, {
         props: this.common_props(),
         on: this.layer_events
+      }), h(KeyboardListener, {
+        on: this.keyboard_events
+      }), h(UxLayer, {
+        props: {
+          id: id,
+          tv_id: this.$props.tv_id,
+          uxs: this.uxs,
+          colors: this.$props.colors,
+          config: this.$props.config,
+          updater: Math.random()
+        },
+        on: {
+          'custom-event': this.emit_ux_event
+        }
       })].concat(this.get_overlays(h))
     });
   },
@@ -7121,57 +11896,75 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
         return _this3.renderer.new_layer(layer);
       });
     },
-    get_overlays: function get_overlays(h) {
+    del_layer: function del_layer(layer) {
       var _this4 = this;
+
+      this.$nextTick(function () {
+        return _this4.renderer.del_layer(layer);
+      });
+      var grid_id = this.$props.grid_id;
+      this.$emit('custom-event', {
+        event: 'remove-shaders',
+        args: [grid_id, layer]
+      }); // TODO: close all interfaces
+
+      this.$emit('custom-event', {
+        event: 'remove-layer-meta',
+        args: [grid_id, layer]
+      });
+      this.remove_all_ux(layer);
+    },
+    get_overlays: function get_overlays(h) {
+      var _this5 = this;
 
       // Distributes overlay data & settings according
       // to this._registry; returns compo list
       var comp_list = [],
           count = {};
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = Gridvue_type_script_lang_js_createForOfIteratorHelper(this.$props.data),
+          _step;
 
       try {
-        for (var _iterator = this.$props.data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var d = _step.value;
           var comp = this._list[this._registry[d.type]];
 
           if (comp) {
+            if (comp.methods.calc) {
+              comp = this.inject_renderer(comp);
+            }
+
             comp_list.push({
               cls: comp,
               type: d.type,
               data: d.data,
-              settings: d.settings
+              settings: d.settings,
+              i0: d.i0,
+              tf: d.tf
             });
             count[d.type] = 0;
           }
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       return comp_list.map(function (x, i) {
         return h(x.cls, {
-          on: _this4.layer_events,
-          attrs: Object.assign(_this4.common_props(), {
+          on: _this5.layer_events,
+          attrs: Object.assign(_this5.common_props(), {
             id: "".concat(x.type, "_").concat(count[x.type]++),
             type: x.type,
             data: x.data,
             settings: x.settings,
+            i0: x.i0,
+            tf: x.tf,
             num: i,
-            grid_id: _this4.$props.grid_id
+            grid_id: _this5.$props.grid_id,
+            meta: _this5.$props.meta
           })
         });
       });
@@ -7181,40 +11974,154 @@ Splitters_component.options.__file = "src/components/overlays/Splitters.vue"
         cursor: this.$props.cursor,
         colors: this.$props.colors,
         layout: this.$props.layout.grids[this.$props.grid_id],
+        interval: this.$props.interval,
         sub: this.$props.sub,
         font: this.$props.font,
         config: this.$props.config
       };
+    },
+    emit_ux_event: function emit_ux_event(e) {
+      var e_pass = this.on_ux_event(e, 'grid');
+      if (e_pass) this.$emit('custom-event', e);
+    },
+    // Replace the current comp with 'renderer'
+    inject_renderer: function inject_renderer(comp) {
+      var src = comp.methods.calc();
+
+      if (!src.conf || !src.conf.renderer || comp.__renderer__) {
+        return comp;
+      } // Search for an overlay with the target 'name'
+
+
+      var f = this._list.find(function (x) {
+        return x.name === src.conf.renderer;
+      });
+
+      if (!f) return comp;
+      comp.mixins.push(f);
+      comp.__renderer__ = src.conf.renderer;
+      return comp;
+    }
+  },
+  computed: {
+    is_active: function is_active() {
+      return this.$props.cursor.t !== undefined && this.$props.cursor.grid_id === this.$props.grid_id;
     }
   },
   watch: {
     range: {
       handler: function handler() {
-        this.redraw();
+        var _this6 = this;
+
+        // TODO: Left-side render lag fix:
+        // Overlay data is updated one tick later than
+        // the main sub. Fast fix is to delay redraw()
+        // call. It will be a solution until a better
+        // one comes by.
+        this.$nextTick(function () {
+          return _this6.redraw();
+        });
       },
       deep: true
     },
     cursor: {
       handler: function handler() {
-        this.redraw();
+        if (!this.$props.cursor.locked) this.redraw();
       },
       deep: true
+    },
+    overlays: {
+      // Track changes in calc() functions
+      handler: function handler(ovs) {
+        var _iterator2 = Gridvue_type_script_lang_js_createForOfIteratorHelper(ovs),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var ov = _step2.value;
+
+            var _iterator3 = Gridvue_type_script_lang_js_createForOfIteratorHelper(this.$children),
+                _step3;
+
+            try {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var comp = _step3.value;
+                if (typeof comp.id !== 'string') continue;
+                var tuple = comp.id.split('_');
+                tuple.pop();
+
+                if (tuple.join('_') === ov.name) {
+                  comp.calc = ov.methods.calc;
+                  if (!comp.calc) continue;
+                  var calc = comp.calc.toString();
+
+                  if (calc !== ov.__prevscript__) {
+                    comp.exec_script();
+                  }
+
+                  ov.__prevscript__ = calc;
+                }
+              }
+            } catch (err) {
+              _iterator3.e(err);
+            } finally {
+              _iterator3.f();
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      },
+      deep: true
+    },
+    // Redraw on the shader list change
+    shaders: function shaders(n, p) {
+      this.redraw();
     }
   },
   data: function data() {
-    var _this5 = this;
+    var _this7 = this;
 
     return {
       layer_events: {
         'new-grid-layer': this.new_layer,
+        'delete-grid-layer': this.del_layer,
         'show-grid-layer': function showGridLayer(d) {
-          _this5.renderer.show_hide_layer(d);
+          _this7.renderer.show_hide_layer(d);
 
-          _this5.redraw();
+          _this7.redraw();
         },
         'redraw-grid': this.redraw,
         'layer-meta-props': function layerMetaProps(d) {
-          return _this5.$emit('layer-meta-props', d);
+          return _this7.$emit('layer-meta-props', d);
+        },
+        'custom-event': function customEvent(d) {
+          return _this7.$emit('custom-event', d);
+        }
+      },
+      keyboard_events: {
+        'register-kb-listener': function registerKbListener(event) {
+          _this7.$emit('register-kb-listener', event);
+        },
+        'remove-kb-listener': function removeKbListener(event) {
+          _this7.$emit('remove-kb-listener', event);
+        },
+        'keyup': function keyup(event) {
+          if (!_this7.is_active) return;
+
+          _this7.renderer.propagate('keyup', event);
+        },
+        'keydown': function keydown(event) {
+          if (!_this7.is_active) return; // TODO: is this neeeded?
+
+          _this7.renderer.propagate('keydown', event);
+        },
+        'keypress': function keypress(event) {
+          if (!_this7.is_active) return;
+
+          _this7.renderer.propagate('keypress', event);
         }
       }
     };
@@ -7246,23 +12153,27 @@ if (false) { var Grid_api; }
 Grid_component.options.__file = "src/components/Grid.vue"
 /* harmony default export */ var components_Grid = (Grid_component.exports);
 // CONCATENATED MODULE: ./src/components/js/sidebar.js
-function sidebar_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function sidebar_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function sidebar_createClass(Constructor, protoProps, staticProps) { if (protoProps) sidebar_defineProperties(Constructor.prototype, protoProps); if (staticProps) sidebar_defineProperties(Constructor, staticProps); return Constructor; }
+
+function sidebar_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = sidebar_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function sidebar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return sidebar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return sidebar_arrayLikeToArray(o, minLen); }
+
+function sidebar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
 var PANHEIGHT;
 
-var sidebar_Sidebar =
-/*#__PURE__*/
-function () {
-  function Sidebar(canvas, comp) {
-    var side = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'right';
+var sidebar_Sidebar = /*#__PURE__*/function () {
+  function Sidebar(canvas, comp, side) {
+    if (side === void 0) {
+      side = 'right';
+    }
 
-    sidebar_classCallCheck(this, Sidebar);
+    classCallCheck_default()(this, Sidebar);
 
     PANHEIGHT = comp.config.PANHEIGHT;
     this.canvas = canvas;
@@ -7277,12 +12188,12 @@ function () {
     this.listeners();
   }
 
-  sidebar_createClass(Sidebar, [{
+  createClass_default()(Sidebar, [{
     key: "listeners",
     value: function listeners() {
       var _this = this;
 
-      var mc = new hammer["Manager"](this.canvas);
+      var mc = this.mc = new hammer["Manager"](this.canvas);
       mc.add(new hammer["Pan"]({
         direction: hammer["DIRECTION_VERTICAL"],
         threshold: 1
@@ -7298,11 +12209,14 @@ function () {
           _this.zoom = 1.0;
         }
 
+        _this.y_range = [_this.layout.$_hi, _this.layout.$_lo];
         _this.drug = {
           y: event.center.y,
-          z: _this.zoom
+          z: _this.zoom,
+          mid: math.log_mid(_this.y_range, _this.layout.height),
+          A: _this.layout.A,
+          B: _this.layout.B
         };
-        _this.y_range = [_this.layout.$_hi, _this.layout.$_lo];
       });
       mc.on('panmove', function (event) {
         if (_this.drug) {
@@ -7351,7 +12265,7 @@ function () {
           h,
           side = this.side;
       var sb = this.layout.sb;
-      this.ctx.fillStyle = this.$p.colors.colorBack;
+      this.ctx.fillStyle = this.$p.colors.back;
       this.ctx.font = this.$p.font;
 
       switch (side) {
@@ -7361,7 +12275,7 @@ function () {
           w = Math.floor(sb);
           h = this.layout.height;
           this.ctx.fillRect(x, y, w, h);
-          this.ctx.strokeStyle = this.$p.colors.colorScale;
+          this.ctx.strokeStyle = this.$p.colors.scale;
           this.ctx.beginPath();
           this.ctx.moveTo(x + 0.5, 0);
           this.ctx.lineTo(x + 0.5, h);
@@ -7374,7 +12288,7 @@ function () {
           w = Math.floor(sb);
           h = this.layout.height;
           this.ctx.fillRect(x, y, w, h);
-          this.ctx.strokeStyle = this.$p.colors.colorScale;
+          this.ctx.strokeStyle = this.$p.colors.scale;
           this.ctx.beginPath();
           this.ctx.moveTo(x + 0.5, 0);
           this.ctx.lineTo(x + 0.5, h);
@@ -7382,14 +12296,14 @@ function () {
           break;
       }
 
-      this.ctx.fillStyle = this.$p.colors.colorText;
+      this.ctx.fillStyle = this.$p.colors.text;
       this.ctx.beginPath();
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = sidebar_createForOfIteratorHelper(points),
+          _step;
 
       try {
-        for (var _iterator = points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
           if (p[0] > this.layout.height) continue;
           var x1 = side === 'left' ? w - 0.5 : x - 0.5;
@@ -7402,28 +12316,45 @@ function () {
           this.ctx.fillText(p[1].toFixed(d), x1 + offst, p[0] + 4);
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       this.ctx.stroke();
       if (this.$p.grid_id) this.upper_border();
+      this.apply_shaders();
       if (this.$p.cursor.y && this.$p.cursor.y$) this.panel();
+    }
+  }, {
+    key: "apply_shaders",
+    value: function apply_shaders() {
+      var layout = this.$p.layout.grids[this.id];
+      var props = {
+        layout: layout,
+        cursor: this.$p.cursor
+      };
+
+      var _iterator2 = sidebar_createForOfIteratorHelper(this.$p.shaders),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var s = _step2.value;
+          this.ctx.save();
+          s.draw(this.ctx, props);
+          this.ctx.restore();
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
     }
   }, {
     key: "upper_border",
     value: function upper_border() {
-      this.ctx.strokeStyle = this.$p.colors.colorScale;
+      this.ctx.strokeStyle = this.$p.colors.scale;
       this.ctx.beginPath();
       this.ctx.moveTo(0, 0.5);
       this.ctx.lineTo(this.layout.width, 0.5);
@@ -7437,17 +12368,16 @@ function () {
         return;
       }
 
-      var lbl = this.$p.cursor.y$;
-      this.ctx.fillStyle = this.$p.colors.colorPanel;
+      var lbl = this.$p.cursor.y$.toFixed(this.layout.prec);
+      this.ctx.fillStyle = this.$p.colors.panel;
       var panwidth = this.layout.sb + 1;
       var x = -0.5;
       var y = this.$p.cursor.y - PANHEIGHT * 0.5 - 0.5;
-      var a = 5; //* 0.5
-
+      var a = 7;
       this.ctx.fillRect(x - 0.5, y, panwidth, PANHEIGHT);
-      this.ctx.fillStyle = this.$p.colors.colorTextHL;
+      this.ctx.fillStyle = this.$p.colors.textHL;
       this.ctx.textAlign = 'left';
-      this.ctx.fillText(lbl, a, y + 16);
+      this.ctx.fillText(lbl, a, y + 15);
     }
   }, {
     key: "calc_zoom",
@@ -7462,14 +12392,80 @@ function () {
 
   }, {
     key: "calc_range",
-    value: function calc_range() {
+    value: function calc_range(diff1, diff2) {
+      var _this2 = this;
+
+      if (diff1 === void 0) {
+        diff1 = 1;
+      }
+
+      if (diff2 === void 0) {
+        diff2 = 1;
+      }
+
       var z = this.zoom / this.drug.z;
       var zk = (1 / z - 1) / 2;
       var range = this.y_range.slice();
       var delta = range[0] - range[1];
-      range[0] = range[0] + delta * zk;
-      range[1] = range[1] - delta * zk;
+
+      if (!this.layout.grid.logScale) {
+        range[0] = range[0] + delta * zk * diff1;
+        range[1] = range[1] - delta * zk * diff2;
+      } else {
+        var px_mid = this.layout.height / 2;
+        var new_hi = px_mid - px_mid * (1 / z);
+        var new_lo = px_mid + px_mid * (1 / z); // Use old mapping to get a new range
+
+        var f = function f(y) {
+          return math.exp((y - _this2.drug.B) / _this2.drug.A);
+        };
+
+        var copy = range.slice();
+        range[0] = f(new_hi);
+        range[1] = f(new_lo);
+      }
+
       return range;
+    }
+  }, {
+    key: "rezoom_range",
+    value: function rezoom_range(delta, diff1, diff2) {
+      if (!this.$p.y_transform || this.$p.y_transform.auto) return;
+      this.zoom = 1.0; // TODO: further work (improve scaling ratio)
+
+      if (delta < 0) delta /= 3.75; // Btw, idk why 3.75, but it works
+
+      delta *= 0.25;
+      this.y_range = [this.layout.$_hi, this.layout.$_lo];
+      this.drug = {
+        y: 0,
+        z: this.zoom,
+        mid: math.log_mid(this.y_range, this.layout.height),
+        A: this.layout.A,
+        B: this.layout.B
+      };
+      this.zoom = this.calc_zoom({
+        center: {
+          y: delta * this.layout.height
+        }
+      });
+      this.comp.$emit('sidebar-transform', {
+        grid_id: this.id,
+        zoom: this.zoom,
+        auto: false,
+        range: this.calc_range(diff1, diff2),
+        drugging: true
+      });
+      this.drug = null;
+      this.comp.$emit('sidebar-transform', {
+        grid_id: this.id,
+        drugging: false
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this.mc) this.mc.destroy();
     }
   }, {
     key: "mousemove",
@@ -7495,8 +12491,8 @@ function () {
 
 /* harmony default export */ var Sidebarvue_type_script_lang_js_ = ({
   name: 'Sidebar',
-  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'grid_id', 'rerender', 'y_transform', 'tv_id', 'config'],
-  mixins: [canvas],
+  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'grid_id', 'rerender', 'y_transform', 'tv_id', 'config', 'shaders'],
+  mixins: [mixins_canvas],
   mounted: function mounted() {
     var el = this.$refs['canvas'];
     this.renderer = new sidebar_Sidebar(el, this);
@@ -7517,7 +12513,7 @@ function () {
         height: layout.height
       },
       style: {
-        backgroundColor: this.$props.colors.colorBack
+        backgroundColor: this.$props.colors.back
       }
     });
   },
@@ -7541,6 +12537,9 @@ function () {
         return _this.redraw();
       });
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (this.renderer) this.renderer.destroy();
   }
 });
 // CONCATENATED MODULE: ./src/components/Sidebar.vue?vue&type=script&lang=js&
@@ -7589,7 +12588,7 @@ var Legendvue_type_template_id_34724886_render = function() {
                 "span",
                 {
                   staticClass: "t-vue-title",
-                  style: { color: _vm.common.colors.colorTitle }
+                  style: { color: _vm.common.colors.title }
                 },
                 [
                   _vm._v(
@@ -7635,6 +12634,7 @@ var Legendvue_type_template_id_34724886_render = function() {
             _c("button-group", {
               attrs: {
                 buttons: _vm.common.buttons,
+                config: _vm.common.config,
                 ov_id: ind.id,
                 grid_id: _vm.grid_id,
                 index: ind.index,
@@ -7672,7 +12672,18 @@ var Legendvue_type_template_id_34724886_render = function() {
               ? _c("span", { staticClass: "t-vue-unknown" }, [
                   _vm._v("\n            (Unknown type)\n        ")
                 ])
-              : _vm._e()
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "transition",
+              { attrs: { name: "tvjs-appear" } },
+              [
+                ind.loading
+                  ? _c("spinner", { attrs: { colors: _vm.common.colors } })
+                  : _vm._e()
+              ],
+              1
+            )
           ],
           1
         )
@@ -7699,12 +12710,14 @@ var ButtonGroupvue_type_template_id_6f826426_render = function() {
       return _c("legend-button", {
         key: i,
         attrs: {
-          id: b,
+          id: b.name || b,
           tv_id: _vm.tv_id,
           ov_id: _vm.ov_id,
           grid_id: _vm.grid_id,
           index: _vm.index,
-          display: _vm.display
+          display: _vm.display,
+          icon: b.icon,
+          config: _vm.config
         },
         on: { "legend-button-click": _vm.button_click }
       })
@@ -7725,6 +12738,11 @@ var LegendButtonvue_type_template_id_1ad87362_render = function() {
   var _c = _vm._self._c || _h
   return _c("img", {
     staticClass: "t-vue-lbtn",
+    style: {
+      width: _vm.config.L_BTN_SIZE + "px",
+      height: _vm.config.L_BTN_SIZE + "px",
+      margin: _vm.config.L_BTN_MARGIN
+    },
     attrs: { src: _vm.base64, id: _vm.uuid },
     on: { click: _vm.onclick }
   })
@@ -7735,10 +12753,11 @@ LegendButtonvue_type_template_id_1ad87362_render._withStripped = true
 
 // CONCATENATED MODULE: ./src/components/LegendButton.vue?vue&type=template&id=1ad87362&
 
-// EXTERNAL MODULE: ./src/stuff/icons.json
-var icons = __webpack_require__(10);
-
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/LegendButton.vue?vue&type=script&lang=js&
+//
+//
+//
+//
 //
 //
 //
@@ -7747,11 +12766,11 @@ var icons = __webpack_require__(10);
 
 /* harmony default export */ var LegendButtonvue_type_script_lang_js_ = ({
   name: 'LegendButton',
-  props: ['id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display'],
+  props: ['id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display', 'icon', 'config'],
   mounted: function mounted() {},
   computed: {
     base64: function base64() {
-      return 'data:image/png;base64,' + icons[this.file_name];
+      return this.icon || icons[this.file_name];
     },
     file_name: function file_name() {
       var id = this.$props.id;
@@ -7772,7 +12791,7 @@ var icons = __webpack_require__(10);
       return this.$props.grid_id === 0 ? "onchart" : "offchart";
     },
     data_index: function data_index() {
-      return this.$props.grid_id === 0 ? this.$props.index : this.$props.grid_id - 1;
+      return this.$props.index;
     }
   },
   methods: {
@@ -7790,7 +12809,7 @@ var icons = __webpack_require__(10);
 // CONCATENATED MODULE: ./src/components/LegendButton.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_LegendButtonvue_type_script_lang_js_ = (LegendButtonvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/LegendButton.vue?vue&type=style&index=0&lang=css&
-var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(14);
+var LegendButtonvue_type_style_index_0_lang_css_ = __webpack_require__(46);
 
 // CONCATENATED MODULE: ./src/components/LegendButton.vue
 
@@ -7832,10 +12851,12 @@ LegendButton_component.options.__file = "src/components/LegendButton.vue"
 //
 //
 //
+//
+//
 
 /* harmony default export */ var ButtonGroupvue_type_script_lang_js_ = ({
   name: 'ButtonGroup',
-  props: ['buttons', 'tv_id', 'ov_id', 'grid_id', 'index', 'display'],
+  props: ['buttons', 'tv_id', 'ov_id', 'grid_id', 'index', 'display', 'config'],
   components: {
     LegendButton: LegendButton
   },
@@ -7848,7 +12869,7 @@ LegendButton_component.options.__file = "src/components/LegendButton.vue"
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_ButtonGroupvue_type_script_lang_js_ = (ButtonGroupvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/ButtonGroup.vue?vue&type=style&index=0&lang=css&
-var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(16);
+var ButtonGroupvue_type_style_index_0_lang_css_ = __webpack_require__(48);
 
 // CONCATENATED MODULE: ./src/components/ButtonGroup.vue
 
@@ -7874,6 +12895,67 @@ var ButtonGroup_component = normalizeComponent(
 if (false) { var ButtonGroup_api; }
 ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 /* harmony default export */ var ButtonGroup = (ButtonGroup_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Spinner.vue?vue&type=template&id=39432f99&
+var Spinnervue_type_template_id_39432f99_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "tvjs-spinner" },
+    _vm._l(4, function(i) {
+      return _c("div", { style: { background: _vm.colors.text } })
+    }),
+    0
+  )
+}
+var Spinnervue_type_template_id_39432f99_staticRenderFns = []
+Spinnervue_type_template_id_39432f99_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Spinner.vue?vue&type=template&id=39432f99&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Spinner.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var Spinnervue_type_script_lang_js_ = ({
+  name: 'Spinner',
+  props: ['colors']
+});
+// CONCATENATED MODULE: ./src/components/Spinner.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Spinnervue_type_script_lang_js_ = (Spinnervue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/Spinner.vue?vue&type=style&index=0&lang=css&
+var Spinnervue_type_style_index_0_lang_css_ = __webpack_require__(50);
+
+// CONCATENATED MODULE: ./src/components/Spinner.vue
+
+
+
+
+
+
+/* normalize component */
+
+var Spinner_component = normalizeComponent(
+  components_Spinnervue_type_script_lang_js_,
+  Spinnervue_type_template_id_39432f99_render,
+  Spinnervue_type_template_id_39432f99_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Spinner_api; }
+Spinner_component.options.__file = "src/components/Spinner.vue"
+/* harmony default export */ var Spinner = (Spinner_component.exports);
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Legend.vue?vue&type=script&lang=js&
 //
 //
@@ -7914,12 +12996,19 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ var Legendvue_type_script_lang_js_ = ({
   name: 'ChartLegend',
   props: ['common', 'values', 'grid_id', 'meta_props'],
   components: {
-    ButtonGroup: ButtonGroup
+    ButtonGroup: ButtonGroup,
+    Spinner: Spinner
   },
   computed: {
     ohlcv: function ohlcv() {
@@ -7927,9 +13016,20 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
         return Array(6).fill('n/a');
       }
 
-      var prec = this.layout.prec;
+      var prec = this.layout.prec; // TODO: main the main legend more customizable
+
+      var id = this.main_type + '_0';
+      var meta = this.$props.meta_props[id] || {};
+
+      if (meta.legend) {
+        return (meta.legend() || []).map(function (x) {
+          return x.value;
+        });
+      }
+
       return [this.$props.values.ohlcv[1].toFixed(prec), this.$props.values.ohlcv[2].toFixed(prec), this.$props.values.ohlcv[3].toFixed(prec), this.$props.values.ohlcv[4].toFixed(prec), this.$props.values.ohlcv[5] ? this.$props.values.ohlcv[5].toFixed(2) : 'n/a'];
     },
+    // TODO: add support for { grid: { id : N }}
     indicators: function indicators() {
       var _this = this;
 
@@ -7944,17 +13044,21 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
         return {
           v: 'display' in x.settings ? x.settings.display : true,
           name: x.name || id,
-          index: _this.json_data.indexOf(x),
+          index: (_this.off_data || _this.json_data).indexOf(x),
           id: id,
           values: values ? f(id, values) : _this.n_a(1),
-          unk: !(id in (_this.$props.meta_props || {}))
+          unk: !(id in (_this.$props.meta_props || {})),
+          loading: x.loading
         };
       });
     },
     calc_style: function calc_style() {
       var top = this.layout.height > 150 ? 10 : 5;
+      var grids = this.$props.common.layout.grids;
+      var w = grids[0] ? grids[0].width : undefined;
       return {
-        top: "".concat(this.layout.offset + top, "px")
+        top: "".concat(this.layout.offset + top, "px"),
+        width: "".concat(w - 20, "px")
       };
     },
     layout: function layout() {
@@ -7963,6 +13067,15 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
     },
     json_data: function json_data() {
       return this.$props.common.data;
+    },
+    off_data: function off_data() {
+      return this.$props.common.offchart;
+    },
+    main_type: function main_type() {
+      var f = this.common.data.find(function (x) {
+        return x.main;
+      });
+      return f ? f.type : undefined;
     }
   },
   methods: {
@@ -7978,12 +13091,12 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 
         if (typeof x == 'number') {
           // Show 8 digits for small values
-          x = x.toFixed(x > 0.001 ? 4 : 8);
+          x = x.toFixed(Math.abs(x) > 0.001 ? 4 : 8);
         }
 
         return {
           value: x,
-          color: cs ? cs[i] : undefined
+          color: cs ? cs[i % cs.length] : undefined
         };
       });
     },
@@ -8000,7 +13113,7 @@ ButtonGroup_component.options.__file = "src/components/ButtonGroup.vue"
 // CONCATENATED MODULE: ./src/components/Legend.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Legendvue_type_script_lang_js_ = (Legendvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Legend.vue?vue&type=style&index=0&lang=css&
-var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(18);
+var Legendvue_type_style_index_0_lang_css_ = __webpack_require__(52);
 
 // CONCATENATED MODULE: ./src/components/Legend.vue
 
@@ -8026,7 +13139,71 @@ var Legend_component = normalizeComponent(
 if (false) { var Legend_api; }
 Legend_component.options.__file = "src/components/Legend.vue"
 /* harmony default export */ var Legend = (Legend_component.exports);
+// CONCATENATED MODULE: ./src/mixins/shaders.js
+function shaders_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = shaders_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function shaders_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return shaders_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return shaders_arrayLikeToArray(o, minLen); }
+
+function shaders_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// Parser for shader events
+/* harmony default export */ var shaders = ({
+  methods: {
+    // Init shaders from extensions
+    init_shaders: function init_shaders(skin, prev) {
+      if (skin !== prev) {
+        if (prev) this.shaders = this.shaders.filter(function (x) {
+          return x.owner !== prev.id;
+        });
+
+        var _iterator = shaders_createForOfIteratorHelper(skin.shaders),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var Shader = _step.value;
+            var shader = new Shader();
+            shader.owner = skin.id;
+            this.shaders.push(shader);
+          } // TODO: Sort by zIndex
+
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    },
+    on_shader_event: function on_shader_event(d, target) {
+      if (d.event === 'new-shader') {
+        if (d.args[0].target === target) {
+          d.args[0].id = "".concat(d.args[1], "-").concat(d.args[2]);
+          this.shaders.push(d.args[0]);
+          this.rerender++;
+        }
+      }
+
+      if (d.event === 'remove-shaders') {
+        var id = d.args.join('-');
+        this.shaders = this.shaders.filter(function (x) {
+          return x.id !== id;
+        });
+      }
+    }
+  },
+  watch: {
+    skin: function skin(n, p) {
+      this.init_shaders(n, p);
+    }
+  },
+  data: function data() {
+    return {
+      shaders: []
+    };
+  }
+});
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Section.vue?vue&type=script&lang=js&
+
 //
 //
 //
@@ -8053,16 +13230,27 @@ Legend_component.options.__file = "src/components/Legend.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ var Sectionvue_type_script_lang_js_ = ({
   name: 'GridSection',
   props: ['common', 'grid_id'],
+  mixins: [shaders],
   components: {
     Grid: components_Grid,
     Sidebar: components_Sidebar,
     ChartLegend: Legend
+  },
+  mounted: function mounted() {
+    this.init_shaders(this.$props.common.skin);
   },
   methods: {
     range_changed: function range_changed(r) {
@@ -8082,8 +13270,34 @@ Legend_component.options.__file = "src/components/Legend.vue"
       this.$set(this.meta_props, d.layer_id, d);
       this.$emit('layer-meta-props', d);
     },
+    emit_custom_event: function emit_custom_event(d) {
+      this.on_shader_event(d, 'sidebar');
+      this.$emit('custom-event', d);
+    },
     button_click: function button_click(event) {
       this.$emit('legend-button-click', event);
+    },
+    register_kb: function register_kb(event) {
+      this.$emit('register-kb-listener', event);
+    },
+    remove_kb: function remove_kb(event) {
+      this.$emit('remove-kb-listener', event);
+    },
+    rezoom_range: function rezoom_range(event) {
+      var id = 'sb-' + event.grid_id;
+
+      if (this.$refs[id]) {
+        this.$refs[id].renderer.rezoom_range(event.z, event.diff1, event.diff2);
+      }
+    },
+    ghash: function ghash(val) {
+      // Measures grid heights configuration
+      var hs = val.layout.grids.map(function (x) {
+        return x.height;
+      });
+      return hs.reduce(function (a, b) {
+        return a + b;
+      }, '');
     }
   },
   computed: {
@@ -8093,12 +13307,21 @@ Legend_component.options.__file = "src/components/Legend.vue"
       var p = Object.assign({}, this.$props.common); // Split offchart data between offchart grids
 
       if (id > 0) {
-        p.data = [p.data[id - 1]];
+        var _p$data;
+
+        var all = p.data;
+        p.data = [p.data[id - 1]]; // Merge offchart overlays with custom ids with
+        // the existing onse (by comparing the grid ids)
+
+        (_p$data = p.data).push.apply(_p$data, toConsumableArray_default()(all.filter(function (x) {
+          return x.grid && x.grid.id === id;
+        })));
       }
 
       p.width = p.layout.grids[id].width;
       p.height = p.layout.grids[id].height;
       p.y_transform = p.y_ts[id];
+      p.shaders = this.grid_shaders;
       return p;
     },
     sidebar_props: function sidebar_props() {
@@ -8107,6 +13330,7 @@ Legend_component.options.__file = "src/components/Legend.vue"
       p.width = p.layout.grids[id].sb;
       p.height = p.layout.grids[id].height;
       p.y_transform = p.y_ts[id];
+      p.shaders = this.sb_shaders;
       return p;
     },
     section_values: function section_values() {
@@ -8120,22 +13344,48 @@ Legend_component.options.__file = "src/components/Legend.vue"
       var p = Object.assign({}, this.$props.common); // Split offchart data between offchart grids
 
       if (id > 0) {
+        var _p$data2;
+
+        var all = p.data;
+        p.offchart = all;
         p.data = [p.data[id - 1]];
+
+        (_p$data2 = p.data).push.apply(_p$data2, toConsumableArray_default()(all.filter(function (x) {
+          return x.grid && x.grid.id === id;
+        })));
       }
 
       return p;
     },
     get_meta_props: function get_meta_props() {
       return this.meta_props;
+    },
+    grid_shaders: function grid_shaders() {
+      return this.shaders.filter(function (x) {
+        return x.target === 'grid';
+      });
+    },
+    sb_shaders: function sb_shaders() {
+      return this.shaders.filter(function (x) {
+        return x.target === 'sidebar';
+      });
     }
   },
   watch: {
     common: {
       handler: function handler(val, old_val) {
+        var newhash = this.ghash(val);
+
+        if (newhash !== this.last_ghash) {
+          this.rerender++;
+        }
+
         if (val.data.length !== old_val.data.length) {
           // Look at this nasty trick!
           this.rerender++;
         }
+
+        this.last_ghash = newhash;
       },
       deep: true
     }
@@ -8143,14 +13393,15 @@ Legend_component.options.__file = "src/components/Legend.vue"
   data: function data() {
     return {
       meta_props: {},
-      rerender: 0
+      rerender: 0,
+      last_ghash: ''
     };
   }
 });
 // CONCATENATED MODULE: ./src/components/Section.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Sectionvue_type_script_lang_js_ = (Sectionvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Section.vue?vue&type=style&index=0&lang=css&
-var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(20);
+var Sectionvue_type_style_index_0_lang_css_ = __webpack_require__(54);
 
 // CONCATENATED MODULE: ./src/components/Section.vue
 
@@ -8177,26 +13428,29 @@ if (false) { var Section_api; }
 Section_component.options.__file = "src/components/Section.vue"
 /* harmony default export */ var Section = (Section_component.exports);
 // CONCATENATED MODULE: ./src/components/js/botbar.js
-function botbar_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function botbar_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function botbar_createClass(Constructor, protoProps, staticProps) { if (protoProps) botbar_defineProperties(Constructor.prototype, protoProps); if (staticProps) botbar_defineProperties(Constructor, staticProps); return Constructor; }
+
+function botbar_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = botbar_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function botbar_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return botbar_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return botbar_arrayLikeToArray(o, minLen); }
+
+function botbar_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
 var botbar_MINUTE15 = constants.MINUTE15,
+    botbar_MINUTE = constants.MINUTE,
     botbar_HOUR = constants.HOUR,
     botbar_DAY = constants.DAY,
     botbar_WEEK = constants.WEEK,
+    botbar_MONTH = constants.MONTH,
     botbar_YEAR = constants.YEAR,
     botbar_MONTHMAP = constants.MONTHMAP;
 
-var botbar_Botbar =
-/*#__PURE__*/
-function () {
+var botbar_Botbar = /*#__PURE__*/function () {
   function Botbar(canvas, comp) {
-    botbar_classCallCheck(this, Botbar);
+    classCallCheck_default()(this, Botbar);
 
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -8207,31 +13461,31 @@ function () {
     this.layout = this.$p.layout;
   }
 
-  botbar_createClass(Botbar, [{
+  createClass_default()(Botbar, [{
     key: "update",
     value: function update() {
       this.grid_0 = this.layout.grids[0];
       var width = this.layout.botbar.width;
       var height = this.layout.botbar.height;
       var sb = this.layout.grids[0].sb;
-      this.ctx.fillStyle = this.$p.colors.colorBack;
+      this.ctx.fillStyle = this.$p.colors.back;
       this.ctx.font = this.$p.font;
       this.ctx.fillRect(0, 0, width, height);
-      this.ctx.strokeStyle = this.$p.colors.colorScale;
+      this.ctx.strokeStyle = this.$p.colors.scale;
       this.ctx.beginPath();
       this.ctx.moveTo(0, 0.5);
       this.ctx.lineTo(Math.floor(width + 1), 0.5);
       this.ctx.stroke();
-      this.ctx.fillStyle = this.$p.colors.colorText;
+      this.ctx.fillStyle = this.$p.colors.text;
       this.ctx.beginPath();
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+
+      var _iterator = botbar_createForOfIteratorHelper(this.layout.botbar.xs),
+          _step;
 
       try {
-        for (var _iterator = this.layout.botbar.xs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
-          var lbl = this.format_date(p[1][0]);
+          var lbl = this.format_date(p);
           if (p[0] > width - sb) continue;
           this.ctx.moveTo(p[0] - 0.5, 0);
           this.ctx.lineTo(p[0] - 0.5, 4.5);
@@ -8245,75 +13499,111 @@ function () {
           this.ctx.globalAlpha = 1;
         }
       } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _iterator.e(err);
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
+        _iterator.f();
       }
 
       this.ctx.stroke();
-      if (this.$p.cursor.x && this.$p.cursor.t) this.panel();
+      this.apply_shaders();
+      if (this.$p.cursor.x && this.$p.cursor.t !== undefined) this.panel();
+    }
+  }, {
+    key: "apply_shaders",
+    value: function apply_shaders() {
+      var layout = this.layout.grids[0];
+      var props = {
+        layout: layout,
+        cursor: this.$p.cursor
+      };
+
+      var _iterator2 = botbar_createForOfIteratorHelper(this.comp.bot_shaders),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var s = _step2.value;
+          this.ctx.save();
+          s.draw(this.ctx, props);
+          this.ctx.restore();
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
     }
   }, {
     key: "panel",
     value: function panel() {
       var lbl = this.format_cursor_x();
-      this.ctx.fillStyle = this.$p.colors.colorPanel;
+      this.ctx.fillStyle = this.$p.colors.panel;
       var measure = this.ctx.measureText(lbl + '    ');
       var panwidth = Math.floor(measure.width);
-      var cursor = this.nearest();
+      var cursor = this.$p.cursor.x;
       var x = Math.floor(cursor - panwidth * 0.5);
       var y = -0.5;
       var panheight = this.comp.config.PANHEIGHT;
       this.ctx.fillRect(x, y, panwidth, panheight + 0.5);
-      this.ctx.fillStyle = this.$p.colors.colorTextHL;
+      this.ctx.fillStyle = this.$p.colors.textHL;
       this.ctx.textAlign = 'center';
       this.ctx.fillText(lbl, cursor, y + 16);
-    } // TODO: implement time zones
-
+    }
   }, {
     key: "format_date",
-    value: function format_date(t) {
-      var d = new Date(t);
-      if (utils.year_start(t) === t) return d.getFullYear();
-      if (utils.month_start(t) === t) return botbar_MONTHMAP[d.getMonth()];
-      if (utils.day_start(t) === t) return d.getDate();
-      var h = utils.add_zero(d.getHours());
-      var m = utils.add_zero(d.getMinutes());
+    value: function format_date(p) {
+      var t = p[1][0];
+      t = this.grid_0.ti_map.i2t(t);
+      var ti = this.$p.layout.grids[0].ti_map.tf; // Enable timezones only for tf < 1D
+
+      var k = ti < botbar_DAY ? 1 : 0;
+      var tZ = t + k * this.$p.timezone * botbar_HOUR; //t += new Date(t).getTimezoneOffset() * MINUTE
+
+      var d = new Date(tZ);
+
+      if (p[2] === botbar_YEAR || utils.year_start(t) === t) {
+        return d.getUTCFullYear();
+      }
+
+      if (p[2] === botbar_MONTH || utils.month_start(t) === t) {
+        return botbar_MONTHMAP[d.getUTCMonth()];
+      } // TODO(*) see grid_maker.js
+
+
+      if (utils.day_start(tZ) === tZ) return d.getUTCDate();
+      var h = utils.add_zero(d.getUTCHours());
+      var m = utils.add_zero(d.getUTCMinutes());
       return h + ":" + m;
     }
   }, {
     key: "format_cursor_x",
     value: function format_cursor_x() {
       var t = this.$p.cursor.t;
-      var ti = this.$p.interval;
-      var d = new Date(t);
+      t = this.grid_0.ti_map.i2t(t); //let ti = this.$p.interval
+
+      var ti = this.$p.layout.grids[0].ti_map.tf; // Enable timezones only for tf < 1D
+
+      var k = ti < botbar_DAY ? 1 : 0; //t += new Date(t).getTimezoneOffset() * MINUTE
+
+      var d = new Date(t + k * this.$p.timezone * botbar_HOUR);
 
       if (ti === botbar_YEAR) {
-        return d.getFullYear();
+        return d.getUTCFullYear();
       }
 
       if (ti < botbar_YEAR) {
-        var yr = '`' + "".concat(d.getFullYear()).slice(-2);
-        var mo = botbar_MONTHMAP[d.getMonth()];
+        var yr = '`' + "".concat(d.getUTCFullYear()).slice(-2);
+        var mo = botbar_MONTHMAP[d.getUTCMonth()];
         var dd = '01';
       }
 
-      if (ti <= botbar_WEEK) dd = d.getDate();
+      if (ti <= botbar_WEEK) dd = d.getUTCDate();
       var date = "".concat(dd, " ").concat(mo, " ").concat(yr);
       var time = '';
 
       if (ti < botbar_DAY) {
-        var h = utils.add_zero(d.getHours());
-        var m = utils.add_zero(d.getMinutes());
+        var h = utils.add_zero(d.getUTCHours());
+        var m = utils.add_zero(d.getUTCMinutes());
         time = h + ":" + m;
       }
 
@@ -8333,18 +13623,6 @@ function () {
       if (utils.day_start(t) === t) return true;
       if (ti <= botbar_MINUTE15 && t % botbar_HOUR === 0) return true;
       return false;
-    } // Nearest data object (when locked)
-
-  }, {
-    key: "nearest",
-    value: function nearest() {
-      if (this.$p.cursor.locked) {
-        var t = this.$p.cursor.values[0].ohlcv[0];
-        var x = Math.floor(this.grid_0.t_magnet(t));
-        return x;
-      }
-
-      return this.$p.cursor.x;
     }
   }, {
     key: "mousemove",
@@ -8370,8 +13648,8 @@ function () {
 
 /* harmony default export */ var Botbarvue_type_script_lang_js_ = ({
   name: 'Botbar',
-  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'rerender', 'tv_id', 'config'],
-  mixins: [canvas],
+  props: ['sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font', 'width', 'height', 'rerender', 'tv_id', 'config', 'shaders', 'timezone'],
+  mixins: [mixins_canvas],
   mounted: function mounted() {
     var el = this.$refs['canvas'];
     this.renderer = new botbar_Botbar(el, this);
@@ -8391,9 +13669,16 @@ function () {
         height: sett.height
       },
       style: {
-        backgroundColor: this.$props.colors.colorBack
+        backgroundColor: this.$props.colors.back
       }
     });
+  },
+  computed: {
+    bot_shaders: function bot_shaders() {
+      return this.$props.shaders.filter(function (x) {
+        return x.target === 'botbar';
+      });
+    }
   },
   watch: {
     range: {
@@ -8420,7 +13705,7 @@ function () {
 // CONCATENATED MODULE: ./src/components/Botbar.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_Botbarvue_type_script_lang_js_ = (Botbarvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./src/components/Botbar.vue?vue&type=style&index=0&lang=css&
-var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(22);
+var Botbarvue_type_style_index_0_lang_css_ = __webpack_require__(56);
 
 // CONCATENATED MODULE: ./src/components/Botbar.vue
 var Botbar_render, Botbar_staticRenderFns
@@ -8446,7 +13731,400 @@ var Botbar_component = normalizeComponent(
 if (false) { var Botbar_api; }
 Botbar_component.options.__file = "src/components/Botbar.vue"
 /* harmony default export */ var components_Botbar = (Botbar_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Keyboard.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+/* harmony default export */ var Keyboardvue_type_script_lang_js_ = ({
+  name: 'Keyboard',
+  created: function created() {
+    window.addEventListener('keydown', this.keydown);
+    window.addEventListener('keyup', this.keyup);
+    window.addEventListener('keypress', this.keypress);
+    this._listeners = {};
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('keydown', this.keydown);
+    window.removeEventListener('keyup', this.keyup);
+    window.removeEventListener('keypress', this.keypress);
+  },
+  render: function render(h) {
+    return h();
+  },
+  methods: {
+    keydown: function keydown(event) {
+      for (var id in this._listeners) {
+        var l = this._listeners[id];
+
+        if (l && l.keydown) {
+          l.keydown(event);
+        } else {
+          console.warn("No 'keydown' listener for ".concat(id));
+        }
+      }
+    },
+    keyup: function keyup(event) {
+      for (var id in this._listeners) {
+        var l = this._listeners[id];
+
+        if (l && l.keyup) {
+          l.keyup(event);
+        } else {
+          console.warn("No 'keyup' listener for ".concat(id));
+        }
+      }
+    },
+    keypress: function keypress(event) {
+      for (var id in this._listeners) {
+        var l = this._listeners[id];
+
+        if (l && l.keypress) {
+          l.keypress(event);
+        } else {
+          console.warn("No 'keypress' listener for ".concat(id));
+        }
+      }
+    },
+    register: function register(listener) {
+      this._listeners[listener.id] = listener;
+    },
+    remove: function remove(listener) {
+      delete this._listeners[listener.id];
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Keyboard.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Keyboardvue_type_script_lang_js_ = (Keyboardvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Keyboard.vue
+var Keyboard_render, Keyboard_staticRenderFns
+
+
+
+
+/* normalize component */
+
+var Keyboard_component = normalizeComponent(
+  components_Keyboardvue_type_script_lang_js_,
+  Keyboard_render,
+  Keyboard_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Keyboard_api; }
+Keyboard_component.options.__file = "src/components/Keyboard.vue"
+/* harmony default export */ var Keyboard = (Keyboard_component.exports);
+// CONCATENATED MODULE: ./src/mixins/datatrack.js
+// Data tracker/watcher
+
+/* harmony default export */ var datatrack = ({
+  methods: {
+    data_changed: function data_changed() {
+      var n = this.ohlcv;
+      var changed = false;
+
+      if (this._data_n0 !== n[0] && this._data_len !== n.length) {
+        changed = true;
+      }
+
+      this.check_all_data(changed);
+
+      if (this.ti_map.ib) {
+        this.reindex_delta(n[0], this._data_n0);
+      }
+
+      this._data_n0 = n[0];
+      this._data_len = n.length;
+      this.save_data_t();
+      return changed;
+    },
+    check_all_data: function check_all_data(changed) {
+      // If length of data in the Structure changed by > 1 point
+      // emit a special event for DC to recalc the scripts
+      // TODO: check overlays data too
+      var len = this._data_len || 0;
+
+      if (Math.abs(this.ohlcv.length - len) > 1 || this._data_n0 !== this.ohlcv[0]) {
+        this.$emit('custom-event', {
+          event: 'data-len-changed',
+          args: []
+        });
+      }
+    },
+    reindex_delta: function reindex_delta(n, p) {
+      n = n || [[0]];
+      p = p || [[0]];
+      var dt = n[0] - p[0];
+
+      if (dt !== 0 && this._data_t) {
+        // Convert t back to index
+        try {
+          // More precise method first
+          var nt = this._data_t + 0.01; // fix for the filter lib
+
+          var res = utils.fast_nearest(this.ohlcv, nt);
+          var cndl = this.ohlcv[res[0]];
+          var off = (nt - cndl[0]) / this.interval_ms;
+          this["goto"](res[0] + off);
+        } catch (e) {
+          this["goto"](this.ti_map.t2i(this._data_t));
+        }
+      }
+    },
+    save_data_t: function save_data_t() {
+      this._data_t = this.ti_map.i2t(this.range[1]); // save as t
+    }
+  },
+  data: function data() {
+    return {
+      _data_n0: null,
+      _data_len: 0,
+      _data_t: 0
+    };
+  }
+});
+// CONCATENATED MODULE: ./src/components/js/ti_mapping.js
+
+
+
+// Time-index mapping (for non-linear t-axis)
+
+var MAX_ARR = Math.pow(2, 32); // 3 MODES of index calculation for overlays/subcharts:
+// ::: indexSrc :::
+// * "map"      -> use TI mapping functions to detect index
+//                 (slowest, for stocks only. DEFAULT)
+//
+// * "calc"     -> calculate shift between sub & data
+//                 (faster, but overlay data should be perfectly
+//                  align with the main chart,
+//                  1-1 candle/data point. Supports Renko)
+//
+// * "data"     -> overlay data should come with candle index
+//                 (fastest, supports Renko)
+
+var ti_mapping_TI = /*#__PURE__*/function () {
+  function TI() {
+    classCallCheck_default()(this, TI);
+
+    this.ib = false;
+  }
+
+  createClass_default()(TI, [{
+    key: "init",
+    value: function init(params, res) {
+      var sub = params.sub,
+          interval = params.interval,
+          meta = params.meta,
+          $p = params.$props,
+          interval_ms = params.interval_ms,
+          sub_start = params.sub_start,
+          ib = params.ib;
+      this.ti_map = [];
+      this.it_map = [];
+      this.sub_i = [];
+      this.ib = ib;
+      this.sub = res;
+      this.ss = sub_start;
+      this.tf = interval_ms;
+      var start = meta.sub_start; // Skip mapping for the regular mode
+
+      if (this.ib) {
+        this.map_sub(res);
+      }
+    } // Make maps for the main subset
+
+  }, {
+    key: "map_sub",
+    value: function map_sub(res) {
+      for (var i = 0; i < res.length; i++) {
+        var t = res[i][0];
+
+        var _i = this.ss + i;
+
+        this.ti_map[t] = _i;
+        this.it_map[_i] = t; // Overwrite t with i
+
+        var copy = toConsumableArray_default()(res[i]);
+
+        copy[0] = _i;
+        this.sub_i.push(copy);
+      }
+    } // Map overlay data
+    // TODO: parse() called 3 times instead of 2 for 'spx_sample.json'
+
+  }, {
+    key: "parse",
+    value: function parse(data, mode) {
+      if (!this.ib || !this.sub[0] || mode === 'data') return data;
+      var res = [];
+      var k = 0; // Candlestick index
+
+      if (mode === 'calc') {
+        var shift = utils.index_shift(this.sub, data);
+
+        for (var i = 0; i < data.length; i++) {
+          var _i = this.ss + i;
+
+          var copy = toConsumableArray_default()(data[i]);
+
+          copy[0] = _i + shift;
+          res.push(copy);
+        }
+
+        return res;
+      } // If indicator data starts after ohlcv, calc the first index
+
+
+      if (data.length) {
+        try {
+          var k1 = utils.fast_nearest(this.sub, data[0][0])[0];
+          if (k1 !== null && k1 >= 0) k = k1;
+        } catch (e) {}
+      }
+
+      var t0 = this.sub[0][0];
+      var tN = this.sub[this.sub.length - 1][0];
+
+      for (var i = 0; i < data.length; i++) {
+        var _copy = toConsumableArray_default()(data[i]);
+
+        var tk = this.sub[k][0];
+        var t = data[i][0];
+        var index = this.ti_map[t];
+
+        if (index === undefined) {
+          // Linear extrapolation
+          if (t < t0 || t > tN) {
+            index = this.ss + k - (tk - t) / this.tf;
+            t = data[i + 1] ? data[i + 1][0] : undefined;
+          } // Linear interpolation
+          else {
+              var tk2 = this.sub[k + 1][0];
+              index = tk === tk2 ? this.ss + k : this.ss + k + (t - tk) / (tk2 - tk);
+              t = data[i + 1] ? data[i + 1][0] : undefined;
+            }
+        } // Race of data points & sub points (ohlcv)
+        // (like turn based increments)
+
+
+        while (k + 1 < this.sub.length - 1 && t > this.sub[k + 1][0]) {
+          k++;
+          tk = this.sub[k][0];
+        }
+
+        _copy[0] = index;
+        res.push(_copy);
+      }
+
+      return res;
+    } // index => time
+
+  }, {
+    key: "i2t",
+    value: function i2t(i) {
+      if (!this.ib || !this.sub.length) return i; // Regular mode
+      // Discrete mapping
+
+      var res = this.it_map[i];
+      if (res !== undefined) return res; // Linear extrapolation
+      else if (i >= this.ss + this.sub_i.length) {
+          var di = i - (this.ss + this.sub_i.length) + 1;
+          var last = this.sub[this.sub.length - 1];
+          return last[0] + di * this.tf;
+        } else if (i < this.ss) {
+          var _di = i - this.ss;
+
+          return this.sub[0][0] + _di * this.tf;
+        } // Linear Interpolation
+
+      var i1 = Math.floor(i) - this.ss;
+      var i2 = i1 + 1;
+      var len = this.sub.length;
+      if (i2 >= len) i2 = len - 1;
+      var sub1 = this.sub[i1];
+      var sub2 = this.sub[i2];
+
+      if (sub1 && sub2) {
+        var t1 = sub1[0];
+        var t2 = sub2[0];
+        return t1 + (t2 - t1) * (i - i1 - this.ss);
+      }
+
+      return undefined;
+    } // Map or bypass depending on the mode
+
+  }, {
+    key: "i2t_mode",
+    value: function i2t_mode(i, mode) {
+      return mode === 'data' ? i : this.i2t(i);
+    } // time => index
+    // TODO: when switch from IB mode to regular tools
+    // disappear (bc there is no more mapping)
+
+  }, {
+    key: "t2i",
+    value: function t2i(t) {
+      if (!this.sub.length) return undefined; // Discrete mapping
+
+      var res = this.ti_map[t];
+      if (res !== undefined) return res;
+      var t0 = this.sub[0][0];
+      var tN = this.sub[this.sub.length - 1][0]; // Linear extrapolation
+
+      if (t < t0) {
+        return this.ss - (t0 - t) / this.tf;
+      } else if (t > tN) {
+        var k = this.sub.length - 1;
+        return this.ss + k - (tN - t) / this.tf;
+      }
+
+      try {
+        // Linear Interpolation
+        var i = utils.fast_nearest(this.sub, t);
+        var tk = this.sub[i[0]][0];
+        var tk2 = this.sub[i[1]][0];
+
+        var _k = (t - tk) / (tk2 - tk);
+
+        return this.ss + i[0] + _k * (i[1] - i[0]);
+      } catch (e) {}
+
+      return undefined;
+    } // Auto detect: is it time or index?
+    // Assuming that index-based mode is ON
+
+  }, {
+    key: "smth2i",
+    value: function smth2i(smth) {
+      if (smth > MAX_ARR) {
+        return this.t2i(smth); // it was time
+      } else {
+          return smth; // it was an index
+        }
+    }
+  }, {
+    key: "smth2t",
+    value: function smth2t(smth) {
+      if (smth < MAX_ARR) {
+        return this.i2t(smth); // it was an index
+      } else {
+          return smth; // it was time
+        }
+    }
+  }]);
+
+  return TI;
+}();
+
+
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Chart.vue?vue&type=script&lang=js&
+
+
 //
 //
 //
@@ -8465,6 +14143,18 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
 
 
 
@@ -8473,10 +14163,12 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
 
 /* harmony default export */ var Chartvue_type_script_lang_js_ = ({
   name: 'Chart',
-  props: ['title_txt', 'data', 'width', 'height', 'font', 'colors', 'overlays', 'tv_id', 'config', 'buttons'],
+  props: ['title_txt', 'data', 'width', 'height', 'font', 'colors', 'overlays', 'tv_id', 'config', 'buttons', 'toolbar', 'ib', 'skin', 'timezone'],
+  mixins: [shaders, datatrack],
   components: {
     GridSection: Section,
-    Botbar: components_Botbar
+    Botbar: components_Botbar,
+    Keyboard: Keyboard
   },
   created: function created() {
     // Context for text measurements
@@ -8484,17 +14176,25 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
 
     this.init_range();
     this.sub = this.subset();
+    utils.overwrite(this.range, this.range); // Fix for IB mode
+
     this._layout = new js_layout(this); // Updates current cursor values
 
     this.updater = new updater(this);
+    this.update_last_candle();
+    this.init_shaders(this.skin);
   },
   methods: {
     range_changed: function range_changed(r) {
       // Overwite & keep the original references
+      // Quick fix for IB mode (switch 2 next lines)
+      // TODO: wtf?
+      var sub = this.subset(r);
       utils.overwrite(this.range, r);
-      var sub = this.subset();
       utils.overwrite(this.sub, sub);
       this.update_layout();
+      this.$emit('range-changed', r);
+      if (this.$props.ib) this.save_data_t();
     },
     "goto": function goto(t) {
       var dt = this.range[1] - this.range[0];
@@ -8505,13 +14205,23 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
     },
     cursor_changed: function cursor_changed(e) {
       this.updater.sync(e);
+      if (this._hook_xchanged) this.ce('?x-changed', e);
     },
     cursor_locked: function cursor_locked(state) {
+      if (this.cursor.scroll_lock && state) return;
       this.cursor.locked = state;
+      if (this._hook_xlocked) this.ce('?x-locked', state);
     },
     calc_interval: function calc_interval() {
+      var _this = this;
+
       if (this.ohlcv.length < 2) return;
-      this.interval = utils.detect_interval(this.ohlcv);
+      var tf = utils.parse_tf(this.forced_tf);
+      this.interval_ms = tf || utils.detect_interval(this.ohlcv);
+      this.interval = this.$props.ib ? 1 : this.interval_ms;
+      utils.warn(function () {
+        return _this.$props.ib && !_this.chart.tf;
+      }, constants.IB_TF_WARN, constants.SECOND);
     },
     set_ytransform: function set_ytransform(s) {
       var obj = this.y_transforms[s.grid_id] || {};
@@ -8526,21 +14236,43 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
       var l = this.ohlcv.length - 1;
       if (this.ohlcv.length < 2) return;
 
-      if (this.ohlcv.length < dl) {
+      if (this.ohlcv.length <= dl) {
         var s = 0,
             d = ml;
       } else {
         s = l - dl, d = 0.5;
       }
 
-      utils.overwrite(this.range, [this.ohlcv[s][0] - this.interval * d, this.ohlcv[l][0] + this.interval * ml]);
+      if (!this.$props.ib) {
+        utils.overwrite(this.range, [this.ohlcv[s][0] - this.interval * d, this.ohlcv[l][0] + this.interval * ml]);
+      } else {
+        utils.overwrite(this.range, [s - this.interval * d, l + this.interval * ml]);
+      }
     },
-    subset: function subset() {
-      return utils.fast_filter(this.ohlcv, this.range[0] - this.interval, this.range[1]);
+    subset: function subset(range) {
+      if (range === void 0) {
+        range = this.range;
+      }
+
+      var _this$filter = this.filter(this.ohlcv, range[0] - this.interval, range[1]),
+          _this$filter2 = slicedToArray_default()(_this$filter, 2),
+          res = _this$filter2[0],
+          index = _this$filter2[1];
+
+      this.ti_map = new ti_mapping_TI();
+
+      if (res) {
+        this.sub_start = index;
+        this.ti_map.init(this, res);
+        if (!this.$props.ib) return res || [];
+        return this.ti_map.sub_i;
+      }
+
+      return [];
     },
     common_props: function common_props() {
       return {
-        title_txt: this.$props.title_txt,
+        title_txt: this.chart.name || this.$props.title_txt,
         layout: this._layout,
         sub: this.sub,
         range: this.range,
@@ -8551,18 +14283,25 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
         y_ts: this.y_transforms,
         tv_id: this.$props.tv_id,
         config: this.$props.config,
-        buttons: this.$props.buttons
+        buttons: this.$props.buttons,
+        meta: this.meta,
+        skin: this.$props.skin
       };
     },
     overlay_subset: function overlay_subset(source) {
-      var _this = this;
+      var _this2 = this;
 
       return source.map(function (d) {
+        var res = utils.fast_filter(d.data, _this2.ti_map.i2t_mode(_this2.range[0] - _this2.interval, d.indexSrc), _this2.ti_map.i2t_mode(_this2.range[1], d.indexSrc));
         return {
           type: d.type,
           name: d.name,
-          data: utils.fast_filter(d.data, _this.range[0] - _this.interval, _this.range[1]),
-          settings: d.settings
+          data: _this2.ti_map.parse(res[0] || [], d.indexSrc || 'map'),
+          settings: d.settings || _this2.settings_ov,
+          grid: d.grid || {},
+          tf: utils.parse_tf(d.tf),
+          i0: res[1],
+          loading: d.loading
         };
       });
     },
@@ -8579,17 +14318,66 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
         this.$set(this.layers_meta, d.grid_id, {});
       }
 
-      this.$set(this.layers_meta[d.grid_id], utils.get_num_id(d.layer_id), d); // Rerender
+      this.$set(this.layers_meta[d.grid_id], d.layer_id, d); // Rerender
 
       this.update_layout();
     },
-    update_layout: function update_layout() {
-      this.calc_interval();
+    remove_meta_props: function remove_meta_props(grid_id, layer_id) {
+      if (grid_id in this.layers_meta) {
+        this.$delete(this.layers_meta[grid_id], layer_id);
+      }
+    },
+    emit_custom_event: function emit_custom_event(d) {
+      this.on_shader_event(d, 'botbar');
+      this.$emit('custom-event', d);
+
+      if (d.event === 'remove-layer-meta') {
+        this.remove_meta_props.apply(this, toConsumableArray_default()(d.args));
+      }
+    },
+    update_layout: function update_layout(clac_tf) {
+      if (clac_tf) this.calc_interval();
       var lay = new js_layout(this);
       utils.copy_layout(this._layout, lay);
+      if (this._hook_update) this.ce('?chart-update', lay);
     },
     legend_button_click: function legend_button_click(event) {
       this.$emit('legend-button-click', event);
+    },
+    register_kb: function register_kb(event) {
+      if (!this.$refs.keyboard) return;
+      this.$refs.keyboard.register(event);
+    },
+    remove_kb: function remove_kb(event) {
+      if (!this.$refs.keyboard) return;
+      this.$refs.keyboard.remove(event);
+    },
+    update_last_candle: function update_last_candle() {
+      // TODO: add last values for all overlays
+      this.last_candle = this.ohlcv ? this.ohlcv[this.ohlcv.length - 1] : undefined;
+    },
+    // Hook events for extensions
+    ce: function ce(event) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      this.emit_custom_event({
+        event: event,
+        args: args
+      });
+    },
+    // Set hooks list (called from an extension)
+    hooks: function hooks() {
+      var _this3 = this;
+
+      for (var _len2 = arguments.length, list = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        list[_key2] = arguments[_key2];
+      }
+
+      list.forEach(function (x) {
+        return _this3["_hook_".concat(x)] = true;
+      });
     }
   },
   computed: {
@@ -8601,7 +14389,9 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
         type: this.chart.type || 'Candles',
         main: true,
         data: this.sub,
-        settings: this.chart.settings || {}
+        i0: this.sub_start,
+        settings: this.chart.settings || this.settings_ohlcv,
+        grid: this.chart.grid || {}
       });
       p.overlays = this.$props.overlays;
       return p;
@@ -8627,13 +14417,34 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
       return this.$props.data.ohlcv || this.chart.data || [];
     },
     chart: function chart() {
-      return this.$props.data.chart || {};
+      return this.$props.data.chart || {
+        grid: {}
+      };
     },
     onchart: function onchart() {
       return this.$props.data.onchart || [];
     },
     offchart: function offchart() {
       return this.$props.data.offchart || [];
+    },
+    filter: function filter() {
+      return this.$props.ib ? utils.fast_filter_i : utils.fast_filter;
+    },
+    styles: function styles() {
+      var w = this.$props.toolbar ? this.$props.config.TOOLBAR : 0;
+      return {
+        'margin-left': "".concat(w, "px")
+      };
+    },
+    meta: function meta() {
+      return {
+        last: this.last_candle,
+        sub_start: this.sub_start,
+        activated: this.activated
+      };
+    },
+    forced_tf: function forced_tf() {
+      return this.chart.tf;
     }
   },
   data: function data() {
@@ -8652,30 +14463,84 @@ Botbar_component.options.__file = "src/components/Botbar.vue"
         y$: null,
         grid_id: null,
         locked: false,
-        values: {}
+        values: {},
+        scroll_lock: false
       },
       // A trick to re-render botbar
       rerender: 0,
       // Layers meta-props (changing behaviour)
       layers_meta: {},
       // Y-transforms (for y-zoom and -shift)
-      y_transforms: {}
+      y_transforms: {},
+      // Default OHLCV settings (when using DataStructure v1.0)
+      settings_ohlcv: {},
+      // Default overlay settings
+      settings_ov: {},
+      // Meta data
+      last_candle: [],
+      sub_start: undefined,
+      activated: false
     };
   },
   watch: {
     width: function width() {
       this.update_layout();
+      if (this._hook_resize) this.ce('?chart-resize');
     },
     height: function height() {
       this.update_layout();
+      if (this._hook_resize) this.ce('?chart-resize');
+    },
+    ib: function ib(nw) {
+      if (!nw) {
+        // Change range index => time
+        var t1 = this.ti_map.i2t(this.range[0]);
+        var t2 = this.ti_map.i2t(this.range[1]);
+        utils.overwrite(this.range, [t1, t2]);
+        this.interval = this.interval_ms;
+      } else {
+        this.init_range(); // TODO: calc index range instead
+
+        utils.overwrite(this.range, this.range);
+        this.interval = 1;
+      }
+
+      var sub = this.subset();
+      utils.overwrite(this.sub, sub);
+      this.update_layout();
+    },
+    timezone: function timezone() {
+      this.update_layout();
+    },
+    colors: function colors() {
+      utils.overwrite(this.range, this.range);
+    },
+    forced_tf: function forced_tf(n, p) {
+      this.update_layout(true);
+      this.ce('exec-all-scripts');
     },
     data: {
-      handler: function handler() {
+      handler: function handler(n, p) {
         if (!this.sub.length) this.init_range();
-        var sub = this.subset();
-        utils.overwrite(this.sub, sub);
-        this.update_layout();
+        var sub = this.subset(); // Fixes Infinite loop warn, when the subset is empty
+        // TODO: Consider removing 'sub' from data entirely
+
+        if (this.sub.length || sub.length) {
+          utils.overwrite(this.sub, sub);
+        }
+
+        var nw = this.data_changed();
+        this.update_layout(nw);
         utils.overwrite(this.range, this.range);
+        this.cursor.scroll_lock = !!n.scrollLock;
+
+        if (n.scrollLock && this.cursor.locked) {
+          this.cursor.locked = false;
+        }
+
+        if (this._hook_data) this.ce('?chart-data', nw);
+        this.update_last_candle(); // TODO: update legend values for overalys
+
         this.rerender++;
       },
       deep: true
@@ -8707,7 +14572,906 @@ var Chart_component = normalizeComponent(
 if (false) { var Chart_api; }
 Chart_component.options.__file = "src/components/Chart.vue"
 /* harmony default export */ var Chart = (Chart_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Toolbar.vue?vue&type=template&id=021887fb&
+var Toolbarvue_type_template_id_021887fb_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      key: _vm.tool_count,
+      staticClass: "trading-vue-toolbar",
+      style: _vm.styles
+    },
+    _vm._l(_vm.groups, function(tool, i) {
+      return tool.icon && !tool.hidden
+        ? _c("toolbar-item", {
+            key: i,
+            attrs: {
+              data: tool,
+              subs: _vm.sub_map,
+              dc: _vm.data,
+              config: _vm.config,
+              colors: _vm.colors,
+              selected: _vm.is_selected(tool)
+            },
+            on: { "item-selected": _vm.selected }
+          })
+        : _vm._e()
+    }),
+    1
+  )
+}
+var Toolbarvue_type_template_id_021887fb_staticRenderFns = []
+Toolbarvue_type_template_id_021887fb_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Toolbar.vue?vue&type=template&id=021887fb&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ToolbarItem.vue?vue&type=template&id=227b3c2e&
+var ToolbarItemvue_type_template_id_227b3c2e_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      class: ["trading-vue-tbitem", _vm.selected ? "selected-item" : ""],
+      style: _vm.item_style,
+      on: { click: _vm.emit_selected, mousedown: _vm.mousedown }
+    },
+    [
+      _c("div", {
+        staticClass: "trading-vue-tbicon tvjs-pixelated",
+        style: _vm.icon_style
+      }),
+      _vm._v(" "),
+      _vm.data.group
+        ? _c(
+            "div",
+            {
+              staticClass: "trading-vue-tbitem-exp",
+              style: _vm.exp_style,
+              on: {
+                click: _vm.exp_click,
+                mousedown: _vm.expmousedown,
+                mouseover: _vm.expmouseover,
+                mouseleave: _vm.expmouseleave
+              }
+            },
+            [_vm._v("\n        ᐳ\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.show_exp_list
+        ? _c("item-list", {
+            attrs: {
+              config: _vm.config,
+              items: _vm.data.items,
+              colors: _vm.colors,
+              dc: _vm.dc
+            },
+            on: {
+              "close-list": _vm.close_list,
+              "item-selected": _vm.emit_selected_sub
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var ToolbarItemvue_type_template_id_227b3c2e_staticRenderFns = []
+ToolbarItemvue_type_template_id_227b3c2e_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/ToolbarItem.vue?vue&type=template&id=227b3c2e&
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ItemList.vue?vue&type=template&id=c50b23fe&
+var ItemListvue_type_template_id_c50b23fe_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "tvjs-item-list",
+      style: _vm.list_style(),
+      on: { mousedown: _vm.thismousedown }
+    },
+    _vm._l(_vm.items, function(item) {
+      return !item.hidden
+        ? _c(
+            "div",
+            {
+              class: _vm.item_class(item),
+              style: _vm.item_style(item),
+              on: {
+                click: function(e) {
+                  return _vm.item_click(e, item)
+                }
+              }
+            },
+            [
+              _c("div", {
+                staticClass: "trading-vue-tbicon tvjs-pixelated",
+                style: _vm.icon_style(item)
+              }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(item.type))])
+            ]
+          )
+        : _vm._e()
+    }),
+    0
+  )
+}
+var ItemListvue_type_template_id_c50b23fe_staticRenderFns = []
+ItemListvue_type_template_id_c50b23fe_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/ItemList.vue?vue&type=template&id=c50b23fe&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ItemList.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var ItemListvue_type_script_lang_js_ = ({
+  name: 'ItemList',
+  props: ['config', 'items', 'colors', 'dc'],
+  mounted: function mounted() {
+    window.addEventListener('mousedown', this.onmousedown);
+  },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('mousedown', this.onmousedown);
+  },
+  methods: {
+    list_style: function list_style() {
+      var conf = this.$props.config;
+      var w = conf.TOOLBAR;
+      var brd = this.colors.tbListBorder || this.colors.grid;
+      var bstl = "1px solid ".concat(brd);
+      return {
+        left: "".concat(w, "px"),
+        background: this.colors.back,
+        borderTop: bstl,
+        borderRight: bstl,
+        borderBottom: bstl
+      };
+    },
+    item_class: function item_class(item) {
+      if (this.dc.tool === item.type) {
+        return "tvjs-item-list-item selected-item";
+      }
+
+      return "tvjs-item-list-item";
+    },
+    item_style: function item_style(item) {
+      var conf = this.$props.config;
+      var h = conf.TB_ICON + conf.TB_ITEM_M * 2 + 8;
+      var sel = this.dc.tool === item.type;
+      return {
+        height: "".concat(h, "px"),
+        color: sel ? undefined : "#888888"
+      };
+    },
+    icon_style: function icon_style(data) {
+      var conf = this.$props.config;
+      var br = conf.TB_ICON_BRI;
+      var im = conf.TB_ITEM_M;
+      return {
+        'background-image': "url(".concat(data.icon, ")"),
+        'width': '25px',
+        'height': '25px',
+        'margin': "".concat(im, "px"),
+        'filter': "brightness(".concat(br, ")")
+      };
+    },
+    item_click: function item_click(e, item) {
+      e.cancelBubble = true;
+      this.$emit('item-selected', item);
+      this.$emit('close-list');
+    },
+    onmousedown: function onmousedown() {
+      this.$emit('close-list');
+    },
+    thismousedown: function thismousedown(e) {
+      e.stopPropagation();
+    }
+  },
+  computed: {},
+  data: function data() {
+    return {};
+  }
+});
+// CONCATENATED MODULE: ./src/components/ItemList.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_ItemListvue_type_script_lang_js_ = (ItemListvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/ItemList.vue?vue&type=style&index=0&lang=css&
+var ItemListvue_type_style_index_0_lang_css_ = __webpack_require__(58);
+
+// CONCATENATED MODULE: ./src/components/ItemList.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ItemList_component = normalizeComponent(
+  components_ItemListvue_type_script_lang_js_,
+  ItemListvue_type_template_id_c50b23fe_render,
+  ItemListvue_type_template_id_c50b23fe_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var ItemList_api; }
+ItemList_component.options.__file = "src/components/ItemList.vue"
+/* harmony default export */ var ItemList = (ItemList_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ToolbarItem.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var ToolbarItemvue_type_script_lang_js_ = ({
+  name: 'ToolbarItem',
+  props: ['data', 'selected', 'colors', 'tv_id', 'config', 'dc', 'subs'],
+  components: {
+    ItemList: ItemList
+  },
+  mounted: function mounted() {
+    if (this.data.group) {
+      var type = this.subs[this.data.group];
+      var item = this.data.items.find(function (x) {
+        return x.type === type;
+      });
+      if (item) this.sub_item = item;
+    }
+  },
+  methods: {
+    mousedown: function mousedown(e) {
+      var _this = this;
+
+      this.click_start = utils.now();
+      this.click_id = setTimeout(function () {
+        _this.show_exp_list = true;
+      }, this.config.TB_ICON_HOLD);
+    },
+    expmouseover: function expmouseover() {
+      this.exp_hover = true;
+    },
+    expmouseleave: function expmouseleave() {
+      this.exp_hover = false;
+    },
+    expmousedown: function expmousedown(e) {
+      if (this.show_exp_list) e.stopPropagation();
+    },
+    emit_selected: function emit_selected() {
+      if (utils.now() - this.click_start > this.config.TB_ICON_HOLD) return;
+      clearTimeout(this.click_id);
+
+      if (!this.data.group) {
+        this.$emit('item-selected', this.data);
+      } else {
+        var item = this.sub_item || this.data.items[0];
+        this.$emit('item-selected', item);
+      }
+    },
+    emit_selected_sub: function emit_selected_sub(item) {
+      this.$emit('item-selected', item);
+      this.sub_item = item;
+    },
+    exp_click: function exp_click(e) {
+      if (!this.data.group) return;
+      e.cancelBubble = true;
+      this.show_exp_list = !this.show_exp_list;
+    },
+    close_list: function close_list() {
+      this.show_exp_list = false;
+    }
+  },
+  computed: {
+    item_style: function item_style() {
+      if (this.$props.data.type === 'System:Splitter') {
+        return this.splitter;
+      }
+
+      var conf = this.$props.config;
+      var im = conf.TB_ITEM_M;
+      var m = (conf.TOOLBAR - conf.TB_ICON) * 0.5 - im;
+      var s = conf.TB_ICON + im * 2;
+      var b = this.exp_hover ? 0 : 3;
+      return {
+        'width': "".concat(s, "px"),
+        'height': "".concat(s, "px"),
+        'margin': "8px ".concat(m, "px 0px ").concat(m, "px"),
+        'border-radius': "3px ".concat(b, "px ").concat(b, "px 3px")
+      };
+    },
+    icon_style: function icon_style() {
+      if (this.$props.data.type === 'System:Splitter') {
+        return {};
+      }
+
+      var conf = this.$props.config;
+      var br = conf.TB_ICON_BRI;
+      var sz = conf.TB_ICON;
+      var im = conf.TB_ITEM_M;
+      var ic = this.sub_item ? this.sub_item.icon : this.$props.data.icon;
+      return {
+        'background-image': "url(".concat(ic, ")"),
+        'width': "".concat(sz, "px"),
+        'height': "".concat(sz, "px"),
+        'margin': "".concat(im, "px"),
+        'filter': "brightness(".concat(br, ")")
+      };
+    },
+    exp_style: function exp_style() {
+      var conf = this.$props.config;
+      var im = conf.TB_ITEM_M;
+      var s = conf.TB_ICON * 0.5 + im;
+      var p = (conf.TOOLBAR - s * 2) / 4;
+      return {
+        padding: "".concat(s, "px ").concat(p, "px"),
+        transform: this.show_exp_list ? "scale(-0.6, 1)" : "scaleX(0.6)"
+      };
+    },
+    splitter: function splitter() {
+      var conf = this.$props.config;
+      var colors = this.$props.colors;
+      var c = colors.grid;
+      var im = conf.TB_ITEM_M;
+      var m = (conf.TOOLBAR - conf.TB_ICON) * 0.5 - im;
+      var s = conf.TB_ICON + im * 2;
+      return {
+        'width': "".concat(s, "px"),
+        'height': '1px',
+        'margin': "8px ".concat(m, "px 8px ").concat(m, "px"),
+        'background-color': c
+      };
+    }
+  },
+  data: function data() {
+    return {
+      exp_hover: false,
+      show_exp_list: false,
+      sub_item: null
+    };
+  }
+});
+// CONCATENATED MODULE: ./src/components/ToolbarItem.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_ToolbarItemvue_type_script_lang_js_ = (ToolbarItemvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/ToolbarItem.vue?vue&type=style&index=0&lang=css&
+var ToolbarItemvue_type_style_index_0_lang_css_ = __webpack_require__(60);
+
+// CONCATENATED MODULE: ./src/components/ToolbarItem.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ToolbarItem_component = normalizeComponent(
+  components_ToolbarItemvue_type_script_lang_js_,
+  ToolbarItemvue_type_template_id_227b3c2e_render,
+  ToolbarItemvue_type_template_id_227b3c2e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var ToolbarItem_api; }
+ToolbarItem_component.options.__file = "src/components/ToolbarItem.vue"
+/* harmony default export */ var ToolbarItem = (ToolbarItem_component.exports);
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Toolbar.vue?vue&type=script&lang=js&
+function Toolbarvue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = Toolbarvue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function Toolbarvue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return Toolbarvue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Toolbarvue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function Toolbarvue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Toolbarvue_type_script_lang_js_ = ({
+  name: 'Toolbar',
+  props: ['data', 'height', 'colors', 'tv_id', 'config'],
+  components: {
+    ToolbarItem: ToolbarItem
+  },
+  mounted: function mounted() {},
+  methods: {
+    selected: function selected(tool) {
+      this.$emit('custom-event', {
+        event: 'tool-selected',
+        args: [tool.type]
+      });
+
+      if (tool.group) {
+        // TODO: emit the sub map to DC (save)
+        this.sub_map[tool.group] = tool.type;
+      }
+    },
+    is_selected: function is_selected(tool) {
+      var _this = this;
+
+      if (tool.group) {
+        return !!tool.items.find(function (x) {
+          return x.type === _this.data.tool;
+        });
+      }
+
+      return tool.type === this.data.tool;
+    }
+  },
+  computed: {
+    styles: function styles() {
+      var colors = this.$props.colors;
+      var b = this.$props.config.TB_BORDER;
+      var w = this.$props.config.TOOLBAR - b;
+      var c = colors.grid;
+      var cb = colors.tbBack || colors.back;
+      var brd = colors.tbBorder || colors.scale;
+      var st = this.$props.config.TB_B_STYLE;
+      return {
+        'width': "".concat(w, "px"),
+        'height': "".concat(this.$props.height - 3, "px"),
+        'background-color': cb,
+        'border-right': "".concat(b, "px ").concat(st, " ").concat(brd)
+      };
+    },
+    groups: function groups() {
+      var arr = [];
+
+      var _iterator = Toolbarvue_type_script_lang_js_createForOfIteratorHelper(this.data.tools || []),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var tool = _step.value;
+
+          if (!tool.group) {
+            arr.push(tool);
+            continue;
+          }
+
+          var g = arr.find(function (x) {
+            return x.group === tool.group;
+          });
+
+          if (!g) {
+            arr.push({
+              group: tool.group,
+              icon: tool.icon,
+              items: [tool]
+            });
+          } else {
+            g.items.push(tool);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return arr;
+    }
+  },
+  watch: {
+    data: {
+      handler: function handler(n) {
+        // For some reason Vue.js doesn't want to
+        // update 'tools' automatically when new item
+        // is pushed/removed. Yo, Vue, I herd you
+        // you want more dirty tricks?
+        if (n.tools) this.tool_count = n.tools.length;
+      },
+      deep: true
+    }
+  },
+  data: function data() {
+    return {
+      tool_count: 0,
+      sub_map: {}
+    };
+  }
+});
+// CONCATENATED MODULE: ./src/components/Toolbar.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Toolbarvue_type_script_lang_js_ = (Toolbarvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/Toolbar.vue?vue&type=style&index=0&lang=css&
+var Toolbarvue_type_style_index_0_lang_css_ = __webpack_require__(62);
+
+// CONCATENATED MODULE: ./src/components/Toolbar.vue
+
+
+
+
+
+
+/* normalize component */
+
+var Toolbar_component = normalizeComponent(
+  components_Toolbarvue_type_script_lang_js_,
+  Toolbarvue_type_template_id_021887fb_render,
+  Toolbarvue_type_template_id_021887fb_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Toolbar_api; }
+Toolbar_component.options.__file = "src/components/Toolbar.vue"
+/* harmony default export */ var Toolbar = (Toolbar_component.exports);
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Widgets.vue?vue&type=template&id=5fe4312f&
+var Widgetsvue_type_template_id_5fe4312f_render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "tvjs-widgets",
+      style: { width: _vm.width + "px", height: _vm.height + "px" }
+    },
+    _vm._l(Object.keys(_vm.map), function(id) {
+      return _c(_vm.initw(id), {
+        key: id,
+        tag: "component",
+        attrs: {
+          id: id,
+          main: _vm.map[id].ctrl,
+          data: _vm.map[id].data,
+          tv: _vm.tv,
+          dc: _vm.dc
+        }
+      })
+    }),
+    1
+  )
+}
+var Widgetsvue_type_template_id_5fe4312f_staticRenderFns = []
+Widgetsvue_type_template_id_5fe4312f_render._withStripped = true
+
+
+// CONCATENATED MODULE: ./src/components/Widgets.vue?vue&type=template&id=5fe4312f&
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Widgets.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var Widgetsvue_type_script_lang_js_ = ({
+  name: 'Widgets',
+  props: ['width', 'height', 'map', 'tv', 'dc'],
+  methods: {
+    initw: function initw(id) {
+      return this.$props.map[id].cls;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Widgets.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Widgetsvue_type_script_lang_js_ = (Widgetsvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/Widgets.vue?vue&type=style&index=0&lang=css&
+var Widgetsvue_type_style_index_0_lang_css_ = __webpack_require__(64);
+
+// CONCATENATED MODULE: ./src/components/Widgets.vue
+
+
+
+
+
+
+/* normalize component */
+
+var Widgets_component = normalizeComponent(
+  components_Widgetsvue_type_script_lang_js_,
+  Widgetsvue_type_template_id_5fe4312f_render,
+  Widgetsvue_type_template_id_5fe4312f_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var Widgets_api; }
+Widgets_component.options.__file = "src/components/Widgets.vue"
+/* harmony default export */ var Widgets = (Widgets_component.exports);
+// CONCATENATED MODULE: ./src/mixins/xcontrol.js
+function xcontrol_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = xcontrol_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function xcontrol_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return xcontrol_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return xcontrol_arrayLikeToArray(o, minLen); }
+
+function xcontrol_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// extensions control
+/* harmony default export */ var xcontrol = ({
+  mounted: function mounted() {
+    this.ctrllist();
+    this.skin_styles();
+  },
+  methods: {
+    // Build / rebuild component list
+    ctrllist: function ctrllist() {
+      this.ctrl_destroy();
+      this.controllers = [];
+
+      var _iterator = xcontrol_createForOfIteratorHelper(this.$props.extensions),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var x = _step.value;
+          var name = x.Main.__name__;
+
+          if (!this.xSettings[name]) {
+            this.$set(this.xSettings, name, {});
+          }
+
+          var nc = new x.Main(this, // tv inst
+          this.data, // dc
+          this.xSettings[name] // settings
+          );
+          nc.name = name;
+          this.controllers.push(nc);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return this.controllers;
+    },
+    // TODO: preventDefault
+    pre_dc: function pre_dc(e) {
+      var _iterator2 = xcontrol_createForOfIteratorHelper(this.controllers),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var ctrl = _step2.value;
+
+          if (ctrl.update) {
+            ctrl.update(e);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    },
+    post_dc: function post_dc(e) {
+      var _iterator3 = xcontrol_createForOfIteratorHelper(this.controllers),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var ctrl = _step3.value;
+
+          if (ctrl.post_update) {
+            ctrl.post_update(e);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+    },
+    ctrl_destroy: function ctrl_destroy() {
+      var _iterator4 = xcontrol_createForOfIteratorHelper(this.controllers),
+          _step4;
+
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var ctrl = _step4.value;
+          if (ctrl.destroy) ctrl.destroy();
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+    },
+    skin_styles: function skin_styles() {
+      var id = 'tvjs-skin-styles';
+      var stbr = document.getElementById(id);
+
+      if (stbr) {
+        var parent = stbr.parentNode;
+        parent.removeChild(stbr);
+      }
+
+      if (this.skin_proto && this.skin_proto.styles) {
+        var sheet = document.createElement('style');
+        sheet.setAttribute("id", id);
+        sheet.innerHTML = this.skin_proto.styles;
+        this.$el.appendChild(sheet);
+      }
+    }
+  },
+  computed: {
+    ws: function ws() {
+      var ws = {};
+
+      var _iterator5 = xcontrol_createForOfIteratorHelper(this.controllers),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var ctrl = _step5.value;
+
+          if (ctrl.widgets) {
+            for (var id in ctrl.widgets) {
+              ws[id] = ctrl.widgets[id];
+              ws[id].ctrl = ctrl;
+            }
+          }
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+
+      return ws;
+    },
+    skins: function skins() {
+      var sks = {};
+
+      var _iterator6 = xcontrol_createForOfIteratorHelper(this.$props.extensions),
+          _step6;
+
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var x = _step6.value;
+
+          for (var id in x.skins || {}) {
+            sks[id] = x.skins[id];
+          }
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+
+      return sks;
+    },
+    skin_proto: function skin_proto() {
+      return this.skins[this.$props.skin];
+    },
+    colorpack: function colorpack() {
+      var sel = this.skins[this.$props.skin];
+      return sel ? sel.colors : undefined;
+    }
+  },
+  watch: {
+    // TODO: This is fast & dirty fix, need
+    // to fix the actual reactivity problem
+    skin: function skin(n, p) {
+      if (n !== p) this.resetChart();
+      this.skin_styles();
+    },
+    extensions: function extensions() {
+      this.ctrllist();
+    },
+    xSettings: {
+      handler: function handler(n, p) {
+        var _iterator7 = xcontrol_createForOfIteratorHelper(this.controllers),
+            _step7;
+
+        try {
+          for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+            var ctrl = _step7.value;
+
+            if (ctrl.onsettings) {
+              ctrl.onsettings(n, p);
+            }
+          }
+        } catch (err) {
+          _iterator7.e(err);
+        } finally {
+          _iterator7.f();
+        }
+      },
+      deep: true
+    }
+  },
+  data: function data() {
+    return {
+      controllers: []
+    };
+  }
+});
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/TradingVue.vue?vue&type=script&lang=js&
+
+
+function TradingVuevue_type_script_lang_js_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = TradingVuevue_type_script_lang_js_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function TradingVuevue_type_script_lang_js_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return TradingVuevue_type_script_lang_js_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return TradingVuevue_type_script_lang_js_arrayLikeToArray(o, minLen); }
+
+function TradingVuevue_type_script_lang_js_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -8727,13 +15491,33 @@ Chart_component.options.__file = "src/components/Chart.vue"
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ var TradingVuevue_type_script_lang_js_ = ({
   name: 'TradingVue',
   components: {
-    Chart: Chart
+    Chart: Chart,
+    Toolbar: Toolbar,
+    Widgets: Widgets
   },
+  mixins: [xcontrol],
   props: {
     titleTxt: {
       type: String,
@@ -8811,9 +15595,23 @@ Chart_component.options.__file = "src/components/Chart.vue"
       type: String,
       "default": '#565c68'
     },
+    colorTbBack: {
+      type: String
+    },
+    colorTbBorder: {
+      type: String,
+      "default": '#8282827d'
+    },
+    colors: {
+      type: Object
+    },
     font: {
-      typr: String,
+      type: String,
       "default": constants.ChartConfig.FONT
+    },
+    toolbar: {
+      type: Boolean,
+      "default": false
     },
     data: {
       type: Object,
@@ -8839,32 +15637,99 @@ Chart_component.options.__file = "src/components/Chart.vue"
       "default": function _default() {
         return [];
       }
+    },
+    indexBased: {
+      type: Boolean,
+      "default": false
+    },
+    extensions: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    xSettings: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
+    },
+    skin: {
+      type: String // Skin Name
+
+    },
+    timezone: {
+      type: Number,
+      "default": 0
     }
   },
   computed: {
     // Copy a subset of TradingVue props
     chart_props: function chart_props() {
+      var offset = this.$props.toolbar ? this.chart_config.TOOLBAR : 0;
       var chart_props = {
         title_txt: this.$props.titleTxt,
-        overlays: this.$props.overlays,
-        data: this.$props.data,
-        width: this.$props.width,
+        overlays: this.$props.overlays.concat(this.mod_ovs),
+        data: this.decubed,
+        width: this.$props.width - offset,
         height: this.$props.height,
-        font: this.$props.font,
+        font: this.font_comp,
         buttons: this.$props.legendButtons,
-        colors: {}
+        toolbar: this.$props.toolbar,
+        ib: this.$props.indexBased || this.index_based || false,
+        colors: Object.assign({}, this.$props.colors || this.colorpack),
+        skin: this.skin_proto,
+        timezone: this.$props.timezone
       };
-
-      for (var k in this.$props) {
-        if (k.indexOf('color') === 0) {
-          chart_props.colors[k] = this.$props[k];
-        }
-      }
-
+      this.parse_colors(chart_props.colors);
       return chart_props;
     },
     chart_config: function chart_config() {
-      return Object.assign(constants.ChartConfig, this.$props.chartConfig);
+      return Object.assign({}, constants.ChartConfig, this.$props.chartConfig);
+    },
+    decubed: function decubed() {
+      var data = this.$props.data;
+
+      if (data.data !== undefined) {
+        // DataCube detected
+        data.init_tvjs(this);
+        return data.data;
+      } else {
+        return data;
+      }
+    },
+    index_based: function index_based() {
+      var base = this.$props.data;
+
+      if (base.chart) {
+        return base.chart.indexBased;
+      } else if (base.data) {
+        return base.data.chart.indexBased;
+      }
+
+      return false;
+    },
+    mod_ovs: function mod_ovs() {
+      var arr = [];
+
+      var _iterator = TradingVuevue_type_script_lang_js_createForOfIteratorHelper(this.$props.extensions),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var x = _step.value;
+          arr.push.apply(arr, toConsumableArray_default()(Object.values(x.overlays)));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return arr;
+    },
+    font_comp: function font_comp() {
+      return this.skin_proto && this.skin_proto.font ? this.skin_proto.font : this.font;
     }
   },
   data: function data() {
@@ -8872,30 +15737,152 @@ Chart_component.options.__file = "src/components/Chart.vue"
       reset: 0
     };
   },
+  beforeDestroy: function beforeDestroy() {
+    this.custom_event({
+      event: 'before-destroy'
+    });
+    this.ctrl_destroy();
+  },
   methods: {
-    resetChart: function resetChart() {
+    // TODO: reset extensions?
+    resetChart: function resetChart(resetRange) {
+      var _this = this;
+
+      if (resetRange === void 0) {
+        resetRange = true;
+      }
+
       this.reset++;
+      var range = this.getRange();
+
+      if (!resetRange && range[0] && range[1]) {
+        this.$nextTick(function () {
+          return _this.setRange.apply(_this, toConsumableArray_default()(range));
+        });
+      }
+
+      this.$nextTick(function () {
+        return _this.custom_event({
+          event: 'chart-reset',
+          args: []
+        });
+      });
     },
     "goto": function goto(t) {
+      // TODO: limit goto & setRange (out of data error)
+      if (this.chart_props.ib) {
+        var ti_map = this.$refs.chart.ti_map;
+        t = ti_map.smth2i(t);
+      }
+
       this.$refs.chart["goto"](t);
     },
     setRange: function setRange(t1, t2) {
+      if (this.chart_props.ib) {
+        var ti_map = this.$refs.chart.ti_map;
+        t1 = ti_map.smth2i(t1);
+        t2 = ti_map.smth2i(t2);
+      }
+
       this.$refs.chart.setRange(t1, t2);
     },
     getRange: function getRange() {
+      if (this.chart_props.ib) {
+        var ti_map = this.$refs.chart.ti_map; // Time range => index range
+
+        return this.$refs.chart.range.map(function (x) {
+          return ti_map.i2t(x);
+        });
+      }
+
       return this.$refs.chart.range;
     },
     getCursor: function getCursor() {
-      return this.$refs.chart.cursor;
+      var cursor = this.$refs.chart.cursor;
+
+      if (this.chart_props.ib) {
+        var ti_map = this.$refs.chart.ti_map;
+        var copy = Object.assign({}, cursor);
+        copy.i = copy.t;
+        copy.t = ti_map.i2t(copy.t);
+        return copy;
+      }
+
+      return cursor;
     },
     legend_button: function legend_button(event) {
-      this.$emit('legend-button-click', event);
+      this.custom_event({
+        event: 'legend-button-click',
+        args: [event]
+      });
+    },
+    custom_event: function custom_event(d) {
+      if ('args' in d) {
+        this.$emit.apply(this, [d.event].concat(toConsumableArray_default()(d.args)));
+      } else {
+        this.$emit(d.event);
+      }
+
+      var data = this.$props.data;
+      var ctrl = this.controllers.length !== 0;
+      if (ctrl) this.pre_dc(d);
+
+      if (data.tv) {
+        // If the data object is DataCube
+        data.on_custom_event(d.event, d.args);
+      }
+
+      if (ctrl) this.post_dc(d);
+    },
+    range_changed: function range_changed(r) {
+      if (this.chart_props.ib) {
+        var ti_map = this.$refs.chart.ti_map;
+        r = r.map(function (x) {
+          return ti_map.i2t(x);
+        });
+      }
+
+      this.$emit('range-changed', r);
+      this.custom_event({
+        event: 'range-changed',
+        args: [r]
+      });
+      if (this.onrange) this.onrange(r);
+    },
+    set_loader: function set_loader(dc) {
+      var _this2 = this;
+
+      this.onrange = function (r) {
+        var pf = _this2.chart_props.ib ? '_ms' : '';
+        var tf = _this2.$refs.chart['interval' + pf];
+        dc.range_changed(r, tf);
+      };
+    },
+    parse_colors: function parse_colors(colors) {
+      for (var k in this.$props) {
+        if (k.indexOf('color') === 0 && k !== 'colors') {
+          var k2 = k.replace('color', '');
+          k2 = k2[0].toLowerCase() + k2.slice(1);
+          if (colors[k2]) continue;
+          colors[k2] = this.$props[k];
+        }
+      }
+    },
+    mousedown: function mousedown() {
+      this.$refs.chart.activated = true;
+    },
+    mouseleave: function mouseleave() {
+      this.$refs.chart.activated = false;
     }
   }
 });
 // CONCATENATED MODULE: ./src/TradingVue.vue?vue&type=script&lang=js&
  /* harmony default export */ var src_TradingVuevue_type_script_lang_js_ = (TradingVuevue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/TradingVue.vue?vue&type=style&index=0&lang=css&
+var TradingVuevue_type_style_index_0_lang_css_ = __webpack_require__(66);
+
 // CONCATENATED MODULE: ./src/TradingVue.vue
+
 
 
 
@@ -8918,15 +15905,2600 @@ var TradingVue_component = normalizeComponent(
 if (false) { var TradingVue_api; }
 TradingVue_component.options.__file = "src/TradingVue.vue"
 /* harmony default export */ var TradingVue = (TradingVue_component.exports);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
+var helpers_typeof = __webpack_require__(10);
+var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
+var assertThisInitialized = __webpack_require__(27);
+var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
+var regenerator = __webpack_require__(7);
+var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__(11);
+var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
+
+// EXTERNAL MODULE: ./src/helpers/tmp/ww$$$.json
+var ww$$$ = __webpack_require__(32);
+
+// EXTERNAL MODULE: ./node_modules/lz-string/libs/lz-string.js
+var lz_string = __webpack_require__(33);
+var lz_string_default = /*#__PURE__*/__webpack_require__.n(lz_string);
+
+// EXTERNAL MODULE: ./src/helpers/script_ww.js
+var script_ww = __webpack_require__(69);
+
+// CONCATENATED MODULE: ./src/helpers/script_ww_api.js
+
+
+
+
+// Webworker interface
+// Compiled webworker (see webpack/ww_plugin.js)
+
+
+
+ // For webworker-loader to find the ww
+
+var script_ww_api_WebWork = /*#__PURE__*/function () {
+  function WebWork(dc) {
+    classCallCheck_default()(this, WebWork);
+
+    this.dc = dc;
+    this.tasks = {};
+
+    this.onevent = function () {};
+
+    this.start();
+  }
+
+  createClass_default()(WebWork, [{
+    key: "start",
+    value: function start() {
+      var _this = this;
+
+      if (this.worker) this.worker.terminate(); // URL.createObjectURL
+
+      window.URL = window.URL || window.webkitURL;
+      var data = lz_string_default.a.decompressFromBase64(ww$$$[0]);
+      var blob;
+
+      try {
+        blob = new Blob([data], {
+          type: 'application/javascript'
+        });
+      } catch (e) {
+        // Backwards-compatibility
+        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+        blob = new BlobBuilder();
+        blob.append(data);
+        blob = blob.getBlob();
+      }
+
+      this.worker = new Worker(URL.createObjectURL(blob));
+
+      this.worker.onmessage = function (e) {
+        return _this.onmessage(e);
+      };
+    }
+  }, {
+    key: "start_socket",
+    value: function start_socket() {
+      var _this2 = this;
+
+      if (!this.dc.sett.node_url) return;
+      this.socket = new WebSocket(this.dc.sett.node_url);
+      this.socket.addEventListener('message', function (e) {
+        _this2.onmessage({
+          data: JSON.parse(e.data)
+        });
+      });
+      this.msg_queue = [];
+    }
+  }, {
+    key: "send",
+    value: function send(msg, tx_keys) {
+      if (this.dc.sett.node_url) {
+        return this.send_node(msg, tx_keys);
+      }
+
+      if (tx_keys) {
+        var tx_objs = tx_keys.map(function (k) {
+          return msg.data[k];
+        });
+        this.worker.postMessage(msg, tx_objs);
+      } else {
+        this.worker.postMessage(msg);
+      }
+    } // Send to node.js via websocket
+
+  }, {
+    key: "send_node",
+    value: function send_node(msg, tx_keys) {
+      if (!this.socket) this.start_socket();
+
+      if (this.socket && this.socket.readyState) {
+        // Send the old messages first
+        while (this.msg_queue.length) {
+          var m = this.msg_queue.shift();
+          this.socket.send(JSON.stringify(m));
+        }
+
+        this.socket.send(JSON.stringify(msg));
+      } else {
+        this.msg_queue.push(msg);
+      }
+    }
+  }, {
+    key: "onmessage",
+    value: function onmessage(e) {
+      if (e.data.id in this.tasks) {
+        this.tasks[e.data.id](e.data.data);
+        delete this.tasks[e.data.id];
+      } else {
+        this.onevent(e);
+      }
+    } // Execute a task
+
+  }, {
+    key: "exec",
+    value: function () {
+      var _exec = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(type, data, tx_keys) {
+        var _this3 = this;
+
+        return regenerator_default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", new Promise(function (rs, rj) {
+                  var id = utils.uuid();
+
+                  _this3.send({
+                    type: type,
+                    id: id,
+                    data: data
+                  }, tx_keys);
+
+                  _this3.tasks[id] = function (res) {
+                    rs(res);
+                  };
+                }));
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function exec(_x, _x2, _x3) {
+        return _exec.apply(this, arguments);
+      }
+
+      return exec;
+    }() // Execute a task, but just fucking do it,
+    // do not wait for the result
+
+  }, {
+    key: "just",
+    value: function just(type, data, tx_keys) {
+      var id = utils.uuid();
+      this.send({
+        type: type,
+        id: id,
+        data: data
+      }, tx_keys);
+    } // Relay an event from iframe postMessage
+    // (for the future)
+
+  }, {
+    key: "relay",
+    value: function () {
+      var _relay = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee2(event, just) {
+        var _this4 = this;
+
+        return regenerator_default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (just === void 0) {
+                  just = false;
+                }
+
+                return _context2.abrupt("return", new Promise(function (rs, rj) {
+                  _this4.send(event, event.tx_keys);
+
+                  if (!just) {
+                    _this4.tasks[event.id] = function (res) {
+                      rs(res);
+                    };
+                  }
+                }));
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function relay(_x4, _x5) {
+        return _relay.apply(this, arguments);
+      }
+
+      return relay;
+    }()
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (this.worker) this.worker.terminate();
+    }
+  }]);
+
+  return WebWork;
+}();
+
+/* harmony default export */ var script_ww_api = (script_ww_api_WebWork);
+// CONCATENATED MODULE: ./src/helpers/script_utils.js
+
+
+var FDEFS = /(function |)([$A-Z_][0-9A-Z_$\.]*)[\s]*?\((.*?)\)/gmi;
+var SBRACKETS = /([$A-Z_][0-9A-Z_$\.]*)[\s]*?\[([^"^\[^\]]+?)\]/gmi;
+var TFSTR = /(\d+)(\w*)/gm;
+var BUF_INC = 5;
+var tf_cache = {};
+function f_args(src) {
+  FDEFS.lastIndex = 0;
+  var m = FDEFS.exec(src);
+
+  if (m) {
+    var fkeyword = m[1].trim();
+    var fname = m[2].trim();
+    var fargs = m[3].trim();
+    return fargs.split(',').map(function (x) {
+      return x.trim();
+    });
+  }
+
+  return [];
+}
+function f_body(src) {
+  return src.slice(src.indexOf("{") + 1, src.lastIndexOf("}"));
+}
+function wrap_idxs(src, pre) {
+  if (pre === void 0) {
+    pre = '';
+  }
+
+  SBRACKETS.lastIndex = 0;
+  var changed = false;
+
+  do {
+    var m = SBRACKETS.exec(src);
+
+    if (m) {
+      var vname = m[1].trim();
+      var vindex = m[2].trim();
+
+      if (vindex === '0' || parseInt(vindex) < BUF_INC) {
+        continue;
+      }
+
+      switch (vname) {
+        case 'let':
+        case 'var':
+        case 'return':
+          continue;
+      } //let wrap = `${pre}_v(${vname}, ${vindex})[${vindex}]`
+
+
+      var wrap = "".concat(vname, "[").concat(pre, "_i(").concat(vindex, ", ").concat(vname, ")]");
+      src = src.replace(m[0], wrap);
+      changed = true;
+    }
+  } while (m);
+
+  return changed ? src : src;
+} // Get all module helper classes
+
+function make_module_lib(mod) {
+  var lib = {};
+
+  for (var k in mod) {
+    if (k === 'main' || k === 'id') continue;
+    var a = f_args(mod[k]);
+    lib[k] = new Function(a, f_body(mod[k]));
+  }
+
+  return lib;
+}
+function get_raw_src(f) {
+  if (typeof f === 'string') return f;
+  var src = f.toString();
+  return src.slice(src.indexOf("{") + 1, src.lastIndexOf("}"));
+} // Get tf in ms from pairs such (`15`, `m`)
+
+function tf_from_pair(num, pf) {
+  var mult = 1;
+
+  switch (pf) {
+    case 's':
+      mult = constants.SECOND;
+      break;
+
+    case 'm':
+      mult = constants.MINUTE;
+      break;
+
+    case 'H':
+      mult = constants.HOUR;
+      break;
+
+    case 'D':
+      mult = constants.DAY;
+      break;
+
+    case 'W':
+      mult = constants.WEEK;
+      break;
+
+    case 'M':
+      mult = constants.MONTH;
+      break;
+
+    case 'Y':
+      mult = constants.YEAR;
+      break;
+  }
+
+  return parseInt(num) * mult;
+}
+function tf_from_str(str) {
+  if (typeof str === 'number') return str;
+  if (tf_cache[str]) return tf_cache[str];
+  TFSTR.lastIndex = 0;
+  var m = TFSTR.exec(str);
+
+  if (m) {
+    tf_cache[str] = tf_from_pair(m[1], m[2]);
+    return tf_cache[str];
+  }
+
+  return undefined;
+}
+function get_fn_id(pre, id) {
+  return pre + '-' + id.split('<-').pop();
+} // Apply filter for all new overlays
+
+function ovf(obj, f) {
+  var nw = {};
+
+  for (var id in obj) {
+    nw[id] = {};
+
+    for (var k in obj[id]) {
+      if (k === 'data') continue;
+      nw[id][k] = obj[id][k];
+    }
+
+    nw[id].data = f(obj[id].data);
+  }
+
+  return nw;
+} // Return index of the next element in
+// dataset (since t). Impl: simple binary search
+// TODO: optimize (remember the penultimate
+// iteration and start from there)
+
+function nextt(data, t, ti) {
+  if (ti === void 0) {
+    ti = 0;
+  }
+
+  var i0 = 0;
+  var iN = data.length - 1;
+
+  while (i0 <= iN) {
+    var mid = Math.floor((i0 + iN) / 2);
+
+    if (data[mid][ti] === t) {
+      return mid;
+    } else if (data[mid][ti] < t) {
+      i0 = mid + 1;
+    } else {
+      iN = mid - 1;
+    }
+  }
+
+  return t < data[mid][ti] ? mid : mid + 1;
+} // Estimated size of datasets
+
+function size_of_dss(data) {
+  var bytes = 0;
+
+  for (var id in data) {
+    if (data[id].data && data[id].data[0]) {
+      var s0 = size_of(data[id].data[0]);
+      bytes += s0 * data[id].data.length;
+    }
+  }
+
+  return bytes;
+} // Used to measure the size of dataset
+
+function size_of(object) {
+  var list = [],
+      stack = [object],
+      bytes = 0;
+
+  while (stack.length) {
+    var value = stack.pop();
+
+    var type = typeof_default()(value);
+
+    if (type === 'boolean') {
+      bytes += 4;
+    } else if (type === 'string') {
+      bytes += value.length * 2;
+    } else if (type === 'number') {
+      bytes += 8;
+    } else if (type === 'object' && list.indexOf(value) === -1) {
+      list.push(value);
+
+      for (var i in value) {
+        stack.push(value[i]);
+      }
+    }
+  }
+
+  return bytes;
+}
+function script_utils_now() {
+  return new Date().getTime();
+}
+// CONCATENATED MODULE: ./src/helpers/dataset.js
+
+
+
+
+
+
+function dataset_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = dataset_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function dataset_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dataset_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dataset_arrayLikeToArray(o, minLen); }
+
+function dataset_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// Dataset proxy between vuejs & WebWorker
+
+
+var dataset_Dataset = /*#__PURE__*/function () {
+  function Dataset(dc, desc) {
+    classCallCheck_default()(this, Dataset);
+
+    // TODO: dataset url arrow fn tells WW
+    // to load the ds directly from web
+    this.type = desc.type;
+    this.id = desc.id;
+    this.dc = dc; // Send the data to WW
+
+    if (desc.data) {
+      this.dc.ww.just('upload-data', defineProperty_default()({}, this.id, desc)); // Remove the data from the descriptor
+
+      delete desc.data;
+    }
+
+    var proto = Object.getPrototypeOf(this);
+    Object.setPrototypeOf(desc, proto);
+    Object.defineProperty(desc, 'dc', {
+      get: function get() {
+        return dc;
+      }
+    });
+  } // Watch for the changes of descriptors
+
+
+  createClass_default()(Dataset, [{
+    key: "set",
+    // Set data (overwrite the whole dataset)
+    value: function set(data, exec) {
+      if (exec === void 0) {
+        exec = true;
+      }
+
+      this.dc.ww.just('dataset-op', {
+        id: this.id,
+        type: 'set',
+        data: data,
+        exec: exec
+      });
+    } // Update with new data (array of data points)
+
+  }, {
+    key: "update",
+    value: function update(arr) {
+      this.dc.ww.just('update-data', defineProperty_default()({}, this.id, arr));
+    } // Send WW a chunk to merge. The merge algo
+    // here is simpler than in DC. It just adds
+    // data at the beginning or/and the end of ds
+
+  }, {
+    key: "merge",
+    value: function merge(data, exec) {
+      if (exec === void 0) {
+        exec = true;
+      }
+
+      this.dc.ww.just('dataset-op', {
+        id: this.id,
+        type: 'mrg',
+        data: data,
+        exec: exec
+      });
+    } // Remove the ds from WW
+
+  }, {
+    key: "remove",
+    value: function remove(exec) {
+      if (exec === void 0) {
+        exec = true;
+      }
+
+      this.dc.del("datasets.".concat(this.id));
+      this.dc.ww.just('dataset-op', {
+        id: this.id,
+        type: 'del',
+        exec: exec
+      });
+      delete this.dc.dss[this.id];
+    } // Fetch data from WW
+
+  }, {
+    key: "data",
+    value: function () {
+      var _data = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
+        var ds;
+        return regenerator_default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.dc.ww.exec('get-dataset', this.id);
+
+              case 2:
+                ds = _context.sent;
+
+                if (ds) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 5:
+                return _context.abrupt("return", ds.data);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function data() {
+        return _data.apply(this, arguments);
+      }
+
+      return data;
+    }()
+  }], [{
+    key: "watcher",
+    value: function watcher(n, p) {
+      var nids = n.map(function (x) {
+        return x.id;
+      });
+      var pids = p.map(function (x) {
+        return x.id;
+      });
+
+      var _iterator = dataset_createForOfIteratorHelper(nids),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var id = _step.value;
+
+          if (!pids.includes(id)) {
+            var ds = n.filter(function (x) {
+              return x.id === id;
+            })[0];
+            this.dss[id] = new Dataset(this, ds);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var _iterator2 = dataset_createForOfIteratorHelper(pids),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var id = _step2.value;
+
+          if (!nids.includes(id) && this.dss[id]) {
+            this.dss[id].remove();
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    } // Make an object for data transfer
+
+  }, {
+    key: "make_tx",
+    value: function make_tx(dc, types) {
+      var main = dc.data.chart.data;
+      var base = {};
+
+      if (types.find(function (x) {
+        return x.type === 'OHLCV';
+      })) {
+        base = {
+          ohlcv: main
+        };
+      } // TODO: add more sophisticated search
+      // (using 'script.datasets' paramerter)
+
+      /*for (var req of types) {
+          let ds = Object.values(dc.dss || {})
+              .find(x => x.type === req.type)
+          if (ds && ds.data) {
+              base[ds.id] = {
+                  id: ds.id,
+                  type: ds.type,
+                  data: ds.data
+              }
+          }
+      }*/
+      // TODO: Data request callback ?
+
+
+      return base;
+    }
+  }]);
+
+  return Dataset;
+}(); // Dataset reciever (created on WW)
+
+
+
+var dataset_DatasetWW = /*#__PURE__*/function () {
+  function DatasetWW(id, data) {
+    classCallCheck_default()(this, DatasetWW);
+
+    this.last_upd = script_utils_now();
+    this.id = id;
+
+    if (Array.isArray(data)) {
+      // Regular array
+      this.data = data;
+      if (id === 'ohlcv') this.type = 'OHLCV';
+    } else {
+      // Dataset descriptor
+      this.data = data.data;
+      this.type = data.type;
+    }
+  } // Update from 'update-data' event
+  // TODO: ds size limit (in MB / data points)
+
+
+  createClass_default()(DatasetWW, [{
+    key: "merge",
+    value: function merge(data) {
+      var len = this.data.length;
+
+      if (!len) {
+        this.data = data;
+        return;
+      }
+
+      var t0 = this.data[0][0];
+      var tN = this.data[len - 1][0];
+      var l = data.filter(function (x) {
+        return x[0] < t0;
+      });
+      var r = data.filter(function (x) {
+        return x[0] > tN;
+      });
+      this.data = l.concat(this.data, r);
+    } // On dataset operation
+
+  }, {
+    key: "op",
+    value: function op(se, _op) {
+      this.last_upd = script_utils_now();
+
+      switch (_op.type) {
+        case 'set':
+          this.data = _op.data;
+          se.recalc_size();
+          break;
+
+        case 'del':
+          delete se.data[this.id];
+          se.recalc_size();
+          break;
+
+        case 'mrg':
+          this.merge(_op.data);
+          se.recalc_size();
+          break;
+      }
+    }
+  }], [{
+    key: "update_all",
+    value: function update_all(se, data) {
+      for (var k in data) {
+        if (k === 'ohlcv') continue;
+        var id = k.split('.')[1] || k;
+        if (!se.data[id]) continue;
+        var arr = se.data[id].data;
+        var iN = arr.length - 1;
+        var last = arr[iN];
+
+        var _iterator3 = dataset_createForOfIteratorHelper(data[k]),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var dp = _step3.value;
+
+            if (!last || dp[0] > last[0]) {
+              arr.push(dp);
+            }
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+
+        se.data[id].last_upd = script_utils_now();
+      }
+    }
+  }]);
+
+  return DatasetWW;
+}();
+// CONCATENATED MODULE: ./src/helpers/dc_events.js
+
+
+
+
+
+function dc_events_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = dc_events_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function dc_events_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_events_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_events_arrayLikeToArray(o, minLen); }
+
+function dc_events_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// DataCube event handlers
+
+
+
+
+
+var dc_events_DCEvents = /*#__PURE__*/function () {
+  function DCEvents() {
+    var _this = this;
+
+    classCallCheck_default()(this, DCEvents);
+
+    this.ww = new script_ww_api(this); // Listen to the web-worker events
+
+    this.ww.onevent = function (e) {
+      var _iterator = dc_events_createForOfIteratorHelper(_this.tv.controllers),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var ctrl = _step.value;
+          if (ctrl.ww) ctrl.ww(e.data);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      switch (e.data.type) {
+        case 'request-data':
+          // TODO: DataTunnel class for smarter data transfer
+          if (_this.ww._data_uploading) break;
+          var data = dataset_Dataset.make_tx(_this, e.data.data);
+
+          _this.send_meta_2_ww();
+
+          _this.ww.just('upload-data', data);
+
+          _this.ww._data_uploading = true;
+          break;
+
+        case 'overlay-data':
+          _this.on_overlay_data(e.data.data);
+
+          break;
+
+        case 'overlay-update':
+          _this.on_overlay_update(e.data.data);
+
+          break;
+
+        case 'data-uploaded':
+          _this.ww._data_uploading = false;
+          break;
+
+        case 'engine-state':
+          _this.se_state = Object.assign(_this.se_state || {}, e.data.data);
+          break;
+
+        case 'modify-overlay':
+          _this.modify_overlay(e.data.data);
+
+          break;
+      }
+
+      var _iterator2 = dc_events_createForOfIteratorHelper(_this.tv.controllers),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var ctrl = _step2.value;
+          if (ctrl.post_ww) ctrl.post_ww(e.data);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    };
+  } // Called when overalay/tv emits 'custom-event'
+
+
+  createClass_default()(DCEvents, [{
+    key: "on_custom_event",
+    value: function on_custom_event(event, args) {
+      switch (event) {
+        case 'register-tools':
+          this.register_tools(args);
+          break;
+
+        case 'exec-script':
+          this.exec_script(args);
+          break;
+
+        case 'exec-all-scripts':
+          this.exec_all_scripts();
+          break;
+
+        case 'data-len-changed':
+          this.data_changed(args);
+          break;
+
+        case 'tool-selected':
+          if (!args[0]) break; // TODO: Quick fix, investigate
+
+          if (args[0].split(':')[0] === 'System') {
+            this.system_tool(args[0].split(':')[1]);
+            break;
+          }
+
+          this.tv.$set(this.data, 'tool', args[0]);
+
+          if (args[0] === 'Cursor') {
+            this.drawing_mode_off();
+          }
+
+          break;
+
+        case 'grid-mousedown':
+          this.grid_mousedown(args);
+          break;
+
+        case 'drawing-mode-off':
+          this.drawing_mode_off();
+          break;
+
+        case 'change-settings':
+          this.change_settings(args);
+          break;
+
+        case 'range-changed':
+          this.scripts_onrange.apply(this, toConsumableArray_default()(args));
+          break;
+
+        case 'scroll-lock':
+          this.on_scroll_lock(args[0]);
+          break;
+
+        case 'object-selected':
+          this.object_selected(args);
+          break;
+
+        case 'remove-tool':
+          this.system_tool('Remove');
+          break;
+
+        case 'before-destroy':
+          this.before_destroy();
+          break;
+      }
+    } // Triggered when one or multiple settings are changed
+    // We select only the changed ones & re-exec them on the
+    // web worker
+
+  }, {
+    key: "on_settings",
+    value: function on_settings(values, prev) {
+      var _this2 = this;
+
+      if (!this.sett.scripts) return;
+      var delta = {};
+      var changed = false;
+
+      var _loop = function _loop() {
+        var n = values[i];
+        var arr = prev.filter(function (x) {
+          return x.v === n.v;
+        });
+
+        if (!arr.length && n.p.settings.$props) {
+          var id = n.p.settings.$uuid;
+
+          if (utils.is_scr_props_upd(n, prev) && utils.delayed_exec(n.p)) {
+            delta[id] = n.v;
+            changed = true;
+
+            _this2.tv.$set(n.p, 'loading', true);
+          }
+        }
+      };
+
+      for (var i = 0; i < values.length; i++) {
+        _loop();
+      }
+
+      if (changed && Object.keys(delta).length) {
+        var tf = this.tv.$refs.chart.interval_ms || this.data.chart.tf;
+        var range = this.tv.getRange();
+        this.ww.just('update-ov-settings', {
+          delta: delta,
+          tf: tf,
+          range: range
+        });
+      }
+    } // When the set of $uuids is changed
+
+  }, {
+    key: "on_ids_changed",
+    value: function on_ids_changed(values, prev) {
+      var rem = prev.filter(function (x) {
+        return x !== undefined && !values.includes(x);
+      });
+
+      if (rem.length) {
+        this.ww.just('remove-scripts', rem);
+      }
+    } // Combine all tools and their mods
+
+  }, {
+    key: "register_tools",
+    value: function register_tools(tools) {
+      var preset = {};
+
+      var _iterator3 = dc_events_createForOfIteratorHelper(this.data.tools || []),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var tool = _step3.value;
+          preset[tool.type] = tool;
+          delete tool.type;
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      this.tv.$set(this.data, 'tools', []);
+      var list = [{
+        type: 'Cursor',
+        icon: icons['cursor.png']
+      }];
+
+      var _iterator4 = dc_events_createForOfIteratorHelper(tools),
+          _step4;
+
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var tool = _step4.value;
+          var proto = Object.assign({}, tool.info);
+          var type = tool.info.type || 'Default';
+          proto.type = "".concat(tool.use_for, ":").concat(type);
+          this.merge_presets(proto, preset[tool.use_for]);
+          this.merge_presets(proto, preset[proto.type]);
+          delete proto.mods;
+          list.push(proto);
+
+          for (var mod in tool.info.mods) {
+            var mp = Object.assign({}, proto);
+            mp = Object.assign(mp, tool.info.mods[mod]);
+            mp.type = "".concat(tool.use_for, ":").concat(mod);
+            this.merge_presets(mp, preset[tool.use_for]);
+            this.merge_presets(mp, preset[mp.type]);
+            list.push(mp);
+          }
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+
+      this.tv.$set(this.data, 'tools', list);
+      this.tv.$set(this.data, 'tool', 'Cursor');
+    }
+  }, {
+    key: "exec_script",
+    value: function exec_script(args) {
+      if (args.length && this.sett.scripts) {
+        var obj = this.get_overlay(args[0]);
+        if (!obj || obj.scripts === false) return; // Parse script props & get the values from the ov
+        // TODO: remove unnecessary script initializations
+
+        var s = obj.settings;
+        var props = args[0].src.props || {};
+        if (!s.$uuid) s.$uuid = "".concat(obj.type, "-").concat(utils.uuid2());
+        args[0].uuid = s.$uuid;
+        args[0].sett = s;
+
+        for (var k in props || {}) {
+          var proto = props[k];
+
+          if (s[k] !== undefined) {
+            proto.val = s[k]; // use the existing val
+
+            continue;
+          }
+
+          if (proto.def === undefined) {
+            // TODO: add support of info / errors to the legend
+            console.error("Overlay ".concat(obj.id, ": script prop '").concat(k, "' ") + "doesn't have a default value");
+            return;
+          }
+
+          s[k] = proto.val = proto.def; // set the default
+        } // Remove old props (dropped by the current exec)
+
+
+        if (s.$props) {
+          for (var k in s) {
+            if (s.$props.includes(k) && !(k in props)) {
+              delete s[k];
+            }
+          }
+        }
+
+        s.$props = Object.keys(args[0].src.props || {});
+        this.tv.$set(obj, 'loading', true);
+        var tf = this.tv.$refs.chart.interval_ms || this.data.chart.tf;
+        var range = this.tv.getRange();
+
+        if (obj.script && obj.script.output != null) {
+          args[0].output = obj.script.output;
+        }
+
+        this.ww.just('exec-script', {
+          s: args[0],
+          tf: tf,
+          range: range
+        });
+      }
+    }
+  }, {
+    key: "exec_all_scripts",
+    value: function exec_all_scripts() {
+      if (!this.sett.scripts) return;
+      var skrr = dc.get('.').filter(function (x) {
+        return x.settings.$props;
+      });
+
+      var _iterator5 = dc_events_createForOfIteratorHelper(skrr),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var s = _step5.value;
+          this.merge("".concat(s.id), {
+            loading: true
+          });
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+
+      var tf = this.tv.$refs.chart.interval_ms || this.data.chart.tf;
+      var range = this.tv.getRange();
+      this.ww.just('exec-all-scripts', {
+        tf: tf,
+        range: range
+      });
+    }
+  }, {
+    key: "scripts_onrange",
+    value: function scripts_onrange(r) {
+      if (!this.sett.scripts) return;
+      var delta = {};
+      this.get('.').forEach(function (v) {
+        if (v.script && v.script.execOnRange && v.settings.$uuid) {
+          // TODO: execInterrupt flag?
+          if (utils.delayed_exec(v)) {
+            delta[v.settings.$uuid] = v.settings;
+          }
+        }
+      });
+
+      if (Object.keys(delta).length) {
+        var tf = this.tv.$refs.chart.interval_ms || this.data.chart.tf;
+        var range = this.tv.getRange();
+        this.ww.just('update-ov-settings', {
+          delta: delta,
+          tf: tf,
+          range: range
+        });
+      }
+    } // Overlay modification from WW
+
+  }, {
+    key: "modify_overlay",
+    value: function modify_overlay(upd) {
+      var obj = this.get_overlay(upd);
+
+      if (obj) {
+        for (var k in upd.fields || {}) {
+          if (typeof_default()(obj[k]) === 'object') {
+            this.merge("".concat(upd.uuid, ".").concat(k), upd.fields[k]);
+          } else {
+            this.tv.$set(obj, k, upd.fields[k]);
+          }
+        }
+      }
+    }
+  }, {
+    key: "data_changed",
+    value: function data_changed(args) {
+      if (!this.sett.scripts) return;
+      if (this.sett.data_change_exec === false) return;
+      var main = this.data.chart.data;
+      if (this.ww._data_uploading) return;
+      if (!this.se_state.scripts) return;
+      this.send_meta_2_ww();
+      this.ww.just('upload-data', {
+        ohlcv: main
+      });
+      this.ww._data_uploading = true;
+      this.merge('.', {
+        loading: true
+      });
+    }
+  }, {
+    key: "send_meta_2_ww",
+    value: function send_meta_2_ww() {
+      var tf = this.tv.$refs.chart.interval_ms || this.data.chart.tf;
+      var range = this.tv.getRange();
+      this.ww.just('send-meta-info', {
+        tf: tf,
+        range: range
+      });
+    }
+  }, {
+    key: "merge_presets",
+    value: function merge_presets(proto, preset) {
+      if (!preset) return;
+
+      for (var k in preset) {
+        if (k === 'settings') {
+          Object.assign(proto[k], preset[k]);
+        } else {
+          proto[k] = preset[k];
+        }
+      }
+    }
+  }, {
+    key: "grid_mousedown",
+    value: function grid_mousedown(args) {
+      var _this3 = this;
+
+      // TODO: tool state finished?
+      this.object_selected([]); // Remove the previous RangeTool
+
+      var rem = function rem() {
+        return _this3.get('RangeTool').filter(function (x) {
+          return x.settings.shiftMode;
+        }).forEach(function (x) {
+          return _this3.del(x.id);
+        });
+      };
+
+      if (this.data.tool && this.data.tool !== 'Cursor' && !this.data.drawingMode) {
+        this.tv.$set(this.data, 'drawingMode', true);
+        this.build_tool(args[0]);
+      } else if (this.sett.shift_measure && args[1].shiftKey) {
+        rem();
+        this.tv.$nextTick(function () {
+          return _this3.build_tool(args[0], 'RangeTool:ShiftMode');
+        });
+      } else {
+        rem();
+      }
+    }
+  }, {
+    key: "drawing_mode_off",
+    value: function drawing_mode_off() {
+      this.tv.$set(this.data, 'drawingMode', false);
+      this.tv.$set(this.data, 'tool', 'Cursor');
+    } // Place a new tool
+
+  }, {
+    key: "build_tool",
+    value: function build_tool(grid_id, type) {
+      var list = this.data.tools;
+      type = type || this.data.tool;
+      var proto = list.find(function (x) {
+        return x.type === type;
+      });
+      if (!proto) return;
+      var sett = Object.assign({}, proto.settings || {});
+      var data = (proto.data || []).slice();
+      if (!('legend' in sett)) sett.legend = false;
+      if (!('z-index' in sett)) sett['z-index'] = 100;
+      sett.$selected = true;
+      sett.$state = 'wip';
+      var side = grid_id ? 'offchart' : 'onchart';
+      var id = this.add(side, {
+        name: proto.name,
+        type: type.split(':')[0],
+        settings: sett,
+        data: data,
+        grid: {
+          id: grid_id
+        }
+      });
+      sett.$uuid = "".concat(id, "-").concat(utils.now());
+      this.tv.$set(this.data, 'selected', sett.$uuid);
+      this.add_trash_icon();
+    } // Remove selected / Remove all, etc
+
+  }, {
+    key: "system_tool",
+    value: function system_tool(type) {
+      switch (type) {
+        case 'Remove':
+          if (this.data.selected) {
+            this.del(this.data.selected);
+            this.remove_trash_icon();
+            this.drawing_mode_off();
+            this.on_scroll_lock(false);
+          }
+
+          break;
+      }
+    } // Apply new overlay settings
+
+  }, {
+    key: "change_settings",
+    value: function change_settings(args) {
+      var settings = args[0];
+      delete settings.id;
+      var grid_id = args[1];
+      this.merge("".concat(args[3], ".settings"), settings);
+    } // Lock the scrolling mechanism
+
+  }, {
+    key: "on_scroll_lock",
+    value: function on_scroll_lock(flag) {
+      this.tv.$set(this.data, 'scrollLock', flag);
+    } // When new object is selected / unselected
+
+  }, {
+    key: "object_selected",
+    value: function object_selected(args) {
+      var q = this.data.selected;
+
+      if (q) {
+        // Check if current drawing is finished
+        //let res = this.get_one(`${q}.settings`)
+        //if (res && res.$state !== 'finished') return
+        this.merge("".concat(q, ".settings"), {
+          $selected: false
+        });
+        this.remove_trash_icon();
+      }
+
+      this.tv.$set(this.data, 'selected', null);
+      if (!args.length) return;
+      this.tv.$set(this.data, 'selected', args[2]);
+      this.merge("".concat(args[2], ".settings"), {
+        $selected: true
+      });
+      this.add_trash_icon();
+    }
+  }, {
+    key: "add_trash_icon",
+    value: function add_trash_icon() {
+      var type = 'System:Remove';
+
+      if (this.data.tools.find(function (x) {
+        return x.type === type;
+      })) {
+        return;
+      }
+
+      this.data.tools.push({
+        type: type,
+        icon: icons['trash.png']
+      });
+    }
+  }, {
+    key: "remove_trash_icon",
+    value: function remove_trash_icon() {
+      // TODO: Does not call Toolbar render (distr version)
+      var type = 'System:Remove';
+      utils.overwrite(this.data.tools, this.data.tools.filter(function (x) {
+        return x.type !== type;
+      }));
+    } // Set overlay data from the web-worker
+
+  }, {
+    key: "on_overlay_data",
+    value: function on_overlay_data(data) {
+      var _this4 = this;
+
+      this.get('.').forEach(function (x) {
+        if (x.settings.$synth) _this4.del("".concat(x.id));
+      });
+
+      var _iterator6 = dc_events_createForOfIteratorHelper(data),
+          _step6;
+
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var ov = _step6.value;
+          var obj = this.get_one("".concat(ov.id));
+
+          if (obj) {
+            this.tv.$set(obj, 'loading', false);
+            if (!ov.data) continue;
+            obj.data = ov.data;
+          }
+
+          if (!ov.new_ovs) continue;
+
+          for (var id in ov.new_ovs.onchart) {
+            if (!this.get_one("onchart.".concat(id))) {
+              this.add('onchart', ov.new_ovs.onchart[id]);
+            }
+          }
+
+          for (var id in ov.new_ovs.offchart) {
+            if (!this.get_one("offchart.".concat(id))) {
+              this.add('offchart', ov.new_ovs.offchart[id]);
+            }
+          }
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+    } // Push overlay updates from the web-worker
+
+  }, {
+    key: "on_overlay_update",
+    value: function on_overlay_update(data) {
+      var _iterator7 = dc_events_createForOfIteratorHelper(data),
+          _step7;
+
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var ov = _step7.value;
+          if (!ov.data) continue;
+          var obj = this.get_one("".concat(ov.id));
+
+          if (obj) {
+            this.fast_merge(obj.data, ov.data, false);
+          }
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+    } // Clean-up unfinished business (tools)
+
+  }, {
+    key: "before_destroy",
+    value: function before_destroy() {
+      var f = function f(x) {
+        return !x.settings.$state || x.settings.$state === 'finished';
+      };
+
+      this.data.onchart = this.data.onchart.filter(f);
+      this.data.offchart = this.data.offchart.filter(f);
+      this.drawing_mode_off();
+      this.on_scroll_lock(false);
+      this.object_selected([]);
+      this.ww.destroy();
+    } // Get overlay by grid-layer id
+
+  }, {
+    key: "get_overlay",
+    value: function get_overlay(obj) {
+      var id = obj.id || "g".concat(obj.grid_id, "_").concat(obj.layer_id);
+      var dcid = obj.uuid || this.gldc[id];
+      return this.get_one("".concat(dcid));
+    }
+  }]);
+
+  return DCEvents;
+}();
+
+
+// CONCATENATED MODULE: ./src/helpers/dc_core.js
+
+
+
+
+
+
+
+
+
+function dc_core_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = dc_core_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function dc_core_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return dc_core_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return dc_core_arrayLikeToArray(o, minLen); }
+
+function dc_core_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function dc_core_createSuper(Derived) { var hasNativeReflectConstruct = dc_core_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function dc_core_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+// DataCube "private" methods
+
+
+
+
+var dc_core_DCCore = /*#__PURE__*/function (_DCEvents) {
+  inherits_default()(DCCore, _DCEvents);
+
+  var _super = dc_core_createSuper(DCCore);
+
+  function DCCore() {
+    classCallCheck_default()(this, DCCore);
+
+    return _super.apply(this, arguments);
+  }
+
+  createClass_default()(DCCore, [{
+    key: "init_tvjs",
+    // Set TV instance (once). Called by TradingVue itself
+    value: function init_tvjs($root) {
+      var _this = this;
+
+      if (!this.tv) {
+        this.tv = $root;
+        this.init_data();
+        this.update_ids(); // Listen to all setting changes
+        // TODO: works only with merge()
+
+        this.tv.$watch(function () {
+          return _this.get_by_query('.settings');
+        }, function (n, p) {
+          return _this.on_settings(n, p);
+        }); // Listen to all indices changes
+
+        this.tv.$watch(function () {
+          return _this.get('.').map(function (x) {
+            return x.settings.$uuid;
+          });
+        }, function (n, p) {
+          return _this.on_ids_changed(n, p);
+        }); // Watch for all 'datasets' changes
+
+        this.tv.$watch(function () {
+          return _this.get('datasets');
+        }, dataset_Dataset.watcher.bind(this));
+      }
+    } // Init Data Structure v1.1
+
+  }, {
+    key: "init_data",
+    value: function init_data($root) {
+      if (!('chart' in this.data)) {
+        this.tv.$set(this.data, 'chart', {
+          type: 'Candles',
+          data: this.data.ohlcv || []
+        });
+      }
+
+      if (!('onchart' in this.data)) {
+        this.tv.$set(this.data, 'onchart', []);
+      }
+
+      if (!('offchart' in this.data)) {
+        this.tv.$set(this.data, 'offchart', []);
+      }
+
+      if (!this.data.chart.settings) {
+        this.tv.$set(this.data.chart, 'settings', {});
+      } // Remove ohlcv cuz we have Data v1.1^
+
+
+      delete this.data.ohlcv;
+
+      if (!('datasets' in this.data)) {
+        this.tv.$set(this.data, 'datasets', []);
+      } // Init dataset proxies
+
+
+      var _iterator = dc_core_createForOfIteratorHelper(this.data.datasets),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var ds = _step.value;
+          if (!this.dss) this.dss = {};
+          this.dss[ds.id] = new dataset_Dataset(this, ds);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    } // Range change callback (called by TradingVue)
+    // TODO: improve (reliablity + chunk with limited size)
+
+  }, {
+    key: "range_changed",
+    value: function () {
+      var _range_changed = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(range, tf, check) {
+        var _this2 = this;
+
+        var first, prom;
+        return regenerator_default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (check === void 0) {
+                  check = false;
+                }
+
+                if (this.loader) {
+                  _context.next = 3;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 3:
+                if (this.loading) {
+                  _context.next = 19;
+                  break;
+                }
+
+                first = this.data.chart.data[0][0];
+
+                if (!(range[0] < first)) {
+                  _context.next = 19;
+                  break;
+                }
+
+                this.loading = true;
+                _context.next = 9;
+                return utils.pause(250);
+
+              case 9:
+                // Load bigger chunks
+                range = range.slice(); // copy
+
+                range[0] = Math.floor(range[0]);
+                range[1] = Math.floor(first);
+                prom = this.loader(range, tf, function (d) {
+                  // Callback way
+                  _this2.chunk_loaded(d);
+                });
+
+                if (!(prom && prom.then)) {
+                  _context.next = 19;
+                  break;
+                }
+
+                _context.t0 = this;
+                _context.next = 17;
+                return prom;
+
+              case 17:
+                _context.t1 = _context.sent;
+
+                _context.t0.chunk_loaded.call(_context.t0, _context.t1);
+
+              case 19:
+                if (!check) this.last_chunk = [range, tf];
+
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function range_changed(_x, _x2, _x3) {
+        return _range_changed.apply(this, arguments);
+      }
+
+      return range_changed;
+    }() // A new chunk of data is loaded
+    // TODO: bulletproof fetch
+
+  }, {
+    key: "chunk_loaded",
+    value: function chunk_loaded(data) {
+      // Updates only candlestick data, or
+      if (Array.isArray(data)) {
+        this.merge('chart.data', data);
+      } else {
+        // Bunch of overlays, including chart.data
+        for (var k in data) {
+          this.merge(k, data[k]);
+        }
+      }
+
+      this.loading = false;
+
+      if (this.last_chunk) {
+        this.range_changed.apply(this, toConsumableArray_default()(this.last_chunk).concat([true]));
+        this.last_chunk = null;
+      }
+    } // Update ids for all overlays
+
+  }, {
+    key: "update_ids",
+    value: function update_ids() {
+      this.data.chart.id = "chart.".concat(this.data.chart.type);
+      var count = {}; // grid_id,layer_id => DC id mapping
+
+      this.gldc = {}, this.dcgl = {};
+
+      var _iterator2 = dc_core_createForOfIteratorHelper(this.data.onchart),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var ov = _step2.value;
+
+          if (count[ov.type] === undefined) {
+            count[ov.type] = 0;
+          }
+
+          var i = count[ov.type]++;
+          ov.id = "onchart.".concat(ov.type).concat(i);
+          if (!ov.name) ov.name = ov.type + " ".concat(i);
+          if (!ov.settings) this.tv.$set(ov, 'settings', {}); // grid_id,layer_id => DC id mapping
+
+          this.gldc["g0_".concat(ov.type, "_").concat(i)] = ov.id;
+          this.dcgl[ov.id] = "g0_".concat(ov.type, "_").concat(i);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      count = {};
+      var grids = [{}];
+      var gid = 0;
+
+      var _iterator3 = dc_core_createForOfIteratorHelper(this.data.offchart),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var ov = _step3.value;
+
+          if (count[ov.type] === undefined) {
+            count[ov.type] = 0;
+          }
+
+          var _i = count[ov.type]++;
+
+          ov.id = "offchart.".concat(ov.type).concat(_i);
+          if (!ov.name) ov.name = ov.type + " ".concat(_i);
+          if (!ov.settings) this.tv.$set(ov, 'settings', {}); // grid_id,layer_id => DC id mapping
+
+          gid++;
+          var rgid = (ov.grid || {}).id || gid; // real grid_id
+          // When we merge grid, skip ++
+
+          if ((ov.grid || {}).id) gid--;
+          if (!grids[rgid]) grids[rgid] = {};
+
+          if (grids[rgid][ov.type] === undefined) {
+            grids[rgid][ov.type] = 0;
+          }
+
+          var ri = grids[rgid][ov.type]++;
+          this.gldc["g".concat(rgid, "_").concat(ov.type, "_").concat(ri)] = ov.id;
+          this.dcgl[ov.id] = "g".concat(rgid, "_").concat(ov.type, "_").concat(ri);
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+    } // TODO: chart refine (from the exchange chart)
+
+  }, {
+    key: "update_candle",
+    value: function update_candle(data) {
+      var ohlcv = this.data.chart.data;
+      var last = ohlcv[ohlcv.length - 1];
+      var candle = data['candle'];
+      var tf = this.tv.$refs.chart.interval_ms;
+      var t_next = last[0] + tf;
+      var now = data.t || utils.now();
+      var t = now >= t_next ? now - now % tf : last[0]; // Update the entire candle
+
+      if (candle.length >= 6) {
+        t = candle[0];
+      } else {
+        candle = [t].concat(toConsumableArray_default()(candle));
+      }
+
+      this.agg.push('ohlcv', candle);
+      this.update_overlays(data, t, tf);
+      return t >= t_next;
+    }
+  }, {
+    key: "update_tick",
+    value: function update_tick(data) {
+      var ohlcv = this.data.chart.data;
+      var last = ohlcv[ohlcv.length - 1];
+      var tick = data['price'];
+      var volume = data['volume'] || 0;
+      var tf = this.tv.$refs.chart.interval_ms;
+      var t_next = last[0] + tf;
+      var now = data.t || utils.now();
+      var t = now >= t_next ? now - now % tf : last[0];
+
+      if (t >= t_next && tick !== undefined) {
+        // And new zero-height candle
+        var nc = [t, tick, tick, tick, tick, volume];
+        this.agg.push('ohlcv', nc, tf);
+        ohlcv.push(nc);
+        this.scroll_to(t);
+      } else if (tick !== undefined) {
+        // Update an existing one
+        // TODO: make a separate class Sampler
+        last[2] = Math.max(tick, last[2]);
+        last[3] = Math.min(tick, last[3]);
+        last[4] = tick;
+        last[5] += volume;
+        this.agg.push('ohlcv', last, tf);
+      }
+
+      this.update_overlays(data, t, tf);
+      return t >= t_next;
+    } // Updates all overlays with given values.
+
+  }, {
+    key: "update_overlays",
+    value: function update_overlays(data, t, tf) {
+      for (var k in data) {
+        if (k === 'price' || k === 'volume' || k === 'candle' || k === 't') {
+          continue;
+        }
+
+        if (k.includes('datasets.')) {
+          this.agg.push(k, data[k], tf);
+          continue;
+        }
+
+        if (!Array.isArray(data[k])) {
+          var val = [data[k]];
+        } else {
+          val = data[k];
+        }
+
+        if (!k.includes('.data')) k += '.data';
+        this.agg.push(k, [t].concat(toConsumableArray_default()(val)), tf);
+      }
+    } // Returns array of objects matching query.
+    // Object contains { parent, index, value }
+    // TODO: query caching
+
+  }, {
+    key: "get_by_query",
+    value: function get_by_query(query, chuck) {
+      var tuple = query.split('.');
+
+      switch (tuple[0]) {
+        case 'chart':
+          var result = this.chart_as_piv(tuple);
+          break;
+
+        case 'onchart':
+        case 'offchart':
+          result = this.query_search(query, tuple);
+          break;
+
+        case 'datasets':
+          result = this.query_search(query, tuple);
+
+          var _iterator4 = dc_core_createForOfIteratorHelper(result),
+              _step4;
+
+          try {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              var r = _step4.value;
+
+              if (r.i === 'data') {
+                r.v = this.dss[r.p.id].data();
+              }
+            }
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+
+          break;
+
+        default:
+          /* Should get('.') return also the chart? */
+
+          /*let ch = this.chart_as_query([
+              'chart',
+              tuple[1]
+          ])*/
+          var on = this.query_search(query, ['onchart', tuple[0], tuple[1]]);
+          var off = this.query_search(query, ['offchart', tuple[0], tuple[1]]);
+          result = [].concat(toConsumableArray_default()(on), toConsumableArray_default()(off));
+          break;
+      }
+
+      return result.filter(function (x) {
+        return !(x.v || {}).locked || chuck;
+      });
+    }
+  }, {
+    key: "chart_as_piv",
+    value: function chart_as_piv(tuple) {
+      var field = tuple[1];
+      if (field) return [{
+        p: this.data.chart,
+        i: field,
+        v: this.data.chart[field]
+      }];else return [{
+        p: this.data,
+        i: 'chart',
+        v: this.data.chart
+      }];
+    }
+  }, {
+    key: "query_search",
+    value: function query_search(query, tuple) {
+      var _this3 = this;
+
+      var side = tuple[0];
+      var path = tuple[1] || '';
+      var field = tuple[2];
+      var arr = this.data[side].filter(function (x) {
+        return x.id === query || x.id && x.id.includes(path) || x.name === query || x.name && x.name.includes(path) || query.includes((x.settings || {}).$uuid);
+      });
+
+      if (field) {
+        return arr.map(function (x) {
+          return {
+            p: x,
+            i: field,
+            v: x[field]
+          };
+        });
+      }
+
+      return arr.map(function (x, i) {
+        return {
+          p: _this3.data[side],
+          i: _this3.data[side].indexOf(x),
+          v: x
+        };
+      });
+    }
+  }, {
+    key: "merge_objects",
+    value: function merge_objects(obj, data, new_obj) {
+      if (new_obj === void 0) {
+        new_obj = {};
+      }
+
+      // The only way to get Vue to update all stuff
+      // reactively is to create a brand new object.
+      // TODO: Is there a simpler approach?
+      Object.assign(new_obj, obj.v);
+      Object.assign(new_obj, data);
+      this.tv.$set(obj.p, obj.i, new_obj);
+    } // Merge overlapping time series
+
+  }, {
+    key: "merge_ts",
+    value: function merge_ts(obj, data) {
+      // Assume that both arrays are pre-sorted
+      if (!data.length) return obj.v;
+      var r1 = [obj.v[0][0], obj.v[obj.v.length - 1][0]];
+      var r2 = [data[0][0], data[data.length - 1][0]]; // Overlap
+
+      var o = [Math.max(r1[0], r2[0]), Math.min(r1[1], r2[1])];
+
+      if (o[1] >= o[0]) {
+        var _obj$v, _data;
+
+        var _this$ts_overlap = this.ts_overlap(obj.v, data, o),
+            od = _this$ts_overlap.od,
+            d1 = _this$ts_overlap.d1,
+            d2 = _this$ts_overlap.d2;
+
+        (_obj$v = obj.v).splice.apply(_obj$v, toConsumableArray_default()(d1));
+
+        (_data = data).splice.apply(_data, toConsumableArray_default()(d2)); // Dst === Overlap === Src
+
+
+        if (!obj.v.length && !data.length) {
+          this.tv.$set(obj.p, obj.i, od);
+          return obj.v;
+        } // If src is totally contained in dst
+
+
+        if (!data.length) {
+          data = obj.v.splice(d1[0]);
+        } // If dst is totally contained in src
+
+
+        if (!obj.v.length) {
+          obj.v = data.splice(d2[0]);
+        }
+
+        this.tv.$set(obj.p, obj.i, this.combine(obj.v, od, data));
+      } else {
+        this.tv.$set(obj.p, obj.i, this.combine(obj.v, [], data));
+      }
+
+      return obj.v;
+    } // TODO: review performance, move to worker
+
+  }, {
+    key: "ts_overlap",
+    value: function ts_overlap(arr1, arr2, range) {
+      var t1 = range[0];
+      var t2 = range[1];
+      var ts = {}; // timestamp map
+
+      var a1 = arr1.filter(function (x) {
+        return x[0] >= t1 && x[0] <= t2;
+      });
+      var a2 = arr2.filter(function (x) {
+        return x[0] >= t1 && x[0] <= t2;
+      }); // Indices of segments
+
+      var id11 = arr1.indexOf(a1[0]);
+      var id12 = arr1.indexOf(a1[a1.length - 1]);
+      var id21 = arr2.indexOf(a2[0]);
+      var id22 = arr2.indexOf(a2[a2.length - 1]);
+
+      for (var i = 0; i < a1.length; i++) {
+        ts[a1[i][0]] = a1[i];
+      }
+
+      for (var i = 0; i < a2.length; i++) {
+        ts[a2[i][0]] = a2[i];
+      }
+
+      var ts_sorted = Object.keys(ts).sort();
+      return {
+        od: ts_sorted.map(function (x) {
+          return ts[x];
+        }),
+        d1: [id11, id12 - id11 + 1],
+        d2: [id21, id22 - id21 + 1]
+      };
+    } // Combine parts together:
+    // (destination, overlap, source)
+
+  }, {
+    key: "combine",
+    value: function combine(dst, o, src) {
+      function last(arr) {
+        return arr[arr.length - 1][0];
+      }
+
+      if (!dst.length) {
+        dst = o;
+        o = [];
+      }
+
+      if (!src.length) {
+        src = o;
+        o = [];
+      } // The overlap right in the middle
+
+
+      if (src[0][0] >= dst[0][0] && last(src) <= last(dst)) {
+        return Object.assign(dst, o); // The overlap is on the right
+      } else if (last(src) > last(dst)) {
+        // Psh(...) is faster but can overflow the stack
+        if (o.length < 100000 && src.length < 100000) {
+          var _dst;
+
+          (_dst = dst).push.apply(_dst, toConsumableArray_default()(o).concat(toConsumableArray_default()(src)));
+
+          return dst;
+        } else {
+          return dst.concat(o, src);
+        } // The overlap is on the left
+
+      } else if (src[0][0] < dst[0][0]) {
+        // Push(...) is faster but can overflow the stack
+        if (o.length < 100000 && src.length < 100000) {
+          var _src;
+
+          (_src = src).push.apply(_src, toConsumableArray_default()(o).concat(toConsumableArray_default()(dst)));
+
+          return src;
+        } else {
+          return src.concat(o, dst);
+        }
+      } else {
+        return [];
+      }
+    } // Simple data-point merge (faster)
+
+  }, {
+    key: "fast_merge",
+    value: function fast_merge(data, point, main) {
+      if (main === void 0) {
+        main = true;
+      }
+
+      if (!data) return;
+      var last_t = (data[data.length - 1] || [])[0];
+      var upd_t = point[0];
+
+      if (!data.length || upd_t > last_t) {
+        data.push(point);
+
+        if (main && this.sett.auto_scroll) {
+          this.scroll_to(upd_t);
+        }
+      } else if (upd_t === last_t) {
+        if (main) {
+          this.tv.$set(data, data.length - 1, point);
+        } else {
+          data[data.length - 1] = point;
+        }
+      }
+    }
+  }, {
+    key: "scroll_to",
+    value: function scroll_to(t) {
+      if (this.tv.$refs.chart.cursor.locked) return;
+      var tl = this.tv.$refs.chart.last_candle[0];
+      var d = this.tv.getRange()[1] - tl;
+      if (d > 0) this.tv["goto"](t + d);
+    }
+  }]);
+
+  return DCCore;
+}(dc_events_DCEvents);
+
+
+// CONCATENATED MODULE: ./src/helpers/sett_proxy.js
+// Sends all dc.sett changes to the web-worker
+/* harmony default export */ var sett_proxy = (function (sett, ww) {
+  var h = {
+    get: function get(sett, k) {
+      return sett[k];
+    },
+    set: function set(sett, k, v) {
+      sett[k] = v;
+      ww.just('update-dc-settings', sett);
+      return true;
+    }
+  };
+  ww.just('update-dc-settings', sett);
+  return new Proxy(sett, h);
+});
+// CONCATENATED MODULE: ./src/helpers/agg_tool.js
+
+
+// Tick aggregation
+
+
+var agg_tool_AggTool = /*#__PURE__*/function () {
+  function AggTool(dc, _int) {
+    if (_int === void 0) {
+      _int = 100;
+    }
+
+    classCallCheck_default()(this, AggTool);
+
+    this.symbols = {};
+    this["int"] = _int; // Itarval in ms
+
+    this.dc = dc;
+    this.st_id = null;
+    this.data_changed = false;
+  }
+
+  createClass_default()(AggTool, [{
+    key: "push",
+    value: function push(sym, upd, tf) {
+      var _this = this;
+
+      // Start auto updates
+      if (!this.st_id) {
+        this.st_id = setTimeout(function () {
+          return _this.update();
+        });
+      }
+
+      tf = parseInt(tf);
+      var old = this.symbols[sym];
+      var t = utils.now();
+      var isds = sym.includes('datasets.');
+      this.data_changed = true;
+
+      if (!old) {
+        this.symbols[sym] = {
+          upd: upd,
+          t: t,
+          data: []
+        };
+      } else if (upd[0] >= old.upd[0] + tf && !isds) {
+        // Refine the previous data point
+        this.refine(sym, old.upd.slice());
+        this.symbols[sym] = {
+          upd: upd,
+          t: t,
+          data: []
+        };
+      } else {
+        // Tick updates the current
+        this.symbols[sym].upd = upd;
+        this.symbols[sym].t = t;
+      }
+
+      if (isds) {
+        this.symbols[sym].data.push(upd);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      var _this2 = this;
+
+      var out = {};
+
+      for (var sym in this.symbols) {
+        var upd = this.symbols[sym].upd;
+
+        switch (sym) {
+          case 'ohlcv':
+            var data = this.dc.data.chart.data;
+            this.dc.fast_merge(data, upd);
+            out.ohlcv = data.slice(-2);
+            break;
+
+          default:
+            if (sym.includes('datasets.')) {
+              this.update_ds(sym, out);
+              continue;
+            }
+
+            var data = this.dc.get_one("".concat(sym));
+            if (!data) continue;
+            this.dc.fast_merge(data, upd, false);
+            break;
+        }
+      } // TODO: fill gaps
+
+
+      if (this.data_changed) {
+        this.dc.ww.just('update-data', out);
+        this.data_changed = false;
+      }
+
+      setTimeout(function () {
+        return _this2.update();
+      }, this["int"]);
+    }
+  }, {
+    key: "refine",
+    value: function refine(sym, upd) {
+      if (sym === 'ohlcv') {
+        var data = this.dc.data.chart.data;
+        this.dc.fast_merge(data, upd);
+      } else {
+        var data = this.dc.get_one("".concat(sym));
+        if (!data) return;
+        this.dc.fast_merge(data, upd, false);
+      }
+    }
+  }, {
+    key: "update_ds",
+    value: function update_ds(sym, out) {
+      var data = this.symbols[sym].data;
+
+      if (data.length) {
+        out[sym] = data;
+        this.symbols[sym].data = [];
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      this.symbols = {};
+    }
+  }]);
+
+  return AggTool;
+}();
+
+
+// CONCATENATED MODULE: ./src/helpers/datacube.js
+
+
+
+
+
+
+
+
+function datacube_createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = datacube_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function datacube_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return datacube_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return datacube_arrayLikeToArray(o, minLen); }
+
+function datacube_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function datacube_createSuper(Derived) { var hasNativeReflectConstruct = datacube_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function datacube_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+// Main DataHelper class. A container for data,
+// which works as a proxy and CRUD interface
+
+
+
+ // Interface methods. Private methods in dc_core.js
+
+var datacube_DataCube = /*#__PURE__*/function (_DCCore) {
+  inherits_default()(DataCube, _DCCore);
+
+  var _super = datacube_createSuper(DataCube);
+
+  function DataCube(data, sett) {
+    var _this;
+
+    if (data === void 0) {
+      data = {};
+    }
+
+    if (sett === void 0) {
+      sett = {};
+    }
+
+    classCallCheck_default()(this, DataCube);
+
+    var def_sett = {
+      aggregation: 100,
+      // Update aggregation interval
+      script_depth: 0,
+      // 0 === Exec on all data
+      auto_scroll: true,
+      // Auto scroll to a new candle
+      scripts: true,
+      // Enable overlays scripts,
+      ww_ram_limit: 0,
+      // WebWorker RAM limit (MB)
+      node_url: null,
+      // Use node.js instead of WW
+      shift_measure: true // Draw measurment shift+click
+
+    };
+    sett = Object.assign(def_sett, sett);
+    _this = _super.call(this);
+    _this.sett = sett;
+    _this.data = data;
+    _this.sett = sett_proxy(sett, _this.ww);
+    _this.agg = new agg_tool_AggTool(assertThisInitialized_default()(_this), sett.aggregation);
+    _this.se_state = {}; //this.agg.update = this.agg_update.bind(this)
+
+    return _this;
+  } // Add new overlay
+
+
+  createClass_default()(DataCube, [{
+    key: "add",
+    value: function add(side, overlay) {
+      if (side !== 'onchart' && side !== 'offchart' && side !== 'datasets') {
+        return;
+      }
+
+      this.data[side].push(overlay);
+      this.update_ids();
+      return overlay.id;
+    } // Get all objects matching the query
+
+  }, {
+    key: "get",
+    value: function get(query) {
+      return this.get_by_query(query).map(function (x) {
+        return x.v;
+      });
+    } // Get first object matching the query
+
+  }, {
+    key: "get_one",
+    value: function get_one(query) {
+      return this.get_by_query(query).map(function (x) {
+        return x.v;
+      })[0];
+    } // Set data (reactively)
+
+  }, {
+    key: "set",
+    value: function set(query, data) {
+      var objects = this.get_by_query(query);
+
+      var _iterator = datacube_createForOfIteratorHelper(objects),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var obj = _step.value;
+          var i = obj.i !== undefined ? obj.i : obj.p.indexOf(obj.v);
+
+          if (i !== -1) {
+            this.tv.$set(obj.p, i, data);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.update_ids();
+    } // Merge object or array (reactively)
+
+  }, {
+    key: "merge",
+    value: function merge(query, data) {
+      var objects = this.get_by_query(query);
+
+      var _iterator2 = datacube_createForOfIteratorHelper(objects),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var obj = _step2.value;
+
+          if (Array.isArray(obj.v)) {
+            if (!Array.isArray(data)) continue; // If array is a timeseries, merge it by timestamp
+            // else merge by item index
+
+            if (obj.v[0] && obj.v[0].length >= 2) {
+              this.merge_ts(obj, data);
+            } else {
+              this.merge_objects(obj, data, []);
+            }
+          } else if (typeof_default()(obj.v) === 'object') {
+            this.merge_objects(obj, data);
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      this.update_ids();
+    } // Remove an overlay by query (id/type/name/...)
+
+  }, {
+    key: "del",
+    value: function del(query) {
+      var objects = this.get_by_query(query);
+
+      var _iterator3 = datacube_createForOfIteratorHelper(objects),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var obj = _step3.value;
+          // Find current index of the field (if not defined)
+          var i = typeof obj.i !== 'number' ? obj.i : obj.p.indexOf(obj.v);
+
+          if (i !== -1) {
+            this.tv.$delete(obj.p, i);
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      this.update_ids();
+    } // Update/append data point, depending on timestamp
+
+  }, {
+    key: "update",
+    value: function update(data) {
+      if (data['candle']) {
+        return this.update_candle(data);
+      } else {
+        return this.update_tick(data);
+      }
+    } // Lock overlays from being pulled by query_search
+    // TODO: subject to review
+
+  }, {
+    key: "lock",
+    value: function lock(query) {
+      var objects = this.get_by_query(query);
+      objects.forEach(function (x) {
+        if (x.v && x.v.id && x.v.type) {
+          x.v.locked = true;
+        }
+      });
+    } // Unlock overlays from being pulled by query_search
+    //
+
+  }, {
+    key: "unlock",
+    value: function unlock(query) {
+      var objects = this.get_by_query(query, true);
+      objects.forEach(function (x) {
+        if (x.v && x.v.id && x.v.type) {
+          x.v.locked = false;
+        }
+      });
+    } // Show indicator
+
+  }, {
+    key: "show",
+    value: function show(query) {
+      if (query === 'offchart' || query === 'onchart') {
+        query += '.';
+      } else if (query === '.') {
+        query = '';
+      }
+
+      this.merge(query + '.settings', {
+        display: true
+      });
+    } // Hide indicator
+
+  }, {
+    key: "hide",
+    value: function hide(query) {
+      if (query === 'offchart' || query === 'onchart') {
+        query += '.';
+      } else if (query === '.') {
+        query = '';
+      }
+
+      this.merge(query + '.settings', {
+        display: false
+      });
+    } // Set data loader callback
+
+  }, {
+    key: "onrange",
+    value: function onrange(callback) {
+      var _this2 = this;
+
+      this.loader = callback;
+      setTimeout(function () {
+        return _this2.tv.set_loader(callback ? _this2 : null);
+      }, 0);
+    }
+  }]);
+
+  return DataCube;
+}(dc_core_DCCore);
+
+
+// CONCATENATED MODULE: ./src/mixins/interface.js
+// Html interface, shown on top of the grid.
+// Can be static (a tooltip) or interactive,
+// e.g. a control panel.
+/* harmony default export */ var mixins_interface = ({
+  props: ['ux', 'updater', 'colors', 'wrapper'],
+  mounted: function mounted() {
+    this._$emit = this.$emit;
+    this.$emit = this.custom_event;
+    if (this.init) this.init();
+  },
+  methods: {
+    close: function close() {
+      this.$emit('custom-event', {
+        event: 'close-interface',
+        args: [this.$props.ux.uuid]
+      });
+    },
+    // TODO: emit all the way to the uxlist
+    // add apply the changes there
+    modify: function modify(obj) {
+      this.$emit('custom-event', {
+        event: 'modify-interface',
+        args: [this.$props.ux.uuid, obj]
+      });
+    },
+    custom_event: function custom_event(event) {
+      if (event.split(':')[0] === 'hook') return;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      this._$emit('custom-event', {
+        event: event,
+        args: args
+      });
+    }
+  },
+  computed: {
+    overlay: function overlay() {
+      return this.$props.ux.overlay;
+    },
+    layout: function layout() {
+      return this.overlay.layout;
+    },
+    uxr: function uxr() {
+      return this.$props.ux;
+    }
+  },
+  data: function data() {
+    return {};
+  }
+});
 // CONCATENATED MODULE: ./src/index.js
-/* concated harmony reexport TradingVue */__webpack_require__.d(__webpack_exports__, "TradingVue", function() { return TradingVue; });
-/* concated harmony reexport Overlay */__webpack_require__.d(__webpack_exports__, "Overlay", function() { return overlay; });
-/* concated harmony reexport Utils */__webpack_require__.d(__webpack_exports__, "Utils", function() { return utils; });
-/* concated harmony reexport Constants */__webpack_require__.d(__webpack_exports__, "Constants", function() { return constants; });
-/* concated harmony reexport Candle */__webpack_require__.d(__webpack_exports__, "Candle", function() { return CandleExt; });
-/* concated harmony reexport Volbar */__webpack_require__.d(__webpack_exports__, "Volbar", function() { return VolbarExt; });
-/* concated harmony reexport layout_cnv */__webpack_require__.d(__webpack_exports__, "layout_cnv", function() { return layout_cnv; });
-/* concated harmony reexport layout_vol */__webpack_require__.d(__webpack_exports__, "layout_vol", function() { return layout_vol; });
 
 
 
@@ -8934,6 +18506,23 @@ TradingVue_component.options.__file = "src/TradingVue.vue"
 
 
 
+
+
+
+
+
+
+
+
+var primitives = {
+  Candle: candle_CandleExt,
+  Volbar: volbar_VolbarExt,
+  Line: line_Line,
+  Pin: pin_Pin,
+  Price: price_Price,
+  Ray: ray_Ray,
+  Seg: seg_Seg
+};
 
 TradingVue.install = function (Vue) {
   Vue.component(TradingVue.name, TradingVue);
@@ -8943,17 +18532,21 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(TradingVue);
   window.TradingVueLib = {
     TradingVue: TradingVue,
-    Overlay: overlay,
+    Overlay: mixins_overlay,
     Utils: utils,
     Constants: constants,
-    Candle: CandleExt,
-    Volbar: VolbarExt,
+    Candle: candle_CandleExt,
+    Volbar: volbar_VolbarExt,
     layout_cnv: layout_cnv,
-    layout_vol: layout_vol
+    layout_vol: layout_vol,
+    DataCube: datacube_DataCube,
+    Tool: mixins_tool,
+    Interface: mixins_interface,
+    primitives: primitives
   };
 }
 
-/* harmony default export */ var src = __webpack_exports__["default"] = (TradingVue);
+/* harmony default export */ var src_0 = __webpack_exports__["default"] = (TradingVue);
 
 
 /***/ })

@@ -2,7 +2,7 @@
 import Const from '../../stuff/constants.js'
 import Utils from '../../stuff/utils.js'
 
-const { MINUTE15, HOUR, DAY, WEEK, YEAR, MONTHMAP } = Const
+const { MINUTE15, MINUTE, HOUR, DAY, WEEK, MONTH, YEAR, MONTHMAP } = Const
 
 export default class Botbar {
 
@@ -27,23 +27,23 @@ export default class Botbar {
 
         const sb = this.layout.grids[0].sb
 
-        this.ctx.fillStyle = this.$p.colors.colorBack
+        this.ctx.fillStyle = this.$p.colors.back
         this.ctx.font = this.$p.font
         this.ctx.fillRect(0, 0, width, height)
 
-        this.ctx.strokeStyle = this.$p.colors.colorScale
+        this.ctx.strokeStyle = this.$p.colors.scale
 
         this.ctx.beginPath()
         this.ctx.moveTo(0, 0.5)
         this.ctx.lineTo(Math.floor(width + 1), 0.5)
         this.ctx.stroke()
 
-        this.ctx.fillStyle = this.$p.colors.colorText
+        this.ctx.fillStyle = this.$p.colors.text
         this.ctx.beginPath()
 
         for (var p of this.layout.botbar.xs) {
 
-            let lbl = this.format_date(p[1][0])
+            let lbl = this.format_date(p)
 
             if (p[0] > width - sb) continue
 
@@ -60,40 +60,66 @@ export default class Botbar {
         }
 
         this.ctx.stroke()
-        if (this.$p.cursor.x && this.$p.cursor.t) this.panel()
+        this.apply_shaders()
+        if (this.$p.cursor.x && this.$p.cursor.t !== undefined)
+            this.panel()
 
+    }
+
+    apply_shaders() {
+        let layout = this.layout.grids[0]
+        let props = {
+            layout: layout,
+            cursor: this.$p.cursor
+        }
+        for (var s of this.comp.bot_shaders) {
+            this.ctx.save()
+            s.draw(this.ctx, props)
+            this.ctx.restore()
+        }
     }
 
     panel() {
 
         let lbl = this.format_cursor_x()
-        this.ctx.fillStyle = this.$p.colors.colorPanel
+        this.ctx.fillStyle = this.$p.colors.panel
 
         let measure = this.ctx.measureText(lbl + '    ')
         let panwidth = Math.floor(measure.width)
-        let cursor = this.nearest()
+        let cursor = this.$p.cursor.x
         let x = Math.floor(cursor - panwidth * 0.5)
         let y = - 0.5
         let panheight = this.comp.config.PANHEIGHT
         this.ctx.fillRect(x, y, panwidth, panheight + 0.5)
 
-        this.ctx.fillStyle = this.$p.colors.colorTextHL
+        this.ctx.fillStyle = this.$p.colors.textHL
         this.ctx.textAlign = 'center'
         this.ctx.fillText(lbl, cursor, y + 16)
 
     }
 
-    // TODO: implement time zones
-    format_date(t) {
+    format_date(p) {
+        let t = p[1][0]
+        t = this.grid_0.ti_map.i2t(t)
+        let ti = this.$p.layout.grids[0].ti_map.tf
+        // Enable timezones only for tf < 1D
+        let k = ti < DAY ? 1 : 0
+        let tZ = t + k * this.$p.timezone * HOUR
 
-        let d = new Date(t)
+        //t += new Date(t).getTimezoneOffset() * MINUTE
+        let d = new Date(tZ)
 
-        if (Utils.year_start(t) === t) return d.getFullYear()
-        if (Utils.month_start(t) === t) return MONTHMAP[d.getMonth()]
-        if (Utils.day_start(t) === t) return d.getDate()
+        if (p[2] === YEAR || Utils.year_start(t) === t) {
+            return d.getUTCFullYear()
+        }
+        if (p[2] === MONTH || Utils.month_start(t) === t) {
+            return MONTHMAP[d.getUTCMonth()]
+        }
+        // TODO(*) see grid_maker.js
+        if (Utils.day_start(tZ) === tZ) return d.getUTCDate()
 
-        let h = Utils.add_zero(d.getHours())
-        let m = Utils.add_zero(d.getMinutes())
+        let h = Utils.add_zero(d.getUTCHours())
+        let m = Utils.add_zero(d.getUTCMinutes())
         return h + ":" + m
 
     }
@@ -101,25 +127,31 @@ export default class Botbar {
     format_cursor_x() {
 
         let t = this.$p.cursor.t
-        let ti = this.$p.interval
-        let d = new Date(t)
+        t = this.grid_0.ti_map.i2t(t)
+        //let ti = this.$p.interval
+        let ti = this.$p.layout.grids[0].ti_map.tf
+        // Enable timezones only for tf < 1D
+        let k = ti < DAY ? 1 : 0
+
+        //t += new Date(t).getTimezoneOffset() * MINUTE
+        let d = new Date(t + k * this.$p.timezone * HOUR)
 
         if (ti === YEAR) {
-            return d.getFullYear()
+            return d.getUTCFullYear()
         }
 
         if (ti < YEAR) {
-            var yr = '`' + `${d.getFullYear()}`.slice(-2)
-            var mo = MONTHMAP[d.getMonth()]
+            var yr = '`' + `${d.getUTCFullYear()}`.slice(-2)
+            var mo = MONTHMAP[d.getUTCMonth()]
             var dd = '01'
         }
-        if (ti <= WEEK) dd = d.getDate()
+        if (ti <= WEEK) dd = d.getUTCDate()
         let date = `${dd} ${mo} ${yr}`
         let time = ''
 
         if (ti < DAY) {
-            let h = Utils.add_zero(d.getHours())
-            let m = Utils.add_zero(d.getMinutes())
+            let h = Utils.add_zero(d.getUTCHours())
+            let m = Utils.add_zero(d.getUTCMinutes())
             time = h + ":" + m
         }
 
@@ -144,17 +176,6 @@ export default class Botbar {
         return false
 
     }
-
-    // Nearest data object (when locked)
-    nearest() {
-        if (this.$p.cursor.locked) {
-            let t = this.$p.cursor.values[0].ohlcv[0]
-            let x = Math.floor(this.grid_0.t_magnet(t))
-            return x
-        }
-        return this.$p.cursor.x
-    }
-
 
     mousemove() { }
     mouseout() { }

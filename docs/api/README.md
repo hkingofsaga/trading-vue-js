@@ -1,10 +1,12 @@
 # API Book
 
-::: warning
-This library is in alpha stage, API may change. This guide version is **0.3.5**
-:::
+This guide version is **0.9.0**
 
 ![npm](https://img.shields.io/npm/v/trading-vue-js.svg?color=brightgreen&label=Current%20lib%20version)
+
+### DataCube API is [here](https://github.com/C451/trading-vue-js/tree/master/docs/datacube)
+### Inline Shaders API is [here](https://github.com/C451/trading-vue-js/tree/master/docs/api/SHADERS.md)
+### Index-Based mode API is [there](https://github.com/tvjsx/trading-vue-js/blob/master/docs/api/IB.md)
 
 ## Props
 
@@ -29,11 +31,19 @@ This library is in alpha stage, API may change. This guide version is **0.3.5**
 | colorVolUp | String | Green volume color |
 | colorVolDw | String | Red volume color |
 | colorPanel | String | Value bars color |
+| colors  | Object | All-colors object, has a lower priority |
 | font | String | Full font string, e.g. "11px Arial..." |
 | data | Object | Data object |
 | overlays | Array | List of custom overlay classes |
 | chartConfig | Object | Overwrites chart config values |
 | legendButtons | Array | Array of legend buttons ids |
+| toolbar | Boolean | Show toolbar (works with DataCube) |
+| colorTbBack  | String | Toolbar background color |
+| colorTbBorder  | String | Toolbar border color |
+| indexBased  | Boolean | Index-based rendering mode (global setting) |
+| extensions   | Array | Array of extensions |
+| skin   | String | Skin ID (should be in the extensions) |
+| timezone  <sup style="color:#14b32a">new</sup> | Number | Shift from UTC, hours |
 
 
 ### Legend Button Types
@@ -42,11 +52,22 @@ This library is in alpha stage, API may change. This guide version is **0.3.5**
 |---|---|---|---|---|---|
 |![](assets/README-0487d08a.png)|![](assets/README-6ce736c2.png)|![](assets/README-cbe4028c.png)|![](assets/README-bc4359ae.png)|![](assets/README-ed2c9def.png)| ![](assets/README-b0d2d797.png)|
 
-## Methods
+Pass the following object to define a custom button:
 
-### resetChart()
+```js
+{
+    name: '<button-id>',
+    icon: '<Icon>' // Base64 URL
+}
+```
+
+# Methods
+
+### resetChart(...)
 
 Resets the chart to the default state. Use it if you need to reset the time range.
+
+* **Arguments**: resetRange (Boolean, default = **true**) Reset current time range
 
 *Example:*
 
@@ -100,6 +121,19 @@ Goto to a specific timestamp
 
 * **Arguments**: t (Number) Target timestamp
 
+### getCursor()
+
+Gets the cursor [object](https://github.com/tvjsx/trading-vue-js/tree/master/docs/api#cursor-data)
+
+* **Returns**: Object
+
+### $refs.chart.hooks(...args)
+
+Set hooks to the internal events. You'll get events like this `?<hook name>`
+
+* **Arguments**: ...args (Strings) hook names
+
+Currently supports: `xchanged, xlocked, update, resize, data`
 
 ## Events
 
@@ -133,20 +167,54 @@ export default {
 </script>
 ```
 
+### custom-event
+
+Can be emitted from overlay or **trading-vue** itself. Propagates all the way up to the root component; must have a unique name. Some names are reserved:
+```
+register-tools, tool-selected, grid-mousedown, drawing-mode-off, change-settings,
+scroll-lock, object-selected, remove-tool, before-destroy, new-shader, remove-shaders,
+remove-layer-meta, data-len-changed
+```
+
+*Example:*
+
+Somewhere in overlay:
+```js
+this.$emit('adios-aloha', x1, x2)
+```
+
+Event listener:
+
+```html
+<trading-vue @adios-aloha="on_arrival">
+<script>
+    on_arrival(x1, x2) { ... }
+</script>
+```
+
 ## Data structure
 
-Data structure v1.1
+Data structure v1.3
+
+IMPORTANT: All data must be sorted by time (in ascending order). The main OHLCV must not contain duplicate timestamps.
 
 ```js
 {
-    "chart": [   // Mandatory
+    "chart": {   // Mandatory
         "type": "<Candles|Spline>",
+        "indexBased": <true|false>, // Index-based rendering mode
         "data": [
             [timestamp, open, high, low, close, volume],
             ...
         ],
+        "tf": <Number|'1s'...'1Y'>, // Forced timeframe
+        "grid": { // Grid settings (optional)
+            "logScale": <true|false>,
+            "height": <Number>, // Grid height (weight)
+            "id": // New grid id (merge w/another, offchart only)
+        }
         "settings": { } // Settings (depending on "type")
-    ],
+    },
     "onchart": [ // Displayed ON the chart
         {
             "name": "<Indicator name>",
@@ -155,63 +223,57 @@ Data structure v1.1
                 [timestamp, ... ], // Arbitrary length
                 ...
             ],
-            "settings": { } // Arbitrary settings format
+            "settings": { }, // Arbitrary settings format
+            "grid": { }, // The same as in "chart",
+            "tf": <Number|'1s'...'1Y'>, // Forced timeframe
+            "loading": <true|false>, // Show loading animation
+            "script": { } // See 'script settings',
+            "scripts": <true|false> // Enable/disable scripts
         },
         ...
     ],
     "offchart": [ // Displayed BELOW the chart
-        {
-            "name": "<Indicator name>",
-            "type": "<e.g. RSI, Stoch>",
-            "data": [
-                [timestamp, ... ], // Arbitrary length
-                ...
-            ],
-            "settings": { } // Arbitrary settings format
-        },
-        ...
-    ]
-}
-```
-
-<details><summary>Data structure v1.0</summary>
-<p>
-
-```js
-{
-    "ohlcv": [   // Mandatory
-        [timestamp, open, high, low, close, volume],
-        ...
+        // The same as "onchart"
     ],
-    "onchart": [ // Displayed ON the chart
+    "datasets": [ // Hidden data (used by scripts)
         {
-            "name": "<Indicator name>",
-            "type": "<e.g. EMA, SMA>",
-            "data": [
-                [timestamp, ... ], // Arbitrary length
-                ...
-            ],
-            "settings": { } // Arbitrary settings format
+            "type": "<Dataset Type>",
+            "id": "<Dataset Id>",
+            "data": [ ... ] // Initial data
         },
         ...
     ],
-    "offchart": [ // Displayed BELOW the chart
+    /* The Properties below are automatically created by DataCube,
+     * but can be defined / changed manually, for example,
+     * when you need to set a default color for a tool. */
+    "tools": [ // Tool presets (colors, data, icons, see LineTool.vue)
         {
-            "name": "<Indicator name>",
-            "type": "<e.g. RSI, Stoch>",
-            "data": [
-                [timestamp, ... ], // Arbitrary length
+            "type": "<Tool type, e.g. LineTool:Segment>",
+            "group": "<Tool Group>", // WIP
+            "hint": "Tool Hint", // WIP
+            "settings": {
+                "color": "#35c460",
                 ...
-            ],
-            "settings": { } // Arbitrary settings format
+            },
+            "icon": "Data Url",
+            "data": [ ... ] // Initial data
         },
         ...
-    ]
+    ],
+    "tool": "<Tool type, e.g. Cursor>", // Current tool
+    "selected": "<Selected object id>",
+    "drawingMode": <true|false>
 }
 ```
 
-</p>
-</details>
+### Script Settings
+
+| Prop | Type | Description |
+|---|---|---|
+| execOnRange | Boolean | Exec script on 'range-changed', default=false  |
+| execInterval | Number | Exec-on-range interval, default=0 (immediatly) |
+| output | Boolean/String | Timeseries output: `true, false, 'range'`, default=true |
+
 
 ## Overlay api
 
@@ -231,6 +293,7 @@ Data for building overlays. Defined in `mixins/overlay.js`, accessed through ove
 | data | Array | Current subset of indicator data |
 | settings | Object | Indicator's settings, defined in `data.json` |
 | grid_id | Number | Current grid id |
+| config  | Object | Chart config, see 'constants.js' |
 
 ### Cursor data*
 
@@ -243,6 +306,7 @@ Data for building overlays. Defined in `mixins/overlay.js`, accessed through ove
 | grid_id | Number | Current grid id |
 | locked | Boolean | *true* during scrolling, *false* otherwise |
 | values | Object | Current indicator values in a specific format |
+| scroll_lock  | Boolean | True when scrolling is locked (drawing mode) |
 
 #### Values format
 
@@ -284,6 +348,7 @@ Defined in `layout.js`, accessed through overlay's `this.$props.layout`.
 | $_hi | Number | Upper bound of price-range |
 | $_lo | Number | Lower bound of price-range |
 | $_step | Number | Grid price step |
+| $_mult  | Number | Grid price multipler ([log-scale mode](https://github.com/tvjsx/trading-vue-js/blob/master/docs/faq/README.md#log-scale-no)) |
 | t_step | Number | Grid time step  |
 | A | Number | Scale transform coefficient |
 | B | Number | Offset transform coefficient |
@@ -296,6 +361,7 @@ Defined in `layout.js`, accessed through overlay's `this.$props.layout`.
 | sb |  Number | Sidebar width |
 | spacex | Number | Drawing area width (px) |
 | startx | Number | First candle position (px) |
+| ti_map  | Object | Time-index mapping for [IB mode](https://github.com/tvjsx/trading-vue-js/blob/master/docs/faq/README.md#what-is-the-index-based-ib-rendering-mode) |
 | candles | Array | Candles subset |
 | volume | Array | Volume bars positions and sizes |
 | xs | Array | vertical grid lines `[[x, candle], ...]` |
@@ -383,6 +449,10 @@ ctx.stroke()
 
 To change the default behaviour of an overlay, override this methods.
 
+#### init()
+
+Called when overlay is mounted.
+
 #### meta_info()
 
 Defines plugin version and other useful information. *Optional*, required for publishing.
@@ -409,6 +479,13 @@ draw(ctx) {
     ...
 }
 ```
+
+#### pre_draw(ctx), post_draw(ctx)
+
+Override if you need them.
+
+* **Arguments**: ctx (Canvas context)
+
 
 #### use_for()
 
@@ -470,6 +547,32 @@ legend(values) {
 }
 ```
 
+#### tool()
+
+* **Returns:** Tool descriptor. See `LineTool.vue`:
+
+```js
+tool() {
+    return {
+        // Descriptor for the LineTool
+        group: 'Lines', // Tool group (WIP)
+        icon: Icons['segment.png'], // Data URL (png 25x25 or svg)
+        type: 'Segment', // Tool type (in addition to overlay type)
+        hint: 'This hint will be shown on hover', // WIP
+        data: [],     // Default data
+        settings: {}, // Default settings
+        // Modifications
+        mods: {
+            'Extended': {
+                // Rewrites the default settings field
+                settings: { extended: true },
+                icon: Icons['extended.png']
+            }
+        }
+    }
+}
+```
+
 <br>
 
 #### mousemove(event)
@@ -487,3 +590,43 @@ legend(values) {
 #### mousedown(event)
 *Optional*
 * **Arguments**: event (Object) Vue mouse event
+
+#### keyup(event)
+*Optional*
+* **Arguments**: event (Object) Native keyup event
+
+#### keydown(event)
+*Optional*
+* **Arguments**: event (Object) Native keydown event
+
+#### keypress(event)
+*Optional*
+* **Arguments**: event (Object) Native keypress event
+
+### Overlay I/O objects
+
+#### mouse
+
+Allows you to add multiple mouse listeners.
+
+| Prop/Method | Type | Description |
+|---|---|---|
+| pressed  | Boolean |  Left mouse button status |
+| listeners  | Number |  Listener count |
+| on  | Function |  Registers a listener: `function on(event, callback, queuePosition="unshift")` |
+| x | Number | Current screen position |
+| y | Number |  Current screen position |
+| t  | Number | Current timestamp  |
+| y$  | Number |  Current price level |
+
+
+#### keys
+*(Available for Tool overlays)*
+
+Allows you to add multiple keyboard listeners.
+
+| Prop/Method | Type | Description |
+|---|---|---|
+| pressed  | Function |  Returns `true` if button is pressed: `function pressed(buttonName)` |
+| listeners  | Number |  Listener count |
+| on  | Function |  Registers a listener: `function on(buttonName, callback)` |

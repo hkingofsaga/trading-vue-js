@@ -5,7 +5,7 @@
          class="trading-vue-ohlcv"
         :style = "{ 'max-width': common.width + 'px' }">
         <span class="t-vue-title"
-             :style="{ color: common.colors.colorTitle }">
+             :style="{ color: common.colors.title }">
               {{common.title_txt}}
         </span>
         O<span class="t-vue-lspan" >{{ohlcv[0]}}</span>
@@ -18,6 +18,7 @@
         <span class="t-vue-iname">{{ind.name}}</span>
         <button-group
             v-bind:buttons="common.buttons"
+            v-bind:config="common.config"
             v-bind:ov_id="ind.id"
             v-bind:grid_id="grid_id"
             v-bind:index="ind.index"
@@ -34,25 +35,37 @@
         <span v-if="ind.unk" class="t-vue-unknown">
             (Unknown type)
         </span>
+        <transition name="tvjs-appear">
+            <spinner :colors="common.colors" v-if="ind.loading">
+            </spinner>
+        </transition>
     </div>
 </div>
 </template>
 <script>
 
 import ButtonGroup from './ButtonGroup.vue'
+import Spinner from './Spinner.vue'
 
 export default {
     name: 'ChartLegend',
     props: [
         'common', 'values', 'grid_id', 'meta_props'
     ],
-    components: { ButtonGroup },
+    components: { ButtonGroup, Spinner },
     computed: {
         ohlcv() {
             if (!this.$props.values || !this.$props.values.ohlcv) {
                 return Array(6).fill('n/a')
             }
             const prec = this.layout.prec
+
+            // TODO: main the main legend more customizable
+            let id = this.main_type + '_0'
+            let meta = this.$props.meta_props[id] || {}
+            if (meta.legend) {
+                return (meta.legend() || []).map(x => x.value)
+            }
 
             return [
                 this.$props.values.ohlcv[1].toFixed(prec),
@@ -64,10 +77,12 @@ export default {
                     'n/a'
             ]
         },
+        // TODO: add support for { grid: { id : N }}
         indicators() {
             const values = this.$props.values
             const f = this.format
             var types = {}
+
             return this.json_data.filter(
                 x => x.settings.legend !== false && !x.main
             ).map(x => {
@@ -76,17 +91,21 @@ export default {
                 return {
                     v: 'display' in x.settings ? x.settings.display : true,
                     name: x.name || id,
-                    index: this.json_data.indexOf(x),
+                    index: (this.off_data || this.json_data).indexOf(x),
                     id: id,
                     values: values ? f(id, values) : this.n_a(1),
-                    unk: !(id in (this.$props.meta_props || {}))
+                    unk: !(id in (this.$props.meta_props || {})),
+                    loading: x.loading
                 }
             })
         },
         calc_style() {
             let top = this.layout.height > 150 ? 10 : 5
+            let grids = this.$props.common.layout.grids
+            let w = grids[0] ? grids[0].width : undefined
             return {
                 top: `${this.layout.offset + top}px`,
+                width: `${w-20}px`
             }
         },
         layout() {
@@ -95,6 +114,13 @@ export default {
         },
         json_data() {
             return this.$props.common.data
+        },
+        off_data() {
+            return this.$props.common.offchart
+        },
+        main_type() {
+            let f = this.common.data.find(x => x.main)
+            return f ? f.type : undefined
         }
     },
     methods: {
@@ -111,11 +137,11 @@ export default {
                 const cs = meta.data_colors ? meta.data_colors() : []
                 if (typeof x == 'number') {
                     // Show 8 digits for small values
-                    x = x.toFixed(x > 0.001 ? 4 : 8)
+                    x = x.toFixed(Math.abs(x) > 0.001 ? 4 : 8)
                 }
                 return {
                     value: x,
-                    color: cs ? cs[i] : undefined
+                    color: cs ? cs[i % cs.length] : undefined
                 }
             })
         },
@@ -135,6 +161,8 @@ export default {
     font-size: 1.25em;
     margin-left: 10px;
     pointer-events: none;
+    text-align: left;
+    user-select: none;
 }
 .trading-vue-ohlcv {
     pointer-events: none;
@@ -158,11 +186,23 @@ export default {
     margin-bottom: 0.5em;
     font-weight: 200;
     font-size: 1.0em;
+    margin-top: 0.3em;
 }
 .t-vue-ivalue {
     margin-left: 0.5em;
 }
 .t-vue-unknown {
     color: #999999; /* TODO: move => params */
+}
+
+.tvjs-appear-enter-active,
+.tvjs-appear-leave-active
+{
+    transition: all .25s ease;
+}
+
+.tvjs-appear-enter, .tvjs-appear-leave-to
+{
+    opacity: 0;
 }
 </style>

@@ -12,10 +12,13 @@
 import TradingVue from '../../src/TradingVue.vue'
 import Data from '../data/data_buttons.json'
 import Utils from '../../src/stuff/utils.js'
+import CodeIcon from './LegendButtons/code3.json'
+
 
 export default {
     name: 'LegendButtons',
     description: 'Legend buttons test (click the button, see console)',
+    props: ['night'],
     components: {
         TradingVue
     },
@@ -43,31 +46,35 @@ export default {
     },
     mounted() {
         window.addEventListener('resize', this.onResize)
-        setTimeout(() => {
-            // Async data setup
-            this.$set(this, 'chart', Data)
-        }, 0)
         this.onResize()
+    },
+    computed: {
+        colors() {
+            return this.$props.night ? {} : {
+                colorBack: '#fff',
+                colorGrid: '#eee',
+                colorText: '#333'
+            }
+        },
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize)
     },
     data() {
         return {
-            chart: {}, // Data will be here,
+            chart: Data,
             width: window.innerWidth,
             height: window.innerHeight,
-            colors: {
-                colorBack: '#fff',
-                colorGrid: '#eee',
-                colorText: '#333',
-            },
             buttons: [
-                'display', 'settings', 'remove'
+                'display', 'settings', 'remove',
+                {
+                    name: 'code',
+                    icon: CodeIcon
+                }
             ]
-        };
+        }
     }
-};
+}
 </script>
 
 <style>

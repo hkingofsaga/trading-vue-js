@@ -5,7 +5,9 @@
 import * as Hammer from 'hammerjs'
 import Hamster from 'hamsterjs'
 import Utils from '../../stuff/utils.js'
+import math from '../../stuff/math.js'
 
+// Grid is good.
 export default class Grid {
 
     constructor(canvas, comp) {
@@ -22,9 +24,11 @@ export default class Grid {
         this.id = this.$p.grid_id
         this.layout = this.$p.layout.grids[this.id]
         this.interval = this.$p.interval
+        this.cursor = comp.$props.cursor
         this.offset_x = 0
         this.offset_y = 0
         this.deltas = 0 // Wheel delta events
+        this.wmode = this.$p.config.SCROLL_WHEEL
 
         this.listeners()
         this.overlays = []
@@ -33,25 +37,28 @@ export default class Grid {
 
     listeners() {
 
-        var hamster = Hamster(this.canvas)
-        hamster.wheel((event, delta) => this.mousezoom(-delta * 50, event))
+        this.hm = Hamster(this.canvas)
+        this.hm.wheel((event, delta) => this.mousezoom(-delta * 50, event))
 
-        var mc = new Hammer.Manager(this.canvas)
-        mc.add(new Hammer.Pan())
+        let mc = this.mc = new Hammer.Manager(this.canvas)
+        mc.add(new Hammer.Pan({ threshold: 0}))
         mc.add(new Hammer.Tap())
         mc.add(new Hammer.Pinch())
         mc.get('pinch').set({ enable: true })
 
         mc.on('panstart', event => {
+            if (this.cursor.scroll_lock) return
+            let tfrm = this.$p.y_transform
             this.drug = {
                 x: event.center.x + this.offset_x,
                 y: event.center.y + this.offset_y,
                 r: this.range.slice(),
                 t: this.range[1] - this.range[0],
-                o: this.$p.y_transform ?
-                    (this.$p.y_transform.offset || 0) : 0,
-                y_r: this.$p.y_transform ?
-                    this.$p.y_transform.range.slice() : undefined
+                o: tfrm ?
+                    (tfrm.offset || 0) : 0,
+                y_r: tfrm && tfrm.range ?
+                    tfrm.range.slice() : undefined,
+                B: this.layout.B
             }
             this.comp.$emit('cursor-changed', {
                 grid_id: this.id,
@@ -63,7 +70,7 @@ export default class Grid {
 
         mc.on('panmove', event => {
             if (this.drug) {
-                this.mousedrug(
+                this.mousedrag(
                     this.drug.x + event.deltaX,
                     this.drug.y + event.deltaY,
                 )
@@ -104,27 +111,24 @@ export default class Grid {
             if (this.pinch) this.pinchzoom(event.scale)
         })
 
-        window.addEventListener("gesturestart", event => {
-            event.preventDefault()
-        })
-
-        window.addEventListener("gesturechange", event => {
-            event.preventDefault()
-        })
-
-        window.addEventListener("gestureend", event => {
-            event.preventDefault()
-        })
+        let add = addEventListener
+        add("gesturestart", this.gesturestart)
+        add("gesturechange", this.gesturechange)
+        add("gestureend", this.gestureend)
 
     }
 
+    gesturestart(event) { event.preventDefault() }
+    gesturechange(event) { event.preventDefault() }
+    gestureend(event) { event.preventDefault() }
+
     mousemove(event) {
+
         this.comp.$emit('cursor-changed', {
             grid_id: this.id,
             x: event.layerX,
             y: event.layerY + this.layout.offset
         })
-        if (!this.drug) this.update()
         // TODO: Temp solution, need to implement
         // a proper way to get the chart el offset
         this.offset_x = event.layerX - event.pageX
@@ -149,8 +153,12 @@ export default class Grid {
     }
 
     mousedown(event) {
-        this.comp.$emit('cursor-locked', true)
         this.propagate('mousedown', event)
+        this.comp.$emit('cursor-locked', true)
+        if (event.defaultPrevented) return
+        this.comp.$emit('custom-event', {
+            event: 'grid-mousedown', args: [this.id, event]
+        })
     }
 
     click(event) {
@@ -166,19 +174,27 @@ export default class Grid {
         this.update()
     }
 
+    del_layer(id) {
+        this.overlays = this.overlays.filter(x => x.id !== id)
+        this.update()
+    }
+
     show_hide_layer(event) {
         let l = this.overlays.filter(x => x.id === event.id)
         if (l.length) l[0].display = event.display
     }
 
     update() {
-
         // Update reference to the grid
         // TODO: check what happens if data changes interval
         this.layout = this.$p.layout.grids[this.id]
         this.interval = this.$p.interval
 
+        if (!this.layout) return
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        if (this.$p.shaders.length) this.apply_shaders()
+
         this.grid()
 
         let overlays = []
@@ -190,7 +206,10 @@ export default class Grid {
         overlays.forEach(l => {
             if (!l.display) return
             this.ctx.save()
-            l.renderer.draw(this.ctx)
+            let r = l.renderer
+            if (r.pre_draw) r.pre_draw(this.ctx)
+            r.draw(this.ctx)
+            if (r.post_draw) r.post_draw(this.ctx)
             this.ctx.restore()
         })
 
@@ -199,10 +218,31 @@ export default class Grid {
         }
     }
 
+    apply_shaders() {
+        let layout = this.$p.layout.grids[this.id]
+        let props = {
+            layout: layout,
+            range: this.range,
+            interval: this.interval,
+            tf: layout.ti_map.tf,
+            cursor: this.cursor,
+            colors: this.$p.colors,
+            sub: this.data,
+            font: this.$p.font,
+            config: this.$p.config,
+            meta: this.$p.meta
+        }
+        for (var s of this.$p.shaders) {
+            this.ctx.save()
+            s.draw(this.ctx, props)
+            this.ctx.restore()
+        }
+    }
+
     // Actually draws the grid (for real)
     grid() {
 
-        this.ctx.strokeStyle = this.$p.colors.colorGrid
+        this.ctx.strokeStyle = this.$p.colors.grid
         this.ctx.beginPath()
 
         const ymax = this.layout.height
@@ -227,7 +267,7 @@ export default class Grid {
     }
 
     upper_border() {
-        this.ctx.strokeStyle = this.$p.colors.colorScale
+        this.ctx.strokeStyle = this.$p.colors.scale
         this.ctx.beginPath()
         this.ctx.moveTo(0, 0.5)
         this.ctx.lineTo(this.layout.width, 0.5)
@@ -236,8 +276,13 @@ export default class Grid {
 
     mousezoom(delta, event) {
 
-        event.originalEvent.preventDefault()
-        event.preventDefault()
+        if (this.wmode !== 'pass') {
+            if (this.wmode === 'click' && !this.$p.meta.activated) {
+                return
+            }
+            event.originalEvent.preventDefault()
+            event.preventDefault()
+        }
 
         event.deltaX = event.deltaX || Utils.get_deltaX(event)
         event.deltaY = event.deltaY || Utils.get_deltaY(event)
@@ -259,20 +304,35 @@ export default class Grid {
         // if speed is low, scroll shoud be slower
         if (delta < 0 && this.data.length <= this.MIN_ZOOM) return
         if (delta > 0 && this.data.length > this.MAX_ZOOM) return
-
         let k = this.interval / 1000
-        this.range[0] -= delta * k * this.data.length
+        let diff = delta * k * this.data.length
+        let tl = this.comp.config.ZOOM_MODE === 'tl'
+        if (event.originalEvent.ctrlKey || tl) {
+            let offset = event.originalEvent.offsetX
+            let diff1 = offset / (this.canvas.width-1) * diff
+            let diff2 = diff - diff1
+            this.range[0] -= diff1
+            this.range[1] += diff2
+        } else {
+            this.range[0] -= diff
+        }
 
-        // TODO: BUG: while scrolling you may notice that
-        // the left part of the indicator data is not
-        // loaded immediately. (until you move the cursor)
-        // Need to investigate. Solution: check reactivity,
-        // it is probably lost.
+        if (tl) {
+            let offset = event.originalEvent.offsetY
+            let diff1 = offset / (this.canvas.height-1) * 2
+            let diff2 = 2 - diff1
+            let z = diff / (this.range[1] - this.range[0])
+            //rezoom_range(z, diff_x, diff_y)
+            this.comp.$emit('rezoom-range', {
+                grid_id: this.id, z, diff1, diff2
+            })
+        }
+
         this.change_range()
 
     }
 
-    mousedrug(x, y) {
+    mousedrag(x, y) {
 
         let dt = this.drug.t * (this.drug.x - x) / this.layout.width
 
@@ -280,10 +340,23 @@ export default class Grid {
         d$ *= (this.drug.y - y) / this.layout.height
         let offset = this.drug.o + d$
 
-        if (this.$p.y_transform && !this.$p.y_transform.auto) {
+        let ls = this.layout.grid.logScale
+
+        if (ls && this.drug.y_r) {
+            let dy = this.drug.y - y
+            var range = this.drug.y_r.slice()
+            range[0] = math.exp((0 - this.drug.B + dy) /
+                this.layout.A)
+            range[1] = math.exp(
+                (this.layout.height - this.drug.B + dy) /
+                this.layout.A)
+        }
+
+        if (this.drug.y_r && this.$p.y_transform &&
+            !this.$p.y_transform.auto) {
             this.comp.$emit('sidebar-transform', {
                 grid_id: this.id,
-                range: [
+                range: ls ? (range || this.drug.y_r) : [
                     this.drug.y_r[0] - offset,
                     this.drug.y_r[1] - offset,
                 ]
@@ -365,6 +438,23 @@ export default class Grid {
             if (layer.renderer[name]) {
                 layer.renderer[name](event)
             }
+            const mouse = layer.renderer.mouse
+            const keys = layer.renderer.keys
+            if (mouse.listeners) {
+                mouse.emit(name, event)
+            }
+            if (keys && keys.listeners) {
+                keys.emit(name, event)
+            }
         }
+    }
+
+    destroy() {
+        let rm = removeEventListener
+        rm("gesturestart", this.gesturestart)
+        rm("gesturechange", this.gesturechange)
+        rm("gestureend", this.gestureend)
+        if (this.mc) this.mc.destroy()
+        if (this.hm) this.hm.unwheel()
     }
 }

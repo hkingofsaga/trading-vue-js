@@ -7,7 +7,7 @@ export default {
     mixins: [Overlay],
     methods: {
         meta_info() {
-            return { author: 'C451', version: '1.0.0' }
+            return { author: 'C451', version: '1.0.1' }
         },
         draw(ctx) {
             let layout = this.$props.layout
@@ -41,14 +41,11 @@ export default {
         // Defines legend format (values & colors)
         legend(values) {
             switch (values[1]) {
-                case -1:
-                    var pos = 'Short'
-                    break
                 case 0:
-                    pos = 'Closed'
+                    var pos = 'Sell'
                     break
                 case 1:
-                    pos = 'Long'
+                    pos = 'Buy'
                     break
                 default:
                     pos = 'Unknown'
@@ -60,7 +57,7 @@ export default {
                 },
                 {
                     value: values[2].toFixed(4),
-                    color: this.$props.colors.colorText
+                    color: this.$props.colors.text
                 }
             ].concat(values[3] ? [
                 {
@@ -77,7 +74,6 @@ export default {
             return this.$props.settings
         },
         default_font() {
-            //console.log(this.$props.font.split('px').pop())
             return '12px ' + this.$props.font.split('px').pop()
         },
         buy_color() {
